@@ -4,7 +4,6 @@
             <font-awesome-icon icon="pills"/>&nbsp;Recommendations
         </b-card-header>
         <b-card-body class="container-fluid">
-            <!--            <div class="container">-->
             <div class="row" v-for="reco in recommendations" v-bind:key="reco.label">
                 <div class="container-fluid">
                     <div class="row">
@@ -16,9 +15,7 @@
                         </ul>
                     </div>
                 </div>
-                <!--                    <span v-if="reco.clauses.length > 0" class="font-italic font-weight-light">({{reco.clauses.join(', ')}})</span>-->
             </div>
-            <!--            </div>-->
         </b-card-body>
     </b-card>
 </template>
@@ -26,6 +23,7 @@
 <script>
 
     import {withLabel} from "../utils";
+    import refs from "../refs-data";
 
     export default {
         name: "Recos",
@@ -39,8 +37,8 @@
         },
         computed: {
             recommendations: function () {
-                let recos = [];
                 let nutritionType = this.nutrition.type;
+                let recos = [...refs.nutritions[nutritionType].recommendations];
                 this.pathologies.map(p => p.recommendations)
                     .map(recos => recos[nutritionType])
                     .forEach(pathoRecos =>
@@ -50,17 +48,14 @@
                                 let quantity = Math.max(reco.quantity, pathoReco.quantity);
                                 reco.quantity = quantity;
                                 reco.clauses = [...new Set(reco.clauses.concat(pathoReco.clauses))];
-                                console.log("updating reco ", reco);
                             } else {
                                 reco = {
                                     ...pathoReco
                                 };
-                                console.log("adding reco ", reco);
                                 recos.push(reco);
                             }
                         })
                     );
-                console.log("updated recommendations ", recos);
                 return recos;
             }
         },

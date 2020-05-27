@@ -57,7 +57,7 @@
         },
         methods: {
             productsForNutritionType: function (nutritionType) {
-                return this.nutritions[nutritionType];
+                return this.nutritions[nutritionType].products;
             },
             defaultSelectedProductForType: function (nutritionType) {
                 return this.productsForNutritionType(nutritionType)[0];
