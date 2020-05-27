@@ -1,5 +1,6 @@
 import Vuex from "vuex";
 import refs from "./refs-data";
+import {comparingByLabel} from "./utils";
 
 export function initStore() {
     return new Vuex.Store({
@@ -44,14 +45,16 @@ export function initStore() {
                         pathologies.push(patho)
                     }
                 });
-                state.pathologies = pathologies;
+                state.pathologies = pathologies
+                    .sort(comparingByLabel);
             },
             updateNutrition(state, nutrition) {
                 state.nutrition = {...nutrition};
             },
             updateSelectedPathologies(state, pathologies) {
                 state.pathologies = state.pathologies.filter(p => p.calculation)
-                    .concat(pathologies);
+                    .concat(pathologies)
+                    .sort(comparingByLabel);
             },
         }
     });

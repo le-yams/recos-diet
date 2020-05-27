@@ -32,6 +32,7 @@
 <script>
     import refs from "../refs-data";
     import {mapMutations} from "vuex";
+    import {comparingByLabel} from "../utils";
 
     export default {
         name: "Pathos",
@@ -43,14 +44,16 @@
         data: function () {
             return {
                 availablePathologies: refs.pathologies
-                    .filter(p => !p.calculation),
+                    .filter(p => !p.calculation)
+                    .sort(comparingByLabel),
                 selectedPathologies: [],
             };
         },
         computed: {
             calculatedPathologies: function () {
                 return refs.pathologies
-                    .filter(p => p.calculation && p.calculation.perform(this.patientInfo));
+                    .filter(p => p.calculation && p.calculation.perform(this.patientInfo))
+                    .sort(comparingByLabel);
             },
         },
         watch: {

@@ -41,7 +41,25 @@ export default {
     },
     pathologies: [
         {
-            label: "Dénutrition-SRI"
+            label: "Dénutrition-SRI",
+            recommendations: {
+                'Entérale': [
+                    {
+                        label: "Alvityl (po/sng)",
+                        quantity: "1",
+                        unit: "ampoule/jour",
+                        clauses: ["pendant 10 jours"],
+                    }
+                ],
+                'Parentérale': [
+                    {
+                        label: "Nutryelt",
+                        quantity: "1",
+                        unit: "ampoule 10ml",
+                        clauses: [],
+                    }
+                ],
+            },
         },
         {
             label: "Obésité",
@@ -50,19 +68,109 @@ export default {
                     return patientInfo.bmi >= 30;
                 },
                 description: 'IMC >= 30'
-            }
+            },
+            recommendations: {
+                'Entérale': [
+                    {
+                        label: "Alvityl (po/sng)",
+                        quantity: "1",
+                        unit: "ampoule/jour",
+                        clauses: ["si apports < 1500 kcals"],
+                    }
+                ],
+                'Parentérale': [
+                    {
+                        label: "Nutryelt",
+                        quantity: "1",
+                        unit: "ampoule 10ml",
+                        clauses: [],
+                    }
+                ],
+            },
         },
         {
-            label: "OH"
+            label: "OH",
+            recommendations: {
+                'Entérale': [
+                    {
+                        label: "Alvityl (po/sng)",
+                        quantity: "1",
+                        unit: "ampoule/jour",
+                        clauses: ["si apports < 1500 kcals"],
+                    }
+                ],
+                'Parentérale': [
+                    {
+                        label: "Nutryelt",
+                        quantity: "1",
+                        unit: "ampoule 10ml",
+                        clauses: [],
+                    }
+                ],
+            },
         },
         {
-            label: "CVVHDF"
+            label: "CVVHDF",
+            recommendations: {
+                'Entérale': [
+                    {
+                        label: "Alvityl (po/sng)",
+                        quantity: "2",
+                        unit: "ampoule/jour",
+                        clauses: ["puis 1 ampoule/jour lorsque le BE est atteint"],
+                    }
+                ],
+                'Parentérale': [
+                    {
+                        label: "Nutryelt",
+                        quantity: "2",
+                        unit: "ampoule 10ml",
+                        clauses: [],
+                    }
+                ],
+            },
         },
         {
-            label: "Cirrhotique"
+            label: "Cirrhotique",
+            recommendations: {
+                'Entérale': [
+                    {
+                        label: "Zinc",
+                        quantity: "15",
+                        unit: "mg/jours",
+                        clauses: [],
+                    }
+                ],
+                'Parentérale': [
+                    {
+                        label: "Zinc",
+                        quantity: "15",
+                        unit: "mg/jours",
+                        clauses: [],
+                    }
+                ],
+            },
         },
         {
-            label: "COVID-19"
+            label: "COVID-19",
+            recommendations: {
+                'Entérale': [
+                    {
+                        label: "Alvityl (po/sng)",
+                        quantity: "1",
+                        unit: "ampoule/jour",
+                        clauses: ["si apports < 1500 kcals"],
+                    }
+                ],
+                'Parentérale': [
+                    {
+                        label: "Nutryelt",
+                        quantity: "1",
+                        unit: "ampoule 10ml",
+                        clauses: [],
+                    }
+                ],
+            },
         },
     ],
     calculatedPathologies: function () {
