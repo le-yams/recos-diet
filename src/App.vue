@@ -26,7 +26,7 @@
                             </template>
                             <b-card-body>
                                 <target-flows :nutrition="nutrition" :patient-info="patientInfo"></target-flows>
-                                <recos :pathologies="pathologies"></recos>
+                                <recos :nutrition="nutrition" :pathologies="pathologies"></recos>
                             </b-card-body>
                         </b-tab>
                         <b-tab>
@@ -60,22 +60,11 @@
             Pathos,
         },
         computed: {
-            ...mapState(['pathologies']),
+            ...mapState(['nutrition', 'pathologies']),
             ...mapState({
                 patientInfo: 'patient',
             }),
         },
-        data: function () {
-            return {
-                nutrition: {
-                    type: 'Entérale',
-                    product: {
-                        name: "Sondalis HP Energy",
-                        kcal: 1.5,
-                    },
-                },
-            };
-        }
     }
 </script>
 
