@@ -15,7 +15,7 @@
                         </b-form-checkbox>
                         <b-form-checkbox
                                 v-for="p in calculatedPathologies" v-bind:key="p.label"
-                                v-bind:checked="calculatedPathologies"
+                                v-bind:checked="selectedCalculatedPathologies"
                                 :value="p"
                                 :disabled="true"
                                 class="mb-1">
@@ -52,8 +52,12 @@
         computed: {
             calculatedPathologies: function () {
                 return refs.pathologies
-                    .filter(p => p.calculation && p.calculation.perform(this.patientInfo))
+                    .filter(p => p.calculation)
                     .sort(comparingByLabel);
+            },
+            selectedCalculatedPathologies: function () {
+                return this.calculatedPathologies
+                    .filter(p => p.calculation.perform(this.patientInfo))
             },
         },
         watch: {

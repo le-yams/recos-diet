@@ -29,8 +29,8 @@ export default {
                 {
                     label: "Alvityl (po/sng)",
                     quantity: "1",
-                    unit: "ampoule/jour",
-                    clauses: ["si apports < 1500 kcals"],
+                    unit: "comprimé/jour",
+                    clauses: ["si apports < 1500 kcal"],
                 }
             ],
         },
@@ -53,9 +53,21 @@ export default {
                 {
                     label: "Nutryelt",
                     quantity: "1",
-                    unit: "ampoule 10ml",
+                    unit: "ampoule 10ml/jour",
+                    clauses: ["si apports < 1500 kcal"],
+                },
+                {
+                    label: "Cernevit",
+                    quantity: "1",
+                    unit: "ampoule 5ml/jour",
+                    clauses: ["si apports < 1500 kcal"],
+                },
+                {
+                    label: "K",
+                    quantity: "1",
+                    unit: "ampoule 10ml 2 fois par semaine",
                     clauses: [],
-                }
+                },
             ],
         },
     },
@@ -67,17 +79,35 @@ export default {
                     {
                         label: "Alvityl (po/sng)",
                         quantity: "1",
-                        unit: "ampoule/jour",
-                        clauses: ["pendant 10 jours"],
-                    }
+                        unit: "comprimé/jour",
+                        clauses: ["pendant 10 jours minimum"],
+                    },
+                    {
+                        label: "B1",
+                        quantity: "500",
+                        unit: "mg/jour",
+                        clauses: ["pendant 10 jours minimum"],
+                    },
+                    {
+                        label: "B9",
+                        quantity: "25-50",
+                        unit: "mg/jour",
+                        clauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
+                    },
                 ],
                 'Parentérale': [
                     {
-                        label: "Nutryelt",
-                        quantity: "1",
-                        unit: "ampoule 10ml",
-                        clauses: [],
-                    }
+                        label: "B1",
+                        quantity: "500",
+                        unit: "mg/j",
+                        clauses: ["pendant 10 jours minimum"],
+                    },
+                    {
+                        label: "B9",
+                        quantity: "25-50",
+                        unit: "mg/jour",
+                        clauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
+                    },
                 ],
             },
         },
@@ -97,8 +127,40 @@ export default {
         {
             label: "OH",
             recommendations: {
-                'Entérale': [],
-                'Parentérale': [],
+                'Entérale': [
+                    {
+                        label: "B1",
+                        quantity: "500",
+                        unit: "mg/jour",
+                        clauses: [
+                            "ajouter 500 mg/jour pendant 10 jours en cas de dénutrition-SRI",
+                            "ajouter 500 mg/jour en cas de COVID-19",
+                        ],
+                    },
+                    {
+                        label: "B6",
+                        quantity: "250",
+                        unit: "mg/jour",
+                        clauses: ["sur une courte durée"],
+                    },
+                ],
+                'Parentérale': [
+                    {
+                        label: "B1",
+                        quantity: "500",
+                        unit: "mg/jour",
+                        clauses: [
+                            "ajouter 500 mg/jour pendant 10 jours en cas de dénutrition-SRI",
+                            "ajouter 500 mg/jour en cas de COVID-19",
+                        ],
+                    },
+                    {
+                        label: "B6",
+                        quantity: "250",
+                        unit: "mg/jour",
+                        clauses: ["sur une courte durée"],
+                    },
+                ],
             },
         },
         {
@@ -108,17 +170,23 @@ export default {
                     {
                         label: "Alvityl (po/sng)",
                         quantity: "2",
-                        unit: "ampoule/jour",
-                        clauses: ["puis 1 ampoule/jour lorsque le BE est atteint"],
-                    }
+                        unit: "comprimés/jour",
+                        clauses: ["puis 1 comprimé/jour lorsque le BE est atteint"],
+                    },
                 ],
                 'Parentérale': [
                     {
                         label: "Nutryelt",
                         quantity: "2",
-                        unit: "ampoule 10ml",
+                        unit: "ampoules 10ml",
                         clauses: [],
-                    }
+                    },
+                    {
+                        label: "Cernevit",
+                        quantity: "2",
+                        unit: "ampoule 5ml",
+                        clauses: [],
+                    },
                 ],
             },
         },
@@ -129,7 +197,7 @@ export default {
                     {
                         label: "Zinc",
                         quantity: "15",
-                        unit: "mg/jours",
+                        unit: "mg/jour",
                         clauses: [],
                     }
                 ],
@@ -137,7 +205,7 @@ export default {
                     {
                         label: "Zinc",
                         quantity: "15",
-                        unit: "mg/jours",
+                        unit: "mg/jour",
                         clauses: [],
                     }
                 ],
@@ -146,8 +214,21 @@ export default {
         {
             label: "COVID-19",
             recommendations: {
-                'Entérale': [],
-                'Parentérale': [],
+                'Entérale': [
+                    {
+                        label: "B1",
+                        quantity: "500",
+                        unit: "mg/jour",
+                        clauses: [],
+                    },
+                ],
+                'Parentérale': [
+                    {
+                        label: "B1",
+                        quantity: "500",
+                        unit: "mg/j",
+                        clauses: [],
+                    },],
             },
         },
     ],

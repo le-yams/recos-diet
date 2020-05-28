@@ -1,9 +1,17 @@
 <template>
     <div id="app" class="container-fluid">
         <div class="row">
+            <b-alert show variant="warning" style="width: 100%">
+                <b-icon-exclamation-triangle-fill></b-icon-exclamation-triangle-fill>
+                Cet outil à pour but de présenter un certain nombre de recommandations nutritionnelles en
+                environnement hospitalier.
+                Il ne tient cependant pas compte de l'ensemble du contexte santé du patient.
+                Aussi <strong>il ne saurait en aucun cas remplacer l'avis de votre diététicien(ne)</strong>.
+            </b-alert>
+        </div>
+        <div class="row">
 
             <div class="col-4">
-
                 <div class="container">
                     <div class="row">
                         <patient-form style="width: 100%;"></patient-form>
@@ -33,7 +41,9 @@
                             <template v-slot:title>
                                 <font-awesome-icon icon="fire"/>&nbsp;Grand&nbsp;Brûlés
                             </template>
-                            <b-card-text>Tab contents 2</b-card-text>
+                            <b-card-text>
+                                <b-alert show><em>fonctionnalité à venir</em></b-alert>
+                            </b-card-text>
                         </b-tab>
                     </b-tabs>
                 </b-card>
@@ -74,6 +84,5 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
-        margin-top: 60px;
     }
 </style>

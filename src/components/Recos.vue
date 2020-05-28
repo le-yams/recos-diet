@@ -1,7 +1,7 @@
 <template>
     <b-card no-body>
         <b-card-header>
-            <font-awesome-icon icon="pills"/>&nbsp;Recommendations
+            <font-awesome-icon icon="pills"/>&nbsp;Recommandations
         </b-card-header>
         <b-card-body class="container-fluid">
             <div class="row" v-for="reco in recommendations" v-bind:key="reco.label">
@@ -38,7 +38,9 @@
         computed: {
             recommendations: function () {
                 let nutritionType = this.nutrition.type;
-                let recos = [...refs.nutritions[nutritionType].recommendations];
+                let recos = [...refs.nutritions[nutritionType].recommendations.map(r => {
+                    return {...r};
+                })];
                 this.pathologies.map(p => p.recommendations)
                     .map(recos => recos[nutritionType])
                     .forEach(pathoRecos =>

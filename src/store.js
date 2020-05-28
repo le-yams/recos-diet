@@ -4,7 +4,6 @@ import {comparingByLabel} from "./utils";
 
 export function initStore() {
     return new Vuex.Store({
-        // strict: true,
         state: {
             idealBmi: 24.9,
             patient: {
