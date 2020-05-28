@@ -37,14 +37,6 @@
                                 <recos :nutrition="nutrition" :pathologies="pathologies"></recos>
                             </b-card-body>
                         </b-tab>
-                        <b-tab>
-                            <template v-slot:title>
-                                <font-awesome-icon icon="fire"/>&nbsp;Grand&nbsp;Brûlés
-                            </template>
-                            <b-card-text>
-                                <b-alert show><em>fonctionnalité à venir</em></b-alert>
-                            </b-card-text>
-                        </b-tab>
                     </b-tabs>
                 </b-card>
             </div>
