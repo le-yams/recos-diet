@@ -5,7 +5,7 @@
         </b-card-header>
         <b-card-body>
             <form>
-                <div class="form-group form-row">
+                <div class="form-group form-row mb-1">
                     <label for="inputType" class="col-sm-3 col-form-label">Type</label>
                     <div class="col-sm">
                         <select v-bind:value="selectedNutritionType" v-on:change="selectedNutritionTypeChange"
@@ -14,7 +14,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group form-row">
+                <div class="form-group form-row mb-1">
                     <label for="inputProduct" class="col-sm-3 col-form-label">Produit</label>
                     <div class="col-sm-9">
                         <v-select id="inputProduct" :value="selectedProduct.label" @input="selectedProductChange"

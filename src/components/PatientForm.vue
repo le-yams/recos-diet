@@ -5,7 +5,7 @@
         </b-card-header>
         <b-card-body>
             <form>
-                <div class="form-group form-row">
+                <div class="form-group form-row mb-1">
                     <label for="inputHeight" class="col-sm-3 col-form-label">Taille</label>
                     <div class="col-sm">
                         <input type="number" v-bind:value="height"
@@ -13,7 +13,7 @@
                                class="form-control" id="inputHeight" placeholder="Taille">
                     </div>
                 </div>
-                <div class="form-group form-row">
+                <div class="form-group form-row mb-1">
                     <label for="inputWeight" class="col-sm-3 col-form-label">Poids</label>
                     <div class="col-sm">
                         <input type="number" v-bind:value="weight"
@@ -22,14 +22,14 @@
                     </div>
                 </div>
 
-                <div class="form-group form-row" v-if="bmi > idealBmi">
+                <div class="form-group form-row mb-1" v-if="bmi > idealBmi">
                     <label for="inputAdjustedWeight" class="col-sm-3 col-form-label">Poids ajusté</label>
                     <div class="col-sm">
                         <input v-bind:value="adjustedWeight" class="form-control" id="inputAdjustedWeight"
                                readonly>
                     </div>
                 </div>
-                <div class="form-group form-row">
+                <div class="form-group form-row mb-1">
                     <label for="inputIMC" class="col-sm-3 col-form-label">IMC</label>
                     <div class="col-sm">
                         <input v-bind:value="bmi" class="form-control" id="inputIMC" readonly>

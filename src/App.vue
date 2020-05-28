@@ -12,7 +12,7 @@
         <div class="row">
 
             <div class="col-4">
-                <div class="container">
+                <div class="container-fluid pr-0">
                     <div class="row">
                         <patient-form style="width: 100%;"></patient-form>
                     </div>
@@ -28,7 +28,7 @@
             <div class="col-8">
                 <b-card no-body>
                     <b-tabs card v-model="tabIndex" v-on:input="tabChanged">
-                        <b-tab>
+                        <b-tab class="p-0">
                             <template v-slot:title>
                                 <font-awesome-icon icon="heartbeat"/>&nbsp;Réanimation
                             </template>
@@ -38,7 +38,7 @@
                                        @display-bibliography="displayBibliography"></recos>
                             </b-card-body>
                         </b-tab>
-                        <b-tab v-on:change="tabChanged">
+                        <b-tab v-on:change="tabChanged" class="p-0">
                             <template v-slot:title>
                                 <font-awesome-icon icon="book-medical"/>&nbsp;Bibliographie
                             </template>
