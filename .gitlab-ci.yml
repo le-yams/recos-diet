@@ -1,0 +1,89 @@
+variables:
+  # Default docker image for Node
+  NODE_IMAGE: "node:12-alpine"
+  BUILD_DIR: "dist"
+
+
+stages:
+  - check
+  - build
+  - deploy
+
+##############################################################################################
+#                                Generic job definition                                      #
+##############################################################################################
+.node-base:
+  image: $NODE_IMAGE
+  # Cache downloaded dependencies and plugins between builds.
+  # To keep cache across branches add 'key: "$CI_JOB_NAME"'
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .npm/
+      - node_modules/
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+
+
+###############################################################################################
+#                                      check stage:                                           #
+#                                        - npm-lint                                           #
+###############################################################################################
+npm-lint:
+  extends: .node-base
+  stage: check
+  script:
+    - npm run lint
+  allow_failure: true
+  artifacts:
+    when: always # store artifact even if test Failed
+    name: "$CI_JOB_NAME artifacts from $CI_PROJECT_NAME on $CI_COMMIT_REF_SLUG"
+    paths:
+      - reports/
+    expire_in: 1 day
+
+
+###############################################################################################
+#                                      build stage:                                           #
+#                                        - npm-build                                          #
+###############################################################################################
+npm-build:
+  extends: .node-base
+  stage: build
+  script:
+    - npm run build --prod
+  artifacts:
+    when: always
+    name: "$CI_JOB_NAME artifacts from $CI_PROJECT_NAME on $CI_COMMIT_REF_SLUG"
+    paths:
+      - $BUILD_DIR
+      - reports/
+    expire_in: 1 day
+
+
+###############################################################################################
+#                                      deploy stage:                                          #
+#                                        - upload-to-prod                                     #
+###############################################################################################
+upload-to-prod:
+  stage: deploy
+  image: alpine:latest
+  environment:
+    name: prod
+
+  before_script:
+    - apk --no-cache add lftp openssh
+    - lftp --version
+    - mkdir -p ~/.ssh
+    - cat $DEPLOY_PROD_KNOWN_HOSTS > ~/.ssh/known_hosts
+  script:
+    - lftp -c "debug; set net:timeout 5; set net:max-retries 2; set net:reconnect-interval-base 5; set sftp:auto-confirm yes; open -u $DEPLOY_PROD_USER,$DEPLOY_PROD_PASSWORD sftp://$DEPLOY_PROD_HOST ; mirror -Renvp $BUILD_DIR/ recos-diet; bye"
+  only:
+    refs:
+      - master
+    variables:
+      - $DEPLOY_PROD_ENABLED
+
+
+
+
