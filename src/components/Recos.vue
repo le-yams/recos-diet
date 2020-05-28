@@ -7,7 +7,14 @@
             <div class="row" v-for="reco in recommendations" v-bind:key="reco.label">
                 <div class="container-fluid">
                     <div class="row">
-                        <span>{{reco.label}}: {{reco.quantity}} {{reco.unit}}</span>
+                        <p>{{reco.label}}: {{reco.quantity}} {{reco.unit}}
+                            <sup v-for="sourceIndex in reco.sources" v-bind:key="sourceIndex">
+                                <b-button variant="link" class="p-0"
+                                          @click="displayBibliography(sourceIndex)">
+                                    [{{sourceIndex}}]
+                                </b-button>
+                            </sup>
+                        </p>
                     </div>
                     <div class="row">
                         <ul v-if="reco.clauses.length > 0" class="font-italic font-weight-light">
@@ -50,6 +57,7 @@
                                 let quantity = Math.max(reco.quantity, pathoReco.quantity);
                                 reco.quantity = quantity;
                                 reco.clauses = [...new Set(reco.clauses.concat(pathoReco.clauses))];
+                                reco.sources = [...new Set(reco.sources.concat(pathoReco.sources))];
                             } else {
                                 reco = {
                                     ...pathoReco
@@ -59,6 +67,11 @@
                         })
                     );
                 return recos;
+            },
+        },
+        methods: {
+            displayBibliography: function (index) {
+                this.$emit('display-bibliography', index);
             }
         },
     }

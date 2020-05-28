@@ -27,14 +27,23 @@
 
             <div class="col-8">
                 <b-card no-body>
-                    <b-tabs card>
-                        <b-tab active>
+                    <b-tabs card v-model="tabIndex" v-on:input="tabChanged">
+                        <b-tab>
                             <template v-slot:title>
                                 <font-awesome-icon icon="heartbeat"/>&nbsp;Réanimation
                             </template>
                             <b-card-body>
                                 <target-flows :nutrition="nutrition" :patient-info="patientInfo"></target-flows>
-                                <recos :nutrition="nutrition" :pathologies="pathologies"></recos>
+                                <recos :nutrition="nutrition" :pathologies="pathologies"
+                                       @display-bibliography="displayBibliography"></recos>
+                            </b-card-body>
+                        </b-tab>
+                        <b-tab v-on:change="tabChanged">
+                            <template v-slot:title>
+                                <font-awesome-icon icon="book-medical"/>&nbsp;Bibliographie
+                            </template>
+                            <b-card-body>
+                                <bibliography></bibliography>
                             </b-card-body>
                         </b-tab>
                     </b-tabs>
@@ -45,13 +54,17 @@
 </template>
 
 <script>
-    import {mapState} from "vuex";
+    import {mapMutations, mapState} from "vuex";
     import PatientForm from "./components/PatientForm";
     import NutritionForm from "./components/NutritionForm";
     import TargetFlows from "./components/TargetFlows";
     import Recos from "./components/Recos";
     import Pathos from "./components/Pathos";
+    import Bibliography from "./components/Bibliography";
 
+    const TAB_BIBLIO_INDEX = 1;
+
+    //var VueScrollTo = require('vue-scrollto');
     export default {
         name: 'App',
         components: {
@@ -60,13 +73,34 @@
             TargetFlows,
             Recos,
             Pathos,
+            Bibliography,
+        },
+        data: function () {
+            return {
+                tabIndex: 0,
+            };
         },
         computed: {
             ...mapState(['nutrition', 'pathologies']),
             ...mapState({
                 patientInfo: 'patient',
+                outlinedBibliography: state => state.bibliography.outlined,
             }),
         },
+        methods: {
+            ...mapMutations(['outlineBiliography']),
+
+            displayBibliography: function (index) {
+                this.outlineBiliography(index);
+                this.tabIndex = TAB_BIBLIO_INDEX;
+            },
+            tabChanged: function () {
+                if (this.outlinedBibliography > 0) {
+                    let anchor = "#bibliography-" + (this.outlinedBibliography - 1);
+                    this.$scrollTo(anchor)
+                }
+            }
+        }
     }
 </script>
 

@@ -7,17 +7,19 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {
+    faBookMedical,
     faBullseye,
     faDisease,
     faFire,
     faHeartbeat,
     faPills,
     faUserInjured,
-    faUtensils
+    faUtensils,
 } from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import App from './App.vue'
 import {initStore} from './store'
+import VueScrollTo from 'vue-scrollto'
 
 library.add(faUserInjured)
 library.add(faFire)
@@ -26,6 +28,7 @@ library.add(faUtensils)
 library.add(faBullseye)
 library.add(faPills)
 library.add(faDisease)
+library.add(faBookMedical)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('v-select', vSelect)
 
@@ -33,11 +36,12 @@ Vue.component('v-select', vSelect)
 Vue.config.productionTip = false
 
 Vue.use(Vuex)
-
 // Install BootstrapVue
 Vue.use(BootstrapVue)
+
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+Vue.use(VueScrollTo)
 
 const store = initStore();
 

@@ -18,6 +18,9 @@ export function initStore() {
             },
             pathologies: [],
             constants: refs,
+            bibliography: {
+                outlined: 0,
+            }
         },
         mutations: {
             updatePatientInfo(state, heightAndWeight) {
@@ -55,6 +58,9 @@ export function initStore() {
                     .concat(pathologies)
                     .sort(comparingByLabel);
             },
+            outlineBiliography(state, index) {
+                state.bibliography.outlined = index;
+            }
         }
     });
 }
