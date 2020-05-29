@@ -4,9 +4,6 @@
             <font-awesome-icon icon="bullseye"/>&nbsp;Débits cible
         </b-card-header>
         <b-card-title></b-card-title>
-        <b-card-sub-title class="p-1 pl-3">
-            {{nutrition.product.label}}
-        </b-card-sub-title>
         <b-card-body class="p-1">
             <ul>
                 <li>
