@@ -12,7 +12,9 @@ import {
     faDisease,
     faFire,
     faHeartbeat,
+    faLongArrowAltDown,
     faPills,
+    faStickyNote,
     faUserInjured,
     faUtensils,
 } from '@fortawesome/free-solid-svg-icons'
@@ -29,6 +31,8 @@ library.add(faBullseye)
 library.add(faPills)
 library.add(faDisease)
 library.add(faBookMedical)
+library.add(faStickyNote)
+library.add(faLongArrowAltDown)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('v-select', vSelect)
 

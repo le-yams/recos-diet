@@ -41,6 +41,15 @@
                         </b-tab>
                         <b-tab v-on:change="tabChanged" class="p-0">
                             <template v-slot:title>
+                                <font-awesome-icon icon="sticky-note"/>
+                                SRI
+                            </template>
+                            <b-card-body>
+                                <sri></sri>
+                            </b-card-body>
+                        </b-tab>
+                        <b-tab v-on:change="tabChanged" class="p-0">
+                            <template v-slot:title>
                                 <font-awesome-icon icon="book-medical"/>&nbsp;Bibliographie
                             </template>
                             <b-card-body>
@@ -62,8 +71,9 @@
     import Recos from "./components/Recos";
     import Pathos from "./components/Pathos";
     import Bibliography from "./components/Bibliography";
+    import Sri from "./components/Sri";
 
-    const TAB_BIBLIO_INDEX = 1;
+    const TAB_BIBLIO_INDEX = 2;
 
     //var VueScrollTo = require('vue-scrollto');
     export default {
@@ -74,6 +84,7 @@
             TargetFlows,
             Recos,
             Pathos,
+            Sri,
             Bibliography,
         },
         data: function () {
