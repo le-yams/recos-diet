@@ -5,13 +5,13 @@ let nutritionTypes = {
 
 let products = {
     NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES: 'Nutrison Protein Plus Energy Multifibres',
+    OLIMEL_N7E: 'Olimel N7E',
+    OLIMEL_N9E: 'Olimel N9E',
     PEPTAMEN_HN: 'Peptamen HN',
+    REANUTRIFLEX_OMEGA: 'Réanutriflex Omega',
     SONDALIS_HP_ENERGY: 'Sondalis HP Energy',
     SONDALIS_JUNIOR: 'Sondalis Junior',
     SONDALIS_T_ENERGY: 'Sondalis T Energy',
-    REANUTRIFLEX_OMEGA: '',
-    OLIMEL_N7E: 'Olimel N7E',
-    OLIMEL_N9E: 'Olimel N9E',
 };
 export default {
     nutritionTypes: {
@@ -101,6 +101,81 @@ export default {
             recommendations: {
                 'Entérale': [],
                 'Parentérale': [],
+            },
+        },
+        {
+            label: "Cirrhotique",
+            recommendations: {
+                'Entérale': [
+                    {
+                        label: "Zinc",
+                        quantity: "15",
+                        unit: "mg/jour",
+                        clauses: ["seulement si encéphalopathie hépatique, carence ou infection"],
+                        sources: [1],
+                    }
+                ],
+                'Parentérale': [
+                    {
+                        label: "Zinc",
+                        quantity: "15",
+                        unit: "mg/jour",
+                        clauses: ["seulement si encéphalopathie hépatique, carence ou infection"],
+                        sources: [1],
+                    }
+                ],
+            },
+        },
+        {
+            label: "COVID-19",
+            recommendations: {
+                'Entérale': [
+                    {
+                        label: "B1",
+                        quantity: "500",
+                        unit: "mg/jour",
+                        clauses: [],
+                        sources: [1],
+                    },
+                ],
+                'Parentérale': [
+                    {
+                        label: "B1",
+                        quantity: "500",
+                        unit: "mg/j",
+                        clauses: [],
+                        sources: [1],
+                    },],
+            },
+        },
+        {
+            label: "CVVHDF",
+            recommendations: {
+                'Entérale': [
+                    {
+                        label: "Alvityl (po/sng)",
+                        quantity: "2",
+                        unit: "comprimés/jour",
+                        clauses: ["puis 1 comprimé/jour lorsque le BE est atteint"],
+                        sources: [1, 3, 4],
+                    },
+                ],
+                'Parentérale': [
+                    {
+                        label: "Nutryelt",
+                        quantity: "2",
+                        unit: "ampoules 10ml",
+                        clauses: [],
+                        sources: [1],
+                    },
+                    {
+                        label: "Cernevit",
+                        quantity: "2",
+                        unit: "ampoule 5ml",
+                        clauses: [],
+                        sources: [1],
+                    },
+                ],
             },
         },
         {
@@ -201,81 +276,6 @@ export default {
                         sources: [1],
                     },
                 ],
-            },
-        },
-        {
-            label: "CVVHDF",
-            recommendations: {
-                'Entérale': [
-                    {
-                        label: "Alvityl (po/sng)",
-                        quantity: "2",
-                        unit: "comprimés/jour",
-                        clauses: ["puis 1 comprimé/jour lorsque le BE est atteint"],
-                        sources: [1, 3, 4],
-                    },
-                ],
-                'Parentérale': [
-                    {
-                        label: "Nutryelt",
-                        quantity: "2",
-                        unit: "ampoules 10ml",
-                        clauses: [],
-                        sources: [1],
-                    },
-                    {
-                        label: "Cernevit",
-                        quantity: "2",
-                        unit: "ampoule 5ml",
-                        clauses: [],
-                        sources: [1],
-                    },
-                ],
-            },
-        },
-        {
-            label: "Cirrhotique",
-            recommendations: {
-                'Entérale': [
-                    {
-                        label: "Zinc",
-                        quantity: "15",
-                        unit: "mg/jour",
-                        clauses: [],
-                        sources: [1],
-                    }
-                ],
-                'Parentérale': [
-                    {
-                        label: "Zinc",
-                        quantity: "15",
-                        unit: "mg/jour",
-                        clauses: [],
-                        sources: [1],
-                    }
-                ],
-            },
-        },
-        {
-            label: "COVID-19",
-            recommendations: {
-                'Entérale': [
-                    {
-                        label: "B1",
-                        quantity: "500",
-                        unit: "mg/jour",
-                        clauses: [],
-                        sources: [1],
-                    },
-                ],
-                'Parentérale': [
-                    {
-                        label: "B1",
-                        quantity: "500",
-                        unit: "mg/j",
-                        clauses: [],
-                        sources: [1],
-                    },],
             },
         },
     ],
