@@ -7,7 +7,7 @@
             <div class="row" v-for="reco in recommendations" v-bind:key="reco.label">
                 <div class="container-fluid">
                     <div class="row">
-                        <p>{{reco.label}}: {{reco.quantity}} {{reco.unit}}
+                        <p class="mb-0">{{reco.label}}: {{reco.quantity}} {{reco.unit}}
                             <sup v-for="sourceIndex in reco.sources" v-bind:key="sourceIndex">
                                 <b-button variant="link" class="p-0"
                                           @click="displayBibliography(sourceIndex)">
