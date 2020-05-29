@@ -6,6 +6,9 @@
         <b-card-title></b-card-title>
         <b-card-body class="p-1">
             <ul>
+                <li v-if="displayLowTarget">
+                    <target-flow :cal-target="10" :nutrition="nutrition" :patient-info="patientInfo"/>
+                </li>
                 <li>
                     <target-flow :cal-target="20" :nutrition="nutrition" :patient-info="patientInfo"/>
                 </li>
@@ -23,6 +26,7 @@
 
 <script>
     import TargetFlow from "./TargetFlow";
+    import refs from "../refs-data";
 
     export default {
         name: "TargetFlows",
@@ -41,8 +45,10 @@
         computed: {
             hasObesity: function () {
                 return this.pathologies.find(p => p.label === 'Obésité');
-            }
-
+            },
+            displayLowTarget: function () {
+                return this.nutrition.product.label === refs.products.SONDALIS_JUNIOR;
+            },
         }
     }
 </script>

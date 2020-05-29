@@ -1,28 +1,48 @@
-export default {
+let nutritionTypes = {
     ENTERALE: 'Entérale',
     PARENTERALE: 'Parentérale',
+};
+
+let products = {
+    NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES: 'Nutrison Protein Plus Energy Multifibres',
+    PEPTAMEN_HN: 'Peptamen HN',
+    SONDALIS_HP_ENERGY: 'Sondalis HP Energy',
+    SONDALIS_JUNIOR: 'Sondalis Junior',
+    SONDALIS_T_ENERGY: 'Sondalis T Energy',
+    REANUTRIFLEX_OMEGA: '',
+    OLIMEL_N7E: 'Olimel N7E',
+    OLIMEL_N9E: 'Olimel N9E',
+};
+export default {
+    nutritionTypes: {
+        ...nutritionTypes
+    },
+    products: {
+        ...products
+    },
     nutritions: {
         'Entérale': {
             products: [
                 {
-                    label: "Sondalis HP Energy",
+                    label: products.NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES,
+                    // label: "Nutrison Protein Plus Energy Multifibres",
                     kcal: 1.5,
                 },
                 {
-                    label: "Nutrison Protein Plus Energy Multifibres",
-                    kcal: 1.5,
-                },
-                {
-                    label: "Sondalis T Energy",
-                    kcal: 1.55,
-                },
-                {
-                    label: "Peptamen HN",
+                    label: products.PEPTAMEN_HN,
                     kcal: 1.33,
                 },
                 {
-                    label: "Sondalis Junior",
+                    label: products.SONDALIS_HP_ENERGY,
+                    kcal: 1.5,
+                },
+                {
+                    label: products.SONDALIS_JUNIOR,
                     kcal: 1,
+                },
+                {
+                    label: products.SONDALIS_T_ENERGY,
+                    kcal: 1.55,
                 },
             ],
             recommendations: [
@@ -38,15 +58,15 @@ export default {
         'Parentérale': {
             products: [
                 {
-                    label: "Réanutriflex Omega",
+                    label: products.REANUTRIFLEX_OMEGA,
                     kcal: 1.18,
                 },
                 {
-                    label: "Olimel N7E",
+                    label: products.OLIMEL_N7E,
                     kcal: 1.14,
                 },
                 {
-                    label: "Olimel N9E",
+                    label: products.OLIMEL_N9E,
                     kcal: 1.7,
                 },
             ],
@@ -76,6 +96,13 @@ export default {
         },
     },
     pathologies: [
+        {
+            label: 'Anorexie mentale',
+            recommendations: {
+                'Entérale': [],
+                'Parentérale': [],
+            },
+        },
         {
             label: "Dénutrition-SRI",
             recommendations: {

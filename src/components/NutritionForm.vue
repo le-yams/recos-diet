@@ -68,7 +68,7 @@
                     product: product,
                 });
 
-                if (this.selectedNutritionType === refs.ENTERALE) {
+                if (this.selectedNutritionType === refs.nutritionTypes.ENTERALE) {
                     this.lastSelectedEnterale = product;
                 } else {
                     this.lastSelectedParenterale = product;
@@ -77,7 +77,7 @@
             selectedNutritionTypeChange: function (evt) {
                 let nutritionType = evt.target.value;
                 var product;
-                if (nutritionType === refs.ENTERALE) {
+                if (nutritionType === refs.nutritionTypes.ENTERALE) {
                     product = this.lastSelectedEnterale;
                 } else {
                     product = this.lastSelectedParenterale;

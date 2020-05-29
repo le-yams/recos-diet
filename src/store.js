@@ -13,8 +13,8 @@ export function initStore() {
                 adjustedWeight: 70,
             },
             nutrition: {
-                type: refs.ENTERALE,
-                product: refs.nutritions[refs.ENTERALE].products[0],
+                type: refs.nutritionTypes.ENTERALE,
+                product: refs.nutritions[refs.nutritionTypes.ENTERALE].products[0],
             },
             pathologies: [],
             constants: refs,
