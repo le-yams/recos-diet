@@ -200,6 +200,7 @@ export default {
                     },
                 ],
             },
+            warning: pathologieNames.ANOREXIE_MENTALE + " : merci de prescrire un avis diététique pour la suite de la prise en charge.",
         },
         {
             label: pathologieNames.CIRRHOTIQUE,

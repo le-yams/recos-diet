@@ -33,6 +33,10 @@
                                 <font-awesome-icon icon="heartbeat"/>&nbsp;Réanimation
                             </template>
                             <b-card-body>
+                                <b-alert :show="warnings.length > 0" variant="danger">
+                                    <p v-for="warning in warnings" v-bind:key="warning" class="mb-1">{{warning}}</p>
+                                </b-alert>
+
                                 <target-flows :patient-info="patientInfo" :nutrition="nutrition"
                                               :pathologies="pathologies"></target-flows>
                                 <recos :nutrition="nutrition" :pathologies="pathologies"
@@ -98,6 +102,11 @@
                 patientInfo: 'patient',
                 outlinedBibliography: state => state.bibliography.outlined,
             }),
+            warnings: function () {
+                return this.pathologies
+                    .filter(p => p.warning)
+                    .map(p => p.warning);
+            },
         },
         methods: {
             ...mapMutations(['outlineBiliography']),
