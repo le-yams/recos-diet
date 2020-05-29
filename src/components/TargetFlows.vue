@@ -26,7 +26,6 @@
 
 <script>
     import TargetFlow from "./TargetFlow";
-    import refs from "../refs-data";
 
     export default {
         name: "TargetFlows",
@@ -47,7 +46,7 @@
                 return this.pathologies.find(p => p.label === 'Obésité');
             },
             displayLowTarget: function () {
-                return this.nutrition.product.label === refs.products.SONDALIS_JUNIOR;
+                return this.pathologies.find(p => p.label === 'Anorexie mentale');
             },
         }
     }

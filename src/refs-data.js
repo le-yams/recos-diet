@@ -10,7 +10,7 @@ let products = {
     PEPTAMEN_HN: 'Peptamen HN',
     REANUTRIFLEX_OMEGA: 'Réanutriflex Omega',
     SONDALIS_HP_ENERGY: 'Sondalis HP Energy',
-    SONDALIS_JUNIOR: 'Sondalis Junior',
+    SONDALIS_JUNIOR_STANDARD: 'Sondalis Junior Standard',
     SONDALIS_T_ENERGY: 'Sondalis T Energy',
 };
 export default {
@@ -37,7 +37,7 @@ export default {
                     kcal: 1.5,
                 },
                 {
-                    label: products.SONDALIS_JUNIOR,
+                    label: products.SONDALIS_JUNIOR_STANDARD,
                     kcal: 1,
                 },
                 {
