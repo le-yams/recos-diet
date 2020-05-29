@@ -33,7 +33,8 @@
                                 <font-awesome-icon icon="heartbeat"/>&nbsp;Réanimation
                             </template>
                             <b-card-body>
-                                <target-flows :nutrition="nutrition" :patient-info="patientInfo"></target-flows>
+                                <target-flows :patient-info="patientInfo" :nutrition="nutrition"
+                                              :pathologies="pathologies"></target-flows>
                                 <recos :nutrition="nutrition" :pathologies="pathologies"
                                        @display-bibliography="displayBibliography"></recos>
                             </b-card-body>

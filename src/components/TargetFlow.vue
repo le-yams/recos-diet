@@ -1,5 +1,5 @@
 <template>
-    <p class="m-0">
+    <p class="m-0" v-bind:class="{'text-muted': grayed, 'font-italic': grayed}">
         Pour un besoin de <strong>{{ calTarget }}</strong> kcal/kg, débit cible = <strong>{{ flow }}</strong> ml/h
     </p>
 </template>
@@ -17,6 +17,10 @@
             nutrition: {
                 type: Object,
             },
+            grayed: {
+                type: Boolean,
+                default: false,
+            }
         },
         computed: {
             flow: function () {

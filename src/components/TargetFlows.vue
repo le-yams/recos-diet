@@ -16,7 +16,8 @@
                     <target-flow :cal-target="25" :nutrition="nutrition" :patient-info="patientInfo"/>
                 </li>
                 <li>
-                    <target-flow :cal-target="30" :nutrition="nutrition" :patient-info="patientInfo"/>
+                    <target-flow :cal-target="30" :nutrition="nutrition" :patient-info="patientInfo"
+                                 :grayed="hasObesity"/>
                 </li>
             </ul>
         </b-card-body>
@@ -25,7 +26,6 @@
 
 <script>
     import TargetFlow from "./TargetFlow";
-    import {mapState} from "vuex";
 
     export default {
         name: "TargetFlows",
@@ -34,9 +34,18 @@
             patientInfo: {
                 type: Object,
             },
+            nutrition: {
+                type: Object,
+            },
+            pathologies: {
+                type: Array,
+            },
         },
         computed: {
-            ...mapState(['nutrition']),
+            hasObesity: function () {
+                return this.pathologies.find(p => p.label === 'Obésité');
+            }
+
         }
     }
 </script>
