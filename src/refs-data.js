@@ -7,8 +7,11 @@ const products = {
     NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES: 'Nutrison Protein Plus Energy Multifibres',
     OLIMEL_N7E: 'Olimel N7E',
     OLIMEL_N9E: 'Olimel N9E',
+    MEDNUTRIFLEX_OMEGA: 'Mednutriflex Omega',
     PEPTAMEN_HN: 'Peptamen HN',
+    PEPTISORB: 'Peptisorb (hypolipidique)',
     REANUTRIFLEX_OMEGA: 'Réanutriflex Omega',
+    SMOKABIVEN_PROTEIN: 'Smokabiven Protein',
     SONDALIS_HP_ENERGY: 'Sondalis HP Energy',
     SONDALIS_JUNIOR_STANDARD: 'Sondalis Junior Standard',
     SONDALIS_T_ENERGY: 'Sondalis T Energy',
@@ -37,23 +40,27 @@ export default {
                 {
                     label: products.NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES,
                     // label: "Nutrison Protein Plus Energy Multifibres",
-                    kcal: 1.5,
+                    kcalByLiter: 1500,
                 },
                 {
                     label: products.PEPTAMEN_HN,
-                    kcal: 1.33,
+                    kcalByLiter: 1330,
+                },
+                {
+                    label: products.PEPTISORB,
+                    kcalByLiter: 1000,
                 },
                 {
                     label: products.SONDALIS_HP_ENERGY,
-                    kcal: 1.5,
+                    kcalByLiter: 1500,
                 },
                 {
                     label: products.SONDALIS_JUNIOR_STANDARD,
-                    kcal: 1,
+                    kcalByLiter: 1000
                 },
                 {
                     label: products.SONDALIS_T_ENERGY,
-                    kcal: 1.55,
+                    kcalByLiter: 1550,
                 },
             ],
             recommendations: [
@@ -69,16 +76,24 @@ export default {
         'Parentérale': {
             products: [
                 {
-                    label: products.REANUTRIFLEX_OMEGA,
-                    kcal: 1.18,
+                    label: products.MEDNUTRIFLEX_OMEGA,
+                    kcalByLiter: 1012,
                 },
                 {
                     label: products.OLIMEL_N7E,
-                    kcal: 1.14,
+                    kcalByLiter: 1140,
                 },
                 {
                     label: products.OLIMEL_N9E,
-                    kcal: 1.7,
+                    kcalByLiter: 1700,
+                },
+                {
+                    label: products.REANUTRIFLEX_OMEGA,
+                    kcalByLiter: 1180,
+                },
+                {
+                    label: products.SMOKABIVEN_PROTEIN,
+                    kcalByLiter: 889,
                 },
             ],
             recommendations: [

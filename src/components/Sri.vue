@@ -4,10 +4,19 @@
             <h1>Critères NICE 2006</h1>
         </div>
         <div class="row">
+            <b-alert show variant="info">Les critères de NICE (National Institute for health and Clinical Excellence)
+                permettent de dépister
+                les
+                patients à haut risque de syndrome de renutrition inappropriée. Les patients à risque de SRI
+                comportent
+                au moins 1 critère majeur ou au moins 2 critères mineurs.
+            </b-alert>
+        </div>
+        <div class="row">
             <div class="col">
                 <b-card>
                     <b-card-body>
-                        <b-card-title><u>Soit 1 des critères suivants</u></b-card-title>
+                        <b-card-title><u>Critères majeurs</u></b-card-title>
                     </b-card-body>
                     <b-list-group flush>
                         <b-list-group-item>IMC &lt; 16</b-list-group-item>
@@ -23,7 +32,7 @@
             <div class="col">
                 <b-card>
                     <b-card-body>
-                        <b-card-title><u>Soit 2 des critères suivants</u></b-card-title>
+                        <b-card-title><u>Critères mineurs</u></b-card-title>
                     </b-card-body>
                     <b-list-group flush>
                         <b-list-group-item>IMC &lt; 18,5</b-list-group-item>
@@ -31,7 +40,7 @@
                         </b-list-group-item>
                         <b-list-group-item>Apport nutritionnel faible ou nul &gt; 5 jours</b-list-group-item>
                         <b-list-group-item>OH chronique</b-list-group-item>
-                        <b-list-group-item>insuline, chimiotéraphie, antiacides, diurétiques</b-list-group-item>
+                        <b-list-group-item>Insuline, chimiotéraphie, antiacides, diurétiques</b-list-group-item>
                     </b-list-group>
                 </b-card>
             </div>

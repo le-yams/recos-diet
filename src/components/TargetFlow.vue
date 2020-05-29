@@ -1,5 +1,5 @@
 <template>
-    <p class="m-0" v-bind:class="{'text-muted': grayed, 'font-italic': grayed}">
+    <p class="m-0">
         Pour un besoin de <strong>{{ calTarget }}</strong> kcal/kg, débit cible = <strong>{{ flow }}</strong> ml/h
     </p>
 </template>
@@ -17,14 +17,11 @@
             nutrition: {
                 type: Object,
             },
-            grayed: {
-                type: Boolean,
-                default: false,
-            }
         },
         computed: {
             flow: function () {
-                return (this.patientInfo.adjustedWeight * this.calTarget / 24 / this.nutrition.product.kcal).toFixed(0);
+                let kcalByML = this.nutrition.product.kcalByLiter / 1000;
+                return (this.patientInfo.adjustedWeight * this.calTarget / 24 / kcalByML).toFixed(0);
             }
         }
     }

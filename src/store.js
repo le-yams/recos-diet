@@ -14,7 +14,7 @@ export function initStore() {
             },
             nutrition: {
                 type: refs.nutritionTypes.ENTERALE,
-                product: refs.nutritions[refs.nutritionTypes.ENTERALE].products[0],
+                product: refs.nutritions[refs.nutritionTypes.ENTERALE].products[3],
             },
             pathologies: [],
             constants: refs,

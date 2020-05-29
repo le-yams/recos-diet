@@ -6,18 +6,17 @@
         <b-card-title></b-card-title>
         <b-card-body class="p-1">
             <ul>
-                <li v-if="displayLowTarget">
+                <li v-if="hasAnorexia">
                     <target-flow :cal-target="10" :nutrition="nutrition" :patient-info="patientInfo"/>
                 </li>
-                <li>
+                <li v-if="!hasAnorexia">
                     <target-flow :cal-target="20" :nutrition="nutrition" :patient-info="patientInfo"/>
                 </li>
-                <li>
+                <li v-if="!hasAnorexia">
                     <target-flow :cal-target="25" :nutrition="nutrition" :patient-info="patientInfo"/>
                 </li>
-                <li>
-                    <target-flow :cal-target="30" :nutrition="nutrition" :patient-info="patientInfo"
-                                 :grayed="hasObesity"/>
+                <li v-if="!hasAnorexia && !hasObesity">
+                    <target-flow :cal-target="30" :nutrition="nutrition" :patient-info="patientInfo"/>
                 </li>
             </ul>
         </b-card-body>
@@ -45,7 +44,8 @@
             hasObesity: function () {
                 return this.pathologies.find(p => p.label === 'Obésité');
             },
-            displayLowTarget: function () {
+
+            hasAnorexia: function () {
                 return this.pathologies.find(p => p.label === 'Anorexie mentale');
             },
         }
