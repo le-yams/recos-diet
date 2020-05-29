@@ -375,7 +375,46 @@ export default {
             },
         },
     ],
-    bibliography: [],
+    bibliography: [
+        {
+            label: 'ESPEN (2019), Guideline on clinical nutrition in the intensive care unit.',
+            url: 'https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline-on-clinical-nutrition-in-the-intensive-care-unit.pdf'
+        },
+        {
+            label: 'AFAR, Annales Françaises d’Anesthésie et de Réanimation (2014), Nutrition artificielle en réanimation.',
+            url: 'https://sfar.org/wp-content/uploads/2015/10/2_AFAR_Nutrition-artificielle-en-reanimation.pdf'
+        },
+        {
+            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie.',
+        },
+        {
+            label: 'https://www.chu.ulg.ac.be/upload/docs/application/pdf/2009-01/guide_1.pdf',
+            url: 'https://www.chu.ulg.ac.be/upload/docs/application/pdf/2009-01/guide_1.pdf'
+        },
+        {
+            label: 'NICE, National Institute for Health and Care Excellence (2017). Nutrition Support for adults : oral nutrition support, enteral tube feeding an parenteral nutrition.',
+            url: 'https://www.nice.org.uk/guidance/cg32/chapter/1-Guidance#ftn.footnote_8'
+        },
+        {
+            label: 'Barras-Moret Anne-Catherine, Guex Esther, Coti Bertrand Pauline, Le syndrome de renutrition inapproprié : la clé du traitement est la prévention (2011).',
+            url: 'https://www.sfncm.org/images/stories/pdf_pratiquesnutrition/Barras-Moret%20NCM%202011.pdf'
+        },
+        {
+            label: 'Airagnais G, Ducoutumany G, Laffy-Beaufils B, Le Faou A-L, Limousin F, La prise en charge du syndrome de sevrage de l’alcool : quelles nouveautés ? (2019).',
+        },
+        {
+            label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Nutrition du patient covid-19 intubé et ventilé en réanimation (2020).',
+            url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_08_COVID-19.pdf'
+        },
+        {
+            label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Principes de prise en charge des patients Covid 19+ en post-réanimation (2020).',
+            url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_09_COVID-19.pdf'
+        },
+        {
+            label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Prévention du syndrome de renutrition inapproprié (SRI) des patients COVID 19 (2020).',
+            url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_03_COVID-19.pdf'
+        },
+    ],
     calculatedPathologies: function () {
         return this.pathologies.filter(p => p.calculation)
     },

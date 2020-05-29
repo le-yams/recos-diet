@@ -2,7 +2,10 @@
     <div class="container-fluid">
         <div class="row" v-for="(source, index) in bibliography" v-bind:key="index"
              v-bind:class="{ 'font-weight-bold': isOutlined(index) }">
-            <span :id="'bibliography-' + index">[{{index+1}}] {{source}}</span>
+            <p :id="'bibliography-' + index" class="mb-1">
+                <span v-if="source.url">[{{index+1}}]&nbsp;<a :href="source.url">{{source.label}}</a></span>
+                <span v-else>[{{index+1}}]&nbsp;{{source.label}}</span>
+            </p>
         </div>
     </div>
 </template>
