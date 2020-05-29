@@ -1,9 +1,9 @@
-let nutritionTypes = {
+const nutritionTypes = {
     ENTERALE: 'Entérale',
     PARENTERALE: 'Parentérale',
 };
 
-let products = {
+const products = {
     NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES: 'Nutrison Protein Plus Energy Multifibres',
     OLIMEL_N7E: 'Olimel N7E',
     OLIMEL_N9E: 'Olimel N9E',
@@ -13,6 +13,17 @@ let products = {
     SONDALIS_JUNIOR_STANDARD: 'Sondalis Junior Standard',
     SONDALIS_T_ENERGY: 'Sondalis T Energy',
 };
+
+export const pathologieNames = {
+    ANOREXIE_MENTALE: 'Anorexie mentale',
+    CIRRHOTIQUE: 'Cirrhotique',
+    COVID_19: 'COVID-19',
+    CVVHDF: 'CVVHDF',
+    DENUTRITION_SRI: 'Dénutrition-SRI',
+    OBESITE: 'Obésité',
+    OH: 'OH',
+};
+
 export default {
     nutritionTypes: {
         ...nutritionTypes
@@ -97,14 +108,86 @@ export default {
     },
     pathologies: [
         {
-            label: 'Anorexie mentale',
+            label: pathologieNames.ANOREXIE_MENTALE,
             recommendations: {
-                'Entérale': [],
-                'Parentérale': [],
+                'Entérale': [
+                    {
+                        label: "Nutryelt",
+                        quantity: "1",
+                        unit: "ampoule 10ml/jour",
+                        clauses: ["en IV"],
+                        sources: [],
+                    },
+                    {
+                        label: "Cernevit",
+                        quantity: "1",
+                        unit: "ampoule 5ml/jour",
+                        clauses: ["en IV"],
+                        sources: [],
+                    },
+                    {
+                        label: "B1",
+                        quantity: "500",
+                        unit: "mg/jour",
+                        clauses: ["en IV"],
+                        sources: [1],
+                    },
+                    {
+                        label: "B9",
+                        quantity: "25",
+                        unit: "mg/jour",
+                        clauses: ["en IV"],
+                        sources: [1],
+                    },
+                    {
+                        label: "Zinc",
+                        quantity: "10",
+                        unit: "mg/jour",
+                        clauses: ["en IV"],
+                        sources: [1],
+                    },
+                ],
+                'Parentérale': [
+                    {
+                        label: "Nutryelt",
+                        quantity: "1",
+                        unit: "ampoule 10ml/jour",
+                        clauses: ["en IV"],
+                        sources: [],
+                    },
+                    {
+                        label: "Cernevit",
+                        quantity: "1",
+                        unit: "ampoule 5ml/jour",
+                        clauses: ["en IV"],
+                        sources: [],
+                    },
+                    {
+                        label: "B1",
+                        quantity: "500",
+                        unit: "mg/jour",
+                        clauses: ["en IV"],
+                        sources: [1],
+                    },
+                    {
+                        label: "B9",
+                        quantity: "25",
+                        unit: "mg/jour",
+                        clauses: ["en IV"],
+                        sources: [1],
+                    },
+                    {
+                        label: "Zinc",
+                        quantity: "10",
+                        unit: "mg/jour",
+                        clauses: ["en IV"],
+                        sources: [1],
+                    },
+                ],
             },
         },
         {
-            label: "Cirrhotique",
+            label: pathologieNames.CIRRHOTIQUE,
             recommendations: {
                 'Entérale': [
                     {
@@ -127,7 +210,7 @@ export default {
             },
         },
         {
-            label: "COVID-19",
+            label: pathologieNames.COVID_19,
             recommendations: {
                 'Entérale': [
                     {
@@ -149,7 +232,7 @@ export default {
             },
         },
         {
-            label: "CVVHDF",
+            label: pathologieNames.CVVHDF,
             recommendations: {
                 'Entérale': [
                     {
@@ -179,7 +262,7 @@ export default {
             },
         },
         {
-            label: "Dénutrition-SRI",
+            label: pathologieNames.DENUTRITION_SRI,
             recommendations: {
                 'Entérale': [
                     {
@@ -223,7 +306,7 @@ export default {
             },
         },
         {
-            label: "Obésité",
+            label: pathologieNames.OBESITE,
             calculation: {
                 perform: function (patientInfo) {
                     return patientInfo.bmi >= 30;
@@ -236,7 +319,7 @@ export default {
             },
         },
         {
-            label: "OH",
+            label: pathologieNames.OH,
             recommendations: {
                 'Entérale': [
                     {
