@@ -8,12 +8,8 @@
                 <div class="container-fluid">
                     <div class="row">
                         <p class="mb-0">{{reco.label}}: {{reco.quantity}} {{reco.unit}}
-                            <sup v-for="sourceIndex in reco.sources" v-bind:key="sourceIndex">
-                                <b-button variant="link" class="p-0"
-                                          @click="displayBibliography(sourceIndex)">
-                                    [{{sourceIndex}}]
-                                </b-button>
-                            </sup>
+                            <biblio-links :sources="reco.sources"
+                                          @display-bibliography="displayBibliography"></biblio-links>
                         </p>
                     </div>
                     <div class="row">
@@ -31,9 +27,11 @@
 
     import {withLabel} from "../utils";
     import refs from "../refs-data";
+    import BiblioLinks from "./BiblioLinks";
 
     export default {
         name: "Recos",
+        components: {BiblioLinks},
         props: {
             nutrition: {
                 type: Object,
@@ -45,13 +43,17 @@
         computed: {
             recommendations: function () {
                 let nutritionType = this.nutrition.type;
-                let recos = [...refs.nutritions[nutritionType].recommendations.map(r => {
+                let pathoRecos = this.pathologies.map(p => p.recommendations);
+                let exclusions = [...new Set(pathoRecos.filter(r => r.exclusions).flatMap(r => r.exclusions))];
+                console.log("exclusions: ", exclusions);
+                let notExcluded = reco => !exclusions.find(e => e === reco.label);
+                let recos = [...refs.nutritions[nutritionType].recommendations.filter(notExcluded).map(r => {
                     return {...r};
                 })];
-                this.pathologies.map(p => p.recommendations)
-                    .map(recos => recos[nutritionType])
-                    .forEach(pathoRecos =>
-                        pathoRecos.forEach(pathoReco => {
+                console.log("global recommendations: ", recos);
+                pathoRecos.flatMap(recos => recos[nutritionType])
+                    .filter(notExcluded)
+                    .forEach(pathoReco => {
                             let reco = recos.find(withLabel(pathoReco.label));
                             if (reco) {
                                 let quantity = Math.max(reco.quantity, pathoReco.quantity);
@@ -64,7 +66,7 @@
                                 };
                                 recos.push(reco);
                             }
-                        })
+                        }
                     );
                 return recos;
             },

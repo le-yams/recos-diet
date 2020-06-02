@@ -79,7 +79,6 @@
 
     const TAB_BIBLIO_INDEX = 2;
 
-    //var VueScrollTo = require('vue-scrollto');
     export default {
         name: 'App',
         components: {
