@@ -6,11 +6,11 @@
         <b-card-body>
             <form>
                 <div class="form-group form-row mb-1">
-                    <label for="inputHeight" class="col-sm-3 col-form-label">Taille</label>
+                    <label for="inputHeight" class="col-sm-3 col-form-label">Taille (cm)</label>
                     <div class="col-sm">
                         <input type="number" v-bind:value="height"
                                v-on:change="updateHeight"
-                               class="form-control" id="inputHeight" placeholder="Taille">
+                               class="form-control" id="inputHeight" placeholder="Taille (cm)">
                     </div>
                 </div>
                 <div class="form-group form-row mb-1">
