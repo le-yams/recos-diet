@@ -70,7 +70,6 @@ upload-to-prod:
   image: alpine:latest
   environment:
     name: prod
-
   before_script:
     - apk --no-cache add lftp openssh
     - lftp --version
@@ -78,6 +77,7 @@ upload-to-prod:
     - cat $DEPLOY_PROD_KNOWN_HOSTS > ~/.ssh/known_hosts
   script:
     - lftp -c "debug; set net:timeout 5; set net:max-retries 2; set net:reconnect-interval-base 5; set sftp:auto-confirm yes; open -u $DEPLOY_PROD_USER,$DEPLOY_PROD_PASSWORD sftp://$DEPLOY_PROD_HOST ; mirror -Renvp $BUILD_DIR/ recos-diet; bye"
+  when: manual
   only:
     refs:
       - master
