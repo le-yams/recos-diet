@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.0](https://gitlab.com/ydisanto/recos-diet/compare/0.3.0...1.0.0) (2020-06-09)
+
+
+### Features
+
+* **débits:** calcul des cibles énergétiques quotidiennes ([af5df5c](https://gitlab.com/ydisanto/recos-diet/commit/af5df5c42f89cb1e7f9d3a19d91b18890eadfef1))
+* **patient:** ajout de l'unité de taille ([ae42f25](https://gitlab.com/ydisanto/recos-diet/commit/ae42f252bf216e59dba0ec375d79e3c0987a6e3a))
+
+
+### Bug Fixes
+
+* **recos:** unité apport énergétique quotidien ([c3976e6](https://gitlab.com/ydisanto/recos-diet/commit/c3976e60d4e7f3669de3b6f8699febc1d8fce873))
+
 ### [0.3.0](https://gitlab.com/ydisanto/recos-diet/compare/0.2.0...0.3.0) (2020-06-03)
 
 
