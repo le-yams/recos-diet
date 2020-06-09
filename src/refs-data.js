@@ -68,7 +68,7 @@ export default {
                     label: "Alvityl (po/sng)",
                     quantity: "1",
                     unit: "comprimé/jour",
-                    clauses: ["si apports < 1500 kcal"],
+                    clauses: ["si apports < 1500 kcal/j"],
                     sources: [14, 15],
                 }
             ],
@@ -101,14 +101,14 @@ export default {
                     label: "Nutryelt",
                     quantity: "1",
                     unit: "ampoule 10ml/jour",
-                    clauses: ["si apports < 1500 kcal"],
+                    clauses: ["si apports < 1500 kcal/j"],
                     sources: [13],
                 },
                 {
                     label: "Cernevit",
                     quantity: "1",
                     unit: "ampoule 5ml/jour",
-                    clauses: ["si apports < 1500 kcal"],
+                    clauses: ["si apports < 1500 kcal/j"],
                     sources: [13],
                 },
                 {
