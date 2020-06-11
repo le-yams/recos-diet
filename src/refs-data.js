@@ -153,6 +153,7 @@ export default {
                         quantity: "25",
                         unit: "mg/jour",
                         clauses: ["en IV"],
+                        excludeClauses:[ "Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
                         sources: [],
                     },
                     {
@@ -160,6 +161,7 @@ export default {
                         quantity: "10",
                         unit: "mg/jour",
                         clauses: ["en IV"],
+                        excludeClauses:[ "seulement si encéphalopathie hépatique, carence ou infection"],
                         sources: [],
                     },
                 ],
@@ -190,6 +192,7 @@ export default {
                         quantity: "25",
                         unit: "mg/jour",
                         clauses: ["en IV"],
+                        excludeClauses:[ "Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
                         sources: [],
                     },
                     {
@@ -197,6 +200,7 @@ export default {
                         quantity: "10",
                         unit: "mg/jour",
                         clauses: ["en IV"],
+                        excludeClauses:[ "seulement si encéphalopathie hépatique, carence ou infection"],
                         sources: [],
                     },
                 ],
