@@ -8,17 +8,15 @@
                 <div class="form-group form-row mb-1">
                     <label for="inputType" class="col-sm-3 col-form-label">Type</label>
                     <div class="col-sm">
-                        <select v-bind:value="selectedNutritionType" v-on:change="selectedNutritionTypeChange"
-                                class="form-control" id="inputType">
-                            <option v-for="type in nutritionTypes" :key="type">{{type}}</option>
-                        </select>
+                        <v-select id="inputType" :value="selectedNutritionType" @input="selectedNutritionTypeChange"
+                         :options="nutritionTypes" :clearable="false" :searchable="false" />
                     </div>
                 </div>
                 <div class="form-group form-row mb-1">
                     <label for="inputProduct" class="col-sm-3 col-form-label">Produit</label>
                     <div class="col-sm-9">
                         <v-select id="inputProduct" :value="selectedProduct.label" @input="selectedProductChange"
-                                  :options="productsForSelectedNutritionType" :clearable="false"/>
+                                  :options="productsForSelectedNutritionType" :clearable="false" :searchable="false" />
                     </div>
                 </div>
             </form>
@@ -74,8 +72,7 @@
                     this.lastSelectedParenterale = product;
                 }
             },
-            selectedNutritionTypeChange: function (evt) {
-                let nutritionType = evt.target.value;
+            selectedNutritionTypeChange: function (nutritionType) {
                 var product;
                 if (nutritionType === refs.nutritionTypes.ENTERALE) {
                     product = this.lastSelectedEnterale;
@@ -90,6 +87,22 @@
                     product: product,
                 });
             },
+            // selectedNutritionTypeChange: function (evt) {
+            //     let nutritionType = evt.target.value;
+            //     var product;
+            //     if (nutritionType === refs.nutritionTypes.ENTERALE) {
+            //         product = this.lastSelectedEnterale;
+            //     } else {
+            //         product = this.lastSelectedParenterale;
+            //     }
+            //     if (product == null) {
+            //         product = this.defaultSelectedProductForType(nutritionType);
+            //     }
+            //     this.updateNutrition({
+            //         type: nutritionType,
+            //         product: product,
+            //     });
+            // },
             ...mapMutations(['updateNutrition']),
         },
     }
