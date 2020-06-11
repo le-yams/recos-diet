@@ -298,7 +298,7 @@ export default {
                     },
                     {
                         label: "B9",
-                        quantity: "25-50",
+                        quantity: "25",
                         unit: "mg/jour",
                         clauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
                         sources: [11],
@@ -314,7 +314,7 @@ export default {
                     },
                     {
                         label: "B9",
-                        quantity: "25-50",
+                        quantity: "25",
                         unit: "mg/jour",
                         clauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
                         sources: [11],
