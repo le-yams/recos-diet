@@ -21,7 +21,7 @@ export const pathologieNames = {
     ANOREXIE_MENTALE: 'Anorexie mentale',
     CIRRHOTIQUE: 'Cirrhotique',
     COVID_19: 'COVID-19',
-    CVVHDF: 'CVVHDF',
+    CVVHDF: 'EER continue',
     DENUTRITION_SRI: 'Dénutrition-SRI',
     OBESITE: 'Obésité',
     OH: 'OH',
