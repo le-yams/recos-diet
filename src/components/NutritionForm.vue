@@ -32,7 +32,6 @@
         name: "NutritionForm",
         data: function () {
             return {
-                //lastSelectedProduct: null,
                 lastSelectedEnterale: null,
                 lastSelectedParenterale: null,
             }
@@ -58,7 +57,7 @@
                 return this.nutritions[nutritionType].products;
             },
             defaultSelectedProductForType: function (nutritionType) {
-                return this.productsForNutritionType(nutritionType)[0];
+                return this.productsForNutritionType(nutritionType).find(nt => nt.default);
             },
             selectedProductChange: function (product) {
                 this.updateNutrition({
@@ -87,22 +86,6 @@
                     product: product,
                 });
             },
-            // selectedNutritionTypeChange: function (evt) {
-            //     let nutritionType = evt.target.value;
-            //     var product;
-            //     if (nutritionType === refs.nutritionTypes.ENTERALE) {
-            //         product = this.lastSelectedEnterale;
-            //     } else {
-            //         product = this.lastSelectedParenterale;
-            //     }
-            //     if (product == null) {
-            //         product = this.defaultSelectedProductForType(nutritionType);
-            //     }
-            //     this.updateNutrition({
-            //         type: nutritionType,
-            //         product: product,
-            //     });
-            // },
             ...mapMutations(['updateNutrition']),
         },
     }
