@@ -5,13 +5,13 @@ const nutritionTypes = {
 
 const products = {
     NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES: 'Nutrison Protein Plus Energy Multifibres',
-    OLIMEL_N7E: 'Olimel N7E',
+    OLIMEL_N7E: 'Olimel N7E (USC)',
     OLIMEL_N9E: 'Olimel N9E',
-    MEDNUTRIFLEX_OMEGA: 'Mednutriflex Omega',
+    MEDNUTRIFLEX_OMEGA: 'Mednutriflex Omega N5E (USC)',
     PEPTAMEN_HN: 'Peptamen HN',
     PEPTISORB: 'Peptisorb (hypolipidique)',
-    REANUTRIFLEX_OMEGA: 'Réanutriflex Omega',
-    SMOKABIVEN_PROTEIN: 'Smokabiven Protein',
+    REANUTRIFLEX_OMEGA: 'Réanutriflex Omega N8 (Réa)',
+    SMOKABIVEN_PROTEIN: 'SMOFkabiven Protein N10 (Réa)',
     SONDALIS_HP_ENERGY: 'Sondalis HP Energy',
     SONDALIS_JUNIOR_STANDARD: 'Sondalis Junior Standard',
     SONDALIS_T_ENERGY: 'Sondalis T Energy',
