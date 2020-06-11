@@ -15,3 +15,19 @@ export function withLabel(label) {
 export function not(predicate) {
     return o => !predicate(o);
 }
+
+export function safeArrayConcat(array1, array2) {
+    var result;
+    if (!array1) {
+        result = array2
+    } else if (!array2) {
+        result = array1
+    } else {
+        result = array1.concat(array2);
+    }
+    if (result) {
+        return result;
+    } else {
+        return [];
+    }
+}

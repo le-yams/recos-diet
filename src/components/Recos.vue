@@ -13,8 +13,8 @@
                         </p>
                     </div>
                     <div class="row">
-                        <ul v-if="reco.clauses.length > 0" class="font-italic font-weight-light">
-                            <li v-for="clause in reco.clauses" v-bind:key="clause">{{clause}}</li>
+                        <ul v-if="displayableCausesOf(reco).length > 0" class="font-italic font-weight-light">
+                            <li v-for="clause in displayableCausesOf(reco)" v-bind:key="clause">{{clause}}</li>
                         </ul>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
 
 <script>
 
-    import {withLabel} from "../utils";
+    import {safeArrayConcat, withLabel} from "../utils";
     import refs from "../refs-data";
     import BiblioLinks from "./BiblioLinks";
 
@@ -44,13 +44,11 @@
             recommendations: function () {
                 let nutritionType = this.nutrition.type;
                 let pathoRecos = this.pathologies.map(p => p.recommendations);
-                let exclusions = [...new Set(pathoRecos.filter(r => r.exclusions).flatMap(r => r.exclusions))];
-                console.log("exclusions: ", exclusions);
-                let notExcluded = reco => !exclusions.find(e => e === reco.label);
+                let nutrientExclusions = [...new Set(pathoRecos.filter(r => r.exclusions).flatMap(r => r.exclusions))];
+                let notExcluded = reco => !nutrientExclusions.find(e => e === reco.label);
                 let recos = [...refs.nutritions[nutritionType].recommendations.filter(notExcluded).map(r => {
                     return {...r};
                 })];
-                console.log("global recommendations: ", recos);
                 pathoRecos.flatMap(recos => recos[nutritionType])
                     .filter(notExcluded)
                     .forEach(pathoReco => {
@@ -59,6 +57,7 @@
                                 let quantity = Math.max(reco.quantity, pathoReco.quantity);
                                 reco.quantity = quantity;
                                 reco.clauses = [...new Set(reco.clauses.concat(pathoReco.clauses))];
+                                reco.excludeClauses = [...new Set(safeArrayConcat(reco.excludeClauses, pathoReco.excludeClauses))];
                                 reco.sources = [...new Set(reco.sources.concat(pathoReco.sources))];
                             } else {
                                 reco = {
@@ -74,7 +73,15 @@
         methods: {
             displayBibliography: function (index) {
                 this.$emit('display-bibliography', index);
-            }
+            },
+            displayableCausesOf(reco) {
+                let excluded = reco.excludeClauses;
+                if (excluded) {
+                    return reco.clauses.filter(c => !excluded.includes(c));
+                } else {
+                return reco.clauses;
+                }
+            },
         },
     }
 
