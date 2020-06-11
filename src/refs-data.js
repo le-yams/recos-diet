@@ -101,14 +101,14 @@ export default {
                     label: "Nutryelt",
                     quantity: "1",
                     unit: "ampoule 10ml/jour",
-                    clauses: ["si apports < 1500 kcal/j"],
+                    clauses: [],
                     sources: [13],
                 },
                 {
                     label: "Cernevit",
                     quantity: "1",
                     unit: "ampoule 5ml/jour",
-                    clauses: ["si apports < 1500 kcal/j"],
+                    clauses: [],
                     sources: [13],
                 },
                 {
