@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://gitlab.com/ydisanto/recos-diet/compare/0.3.0...1.1.0) (2020-06-11)
+
+
+### Features
+
+* **debits:** arrondi de l'apport énergétique quotidien ([02c5f1f](https://gitlab.com/ydisanto/recos-diet/commit/02c5f1f9a4f75750c4b547597e24251598e447f4)), closes [#8](https://gitlab.com/ydisanto/recos-diet/issues/8)
+* **debits:** arrondi de l'apport énergétique quotidien ([f7e83e0](https://gitlab.com/ydisanto/recos-diet/commit/f7e83e0fc007633dc272a798e5c893e41e8eaf10))
+* **débits:** calcul des cibles énergétiques quotidiennes ([af5df5c](https://gitlab.com/ydisanto/recos-diet/commit/af5df5c42f89cb1e7f9d3a19d91b18890eadfef1))
+* **pathologies:** renommage CVVHDF en EER continue ([01582c0](https://gitlab.com/ydisanto/recos-diet/commit/01582c08738643fd35d898795837ecf2f18805f9)), closes [#9](https://gitlab.com/ydisanto/recos-diet/issues/9)
+* **pathologies:** renommage CVVHDF en EER continue ([ba01ac3](https://gitlab.com/ydisanto/recos-diet/commit/ba01ac35e8e5de44d0697d792c053f0f202ce0af))
+* **patient:** ajout de l'unité de taille ([ae42f25](https://gitlab.com/ydisanto/recos-diet/commit/ae42f252bf216e59dba0ec375d79e3c0987a6e3a))
+* **recos:** ajout clause 'en IV' pour vitamine K en parenterale ([0f5c7b3](https://gitlab.com/ydisanto/recos-diet/commit/0f5c7b35bef30335daab001e271c5bf2b637af15)), closes [#16](https://gitlab.com/ydisanto/recos-diet/issues/16)
+* **recos:** ajout clause 'en IV' pour vitamine K en parenterale ([8195611](https://gitlab.com/ydisanto/recos-diet/commit/81956118495eaef8c64e110d5f73c80f47ac8f49))
+* **recos:** mise à jour clauses B1 pour OH ([10e970f](https://gitlab.com/ydisanto/recos-diet/commit/10e970f2969c3e87bbe572790d60e02fbb29e2df)), closes [#17](https://gitlab.com/ydisanto/recos-diet/issues/17)
+* mise à jour libellés produits ([0e25478](https://gitlab.com/ydisanto/recos-diet/commit/0e2547881d5dc2592e978220a1d8cda75f2bfd54)), closes [#15](https://gitlab.com/ydisanto/recos-diet/issues/15)
+* **recos:** mise à jour clauses B1 pour OH ([ea60c01](https://gitlab.com/ydisanto/recos-diet/commit/ea60c0185adcd4c269594f99492710d2d2057f0c))
+* mise à jour libellés produits ([2c5e599](https://gitlab.com/ydisanto/recos-diet/commit/2c5e599a27515af6d26aa145e2d7ed06b8bcab9a))
+
+
+### Bug Fixes
+
+* **nutrition:** correction des produits par défaut ([b9aa384](https://gitlab.com/ydisanto/recos-diet/commit/b9aa384cdbbd090ba1b7f1ea97fbc49d700ac2db)), closes [#14](https://gitlab.com/ydisanto/recos-diet/issues/14) [#13](https://gitlab.com/ydisanto/recos-diet/issues/13)
+* **nutrition:** correction des produits par défaut ([5ccd483](https://gitlab.com/ydisanto/recos-diet/commit/5ccd4834edaf360b82ff3c41c0a4d2726ece698b))
+* **nutrition:** harmonisation des listes  déroulantes ([5405bff](https://gitlab.com/ydisanto/recos-diet/commit/5405bff5bfb67b4d4a884a0e612d0d332431beb6)), closes [#5](https://gitlab.com/ydisanto/recos-diet/issues/5)
+* **nutrition:** harmonisation des listes  déroulantes ([f013ed0](https://gitlab.com/ydisanto/recos-diet/commit/f013ed0c356526902bba627ac0a9a534e67c21ea))
+* **parenterale:** suppression des clauses 'si apports < 1500 kcal/j' ([be24010](https://gitlab.com/ydisanto/recos-diet/commit/be2401048c181c7946325295ff333764c11fd8da)), closes [#7](https://gitlab.com/ydisanto/recos-diet/issues/7)
+* **parenterale:** suppression des clauses 'si apports < 1500 kcal/j' ([2217816](https://gitlab.com/ydisanto/recos-diet/commit/2217816d88844e195c839f6082105002f7e6ad2f))
+* **recos:** correction valeur B9 dénutrition ([8cde7c3](https://gitlab.com/ydisanto/recos-diet/commit/8cde7c3422f5cc5dc781cf23a70e4023f95aac65))
+* **recos:** unité apport énergétique quotidien ([c3976e6](https://gitlab.com/ydisanto/recos-diet/commit/c3976e60d4e7f3669de3b6f8699febc1d8fce873))
+
 ### [1.0.0](https://gitlab.com/ydisanto/recos-diet/compare/0.3.0...1.0.0) (2020-06-09)
 
 
