@@ -344,7 +344,7 @@ export default {
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: [
-                            "ajouter 500 mg/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19",
+                            "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19",
                         ],
                         sources: [6],
                     },
@@ -362,7 +362,7 @@ export default {
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: [
-                            "ajouter 500 mg/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19",
+                            "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19",
                         ],
                         sources: [6],
                     },
