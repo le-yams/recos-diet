@@ -115,7 +115,7 @@ export default {
                     label: "K",
                     quantity: "1",
                     unit: "ampoule 10ml 2 fois par semaine",
-                    clauses: [],
+                    clauses: ["en IV"],
                     sources: [],
                 },
             ],
