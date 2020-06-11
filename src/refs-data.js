@@ -39,7 +39,6 @@ export default {
             products: [
                 {
                     label: products.NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES,
-                    // label: "Nutrison Protein Plus Energy Multifibres",
                     kcalByLiter: 1500,
                 },
                 {
@@ -53,6 +52,7 @@ export default {
                 {
                     label: products.SONDALIS_HP_ENERGY,
                     kcalByLiter: 1500,
+                    default: true,
                 },
                 {
                     label: products.SONDALIS_JUNIOR_STANDARD,
@@ -90,6 +90,7 @@ export default {
                 {
                     label: products.REANUTRIFLEX_OMEGA,
                     kcalByLiter: 1180,
+                    default: true,
                 },
                 {
                     label: products.SMOKABIVEN_PROTEIN,
