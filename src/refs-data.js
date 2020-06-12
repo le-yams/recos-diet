@@ -25,6 +25,7 @@ export const pathologieNames = {
     DENUTRITION_SRI: 'Dénutrition-SRI',
     OBESITE: 'Obésité',
     OH: 'OH',
+    TRAUMA_CRANIEN_GRAVE: "Trauma crânien grave",
 };
 
 export default {
@@ -377,6 +378,29 @@ export default {
                         unit: "mg/jour",
                         clauses: ["sur une courte durée"],
                         sources: [19],
+                    },
+                ],
+            },
+        },
+        {
+            label: pathologieNames.TRAUMA_CRANIEN_GRAVE,
+            recommendations: {
+                'Entérale': [
+                    {
+                        label: "Zinc",
+                        quantity: "10",
+                        unit: "mg/jour",
+                        clauses: [],
+                        sources: [],
+                    },
+                ],
+                'Parentérale': [
+                    {
+                        label: "Zinc",
+                        quantity: "10",
+                        unit: "mg/jour",
+                        clauses: [],
+                        sources: [],
                     },
                 ],
             },
