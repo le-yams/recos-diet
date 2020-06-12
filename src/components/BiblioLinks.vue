@@ -2,7 +2,7 @@
     <span>
 
     <sup v-for="source in normalizedSources" v-bind:key="source">
-        <b-button variant="link" class="p-0" size="sm"
+        <b-button variant="link" class="p-0 biblio-link" size="sm"
                   @click="displayBibliography(source)">
             [{{source}}]
         </b-button>
@@ -37,5 +37,7 @@
 </script>
 
 <style scoped>
-
+.biblio-link {
+    font-size: 0.7rem;
+}
 </style>
