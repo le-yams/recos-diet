@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://gitlab.com/ydisanto/recos-diet/compare/1.1.0...1.2.0) (2020-06-12)
+
+
+### Features
+
+* **pathologies:** ajout trauma cranien grave ([610071e](https://gitlab.com/ydisanto/recos-diet/commit/610071eb9b46af523c745da9ba23923655dfdfb2)), closes [#10](https://gitlab.com/ydisanto/recos-diet/issues/10)
+* **pathologies:** ajout trauma cranien grave ([a3cfdc8](https://gitlab.com/ydisanto/recos-diet/commit/a3cfdc8a4c1a5ffa4ea87a0951f3ed3be2c6970e))
+* **pathologies:** importance de l'avis diet ([4d9a12a](https://gitlab.com/ydisanto/recos-diet/commit/4d9a12aea343945f7bd9e174e1f4a96d7df5153a)), closes [#6](https://gitlab.com/ydisanto/recos-diet/issues/6)
+* **pathologies:** importance de l'avis diet ([69ba9bb](https://gitlab.com/ydisanto/recos-diet/commit/69ba9bb1a131d152c7e880df7829db9a23930b09))
+* **recos:** exclusion de clauses en cas d'anorexie ([4c8e425](https://gitlab.com/ydisanto/recos-diet/commit/4c8e425ca14e1fefab5ccf72ef8d656e58b02b10)), closes [#18](https://gitlab.com/ydisanto/recos-diet/issues/18)
+* **recos:** exclusion de clauses en cas d'anorexie ([62636bc](https://gitlab.com/ydisanto/recos-diet/commit/62636bcf9f774408586dd61c1478a6753417a459))
+* **sources:** resize sources links ([93e1695](https://gitlab.com/ydisanto/recos-diet/commit/93e169545ad716a9e7a3f7040d82caec4e7364ce))
+* **sources:** resize sources links ([8373fef](https://gitlab.com/ydisanto/recos-diet/commit/8373fef690529337d368feb05e71f05f18109b98))
+
 ## [1.1.0](https://gitlab.com/ydisanto/recos-diet/compare/0.3.0...1.1.0) (2020-06-11)
 
 
