@@ -1,16 +1,18 @@
 <template>
     <span>
 
-    <sup v-for="source in normalizedSources" v-bind:key="source.index">
-        <b-button variant="link" class="p-0" size="sm"
-                  @click="displayBibliography(source.index)">
-            [{{source.index}}<span v-if="source.extra">,{{source.extra}}</span>]
+    <sup v-for="source in normalizedSources" v-bind:key="source">
+        <b-button variant="link" class="p-0 biblio-link" size="sm"
+                  @click="displayBibliography(source)">
+            [{{source}}]
         </b-button>
     </sup>
     </span>
 </template>
 
 <script>
+    import refs from "../refs-data";
+
     export default {
         name: "BiblioLinks",
         props: {
@@ -20,16 +22,10 @@
         },
         computed: {
             normalizedSources: function () {
-                return this.sources.map(source => {
-                    let sourceType = typeof source;
-                    if (sourceType === 'number') {
-                        return {
-                            index: source
-                        };
-                    } else if (sourceType === 'object') {
-                        return source;
-                    }
-                });
+                return this.sources.map(sourceId =>
+                    refs.bibliography
+                        .find(b => b.id === sourceId)
+                        .index);
             }
         },
         methods: {
@@ -41,5 +37,7 @@
 </script>
 
 <style scoped>
-
+.biblio-link {
+    font-size: 0.7rem;
+}
 </style>

@@ -33,9 +33,7 @@
                                 <font-awesome-icon icon="heartbeat"/>&nbsp;Réanimation
                             </template>
                             <b-card-body>
-                                <b-alert :show="warnings.length > 0" variant="danger">
-                                    <p v-for="warning in warnings" v-bind:key="warning" class="mb-1">{{warning}}</p>
-                                </b-alert>
+                                <warning :pathologies="pathologies"></warning>
 
                                 <target-flows :patient-info="patientInfo" :nutrition="nutrition"
                                               :pathologies="pathologies"></target-flows>
@@ -76,12 +74,14 @@
     import Pathos from "./components/Pathos";
     import Bibliography from "./components/Bibliography";
     import Sri from "./components/Sri";
+    import Warning from "./components/Warning";
 
     const TAB_BIBLIO_INDEX = 2;
 
     export default {
         name: 'App',
         components: {
+            Warning,
             NutritionForm,
             PatientForm,
             TargetFlows,
@@ -99,7 +99,7 @@
             ...mapState(['nutrition', 'pathologies']),
             ...mapState({
                 patientInfo: 'patient',
-                outlinedBibliography: state => state.bibliography.outlined,
+                outlinedBibliography: state => state.bibliography.outlinedIndex,
             }),
             warnings: function () {
                 return this.pathologies
