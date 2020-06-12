@@ -99,7 +99,7 @@
             ...mapState(['nutrition', 'pathologies']),
             ...mapState({
                 patientInfo: 'patient',
-                outlinedBibliography: state => state.bibliography.outlined,
+                outlinedBibliography: state => state.bibliography.outlinedIndex,
             }),
             warnings: function () {
                 return this.pathologies
