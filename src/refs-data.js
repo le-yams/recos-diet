@@ -70,7 +70,7 @@ export default {
                     quantity: "1",
                     unit: "comprimé/jour",
                     clauses: ["si apports < 1500 kcal/j"],
-                    sources: [14, 15],
+                    sources: ["tnctav-p2137", "gna-p14"],
                 }
             ],
         },
@@ -104,14 +104,14 @@ export default {
                     quantity: "1",
                     unit: "ampoule 10ml/jour",
                     clauses: [],
-                    sources: [13],
+                    sources: ["tnctav-p2133"],
                 },
                 {
                     label: "Cernevit",
                     quantity: "1",
                     unit: "ampoule 5ml/jour",
                     clauses: [],
-                    sources: [13],
+                    sources: ["tnctav-p2133"],
                 },
                 {
                     label: "K",
@@ -241,7 +241,7 @@ export default {
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: [],
-                        sources: [20],
+                        sources: ["sfncm-covid-rea-p2"],
                     },
                 ],
                 'Parentérale': [
@@ -250,7 +250,7 @@ export default {
                         quantity: "500",
                         unit: "mg/j",
                         clauses: [],
-                        sources: [22],
+                        sources: ["sfncm-prev-sri-covid-p2"],
                     },],
             },
         },
@@ -263,7 +263,7 @@ export default {
                         quantity: "2",
                         unit: "comprimés/jour",
                         clauses: ["puis 1 comprimé/jour lorsque le BE est atteint"],
-                        sources: [9],
+                        sources: ["afar-p208"],
                     },
                 ],
                 'Parentérale': [
@@ -272,14 +272,14 @@ export default {
                         quantity: "2",
                         unit: "ampoules 10ml",
                         clauses: [],
-                        sources: [9],
+                        sources: ["afar-p208"],
                     },
                     {
                         label: "Cernevit",
                         quantity: "2",
                         unit: "ampoule 5ml",
                         clauses: [],
-                        sources: [9],
+                        sources: ["afar-p208"],
                     },
                 ],
             },
@@ -293,21 +293,21 @@ export default {
                         quantity: "1",
                         unit: "comprimé/jour",
                         clauses: ["pendant 10 jours minimum"],
-                        sources: [5],
+                        sources: ["espen-p71"],
                     },
                     {
                         label: "B1",
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: ["pendant 10 jours minimum"],
-                        sources: [5],
+                        sources: ["espen-p71"],
                     },
                     {
                         label: "B9",
                         quantity: "25",
                         unit: "mg/jour",
                         clauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
-                        sources: [11],
+                        sources: ["tnctav-p1853"],
                     },
                 ],
                 'Parentérale': [
@@ -316,14 +316,14 @@ export default {
                         quantity: "500",
                         unit: "mg/j",
                         clauses: ["pendant 10 jours minimum"],
-                        sources: [5],
+                        sources: ["espen-p71"],
                     },
                     {
                         label: "B9",
                         quantity: "25",
                         unit: "mg/jour",
                         clauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
-                        sources: [11],
+                        sources: ["tnctav-p1853"],
                     },
                 ],
             },
@@ -352,14 +352,14 @@ export default {
                         clauses: [
                             "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19",
                         ],
-                        sources: [6],
+                        sources: ["afar"],
                     },
                     {
                         label: "B6",
                         quantity: "250",
                         unit: "mg/jour",
                         clauses: ["sur une courte durée"],
-                        sources: [19],
+                        sources: ["pc-alcool-p376"],
                     },
                 ],
                 'Parentérale': [
@@ -370,14 +370,14 @@ export default {
                         clauses: [
                             "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19",
                         ],
-                        sources: [6],
+                        sources: ["afar"],
                     },
                     {
                         label: "B6",
                         quantity: "250",
                         unit: "mg/jour",
                         clauses: ["sur une courte durée"],
-                        sources: [19],
+                        sources: ["pc-alcool-p376"],
                     },
                 ],
             },
@@ -408,84 +408,128 @@ export default {
     ],
     bibliography: [
         {
+            id: "espen-p58",
+            index: 1,
             label: 'ESPEN (2019), Guideline on clinical nutrition in the intensive care unit. p.58',
             url: 'https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline-on-clinical-nutrition-in-the-intensive-care-unit.pdf'
         },
         {
+            id: "espen-p61",
+            index: 2,
             label: 'ESPEN (2019), Guideline on clinical nutrition in the intensive care unit. p.61',
             url: 'https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline-on-clinical-nutrition-in-the-intensive-care-unit.pdf'
         },
         {
+            id: "espen-p66",
+            index: 3,
             label: 'ESPEN (2019), Guideline on clinical nutrition in the intensive care unit. p.66',
             url: 'https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline-on-clinical-nutrition-in-the-intensive-care-unit.pdf'
         },
         {
+            id: "espen-p70",
+            index: 4,
             label: 'ESPEN (2019), Guideline on clinical nutrition in the intensive care unit. p.70',
             url: 'https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline-on-clinical-nutrition-in-the-intensive-care-unit.pdf'
         },
         {
+            id: "espen-p71",
+            index: 5,
             label: 'ESPEN (2019), Guideline on clinical nutrition in the intensive care unit. p.71',
             url: 'https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline-on-clinical-nutrition-in-the-intensive-care-unit.pdf'
         },
         {
+            id: "afar",
+            index: 6,
             label: 'AFAR, Annales Françaises d’Anesthésie et de Réanimation (2014), Nutrition artificielle en réanimation.',
             url: 'https://sfar.org/wp-content/uploads/2015/10/2_AFAR_Nutrition-artificielle-en-reanimation.pdf'
         },
         {
+            id: "afar-p14",
+            index: 7,
             label: 'AFAR, Annales Françaises d’Anesthésie et de Réanimation (2014), Nutrition artificielle en réanimation. p.14',
             url: 'https://sfar.org/wp-content/uploads/2015/10/2_AFAR_Nutrition-artificielle-en-reanimation.pdf'
         },
         {
+            id: "afar-p204",
+            index: 8,
             label: 'AFAR, Annales Françaises d’Anesthésie et de Réanimation (2014), Nutrition artificielle en réanimation. p.204',
             url: 'https://sfar.org/wp-content/uploads/2015/10/2_AFAR_Nutrition-artificielle-en-reanimation.pdf'
         },
         {
+            id: "afar-p208",
+            index: 9,
             label: 'AFAR, Annales Françaises d’Anesthésie et de Réanimation (2014), Nutrition artificielle en réanimation. p.208',
             url: 'https://sfar.org/wp-content/uploads/2015/10/2_AFAR_Nutrition-artificielle-en-reanimation.pdf'
         },
         {
+            id: "tnctav-p1852",
+            index: 10,
             label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1852',
         },
         {
+            id: "tnctav-p1853",
+            index: 11,
             label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1853',
         },
         {
+            id: "tnctav-p2130",
+            index: 12,
             label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2130',
         },
         {
+            id: "tnctav-p2133",
+            index: 13,
             label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2133',
         },
         {
+            id: "tnctav-p2137",
+            index: 14,
             label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2137',
         },
         {
+            id: "gna-p14",
+            index: 15,
             label: 'https://www.chu.ulg.ac.be/upload/docs/application/pdf/2009-01/guide_1.pdf p.14',
             url: 'https://www.chu.ulg.ac.be/upload/docs/application/pdf/2009-01/guide_1.pdf'
         },
         {
+            id: "nice",
+            index: 16,
             label: 'NICE, National Institute for Health and Care Excellence (2017). Nutrition Support for adults : oral nutrition support, enteral tube feeding an parenteral nutrition.',
             url: 'https://www.nice.org.uk/guidance/cg32/chapter/1-Guidance#ftn.footnote_8'
         },
         {
+            id: "nice-p204",
+            index: 17,
             label: 'NICE, National Institute for Health and Care Excellence (2017). Nutrition Support for adults : oral nutrition support, enteral tube feeding an parenteral nutrition. p.204',
             url: 'https://www.nice.org.uk/guidance/cg32/chapter/1-Guidance#ftn.footnote_8'
         },
         {
+            id: "sri-prev",
+            index: 18,
             label: 'Barras-Moret Anne-Catherine, Guex Esther, Coti Bertrand Pauline, Le syndrome de renutrition inapproprié : la clé du traitement est la prévention (2011).',
             url: 'https://www.sfncm.org/images/stories/pdf_pratiquesnutrition/Barras-Moret%20NCM%202011.pdf'
         },
         {
+            id: "pc-alcool-p376",
+            index: 19,
             label: 'Airagnais G, Ducoutumany G, Laffy-Beaufils B, Le Faou A-L, Limousin F, La prise en charge du syndrome de sevrage de l’alcool : quelles nouveautés ? (2019). p.376',
         },
         {
+            id: "sfncm-covid-rea-p2",
+            index: 20,
             label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Nutrition du patient covid-19 intubé et ventilé en réanimation (2020). p.2',
             url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_08_COVID-19.pdf'
         },
         {
+            id: "sfncm-covid-postrea-p2",
+            index: 21,
             label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Principes de prise en charge des patients Covid 19+ en post-réanimation (2020). p.2',
             url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_09_COVID-19.pdf'
         },
         {
+            id: "sfncm-prev-sri-covid-p2",
+            index: 22,
             label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Prévention du syndrome de renutrition inapproprié (SRI) des patients COVID 19 (2020). p.2',
             url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_03_COVID-19.pdf'
         },

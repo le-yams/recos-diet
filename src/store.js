@@ -19,7 +19,7 @@ export function initStore() {
             pathologies: [],
             constants: refs,
             bibliography: {
-                outlined: 0,
+                outlinedIndex: 0,
             }
         },
         mutations: {
@@ -59,7 +59,7 @@ export function initStore() {
                     .sort(comparingByLabel);
             },
             outlineBiliography(state, index) {
-                state.bibliography.outlined = index;
+                state.bibliography.outlinedIndex = index;
             }
         }
     });
