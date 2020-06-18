@@ -1,5 +1,5 @@
 <template>
-    <b-alert :show="true" :variant="warning.variant">
+    <b-alert v-if="warning" :show="true" :variant="warning.variant">
         <p class="mb-1">{{warning.text}}</p>
     </b-alert>
 </template>
@@ -17,12 +17,14 @@
         computed: {
             warning: function () {
                 if (this.pathologies.length >= 3) {
-                    return warnings[2];
+                    return warnings[warnings.length - 1];
                 }
                 let warningLevels = this.pathologies
-                    .filter(p => p.warningLevel)
-                    .map(p => p.warningLevel)
-                    .concat(0); // default value
+                    .filter(p => p.warningLevel !== undefined)
+                    .map(p => p.warningLevel);
+                if (warningLevels.length === 0) {
+                    return undefined;
+                }
                 let warningLevel = Math.max(...warningLevels);
                 return warnings[warningLevel];
             }
