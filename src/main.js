@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
@@ -7,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {
+    faBalanceScale,
     faBookMedical,
     faBullseye,
     faDisease,
@@ -22,6 +24,8 @@ import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import App from './App.vue'
 import {initStore} from './store'
 import VueScrollTo from 'vue-scrollto'
+import Home from "./components/Home";
+import About from "./components/About";
 
 library.add(faUserInjured)
 library.add(faFire)
@@ -33,23 +37,31 @@ library.add(faDisease)
 library.add(faBookMedical)
 library.add(faStickyNote)
 library.add(faLongArrowAltDown)
+library.add(faBalanceScale)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('v-select', vSelect)
 
 
 Vue.config.productionTip = false
 
+Vue.use(VueRouter)
 Vue.use(Vuex)
-// Install BootstrapVue
 Vue.use(BootstrapVue)
-
-// Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 Vue.use(VueScrollTo)
 
-const store = initStore();
+const store = initStore()
+
+const router = new VueRouter({
+    routes: [
+        {path: '/', component: Home},
+        {path: '/home', component: Home},
+        {path: '/about', component: About}
+    ]
+})
 
 new Vue({
     render: h => h(App),
     store,
+    router,
 }).$mount('#app')
