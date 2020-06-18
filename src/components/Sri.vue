@@ -4,12 +4,12 @@
             <h1>Critères NICE 2006</h1>
         </div>
         <div class="row">
-            <b-alert show variant="info">Les critères de NICE (National Institute for health and Clinical Excellence)
-                permettent de dépister
-                les
-                patients à haut risque de syndrome de renutrition inappropriée. Les patients à risque de SRI
-                comportent
-                au moins 1 critère majeur ou au moins 2 critères mineurs.
+            <b-alert show variant="info">Les crit&egrave;res de NICE (National Institute for health and Clinical
+                Excellence)
+                permettent de d&eacute;pister les
+                patients &agrave; haut risque de syndrome de renutrition inappropri&eacute;e. Les patients &agrave;
+                risque de SRI
+                comportent <strong>au moins 1 crit&egrave;re majeur ou au moins 2 crit&egrave;res mineurs</strong>.
             </b-alert>
         </div>
         <div class="row">
