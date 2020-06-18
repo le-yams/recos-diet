@@ -25,7 +25,6 @@ export const pathologieNames = {
     DENUTRITION_SRI: 'Dénutrition-SRI',
     OBESITE: 'Obésité',
     OH: 'OH',
-    TRAUMA_CRANIEN_GRAVE: "Trauma crânien grave",
 };
 
 export const warnings = [
@@ -169,7 +168,7 @@ export default {
                         quantity: "25",
                         unit: "mg/jour",
                         clauses: ["en IV"],
-                        excludeClauses:[ "Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
+                        excludeClauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
                         sources: [],
                     },
                     {
@@ -177,7 +176,7 @@ export default {
                         quantity: "10",
                         unit: "mg/jour",
                         clauses: ["en IV"],
-                        excludeClauses:[ "seulement si encéphalopathie hépatique, carence ou infection"],
+                        excludeClauses: ["seulement si encéphalopathie hépatique, carence ou infection"],
                         sources: [],
                     },
                 ],
@@ -208,7 +207,7 @@ export default {
                         quantity: "25",
                         unit: "mg/jour",
                         clauses: ["en IV"],
-                        excludeClauses:[ "Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
+                        excludeClauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
                         sources: [],
                     },
                     {
@@ -216,7 +215,7 @@ export default {
                         quantity: "10",
                         unit: "mg/jour",
                         clauses: ["en IV"],
-                        excludeClauses:[ "seulement si encéphalopathie hépatique, carence ou infection"],
+                        excludeClauses: ["seulement si encéphalopathie hépatique, carence ou infection"],
                         sources: [],
                     },
                 ],
@@ -395,29 +394,6 @@ export default {
                         unit: "mg/jour",
                         clauses: ["sur une courte durée"],
                         sources: ["pc-alcool-p376"],
-                    },
-                ],
-            },
-        },
-        {
-            label: pathologieNames.TRAUMA_CRANIEN_GRAVE,
-            recommendations: {
-                'Entérale': [
-                    {
-                        label: "Zinc",
-                        quantity: "10",
-                        unit: "mg/jour",
-                        clauses: [],
-                        sources: [],
-                    },
-                ],
-                'Parentérale': [
-                    {
-                        label: "Zinc",
-                        quantity: "10",
-                        unit: "mg/jour",
-                        clauses: [],
-                        sources: [],
                     },
                 ],
             },
