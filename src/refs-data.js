@@ -29,10 +29,6 @@ export const pathologieNames = {
 
 export const warnings = [
     {
-        text: "Avis diététique si besoin",
-        variant: "info"
-    },
-    {
         text: "Avis diététique recommandé",
         variant: "warning"
     },
@@ -222,7 +218,7 @@ export default {
                 exclusions: ['Alvityl (po/sng)']
             },
             warning: pathologieNames.ANOREXIE_MENTALE + " : merci de prescrire un avis diététique pour la suite de la prise en charge.",
-            warningLevel: 2,
+            warningLevel: 1,
         },
         {
             label: pathologieNames.CIRRHOTIQUE,
@@ -342,7 +338,7 @@ export default {
                     },
                 ],
             },
-            warningLevel: 1,
+            warningLevel: 0,
         },
         {
             label: pathologieNames.OBESITE,
