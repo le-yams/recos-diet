@@ -1,13 +1,48 @@
 variables:
   # Default docker image for Node
-  NODE_IMAGE: "node:12-alpine"
+  NODE_IMAGE: "node:lts-alpine"
+  # Release docker image needs git and ssh
+  RELEASE_IMAGE: "node:lts"
+
   BUILD_DIR: "dist"
+  
+  NPM_RELEASE_TAG_PREFIX: ""
+  NPM_RELEASE_COMMIT_MESSAGE_FORMAT: "[ci skip] release {{currentTag}}"
 
 
 stages:
   - check
   - build
+  - release
   - deploy
+
+
+.internal-scripts: &internal-scripts |
+  # BEGSCRIPT
+  set -e
+
+  function log_info() {
+      echo -e "[\\e[1;94mINFO\\e[0m] $*"
+  }
+
+  function log_warn() {
+      echo -e "[\\e[1;93mWARN\\e[0m] $*"
+  }
+
+  function log_error() {
+      echo -e "[\\e[1;91mERROR\\e[0m] $*"
+  }
+
+  function assert_defined() {
+    if [[ -z "$1" ]]
+    then
+      log_error "$2"
+      exit 1
+    fi
+  }
+
+  # ENDSCRIPT
+
 
 ##############################################################################################
 #                                Generic job definition                                      #
@@ -62,6 +97,36 @@ npm-build:
 
 
 ###############################################################################################
+#                                     release stage:                                          #
+#                                        - create-release                                     #
+###############################################################################################
+create-release:
+  extends: .node-base
+  image: $RELEASE_IMAGE
+  stage: release
+  before_script:
+    - *internal-scripts
+    - assert_defined "$GIT_PRIVATE_KEY" 'Missing required env $GIT_PRIVATE_KEY'
+    - eval "$(ssh-agent -s)"
+    - mkdir -m 700 "$HOME/.ssh"
+    - echo -e "-----BEGIN OPENSSH PRIVATE KEY-----\\n${GIT_PRIVATE_KEY}\\n-----END OPENSSH PRIVATE KEY-----" | tr -d '\r' | ssh-add -
+    - ssh-keyscan -H "${CI_SERVER_HOST}" >> ~/.ssh/known_hosts
+    - git config user.name "${GITLAB_USER_NAME}"
+    - git config user.email "${GITLAB_USER_EMAIL}"
+    - git checkout ${CI_COMMIT_REF_NAME}
+    - git pull origin ${CI_COMMIT_REF_NAME}
+    - echo "----- Switching to a SSH GIT ACCESS to allow write access through private key"
+    - git remote set-url origin "git@${CI_SERVER_HOST}:$(echo $CI_REPOSITORY_URL | cut -d'/' -f4-)"
+  script:
+    - npx standard-version -t "${NPM_RELEASE_TAG_PREFIX}" --releaseCommitMessageFormat "${NPM_RELEASE_COMMIT_MESSAGE_FORMAT}"
+    - git push --follow-tags
+  when: manual
+  only:
+    refs:
+      - master
+
+
+###############################################################################################
 #                                      deploy stage:                                          #
 #                                        - upload-to-prod                                     #
 ###############################################################################################
@@ -83,7 +148,3 @@ upload-to-prod:
       - master
     variables:
       - $DEPLOY_PROD_ENABLED
-
-
-
-
