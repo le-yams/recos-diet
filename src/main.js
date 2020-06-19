@@ -16,6 +16,7 @@ import {
     faHeartbeat,
     faLongArrowAltDown,
     faPills,
+    faSmile,
     faStickyNote,
     faUserInjured,
     faUtensils,
@@ -38,6 +39,7 @@ library.add(faBookMedical)
 library.add(faStickyNote)
 library.add(faLongArrowAltDown)
 library.add(faBalanceScale)
+library.add(faSmile)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('v-select', vSelect)
 
