@@ -1,13 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <b-alert show variant="warning" style="width: 100%">
-                <b-icon-exclamation-triangle-fill></b-icon-exclamation-triangle-fill>
-                Cet outil à pour but de présenter un certain nombre de recommandations nutritionnelles en
-                environnement hospitalier.
-                Il ne tient cependant pas compte de l'ensemble du contexte santé du patient.
-                Aussi <strong>il ne saurait en aucun cas remplacer l'avis de votre diététicien(ne)</strong>.
-            </b-alert>
+            <disclaimer></disclaimer>
         </div>
         <div class="row">
 
@@ -76,12 +70,14 @@
     import PatientForm from "./PatientForm";
     import NutritionForm from "./NutritionForm";
     import Warning from "./Warning";
+    import Disclaimer from "./Disclaimer";
 
     const TAB_BIBLIO_INDEX = 2;
 
     export default {
         name: "Home",
         components: {
+            Disclaimer,
             Warning,
             NutritionForm,
             PatientForm,
