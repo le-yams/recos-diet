@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://gitlab.com/ydisanto/recos-diet/compare/1.5.0...1.6.0) (2020-06-19)
+
+
+### Features
+
+* **debits-cible:** ajout des débits cible 10 et 15 pour la dénutrition ([27dea7f](https://gitlab.com/ydisanto/recos-diet/commit/27dea7fec9e6a6ca07635c9266338735f1544b0f))
+* **disclaimer:** mise à jour du disclaimer ([055cdd2](https://gitlab.com/ydisanto/recos-diet/commit/055cdd25a130506974108463e1b877fa8a6dbd67))
+* **disclaimer:** update disclaimer ([4258ffd](https://gitlab.com/ydisanto/recos-diet/commit/4258ffd3c6dd1e7ae4744fecebf356032074bf48))
+* **products:** filter products when anorexia is selected ([3c56721](https://gitlab.com/ydisanto/recos-diet/commit/3c56721a1c3bd22100ef1e9ad79f834ccee09387))
+* **warnings:** Ajout d'un warning spécifique à la dénutrition ([903d4a9](https://gitlab.com/ydisanto/recos-diet/commit/903d4a94900b5153dbe8cf4c7f3cbaa2d5d4d427))
+
+
+### Bug Fixes
+
+* Olimel N9E kcalByLiter is 1070 ([3cd6391](https://gitlab.com/ydisanto/recos-diet/commit/3cd639129327a10e7d16c20818b1c33f3c009577))
+
 ## [1.5.0](https://gitlab.com/ydisanto/recos-diet/compare/1.4.0...1.5.0) (2020-06-19)
 
 
