@@ -2,11 +2,11 @@
     <b-alert show variant="warning">
         <small>
             <b-icon-exclamation-triangle-fill></b-icon-exclamation-triangle-fill>
-            Cet outil &agrave; pour but de pr&eacute;senter un certain nombre de recommandations nutritionnelles pour le
-            patient de r&eacute;animation.
+            Cet outil a pour but de pr&eacute;senter les recommandations nutritionnelles pour le
+            patient de r&eacute;animation aliment&eacute; en nutrition artificielle.
             Il ne tient cependant pas compte de l'ensemble des paramètres médicaux.
             <br/>
-            Aussi <strong>en cas de doute n'hésitez pas à solliciter l'avis de votre diététicien(ne)</strong>.
+            Aussi, en cas de doute, <strong>n'h&eacute;sitez pas &agrave; solliciter l'avis de votre di&eacute;t&eacute;ticien(ne)</strong>.
         </small>
     </b-alert>
 </template>
