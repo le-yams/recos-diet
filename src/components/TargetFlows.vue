@@ -6,8 +6,11 @@
         <b-card-title></b-card-title>
         <b-card-body class="p-1">
             <ul>
-                <li v-if="hasAnorexia">
+                <li v-if="hasAnorexia || hasDenutrition">
                     <target-flow :cal-target="10" :nutrition="nutrition" :patient-info="patientInfo"/>
+                </li>
+                <li v-if="!hasAnorexia && hasDenutrition">
+                    <target-flow :cal-target="15" :nutrition="nutrition" :patient-info="patientInfo"/>
                 </li>
                 <li v-if="!hasAnorexia">
                     <target-flow :cal-target="20" :nutrition="nutrition" :patient-info="patientInfo"/>
@@ -45,9 +48,11 @@
             hasObesity: function () {
                 return this.pathologies.find(p => p.label === pathologieNames.OBESITE);
             },
-
             hasAnorexia: function () {
                 return this.pathologies.find(p => p.label === pathologieNames.ANOREXIE_MENTALE);
+            },
+            hasDenutrition: function () {
+                return this.pathologies.find(p => p.label === pathologieNames.DENUTRITION_SRI);
             },
         }
     }
