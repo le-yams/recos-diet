@@ -28,7 +28,7 @@
                                 <font-awesome-icon icon="heartbeat"/>&nbsp;Réanimation
                             </template>
                             <b-card-body>
-                                <warning :pathologies="pathologies"></warning>
+                                <warnings :pathologies="pathologies"></warnings>
                                 <target-flows :patient-info="patientInfo" :nutrition="nutrition"
                                               :pathologies="pathologies"></target-flows>
                                 <recos :nutrition="nutrition" :pathologies="pathologies"
@@ -69,7 +69,7 @@
     import TargetFlows from "./TargetFlows";
     import PatientForm from "./PatientForm";
     import NutritionForm from "./NutritionForm";
-    import Warning from "./Warning";
+    import Warnings from "./Warnings";
     import Disclaimer from "./Disclaimer";
 
     const TAB_BIBLIO_INDEX = 2;
@@ -78,7 +78,7 @@
         name: "Home",
         components: {
             Disclaimer,
-            Warning,
+            Warnings,
             NutritionForm,
             PatientForm,
             TargetFlows,

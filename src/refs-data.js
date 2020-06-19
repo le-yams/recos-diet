@@ -27,7 +27,7 @@ export const pathologieNames = {
     OH: 'OH',
 };
 
-export const warnings = [
+export const dietOpinionWarnings = [
     {
         text: "Avis diététique recommandé",
         variant: "warning"
@@ -217,8 +217,7 @@ export default {
                 ],
                 exclusions: ['Alvityl (po/sng)']
             },
-            warning: pathologieNames.ANOREXIE_MENTALE + " : merci de prescrire un avis diététique pour la suite de la prise en charge.",
-            warningLevel: 1,
+            dietOpinionWarningLevel: 1,
         },
         {
             label: pathologieNames.CIRRHOTIQUE,
@@ -338,7 +337,11 @@ export default {
                     },
                 ],
             },
-            warningLevel: 0,
+            warning: {
+                text: "Ne pas débuter la nutrition à un débit supérieur ou égal 20kcal/j",
+                variant: "danger",
+            },
+            dietOpinionWarningLevel: 0,
         },
         {
             label: pathologieNames.OBESITE,
