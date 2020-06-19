@@ -1,6 +1,7 @@
 <template>
     <p class="m-0">
-        Pour un besoin de <strong>{{ calTarget }}</strong> kcal/kg, débit cible = <strong>{{ flow.toFixed(0) }}</strong> ml/h ({{
+        Pour un besoin de <strong>{{ calTarget }}</strong> kcal/kg, débit cible = <strong>{{ flow.toFixed(0) }}</strong>
+        ml/h ({{
         dayEnergy.toFixed(0) }} kcal/j)
     </p>
 </template>
@@ -11,12 +12,15 @@
         props: {
             calTarget: {
                 type: Number,
+                required: true,
             },
             patientInfo: {
                 type: Object,
+                required: true,
             },
             nutrition: {
                 type: Object,
+                required: true,
             },
         },
         computed: {

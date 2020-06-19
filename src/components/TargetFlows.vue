@@ -36,12 +36,15 @@
         props: {
             patientInfo: {
                 type: Object,
+                required: true,
             },
             nutrition: {
                 type: Object,
+                required: true,
             },
             pathologies: {
                 type: Array,
+                required: true,
             },
         },
         computed: {

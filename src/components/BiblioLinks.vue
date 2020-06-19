@@ -18,6 +18,7 @@
         props: {
             sources: {
                 type: Array,
+                required: true,
             },
         },
         computed: {
@@ -37,7 +38,7 @@
 </script>
 
 <style scoped>
-.biblio-link {
-    font-size: 0.7rem;
-}
+    .biblio-link {
+        font-size: 0.7rem;
+    }
 </style>

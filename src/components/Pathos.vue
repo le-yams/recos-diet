@@ -39,6 +39,7 @@
         props: {
             patientInfo: {
                 type: Object,
+                required: true,
             },
         },
         data: function () {

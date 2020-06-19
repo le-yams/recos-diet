@@ -11,6 +11,7 @@
         props: {
             licence: {
                 type: String,
+                required: true,
             },
         },
         computed: {

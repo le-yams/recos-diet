@@ -35,9 +35,11 @@
         props: {
             nutrition: {
                 type: Object,
+                required: true,
             },
             pathologies: {
                 type: Array,
+                required: true,
             },
         },
         computed: {
@@ -79,7 +81,7 @@
                 if (excluded) {
                     return reco.clauses.filter(c => !excluded.includes(c));
                 } else {
-                return reco.clauses;
+                    return reco.clauses;
                 }
             },
         },

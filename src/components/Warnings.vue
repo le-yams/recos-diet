@@ -17,6 +17,7 @@
         props: {
             pathologies: {
                 type: Array,
+                required: true,
             },
         },
         computed: {
