@@ -13,7 +13,7 @@
                         </router-link>
                     </div>
                     <div class="col text-right">
-                        <copyright name="Yann D'Isanto"></copyright>&nbsp;
+                        <copyright name="Yann D'Isanto" url="https://gitlab.com/ydisanto/recos-diet"></copyright>&nbsp;
                         <licence-badge licence="cc-by-4.0"></licence-badge>
                     </div>
                 </div>
