@@ -3,7 +3,7 @@ const nutritionTypes = {
     PARENTERALE: 'Parentérale',
 };
 
-const products = {
+export const productsLabel = {
     NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES: 'Nutrison Protein Plus Energy Multifibres',
     OLIMEL_N7E: 'Olimel N7E (USC)',
     OLIMEL_N9E: 'Olimel N9E',
@@ -43,34 +43,34 @@ export default {
         ...nutritionTypes
     },
     products: {
-        ...products
+        ...productsLabel
     },
     nutritions: {
         'Entérale': {
             products: [
                 {
-                    label: products.NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES,
+                    label: productsLabel.NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES,
                     kcalByLiter: 1500,
                 },
                 {
-                    label: products.PEPTAMEN_HN,
+                    label: productsLabel.PEPTAMEN_HN,
                     kcalByLiter: 1330,
                 },
                 {
-                    label: products.PEPTISORB,
+                    label: productsLabel.PEPTISORB,
                     kcalByLiter: 1000,
                 },
                 {
-                    label: products.SONDALIS_HP_ENERGY,
+                    label: productsLabel.SONDALIS_HP_ENERGY,
                     kcalByLiter: 1500,
                     default: true,
                 },
                 {
-                    label: products.SONDALIS_JUNIOR_STANDARD,
+                    label: productsLabel.SONDALIS_JUNIOR_STANDARD,
                     kcalByLiter: 1000
                 },
                 {
-                    label: products.SONDALIS_T_ENERGY,
+                    label: productsLabel.SONDALIS_T_ENERGY,
                     kcalByLiter: 1550,
                 },
             ],
@@ -87,24 +87,24 @@ export default {
         'Parentérale': {
             products: [
                 {
-                    label: products.MEDNUTRIFLEX_OMEGA,
+                    label: productsLabel.MEDNUTRIFLEX_OMEGA,
                     kcalByLiter: 1012,
                 },
                 {
-                    label: products.OLIMEL_N7E,
+                    label: productsLabel.OLIMEL_N7E,
                     kcalByLiter: 1140,
                 },
                 {
-                    label: products.OLIMEL_N9E,
+                    label: productsLabel.OLIMEL_N9E,
                     kcalByLiter: 1070,
                 },
                 {
-                    label: products.REANUTRIFLEX_OMEGA,
+                    label: productsLabel.REANUTRIFLEX_OMEGA,
                     kcalByLiter: 1180,
                     default: true,
                 },
                 {
-                    label: products.SMOKABIVEN_PROTEIN,
+                    label: productsLabel.SMOKABIVEN_PROTEIN,
                     kcalByLiter: 889,
                 },
             ],

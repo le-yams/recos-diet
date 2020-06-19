@@ -25,6 +25,7 @@
 
 <script>
     import TargetFlow from "./TargetFlow";
+    import {pathologieNames} from "../refs-data";
 
     export default {
         name: "TargetFlows",
@@ -42,11 +43,11 @@
         },
         computed: {
             hasObesity: function () {
-                return this.pathologies.find(p => p.label === 'Obésité');
+                return this.pathologies.find(p => p.label === pathologieNames.OBESITE);
             },
 
             hasAnorexia: function () {
-                return this.pathologies.find(p => p.label === 'Anorexie mentale');
+                return this.pathologies.find(p => p.label === pathologieNames.ANOREXIE_MENTALE);
             },
         }
     }

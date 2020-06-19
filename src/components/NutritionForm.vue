@@ -9,14 +9,14 @@
                     <label for="inputType" class="col-sm-3 col-form-label">Type</label>
                     <div class="col-sm">
                         <v-select id="inputType" :value="selectedNutritionType" @input="selectedNutritionTypeChange"
-                         :options="nutritionTypes" :clearable="false" :searchable="false" />
+                                  :options="nutritionTypes" :clearable="false" :searchable="false"/>
                     </div>
                 </div>
                 <div class="form-group form-row mb-1">
                     <label for="inputProduct" class="col-sm-3 col-form-label">Produit</label>
                     <div class="col-sm-9">
                         <v-select id="inputProduct" :value="selectedProduct.label" @input="selectedProductChange"
-                                  :options="productsForSelectedNutritionType" :clearable="false" :searchable="false" />
+                                  :options="productsForSelectedNutritionType" :clearable="false" :searchable="false"/>
                     </div>
                 </div>
             </form>
@@ -26,22 +26,40 @@
 
 <script>
     import {mapMutations, mapState} from "vuex";
-    import refs from "../refs-data";
+    import refs, {pathologieNames, productsLabel} from "../refs-data";
 
     export default {
         name: "NutritionForm",
+        props: {
+            pathologies: {
+                type: Array,
+                required: true,
+            }
+        },
         data: function () {
+            let lastSelected = {};
+            lastSelected[refs.nutritionTypes.ENTERALE] = null;
+            lastSelected[refs.nutritionTypes.PARENTERALE] = null;
             return {
-                lastSelectedEnterale: null,
-                lastSelectedParenterale: null,
+                lastSelected: lastSelected,
             }
         },
         computed: {
+            hasAnorexia: function () {
+                return this.pathologies.find(p => p.label === pathologieNames.ANOREXIE_MENTALE);
+            },
             nutritionTypes: function () {
                 return Object.keys(this.nutritions);
             },
             productsForSelectedNutritionType: function () {
-                return this.productsForNutritionType(this.selectedNutritionType);
+                let products = this.productsForNutritionType(this.selectedNutritionType);
+                if (this.hasAnorexia) {
+                    return products.filter(p =>
+                        p.label === productsLabel.MEDNUTRIFLEX_OMEGA ||
+                        p.label === productsLabel.SONDALIS_JUNIOR_STANDARD);
+                } else {
+                    return products;
+                }
             },
             ...mapState({
                 nutritions: state => state.constants.nutritions,
@@ -51,6 +69,16 @@
                 },
 
             }),
+        },
+        watch: {
+            productsForSelectedNutritionType: function () {
+                if (!this.productsForSelectedNutritionType.find(p => p === this.selectedProduct)) {
+                    this.updateNutrition({
+                        type: this.selectedNutritionType,
+                        product: this.productsForSelectedNutritionType[0],
+                    });
+                }
+            }
         },
         methods: {
             productsForNutritionType: function (nutritionType) {
@@ -64,20 +92,10 @@
                     type: this.selectedNutritionType,
                     product: product,
                 });
-
-                if (this.selectedNutritionType === refs.nutritionTypes.ENTERALE) {
-                    this.lastSelectedEnterale = product;
-                } else {
-                    this.lastSelectedParenterale = product;
-                }
+                this.lastSelected[this.selectedNutritionType] = product;
             },
             selectedNutritionTypeChange: function (nutritionType) {
-                var product;
-                if (nutritionType === refs.nutritionTypes.ENTERALE) {
-                    product = this.lastSelectedEnterale;
-                } else {
-                    product = this.lastSelectedParenterale;
-                }
+                let product = this.lastSelected[nutritionType];
                 if (product == null) {
                     product = this.defaultSelectedProductForType(nutritionType);
                 }
