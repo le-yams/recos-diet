@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://gitlab.com/ydisanto/recos-diet/compare/1.3.0...1.4.0) (2020-06-19)
+
+
+### Features
+
+* **footer:** add link to website sources ([af47292](https://gitlab.com/ydisanto/recos-diet/commit/af4729294a05151400c2416476daa207b57f9f4e))
+
 ## [1.3.0](https://gitlab.com/ydisanto/recos-diet/compare/1.2.0...1.3.0) (2020-06-19)
 
 
