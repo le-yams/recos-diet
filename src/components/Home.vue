@@ -17,7 +17,8 @@
                         <patient-form style="width: 100%;"></patient-form>
                     </div>
                     <div class="row">
-                        <nutrition-form v-on:nutrition-update="nutrition=$event" style="width: 100%;"></nutrition-form>
+                        <nutrition-form :pathologies="pathologies"
+                                        v-on:nutrition-update="nutrition=$event" style="width: 100%;"></nutrition-form>
                     </div>
                     <div class="row">
                         <pathos style="width: 100%;" :patient-info="patientInfo"></pathos>
