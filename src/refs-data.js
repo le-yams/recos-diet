@@ -96,7 +96,7 @@ export default {
                 },
                 {
                     label: products.OLIMEL_N9E,
-                    kcalByLiter: 1700,
+                    kcalByLiter: 1070,
                 },
                 {
                     label: products.REANUTRIFLEX_OMEGA,
