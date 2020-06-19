@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://gitlab.com/ydisanto/recos-diet/compare/1.2.0...1.3.0) (2020-06-19)
+
+
+### Features
+
+* **warning:** suppression du warning d'information ([4b60c5a](https://gitlab.com/ydisanto/recos-diet/commit/4b60c5afeec994f26f1d1e3d22bc03786dff7104))
+* improve sri description ([f99ccb5](https://gitlab.com/ydisanto/recos-diet/commit/f99ccb5be4fadf012049d45f6deec1a097557420))
+* page 'a propos' ([4824b8a](https://gitlab.com/ydisanto/recos-diet/commit/4824b8ace880b38c09d2bd5257b415da2325932f))
+* suppression de la pathologie trauma cranien ([b87238b](https://gitlab.com/ydisanto/recos-diet/commit/b87238bdacce1b9ae679cd9fce4bb6ec90263ce4))
+
 ## [1.2.0](https://gitlab.com/ydisanto/recos-diet/compare/1.1.0...1.2.0) (2020-06-12)
 
 
