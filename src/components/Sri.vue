@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <h1>Critères NICE 2006</h1>
+            <h1>Crit&egrave;res NICE 2006</h1>
         </div>
         <div class="row">
             <b-alert show variant="info">Les crit&egrave;res de NICE (National Institute for health and Clinical
@@ -16,7 +16,7 @@
             <div class="col">
                 <b-card>
                     <b-card-body>
-                        <b-card-title><u>Critères majeurs</u></b-card-title>
+                        <b-card-title><u>Crit&egrave;res majeurs</u></b-card-title>
                     </b-card-body>
                     <b-list-group flush>
                         <b-list-group-item>IMC &lt; 16</b-list-group-item>
@@ -32,7 +32,7 @@
             <div class="col">
                 <b-card>
                     <b-card-body>
-                        <b-card-title><u>Critères mineurs</u></b-card-title>
+                        <b-card-title><u>Crit&egrave;res mineurs</u></b-card-title>
                     </b-card-body>
                     <b-list-group flush>
                         <b-list-group-item>IMC &lt; 18,5</b-list-group-item>
@@ -40,7 +40,7 @@
                         </b-list-group-item>
                         <b-list-group-item>Apport nutritionnel faible ou nul &gt; 5 jours</b-list-group-item>
                         <b-list-group-item>OH chronique</b-list-group-item>
-                        <b-list-group-item>Insuline, chimiotéraphie, antiacides, diurétiques</b-list-group-item>
+                        <b-list-group-item>Insuline, chimiotéraphie, antiacides, diur&eacute;tiques</b-list-group-item>
                     </b-list-group>
                 </b-card>
             </div>
@@ -55,5 +55,7 @@
 </script>
 
 <style scoped>
-
+    div.alert {
+        width: 100%;
+    }
 </style>
