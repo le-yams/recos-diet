@@ -50,7 +50,7 @@ export default {
             products: [
                 {
                     label: productsLabel.NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES,
-                    kcalPerLiter: 1500,
+                    kcalPerLiter: 1530,
                     proteinsGramsPerLiter: 75,
                 },
                 {
@@ -94,7 +94,7 @@ export default {
             products: [
                 {
                     label: productsLabel.MEDNUTRIFLEX_OMEGA,
-                    kcalPerLiter: 1012,
+                    kcalPerLiter: 1010,
                     proteinsGramsPerLiter: 38,
                 },
                 {
