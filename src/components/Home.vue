@@ -46,6 +46,15 @@
                         </b-tab>
                         <b-tab v-on:change="tabChanged" class="p-0">
                             <template v-slot:title>
+                                <font-awesome-icon icon="sticky-note"/>
+                                D&eacute;nutrition
+                            </template>
+                            <b-card-body>
+                                <denutrition></denutrition>
+                            </b-card-body>
+                        </b-tab>
+                        <b-tab v-on:change="tabChanged" class="p-0">
+                            <template v-slot:title>
                                 <font-awesome-icon icon="book-medical"/>&nbsp;Bibliographie
                             </template>
                             <b-card-body>
@@ -71,12 +80,14 @@
     import NutritionForm from "./NutritionForm";
     import Warnings from "./Warnings";
     import Disclaimer from "./Disclaimer";
+    import Denutrition from "./Denutrition";
 
-    const TAB_BIBLIO_INDEX = 2;
+    const TAB_BIBLIO_INDEX = 3;
 
     export default {
         name: "Home",
         components: {
+            Denutrition,
             Disclaimer,
             Warnings,
             NutritionForm,
