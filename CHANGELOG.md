@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://gitlab.com/ydisanto/recos-diet/compare/1.6.0...1.7.0) (2020-06-20)
+
+
+### Features
+
+* **debits-cible:** ajout de l'apport en protéines ([6261e08](https://gitlab.com/ydisanto/recos-diet/commit/6261e08204ee08ec7a2d66e20d6bff911d1923c2))
+* **dénutrition:** ajout de l'onglet sur les critères de la dénutrition ([52c5985](https://gitlab.com/ydisanto/recos-diet/commit/52c5985eb31f33b71887104732f0ce33339cc2ad))
+
+
+### Bug Fixes
+
+* **products:** correction des apports en calorie ([e3c746d](https://gitlab.com/ydisanto/recos-diet/commit/e3c746d1653d0fbb9b233c62c689756db107ff3d))
+
 ## [1.6.0](https://gitlab.com/ydisanto/recos-diet/compare/1.5.0...1.6.0) (2020-06-19)
 
 
