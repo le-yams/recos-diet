@@ -1,8 +1,9 @@
 <template>
-    <p class="m-0">
-        Pour un besoin de <strong>{{ calTarget }}</strong> kcal/kg, débit cible = <strong>{{ flow.toFixed(0) }}</strong>
-        ml/h ({{
-        dayEnergy.toFixed(0) }} kcal/j)
+    <p class="m-0 mb-2">
+        Pour un besoin journalier de <strong>{{ calTarget }}</strong> kcal/kg soit {{ dayEnergy.toFixed(0) }} kcal et
+        {{dayProteins.toFixed(0)}} g de prot&eacute;ines ({{proteinsForWeight.toFixed(1).replace(/[.,]0+$/, "")}} g/kg)
+        <br/>
+        &rArr; d&eacute;bit cible=<strong>{{ hourFlowML.toFixed(0) }}</strong> ml/h
     </p>
 </template>
 
@@ -24,12 +25,20 @@
             },
         },
         computed: {
-            flow: function () {
-                let kcalByML = this.nutrition.product.kcalByLiter / 1000;
-                return this.patientInfo.adjustedWeight * this.calTarget / 24 / kcalByML;
+            hourFlowML: function () {
+                return this.dayFlowLiter * 1000 / 24;
+            },
+            dayFlowLiter: function () {
+                return this.patientInfo.adjustedWeight * this.calTarget / this.nutrition.product.kcalPerLiter;
             },
             dayEnergy: function () {
-                return this.flow * 24 * this.nutrition.product.kcalByLiter / 1000;
+                return this.nutrition.product.kcalPerLiter * this.dayFlowLiter;
+            },
+            dayProteins: function () {
+                return this.nutrition.product.proteinsGramsPerLiter * this.dayFlowLiter;
+            },
+            proteinsForWeight: function () {
+                return this.dayProteins / this.patientInfo.adjustedWeight;
             },
         }
     }

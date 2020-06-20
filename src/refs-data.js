@@ -50,28 +50,34 @@ export default {
             products: [
                 {
                     label: productsLabel.NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES,
-                    kcalByLiter: 1500,
+                    kcalPerLiter: 1500,
+                    proteinsGramsPerLiter: 75,
                 },
                 {
                     label: productsLabel.PEPTAMEN_HN,
-                    kcalByLiter: 1330,
+                    kcalPerLiter: 1330,
+                    proteinsGramsPerLiter: 66,
                 },
                 {
                     label: productsLabel.PEPTISORB,
-                    kcalByLiter: 1000,
+                    kcalPerLiter: 1000,
+                    proteinsGramsPerLiter: 28,
                 },
                 {
                     label: productsLabel.SONDALIS_HP_ENERGY,
-                    kcalByLiter: 1500,
+                    kcalPerLiter: 1500,
+                    proteinsGramsPerLiter: 75,
                     default: true,
                 },
                 {
                     label: productsLabel.SONDALIS_JUNIOR_STANDARD,
-                    kcalByLiter: 1000
+                    kcalPerLiter: 1000,
+                    proteinsGramsPerLiter: 20,
                 },
                 {
                     label: productsLabel.SONDALIS_T_ENERGY,
-                    kcalByLiter: 1550,
+                    kcalPerLiter: 1550,
+                    proteinsGramsPerLiter: 60,
                 },
             ],
             recommendations: [
@@ -88,24 +94,29 @@ export default {
             products: [
                 {
                     label: productsLabel.MEDNUTRIFLEX_OMEGA,
-                    kcalByLiter: 1012,
+                    kcalPerLiter: 1012,
+                    proteinsGramsPerLiter: 38,
                 },
                 {
                     label: productsLabel.OLIMEL_N7E,
-                    kcalByLiter: 1140,
+                    kcalPerLiter: 1140,
+                    proteinsGramsPerLiter: 44.3,
                 },
                 {
                     label: productsLabel.OLIMEL_N9E,
-                    kcalByLiter: 1070,
+                    kcalPerLiter: 1070,
+                    proteinsGramsPerLiter: 56.9,
                 },
                 {
                     label: productsLabel.REANUTRIFLEX_OMEGA,
-                    kcalByLiter: 1180,
+                    kcalPerLiter: 1180,
+                    proteinsGramsPerLiter: 72,
                     default: true,
                 },
                 {
                     label: productsLabel.SMOKABIVEN_PROTEIN,
-                    kcalByLiter: 889,
+                    kcalPerLiter: 889,
+                    proteinsGramsPerLiter: 0,
                 },
             ],
             recommendations: [
