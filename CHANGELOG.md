@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.1](https://gitlab.com/ydisanto/recos-diet/compare/1.7.0...1.7.1) (2020-06-22)
+
+
+### Bug Fixes
+
+* **products:** correction de l'apport en protéine du smofkabiven ([3f72f25](https://gitlab.com/ydisanto/recos-diet/commit/3f72f253d46b66a9b0a5aec3550e761100a8df86))
+
 ## [1.7.0](https://gitlab.com/ydisanto/recos-diet/compare/1.6.0...1.7.0) (2020-06-20)
 
 
