@@ -139,7 +139,7 @@ export default {
                     quantity: "1",
                     unit: "ampoule 10ml 2 fois par semaine",
                     clauses: ["en IV"],
-                    sources: [],
+                    sources: ["tnctav-p1499", "tnctav-p1735-1736", "bd-pub-medocs-cernevit"],
                 },
             ],
         },
@@ -154,21 +154,21 @@ export default {
                         quantity: "1",
                         unit: "ampoule 10ml/jour",
                         clauses: ["en IV"],
-                        sources: [],
+                        sources: ["tnctav-p2742"],
                     },
                     {
                         label: "Cernevit",
                         quantity: "1",
                         unit: "ampoule 5ml/jour",
                         clauses: ["en IV"],
-                        sources: [],
+                        sources: ["tnctav-p2742"],
                     },
                     {
                         label: "B1",
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: ["en IV"],
-                        sources: [],
+                        sources: ["tnctav-p2742", "md374smani"],
                     },
                     {
                         label: "B9",
@@ -176,7 +176,7 @@ export default {
                         unit: "mg/jour",
                         clauses: ["en IV"],
                         excludeClauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
-                        sources: [],
+                        sources: ["tnctav-p1353"],
                     },
                     {
                         label: "Zinc",
@@ -184,7 +184,7 @@ export default {
                         unit: "mg/jour",
                         clauses: ["en IV"],
                         excludeClauses: ["seulement si encéphalopathie hépatique, carence ou infection"],
-                        sources: [],
+                        sources: ["tnctav-p2737", "md374smani"],
                     },
                 ],
                 'Parentérale': [
@@ -193,21 +193,21 @@ export default {
                         quantity: "1",
                         unit: "ampoule 10ml/jour",
                         clauses: ["en IV"],
-                        sources: [],
+                        sources: ["tnctav-p2742"],
                     },
                     {
                         label: "Cernevit",
                         quantity: "1",
                         unit: "ampoule 5ml/jour",
                         clauses: ["en IV"],
-                        sources: [],
+                        sources: ["tnctav-p2742"],
                     },
                     {
                         label: "B1",
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: ["en IV"],
-                        sources: [],
+                        sources: ["tnctav-p2742", "md374smani"],
                     },
                     {
                         label: "B9",
@@ -215,7 +215,7 @@ export default {
                         unit: "mg/jour",
                         clauses: ["en IV"],
                         excludeClauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
-                        sources: [],
+                        sources: ["tnctav-p1353"],
                     },
                     {
                         label: "Zinc",
@@ -223,7 +223,7 @@ export default {
                         unit: "mg/jour",
                         clauses: ["en IV"],
                         excludeClauses: ["seulement si encéphalopathie hépatique, carence ou infection"],
-                        sources: [],
+                        sources: ["tnctav-p2737", "md374smani"],
                     },
                 ],
                 exclusions: ['Alvityl (po/sng)']
@@ -239,7 +239,7 @@ export default {
                         quantity: "15",
                         unit: "mg/jour",
                         clauses: ["seulement si encéphalopathie hépatique, carence ou infection"],
-                        sources: [],
+                        sources: ["monitoring-in-cirrhosis-p927-928", "easl-cpgonicld-p14", "srmauozthe-p2-p5"],
                     }
                 ],
                 'Parentérale': [
@@ -248,7 +248,7 @@ export default {
                         quantity: "15",
                         unit: "mg/jour",
                         clauses: ["seulement si encéphalopathie hépatique, carence ou infection"],
-                        sources: [],
+                        sources: ["monitoring-in-cirrhosis-p927-928", "easl-cpgonicld-p14", "srmauozthe-p2-p5"],
                     }
                 ],
             },
@@ -385,7 +385,7 @@ export default {
                         quantity: "250",
                         unit: "mg/jour",
                         clauses: ["sur une courte durée"],
-                        sources: ["pc-alcool-p376"],
+                        sources: ["pc-alcool-p376", "ncm-v25-p172-176"],
                     },
                 ],
                 'Parentérale': [
@@ -403,7 +403,7 @@ export default {
                         quantity: "250",
                         unit: "mg/jour",
                         clauses: ["sur une courte durée"],
-                        sources: ["pc-alcool-p376"],
+                        sources: ["pc-alcool-p376", "ncm-v25-p172-176"],
                     },
                 ],
             },
@@ -465,77 +465,134 @@ export default {
             url: 'https://sfar.org/wp-content/uploads/2015/10/2_AFAR_Nutrition-artificielle-en-reanimation.pdf'
         },
         {
-            id: "tnctav-p1852",
+            id: "tnctav-p1353",
             index: 10,
+            label: 'Mouna Hanachi, Jean-Claude Melchior ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1353',
+        },
+        {
+            id: "tnctav-p1499",
+            index: 11,
+            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1499',
+        },
+        {
+            id: "tnctav-p1735-1736",
+            index: 12,
+            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1735-1736',
+        },
+        {
+            id: "tnctav-p1852",
+            index: 13,
             label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1852',
         },
         {
             id: "tnctav-p1853",
-            index: 11,
+            index: 14,
             label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1853',
         },
         {
             id: "tnctav-p2130",
-            index: 12,
+            index: 15,
             label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2130',
         },
         {
             id: "tnctav-p2133",
-            index: 13,
+            index: 16,
             label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2133',
         },
         {
             id: "tnctav-p2137",
-            index: 14,
+            index: 17,
             label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2137',
         },
         {
+            id: "tnctav-p2737",
+            index: 18,
+            label: 'Mouna Hanachi, Nadja Kayser, Damien Ringuenet, Jean-Claude Melchior ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2737',
+        },
+        {
+            id: "tnctav-p2742",
+            index: 19,
+            label: 'Mouna Hanachi, Nadja Kayser, Damien Ringuenet, Jean-Claude Melchior ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2742',
+        },
+        {
             id: "gna-p14",
-            index: 15,
+            index: 20,
             label: 'https://www.chu.ulg.ac.be/upload/docs/application/pdf/2009-01/guide_1.pdf p.14',
             url: 'https://www.chu.ulg.ac.be/upload/docs/application/pdf/2009-01/guide_1.pdf'
         },
         {
             id: "nice",
-            index: 16,
+            index: 21,
             label: 'NICE, National Institute for Health and Care Excellence (2017). Nutrition Support for adults : oral nutrition support, enteral tube feeding an parenteral nutrition.',
             url: 'https://www.nice.org.uk/guidance/cg32/chapter/1-Guidance#ftn.footnote_8'
         },
         {
             id: "nice-p204",
-            index: 17,
+            index: 22,
             label: 'NICE, National Institute for Health and Care Excellence (2017). Nutrition Support for adults : oral nutrition support, enteral tube feeding an parenteral nutrition. p.204',
             url: 'https://www.nice.org.uk/guidance/cg32/chapter/1-Guidance#ftn.footnote_8'
         },
         {
             id: "sri-prev",
-            index: 18,
+            index: 23,
             label: 'Barras-Moret Anne-Catherine, Guex Esther, Coti Bertrand Pauline, Le syndrome de renutrition inapproprié : la clé du traitement est la prévention (2011).',
             url: 'https://www.sfncm.org/images/stories/pdf_pratiquesnutrition/Barras-Moret%20NCM%202011.pdf'
         },
         {
             id: "pc-alcool-p376",
-            index: 19,
+            index: 24,
             label: 'Airagnais G, Ducoutumany G, Laffy-Beaufils B, Le Faou A-L, Limousin F, La prise en charge du syndrome de sevrage de l’alcool : quelles nouveautés ? (2019). p.376',
         },
         {
             id: "sfncm-covid-rea-p2",
-            index: 20,
+            index: 25,
             label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Nutrition du patient covid-19 intubé et ventilé en réanimation (2020). p.2',
             url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_08_COVID-19.pdf'
         },
         {
             id: "sfncm-covid-postrea-p2",
-            index: 21,
+            index: 26,
             label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Principes de prise en charge des patients Covid 19+ en post-réanimation (2020). p.2',
             url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_09_COVID-19.pdf'
         },
         {
             id: "sfncm-prev-sri-covid-p2",
-            index: 22,
+            index: 27,
             label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Prévention du syndrome de renutrition inapproprié (SRI) des patients COVID 19 (2020). p.2',
             url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_03_COVID-19.pdf'
         },
+        {
+            id: "bd-pub-medocs-cernevit",
+            index: 28,
+            label: 'Base de données publique des médicaments, Fiche info CERNEVIT (2020).',
+            url: 'http://base-donnees-publique.medicaments.gouv.fr/extrait.php?specid=61001031'
+        },
+        {
+            id: "monitoring-in-cirrhosis-p927-928",
+            index: 29,
+            label: 'A.H.Koop, O Y. Mousa, L E. Pham, J.E. C-H, S.Pungpapong, A P.Keaveny, An argument for vitamin D, A and zinc monitoring in cirrhosis (2018). p.927-928',
+        },
+        {
+            id: "easl-cpgonicld-p14",
+            index: 30,
+            label: 'European Association for the Study of the liver (EASL), Clinical practice guideline on nutrition in chronic liver disease (2019). p.14',
+        },
+        {
+            id: "srmauozthe-p2-p5",
+            index: 31,
+            label: 'N C. Chavez-Tapia, A. Cesar-Arce, T. Barrientos-Gutiérrez, F A. Villegas-López, N. Méndez-Sanchez, M. Uribe, A systematic review and meta-analysis of the use of oral zinc in the treatment of hepatic encephalopathy (2013). p.2 et 5',
+        },
+        {
+            id: "md374smani",
+            index: 32,
+            label: 'Hanachi M, Dicembre M, Rives-Lange C, et al. Micronutrients Deficiencies in 374 Severely Malnourished Anorexia Nervosa Inpatients. Nutrients. 2019;11(4):792. Published 2019 Apr 5. doi:10.3390/nu11040792',
+        },
+        {
+            id: "ncm-v25-p172-176",
+            index: 33,
+            label: 'Benoît Dupont, Servais Eloumou, Marie-Astrid Piquet ; Nutrition clinique et métabolisme, Volume 25, n° 3, (septembre 2011). p.172-176',
+        },
+
     ],
     calculatedPathologies: function () {
         return this.pathologies.filter(p => p.calculation)
