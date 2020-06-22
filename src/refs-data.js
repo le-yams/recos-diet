@@ -11,7 +11,7 @@ export const productsLabel = {
     PEPTAMEN_HN: 'Peptamen HN',
     PEPTISORB: 'Peptisorb (hypolipidique)',
     REANUTRIFLEX_OMEGA: 'Réanutriflex Omega N8 (Réa)',
-    SMOKABIVEN_PROTEIN: 'SMOFkabiven Protein N10 (Réa)',
+    SMOKABIVEN_PROTEIN: 'SMOFKABIVEN PROTEINE N10 (Réa)',
     SONDALIS_HP_ENERGY: 'Sondalis HP Energy',
     SONDALIS_JUNIOR_STANDARD: 'Sondalis Junior Standard',
     SONDALIS_T_ENERGY: 'Sondalis T Energy',
