@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://gitlab.com/ydisanto/recos-diet/compare/1.7.1...1.8.0) (2020-06-22)
+
+
+### Features
+
+* **biblio:** mise à jour de la biblio ([46f1462](https://gitlab.com/ydisanto/recos-diet/commit/46f1462e8bd24d2a50a3341ae6f93b63f72f5a81))
+
+
+### Bug Fixes
+
+* **products:** mise à jour du libellé du smofkabiven ([aa6faad](https://gitlab.com/ydisanto/recos-diet/commit/aa6faad16fe44c0b79d6194fdef825853fe76eee))
+
 ### [1.7.1](https://gitlab.com/ydisanto/recos-diet/compare/1.7.0...1.7.1) (2020-06-22)
 
 
