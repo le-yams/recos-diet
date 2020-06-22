@@ -116,7 +116,7 @@ export default {
                 {
                     label: productsLabel.SMOKABIVEN_PROTEIN,
                     kcalPerLiter: 889,
-                    proteinsGramsPerLiter: 0,
+                    proteinsGramsPerLiter: 65.5,
                 },
             ],
             recommendations: [
