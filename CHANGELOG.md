@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://gitlab.com/ydisanto/recos-diet/compare/1.8.0...1.9.0) (2020-06-23)
+
+
+### Features
+
+* **denutrition:** ajout d'un libellé pour les critères de sévérité ([0934f89](https://gitlab.com/ydisanto/recos-diet/commit/0934f89b03c572b9bbaa44fe7d2d1d62cd5d57cc))
+
+
+### Bug Fixes
+
+* **denutrition:** correction affichage des libellés d'information ([e630173](https://gitlab.com/ydisanto/recos-diet/commit/e6301735f4326641de09fad7c4001ba8919c50f1))
+* **denutrition:** corrections orthographiques ([4e7a262](https://gitlab.com/ydisanto/recos-diet/commit/4e7a2625cf08f1b47e4f9af6a29aa5814f19574c))
+* **pathologies:** correction unité dans le warning de dénutrition-sri ([ef8f3e0](https://gitlab.com/ydisanto/recos-diet/commit/ef8f3e015976371a57c3409af8bf1816dde98ece))
+* **products:** correction de l'apport en protéines du Sondalis T energy ([0630807](https://gitlab.com/ydisanto/recos-diet/commit/0630807e59bb30294f928db80afcd35aa2474fd7))
+
 ## [1.8.0](https://gitlab.com/ydisanto/recos-diet/compare/1.7.1...1.8.0) (2020-06-22)
 
 
