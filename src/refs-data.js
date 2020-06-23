@@ -349,7 +349,7 @@ export default {
                 ],
             },
             warning: {
-                text: "Ne pas débuter la nutrition à un débit supérieur ou égal 20kcal/j",
+                text: "Ne pas débuter la nutrition à un débit supérieur ou égal 20 kcal/kg/j",
                 variant: "danger",
             },
             dietOpinionWarningLevel: 0,
