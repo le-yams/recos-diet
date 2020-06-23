@@ -16,7 +16,9 @@
                 <li>Am&eacute;lie Defossez</li>
                 <li>V&eacute;ronique Fouss</li>
             </ul>
+
             <hr class="my-4">
+
             <p>{{donationText1}}
                 <font-awesome-icon icon="smile"/>
                 .
@@ -31,7 +33,13 @@
                        alt="Bouton Faites un don avec PayPal"/>
                 <img alt="" border="0" src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" width="1" height="1"/>
             </form>
+
+            <hr class="my-4">
+
+            <p>Favicon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
+                    href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
         </div>
+
         <div class="container-fluid">
             <b-button variant="outline-primary" class="ml-5"
                       @click="$router.push('/')">Retour
