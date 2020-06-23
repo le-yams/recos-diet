@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://gitlab.com/ydisanto/recos-diet/compare/1.10.0...1.11.0) (2020-06-23)
+
+
+### Features
+
+* **favicon:** change favicon ([2b45d5c](https://gitlab.com/ydisanto/recos-diet/commit/2b45d5c3a26c129c972fed1c977a20297bcc30ef))
+
 ## [1.10.0](https://gitlab.com/ydisanto/recos-diet/compare/1.9.1...1.10.0) (2020-06-23)
 
 
