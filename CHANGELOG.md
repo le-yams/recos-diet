@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://gitlab.com/ydisanto/recos-diet/compare/1.9.1...1.10.0) (2020-06-23)
+
+
+### Features
+
+* **refs:** ajout d'une page affichant la liste des produits et leurs données ([437872b](https://gitlab.com/ydisanto/recos-diet/commit/437872b93695d245bc70b2944ec4be68c282514b))
+
 ### [1.9.1](https://gitlab.com/ydisanto/recos-diet/compare/1.9.0...1.9.1) (2020-06-23)
 
 
