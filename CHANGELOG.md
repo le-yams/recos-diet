@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://gitlab.com/ydisanto/recos-diet/compare/1.9.0...1.9.1) (2020-06-23)
+
+
+### Bug Fixes
+
+* **products:** correction de l'apport en protéines du Sondalis T energy (60gr/L) ([672db88](https://gitlab.com/ydisanto/recos-diet/commit/672db885754973c5555c38529c4a8eccae2db997))
+
 ## [1.9.0](https://gitlab.com/ydisanto/recos-diet/compare/1.8.0...1.9.0) (2020-06-23)
 
 
