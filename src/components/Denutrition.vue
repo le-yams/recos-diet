@@ -153,7 +153,7 @@
 
 <style scoped>
     div.alert {
-        width: 100 & percnt;;
+        width: 100%;
     }
 
     #oldPatient {
