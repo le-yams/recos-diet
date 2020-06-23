@@ -77,7 +77,7 @@ export default {
                 {
                     label: productsLabel.SONDALIS_T_ENERGY,
                     kcalPerLiter: 1550,
-                    proteinsGramsPerLiter: 30,
+                    proteinsGramsPerLiter: 60,
                 },
             ],
             recommendations: [
