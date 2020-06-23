@@ -27,6 +27,7 @@ import {initStore} from './store'
 import VueScrollTo from 'vue-scrollto'
 import Home from "./components/Home";
 import About from "./components/About";
+import RefData from "./components/ref-data/RefData";
 
 library.add(faUserInjured)
 library.add(faFire)
@@ -58,7 +59,8 @@ const router = new VueRouter({
     routes: [
         {path: '/', component: Home},
         {path: '/home', component: Home},
-        {path: '/about', component: About}
+        {path: '/about', component: About},
+        {path: '/refs', component: RefData},
     ]
 })
 

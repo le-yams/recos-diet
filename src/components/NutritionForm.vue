@@ -19,6 +19,12 @@
                                   :options="productsForSelectedNutritionType" :clearable="false" :searchable="false"/>
                     </div>
                 </div>
+                <div class="pull-right">
+                    <small>
+                        <router-link to="/refs" href="refs.html">[refs]
+                        </router-link>
+                    </small>
+                </div>
             </form>
         </b-card-body>
     </b-card>

@@ -1,4 +1,4 @@
-const nutritionTypes = {
+export const nutritionTypes = {
     ENTERALE: 'Entérale',
     PARENTERALE: 'Parentérale',
 };
