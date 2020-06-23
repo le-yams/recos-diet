@@ -11,8 +11,7 @@
         <div class="row">
             <b-alert show variant="info" v-if="!patientIsOld">
                 Une d&eacute;nutrition est pr&eacute;sente s'il y a pr&eacute;sence d'au moins <strong>1 crit&egrave;re
-                ph&eacute;notypique
-                et 1 crit&egrave;re &eacute;tiologique </strong>.
+                ph&eacute;notypique et 1 crit&egrave;re &eacute;tiologique</strong>.
             </b-alert>
             <b-alert show variant="info" v-if="patientIsOld">
                 Une d&eacute;nutrition est pr&eacute;sente s'il y a pr&eacute;sence d'au moins <strong>1 crit&egrave;re
@@ -76,6 +75,12 @@
 
         <hr class="my-4">
 
+        <div class="row">
+            <b-alert show variant="info">
+                La s&eacute;v&eacute;rit&eacute; d'une d&eacute;nutrition av&eacute;r&eacute;e est &eacute;valu&eacute;e
+                selon les crit&egrave;res suivants.
+            </b-alert>
+        </div>
         <div class="row" v-if="!patientIsOld">
             <div class="col">
                 <b-card>
