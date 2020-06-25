@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://gitlab.com/ydisanto/recos-diet/compare/1.12.1...1.13.0) (2020-06-25)
+
+
+### Features
+
+* **recos:** ajout du préfixe vit. pour les vitamines ([5efff1a](https://gitlab.com/ydisanto/recos-diet/commit/5efff1a69d1c5d3ff15493abeee5ed973d26d5d4))
+
 ### [1.12.1](https://gitlab.com/ydisanto/recos-diet/compare/1.12.0...1.12.1) (2020-06-25)
 
 
