@@ -6,7 +6,7 @@ export const nutritionTypes = {
 export const productsLabel = {
     NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES: 'Nutrison Protein Plus Energy Multifibres',
     OLIMEL_N7E: 'Olimel N7E (USC)',
-    OLIMEL_N9E: 'Olimel N9E',
+    OLIMEL_N9E: 'Olimel N9E (Réa)',
     MEDNUTRIFLEX_OMEGA: 'Mednutriflex Omega N5E (USC)',
     PEPTAMEN_HN: 'Peptamen HN',
     PEPTISORB: 'Peptisorb (hypolipidique)',
