@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.1](https://gitlab.com/ydisanto/recos-diet/compare/1.12.0...1.12.1) (2020-06-25)
+
+
+### Bug Fixes
+
+* **products:** correction des apports en protéines pour peptisorb et réanutriflex ([f1d715b](https://gitlab.com/ydisanto/recos-diet/commit/f1d715beb4e75f04d597ef534b1e79bffb8db72f))
+
 ## [1.12.0](https://gitlab.com/ydisanto/recos-diet/compare/1.11.0...1.12.0) (2020-06-25)
 
 
