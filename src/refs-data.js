@@ -135,7 +135,7 @@ export default {
                     sources: ["tnctav-p2133"],
                 },
                 {
-                    label: "K",
+                    label: "Vit. K",
                     quantity: "1",
                     unit: "ampoule 10ml 2 fois par semaine",
                     clauses: ["en IV"],
@@ -164,14 +164,14 @@ export default {
                         sources: ["tnctav-p2742"],
                     },
                     {
-                        label: "B1",
+                        label: "Vit. B1",
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: ["en IV"],
                         sources: ["tnctav-p2742", "md374smani"],
                     },
                     {
-                        label: "B9",
+                        label: "Vit. B9",
                         quantity: "25",
                         unit: "mg/jour",
                         clauses: ["en IV"],
@@ -203,14 +203,14 @@ export default {
                         sources: ["tnctav-p2742"],
                     },
                     {
-                        label: "B1",
+                        label: "Vit. B1",
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: ["en IV"],
                         sources: ["tnctav-p2742", "md374smani"],
                     },
                     {
-                        label: "B9",
+                        label: "Vit. B9",
                         quantity: "25",
                         unit: "mg/jour",
                         clauses: ["en IV"],
@@ -258,7 +258,7 @@ export default {
             recommendations: {
                 'Entérale': [
                     {
-                        label: "B1",
+                        label: "Vit. B1",
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: [],
@@ -267,7 +267,7 @@ export default {
                 ],
                 'Parentérale': [
                     {
-                        label: "B1",
+                        label: "Vit. B1",
                         quantity: "500",
                         unit: "mg/j",
                         clauses: [],
@@ -317,14 +317,14 @@ export default {
                         sources: ["espen-p71"],
                     },
                     {
-                        label: "B1",
+                        label: "Vit. B1",
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: ["pendant 10 jours minimum"],
                         sources: ["espen-p71"],
                     },
                     {
-                        label: "B9",
+                        label: "Vit. B9",
                         quantity: "25",
                         unit: "mg/jour",
                         clauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
@@ -333,14 +333,14 @@ export default {
                 ],
                 'Parentérale': [
                     {
-                        label: "B1",
+                        label: "Vit. B1",
                         quantity: "500",
                         unit: "mg/j",
                         clauses: ["pendant 10 jours minimum"],
                         sources: ["espen-p71"],
                     },
                     {
-                        label: "B9",
+                        label: "Vit. B9",
                         quantity: "25",
                         unit: "mg/jour",
                         clauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
@@ -372,7 +372,7 @@ export default {
             recommendations: {
                 'Entérale': [
                     {
-                        label: "B1",
+                        label: "Vit. B1",
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: [
@@ -381,7 +381,7 @@ export default {
                         sources: ["afar"],
                     },
                     {
-                        label: "B6",
+                        label: "Vit. B6",
                         quantity: "250",
                         unit: "mg/jour",
                         clauses: ["sur une courte durée"],
@@ -390,7 +390,7 @@ export default {
                 ],
                 'Parentérale': [
                     {
-                        label: "B1",
+                        label: "Vit. B1",
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: [
@@ -399,7 +399,7 @@ export default {
                         sources: ["afar"],
                     },
                     {
-                        label: "B6",
+                        label: "Vit. B6",
                         quantity: "250",
                         unit: "mg/jour",
                         clauses: ["sur une courte durée"],
