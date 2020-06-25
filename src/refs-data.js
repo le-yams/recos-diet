@@ -61,7 +61,7 @@ export default {
                 {
                     label: productsLabel.PEPTISORB,
                     kcalPerLiter: 1000,
-                    proteinsGramsPerLiter: 28,
+                    proteinsGramsPerLiter: 40,
                 },
                 {
                     label: productsLabel.SONDALIS_HP_ENERGY,
@@ -110,7 +110,7 @@ export default {
                 {
                     label: productsLabel.REANUTRIFLEX_OMEGA,
                     kcalPerLiter: 1180,
-                    proteinsGramsPerLiter: 72,
+                    proteinsGramsPerLiter: 56,
                     default: true,
                 },
                 {
