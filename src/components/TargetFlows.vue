@@ -6,10 +6,10 @@
         <b-card-title></b-card-title>
         <b-card-body class="p-1">
             <ul>
-                <li v-if="hasAnorexia || hasDenutrition">
+                <li v-if="hasAnorexia || hasDenutrition || hasCovid">
                     <target-flow :cal-target="10" :nutrition="nutrition" :patient-info="patientInfo"/>
                 </li>
-                <li v-if="!hasAnorexia && hasDenutrition">
+                <li v-if="!hasAnorexia && (hasDenutrition || hasCovid)">
                     <target-flow :cal-target="15" :nutrition="nutrition" :patient-info="patientInfo"/>
                 </li>
                 <li v-if="!hasAnorexia">
@@ -48,14 +48,17 @@
             },
         },
         computed: {
-            hasObesity: function () {
-                return this.pathologies.find(p => p.label === pathologieNames.OBESITE);
-            },
             hasAnorexia: function () {
                 return this.pathologies.find(p => p.label === pathologieNames.ANOREXIE_MENTALE);
             },
             hasDenutrition: function () {
                 return this.pathologies.find(p => p.label === pathologieNames.DENUTRITION_SRI);
+            },
+            hasCovid: function () {
+                return this.pathologies.find(p => p.label === pathologieNames.COVID_19);
+            },
+            hasObesity: function () {
+                return this.pathologies.find(p => p.label === pathologieNames.OBESITE);
             },
         }
     }
