@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://gitlab.com/ydisanto/recos-diet/compare/1.11.0...1.12.0) (2020-06-25)
+
+
+### Features
+
+* **debits-cible:** ajout des débits 10 et 15 pour la pathologie covid ([4ec70d1](https://gitlab.com/ydisanto/recos-diet/commit/4ec70d1d11b1da570d6b0377e69aabc6547db191))
+
+
+### Bug Fixes
+
+* **products:** mise à jour du libellé pour l'Olimel N9E ([316b214](https://gitlab.com/ydisanto/recos-diet/commit/316b2143c40b5120dadf4431c66b8d57aa63e7ed))
+
 ## [1.11.0](https://gitlab.com/ydisanto/recos-diet/compare/1.10.0...1.11.0) (2020-06-23)
 
 
