@@ -8,7 +8,7 @@
                 <div class="form-group form-row mb-1">
                     <label for="inputHeight" class="col-sm-3 col-form-label">Taille (cm)</label>
                     <div class="col-sm">
-                        <input type="number" v-bind:value="height" ref="height"
+                        <input type="number" v-bind:value="height" ref="height" @focus="$event.target.select()"
                                v-on:change="updateHeight" v-on:keyup.enter="$refs.weight.focus()"
                                class="form-control" id="inputHeight" placeholder="Taille (cm)">
                     </div>
@@ -16,7 +16,7 @@
                 <div class="form-group form-row mb-1">
                     <label for="inputWeight" class="col-sm-3 col-form-label">Poids</label>
                     <div class="col-sm">
-                        <input type="number" v-bind:value="weight" ref="weight"
+                        <input type="number" v-bind:value="weight" ref="weight" @focus="$event.target.select()"
                                v-on:change="updateWeight" v-on:keyup.enter="$refs.bmi.focus()"
                                class="form-control" id="inputWeight" placeholder="Poids">
                     </div>
