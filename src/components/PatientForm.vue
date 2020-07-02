@@ -8,16 +8,16 @@
                 <div class="form-group form-row mb-1">
                     <label for="inputHeight" class="col-sm-3 col-form-label">Taille (cm)</label>
                     <div class="col-sm">
-                        <input type="number" v-bind:value="height"
-                               v-on:change="updateHeight"
+                        <input type="number" v-bind:value="height" ref="height"
+                               v-on:change="updateHeight" v-on:keyup.enter="$refs.weight.focus()"
                                class="form-control" id="inputHeight" placeholder="Taille (cm)">
                     </div>
                 </div>
                 <div class="form-group form-row mb-1">
                     <label for="inputWeight" class="col-sm-3 col-form-label">Poids</label>
                     <div class="col-sm">
-                        <input type="number" v-bind:value="weight"
-                               v-on:change="updateWeight"
+                        <input type="number" v-bind:value="weight" ref="weight"
+                               v-on:change="updateWeight" v-on:keyup.enter="$refs.bmi.focus()"
                                class="form-control" id="inputWeight" placeholder="Poids">
                     </div>
                 </div>
@@ -25,14 +25,13 @@
                 <div class="form-group form-row mb-1" v-if="bmi > idealBmi">
                     <label for="inputAdjustedWeight" class="col-sm-3 col-form-label">Poids ajusté</label>
                     <div class="col-sm">
-                        <input v-bind:value="adjustedWeight" class="form-control" id="inputAdjustedWeight"
-                               readonly>
+                        <input v-bind:value="adjustedWeight" class="form-control" id="inputAdjustedWeight" readonly>
                     </div>
                 </div>
                 <div class="form-group form-row mb-1">
                     <label for="inputIMC" class="col-sm-3 col-form-label">IMC</label>
                     <div class="col-sm">
-                        <input v-bind:value="bmi" class="form-control" id="inputIMC" readonly>
+                        <input v-bind:value="bmi" class="form-control" id="inputIMC" readonly ref="bmi">
                     </div>
                 </div>
 
@@ -61,6 +60,9 @@
             adjustedWeight: function () {
                 return this.patient.adjustedWeight;
             },
+        },
+        mounted() {
+            this.$refs.height.focus()
         },
         methods: {
             updateHeight(evt) {
