@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://gitlab.com/ydisanto/recos-diet/compare/1.14.0...1.15.0) (2020-07-02)
+
+
+### Features
+
+* **patient:** select input text on focus ([359df96](https://gitlab.com/ydisanto/recos-diet/commit/359df9666ab81e02e7952748d32550630431b792))
+
 ## [1.14.0](https://gitlab.com/ydisanto/recos-diet/compare/1.13.0...1.14.0) (2020-07-02)
 
 
