@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://gitlab.com/ydisanto/recos-diet/compare/1.13.0...1.14.0) (2020-07-02)
+
+
+### Features
+
+* **patient:** transfert de focus sur touche entrée ([95913a5](https://gitlab.com/ydisanto/recos-diet/commit/95913a5ecd6c10625bd39ef63e3f299c4617f08e))
+
 ## [1.13.0](https://gitlab.com/ydisanto/recos-diet/compare/1.12.1...1.13.0) (2020-06-25)
 
 
