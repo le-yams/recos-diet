@@ -86,8 +86,15 @@ export default {
                     quantity: "1",
                     unit: "comprimé/jour",
                     clauses: ["si apports < 1500 kcal/j"],
-                    sources: ["tnctav-p2137", "gna-p14"],
-                }
+                    sources: ["tnctav-p2137"],
+                },
+                {
+                    label: "Vit. D3",
+                    quantity: "500000",
+                    unit: "UI",
+                    clauses: ["si le dosage de la vit. D est inférieur à 12.5 ng/ml (ou 50 nmol/l)", "dans la première semaine suivant l'admission"],
+                    sources: ["espen-p66"],
+                },
             ],
         },
         'Parentérale': {
@@ -141,6 +148,13 @@ export default {
                     clauses: ["en IV"],
                     sources: ["tnctav-p1499", "tnctav-p1735-1736", "bd-pub-medocs-cernevit"],
                 },
+                {
+                    label: "Vit. D3",
+                    quantity: "500000",
+                    unit: "UI",
+                    clauses: ["si le dosage de la vit. D est inférieur à 12.5 ng/ml (ou 50 nmol/l)", "dans la première semaine suivant l'admission"],
+                    sources: ["espen-p66"],
+                },
             ],
         },
     },
@@ -176,7 +190,7 @@ export default {
                         unit: "mg/jour",
                         clauses: ["en IV"],
                         excludeClauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
-                        sources: ["tnctav-p1353"],
+                        sources: ["tnctav-p1853"],
                     },
                     {
                         label: "Zinc",
@@ -215,7 +229,7 @@ export default {
                         unit: "mg/jour",
                         clauses: ["en IV"],
                         excludeClauses: ["Si dénutrition sévère uniquement", "pendant les 3 premier jours"],
-                        sources: ["tnctav-p1353"],
+                        sources: ["tnctav-p1853"],
                     },
                     {
                         label: "Zinc",
@@ -314,14 +328,14 @@ export default {
                         quantity: "1",
                         unit: "comprimé/jour",
                         clauses: ["pendant 10 jours minimum"],
-                        sources: ["espen-p71"],
+                        sources: ["nice"],
                     },
                     {
                         label: "Vit. B1",
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: ["pendant 10 jours minimum"],
-                        sources: ["espen-p71"],
+                        sources: ["nice"],
                     },
                     {
                         label: "Vit. B9",
@@ -337,7 +351,7 @@ export default {
                         quantity: "500",
                         unit: "mg/j",
                         clauses: ["pendant 10 jours minimum"],
-                        sources: ["espen-p71"],
+                        sources: ["nice"],
                     },
                     {
                         label: "Vit. B9",
@@ -350,6 +364,7 @@ export default {
             },
             warning: {
                 text: "Ne pas débuter la nutrition à un débit supérieur ou égal 20 kcal/kg/j",
+                sources: ["tnctav-p1852"],
                 variant: "danger",
             },
             dietOpinionWarningLevel: 0,
@@ -378,7 +393,7 @@ export default {
                         clauses: [
                             "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19",
                         ],
-                        sources: ["afar"],
+                        sources: ["sri-prev"],
                     },
                     {
                         label: "Vit. B6",
@@ -396,7 +411,7 @@ export default {
                         clauses: [
                             "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19",
                         ],
-                        sources: ["afar"],
+                        sources: ["sri-prev"],
                     },
                     {
                         label: "Vit. B6",
@@ -417,9 +432,9 @@ export default {
             url: 'https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline-on-clinical-nutrition-in-the-intensive-care-unit.pdf'
         },
         {
-            id: "espen-p61",
+            id: "espen-p52",
             index: 2,
-            label: 'ESPEN (2019), Guideline on clinical nutrition in the intensive care unit. p.61',
+            label: 'ESPEN (2019), Guideline on clinical nutrition in the intensive care unit. p.52',
             url: 'https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline-on-clinical-nutrition-in-the-intensive-care-unit.pdf'
         },
         {
@@ -429,168 +444,122 @@ export default {
             url: 'https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline-on-clinical-nutrition-in-the-intensive-care-unit.pdf'
         },
         {
-            id: "espen-p70",
-            index: 4,
-            label: 'ESPEN (2019), Guideline on clinical nutrition in the intensive care unit. p.70',
-            url: 'https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline-on-clinical-nutrition-in-the-intensive-care-unit.pdf'
-        },
-        {
-            id: "espen-p71",
-            index: 5,
-            label: 'ESPEN (2019), Guideline on clinical nutrition in the intensive care unit. p.71',
-            url: 'https://www.espen.org/files/ESPEN-Guidelines/ESPEN_guideline-on-clinical-nutrition-in-the-intensive-care-unit.pdf'
-        },
-        {
-            id: "afar",
-            index: 6,
-            label: 'AFAR, Annales Françaises d’Anesthésie et de Réanimation (2014), Nutrition artificielle en réanimation.',
-            url: 'https://sfar.org/wp-content/uploads/2015/10/2_AFAR_Nutrition-artificielle-en-reanimation.pdf'
-        },
-        {
-            id: "afar-p14",
-            index: 7,
-            label: 'AFAR, Annales Françaises d’Anesthésie et de Réanimation (2014), Nutrition artificielle en réanimation. p.14',
-            url: 'https://sfar.org/wp-content/uploads/2015/10/2_AFAR_Nutrition-artificielle-en-reanimation.pdf'
-        },
-        {
             id: "afar-p204",
-            index: 8,
+            index: 4,
             label: 'AFAR, Annales Françaises d’Anesthésie et de Réanimation (2014), Nutrition artificielle en réanimation. p.204',
             url: 'https://sfar.org/wp-content/uploads/2015/10/2_AFAR_Nutrition-artificielle-en-reanimation.pdf'
         },
         {
             id: "afar-p208",
-            index: 9,
+            index: 5,
             label: 'AFAR, Annales Françaises d’Anesthésie et de Réanimation (2014), Nutrition artificielle en réanimation. p.208',
             url: 'https://sfar.org/wp-content/uploads/2015/10/2_AFAR_Nutrition-artificielle-en-reanimation.pdf'
         },
         {
-            id: "tnctav-p1353",
-            index: 10,
-            label: 'Mouna Hanachi, Jean-Claude Melchior ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1353',
-        },
-        {
             id: "tnctav-p1499",
-            index: 11,
-            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1499',
+            index: 6,
+            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1499 chapitre 54',
         },
         {
             id: "tnctav-p1735-1736",
-            index: 12,
-            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1735-1736',
+            index: 7,
+            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1735-1736 chapitre 63',
         },
         {
             id: "tnctav-p1852",
-            index: 13,
-            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1852',
+            index: 8,
+            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1852 chapitre 66',
         },
         {
             id: "tnctav-p1853",
-            index: 14,
-            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1853',
-        },
-        {
-            id: "tnctav-p2130",
-            index: 15,
-            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2130',
+            index: 9,
+            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.1853 chapitre 66',
         },
         {
             id: "tnctav-p2133",
-            index: 16,
-            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2133',
+            index: 10,
+            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2133 chapitre 75',
         },
         {
             id: "tnctav-p2137",
-            index: 17,
-            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2137',
+            index: 11,
+            label: 'Quillio D, Thibault R, Bachmann P, Coti P, Guex E, Dubern B, Peretti N, Caldari D ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2137 chapitre ',
         },
         {
             id: "tnctav-p2737",
-            index: 18,
-            label: 'Mouna Hanachi, Nadja Kayser, Damien Ringuenet, Jean-Claude Melchior ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2737',
+            index: 12,
+            label: 'Mouna Hanachi, Nadja Kayser, Damien Ringuenet, Jean-Claude Melchior ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2737 chapitre 93',
         },
         {
             id: "tnctav-p2742",
-            index: 19,
-            label: 'Mouna Hanachi, Nadja Kayser, Damien Ringuenet, Jean-Claude Melchior ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2742',
-        },
-        {
-            id: "gna-p14",
-            index: 20,
-            label: 'https://www.chu.ulg.ac.be/upload/docs/application/pdf/2009-01/guide_1.pdf p.14',
-            url: 'https://www.chu.ulg.ac.be/upload/docs/application/pdf/2009-01/guide_1.pdf'
+            index: 13,
+            label: 'Mouna Hanachi, Nadja Kayser, Damien Ringuenet, Jean-Claude Melchior ; SFNCM (2016). Traité de nutrition clinique à tous les âges de la vie. p.2742 chapitre 93',
         },
         {
             id: "nice",
-            index: 21,
+            index: 14,
             label: 'NICE, National Institute for Health and Care Excellence (2017). Nutrition Support for adults : oral nutrition support, enteral tube feeding an parenteral nutrition.',
             url: 'https://www.nice.org.uk/guidance/cg32/chapter/1-Guidance#ftn.footnote_8'
         },
         {
-            id: "nice-p204",
-            index: 22,
-            label: 'NICE, National Institute for Health and Care Excellence (2017). Nutrition Support for adults : oral nutrition support, enteral tube feeding an parenteral nutrition. p.204',
-            url: 'https://www.nice.org.uk/guidance/cg32/chapter/1-Guidance#ftn.footnote_8'
-        },
-        {
             id: "sri-prev",
-            index: 23,
+            index: 15,
             label: 'Barras-Moret Anne-Catherine, Guex Esther, Coti Bertrand Pauline, Le syndrome de renutrition inapproprié : la clé du traitement est la prévention (2011).',
             url: 'https://www.sfncm.org/images/stories/pdf_pratiquesnutrition/Barras-Moret%20NCM%202011.pdf'
         },
         {
             id: "pc-alcool-p376",
-            index: 24,
+            index: 16,
             label: 'Airagnais G, Ducoutumany G, Laffy-Beaufils B, Le Faou A-L, Limousin F, La prise en charge du syndrome de sevrage de l’alcool : quelles nouveautés ? (2019). p.376',
         },
         {
             id: "sfncm-covid-rea-p2",
-            index: 25,
+            index: 17,
             label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Nutrition du patient covid-19 intubé et ventilé en réanimation (2020). p.2',
             url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_08_COVID-19.pdf'
         },
         {
-            id: "sfncm-covid-postrea-p2",
-            index: 26,
-            label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Principes de prise en charge des patients Covid 19+ en post-réanimation (2020). p.2',
-            url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_09_COVID-19.pdf'
-        },
-        {
             id: "sfncm-prev-sri-covid-p2",
-            index: 27,
+            index: 18,
             label: 'SFNCM, Société Francophone Nutrition Clinique et Métabolisme, Prévention du syndrome de renutrition inapproprié (SRI) des patients COVID 19 (2020). p.2',
             url: 'https://www.sfncm.org/images/stories/Fiches_Covid_19/Fiche_03_COVID-19.pdf'
         },
         {
             id: "bd-pub-medocs-cernevit",
-            index: 28,
+            index: 19,
             label: 'Base de données publique des médicaments, Fiche info CERNEVIT (2020).',
             url: 'http://base-donnees-publique.medicaments.gouv.fr/extrait.php?specid=61001031'
         },
         {
             id: "monitoring-in-cirrhosis-p927-928",
-            index: 29,
+            index: 20,
             label: 'A.H.Koop, O Y. Mousa, L E. Pham, J.E. C-H, S.Pungpapong, A P.Keaveny, An argument for vitamin D, A and zinc monitoring in cirrhosis (2018). p.927-928',
         },
         {
             id: "easl-cpgonicld-p14",
-            index: 30,
+            index: 21,
             label: 'European Association for the Study of the liver (EASL), Clinical practice guideline on nutrition in chronic liver disease (2019). p.14',
         },
         {
             id: "srmauozthe-p2-p5",
-            index: 31,
+            index: 22,
             label: 'N C. Chavez-Tapia, A. Cesar-Arce, T. Barrientos-Gutiérrez, F A. Villegas-López, N. Méndez-Sanchez, M. Uribe, A systematic review and meta-analysis of the use of oral zinc in the treatment of hepatic encephalopathy (2013). p.2 et 5',
         },
         {
             id: "md374smani",
-            index: 32,
+            index: 23,
             label: 'Hanachi M, Dicembre M, Rives-Lange C, et al. Micronutrients Deficiencies in 374 Severely Malnourished Anorexia Nervosa Inpatients. Nutrients. 2019;11(4):792. Published 2019 Apr 5. doi:10.3390/nu11040792',
         },
         {
             id: "ncm-v25-p172-176",
-            index: 33,
+            index: 24,
             label: 'Benoît Dupont, Servais Eloumou, Marie-Astrid Piquet ; Nutrition clinique et métabolisme, Volume 25, n° 3, (septembre 2011). p.172-176',
+        },
+        {
+            id: "ideal-body-weight-equation",
+            index: 25,
+            label: 'Peterson CM, Thomas DM, Blackburn GL, Heymsfield SB. Universal equation for estimating ideal body weight and body weight at any BMI. Am J Clin Nutr 2016;103:1197-203',
+            url: 'http://refhub.elsevier.com/S0261-5614(18)32432-4/sref14',
         },
 
     ],

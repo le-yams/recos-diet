@@ -8,7 +8,7 @@
             <div class="col-4">
                 <div class="container-fluid pr-0">
                     <div class="row">
-                        <patient-form style="width: 100%;"></patient-form>
+                        <patient-form @display-bibliography="displayBibliography" style="width: 100%;"></patient-form>
                     </div>
                     <div class="row">
                         <nutrition-form :pathologies="pathologies"
@@ -28,9 +28,9 @@
                                 <font-awesome-icon icon="heartbeat"/>&nbsp;Réanimation
                             </template>
                             <b-card-body>
-                                <warnings :pathologies="pathologies"></warnings>
-                                <target-flows :patient-info="patientInfo" :nutrition="nutrition"
-                                              :pathologies="pathologies"></target-flows>
+                                <warnings :pathologies="pathologies" @display-bibliography="displayBibliography"></warnings>
+                                <target-flows :patient-info="patientInfo" :nutrition="nutrition" :pathologies="pathologies"
+                                              @display-bibliography="displayBibliography"></target-flows>
                                 <recos :nutrition="nutrition" :pathologies="pathologies"
                                        @display-bibliography="displayBibliography"></recos>
                             </b-card-body>

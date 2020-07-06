@@ -4,16 +4,18 @@
             <p class="mb-1">{{dietOpinionWarning.text}}</p>
         </b-alert>
         <b-alert v-for="warning in warnings" :show="true" :variant="warning.variant" v-bind:key="warning.text">
-            <p class="mb-1">{{warning.text}}</p>
+            <p class="mb-1">{{warning.text}}<biblio-links :sources="warning.sources" @display-bibliography="displayBibliography"></biblio-links></p>
         </b-alert>
     </div>
 </template>
 
 <script>
     import {dietOpinionWarnings} from "../refs-data";
+    import BiblioLinks from "./BiblioLinks";
 
     export default {
         name: "Warnings",
+        components: {BiblioLinks},
         props: {
             pathologies: {
                 type: Array,
@@ -38,6 +40,11 @@
                 return this.pathologies
                     .filter(p => p.warning)
                     .map(p => p.warning);
+            },
+        },
+        methods: {
+            displayBibliography: function (index) {
+                this.$emit('display-bibliography', index);
             },
         },
     }

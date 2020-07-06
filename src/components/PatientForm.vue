@@ -6,7 +6,7 @@
         <b-card-body>
             <form>
                 <div class="form-group form-row mb-1">
-                    <label for="inputHeight" class="col-sm-3 col-form-label">Taille (cm)</label>
+                    <label for="inputHeight" class="col-sm-4 col-form-label">Taille (cm)</label>
                     <div class="col-sm">
                         <input type="number" v-bind:value="height" ref="height" @focus="$event.target.select()"
                                v-on:change="updateHeight" v-on:keyup.enter="$refs.weight.focus()"
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="form-group form-row mb-1">
-                    <label for="inputWeight" class="col-sm-3 col-form-label">Poids</label>
+                    <label for="inputWeight" class="col-sm-4 col-form-label">Poids</label>
                     <div class="col-sm">
                         <input type="number" v-bind:value="weight" ref="weight" @focus="$event.target.select()"
                                v-on:change="updateWeight" v-on:keyup.enter="$refs.bmi.focus()"
@@ -23,13 +23,14 @@
                 </div>
 
                 <div class="form-group form-row mb-1" v-if="bmi > idealBmi">
-                    <label for="inputAdjustedWeight" class="col-sm-3 col-form-label">Poids ajusté</label>
+                    <label for="inputAdjustedWeight" class="col-sm-4 col-form-label">Poids ajusté<biblio-links
+                            :sources="['espen-p52', 'ideal-body-weight-equation']" @display-bibliography="displayBibliography"></biblio-links></label>
                     <div class="col-sm">
                         <input v-bind:value="adjustedWeight" class="form-control" id="inputAdjustedWeight" readonly>
                     </div>
                 </div>
                 <div class="form-group form-row mb-1">
-                    <label for="inputIMC" class="col-sm-3 col-form-label">IMC</label>
+                    <label for="inputIMC" class="col-sm-4 col-form-label">IMC</label>
                     <div class="col-sm">
                         <input v-bind:value="bmi" class="form-control" id="inputIMC" readonly ref="bmi">
                     </div>
@@ -42,9 +43,11 @@
 
 <script>
     import {mapMutations, mapState} from 'vuex'
+    import BiblioLinks from "./BiblioLinks";
 
     export default {
         name: "PatientForm",
+        components: {BiblioLinks},
         computed: {
             ...mapState(['idealBmi', 'patient']),
 
@@ -72,6 +75,9 @@
             updateWeight(evt) {
                 let weight = evt.target.value;
                 this.updatePatientInfo({height: this.height, weight: weight});
+            },
+            displayBibliography: function (index) {
+                this.$emit('display-bibliography', index);
             },
             ...mapMutations(['updatePatientInfo']),
         },

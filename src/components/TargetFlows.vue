@@ -13,13 +13,16 @@
                     <target-flow :cal-target="15" :nutrition="nutrition" :patient-info="patientInfo"/>
                 </li>
                 <li v-if="!hasAnorexia">
-                    <target-flow :cal-target="20" :nutrition="nutrition" :patient-info="patientInfo"/>
+                    <target-flow :cal-target="20" :nutrition="nutrition" :patient-info="patientInfo"
+                                 @display-bibliography="displayBibliography" :sources="['espen-p58']" />
                 </li>
                 <li v-if="!hasAnorexia">
-                    <target-flow :cal-target="25" :nutrition="nutrition" :patient-info="patientInfo"/>
+                    <target-flow :cal-target="25" :nutrition="nutrition" :patient-info="patientInfo"
+                                 @display-bibliography="displayBibliography" :sources="['espen-p58', 'afar-p204']" />
                 </li>
                 <li v-if="!hasAnorexia && !hasObesity">
-                    <target-flow :cal-target="30" :nutrition="nutrition" :patient-info="patientInfo"/>
+                    <target-flow :cal-target="30" :nutrition="nutrition" :patient-info="patientInfo"
+                                 @display-bibliography="displayBibliography" :sources="['afar-p204']" />
                 </li>
             </ul>
         </b-card-body>
@@ -60,7 +63,12 @@
             hasObesity: function () {
                 return this.pathologies.find(p => p.label === pathologieNames.OBESITE);
             },
-        }
+        },
+        methods: {
+            displayBibliography: function (index) {
+                this.$emit('display-bibliography', index);
+            },
+        },
     }
 </script>
 
