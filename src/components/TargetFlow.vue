@@ -1,15 +1,18 @@
 <template>
     <p class="m-0 mb-2">
-        Pour un besoin journalier de <strong>{{ calTarget }}</strong> kcal/kg soit {{ dayEnergy.toFixed(0) }} kcal et
-        {{dayProteins.toFixed(0)}} g de prot&eacute;ines ({{proteinsForWeight.toFixed(1).replace(/[.,]0+$/, "")}} g/kg)
+        Pour un besoin journalier de <strong>{{ calTarget }}</strong> kcal/kg<biblio-links :sources="sources" @display-bibliography="displayBibliography"></biblio-links>
+        soit {{ dayEnergy.toFixed(0) }} kcal et {{dayProteins.toFixed(0)}} g de prot&eacute;ines ({{proteinsForWeight.toFixed(1).replace(/[.,]0+$/, "")}} g/kg)
         <br/>
         &rArr; d&eacute;bit cible=<strong>{{ hourFlowML.toFixed(0) }}</strong> ml/h
     </p>
 </template>
 
 <script>
+    import BiblioLinks from "./BiblioLinks";
+
     export default {
         name: "TargetFlow",
+        components: {BiblioLinks},
         props: {
             calTarget: {
                 type: Number,
@@ -23,6 +26,9 @@
                 type: Object,
                 required: true,
             },
+            sources: {
+                type: Array,
+            }
         },
         computed: {
             hourFlowML: function () {
@@ -40,7 +46,12 @@
             proteinsForWeight: function () {
                 return this.dayProteins / this.patientInfo.adjustedWeight;
             },
-        }
+        },
+        methods: {
+            displayBibliography: function (index) {
+                this.$emit('display-bibliography', index);
+            },
+        },
     }
 </script>
 

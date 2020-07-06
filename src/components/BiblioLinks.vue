@@ -1,6 +1,5 @@
 <template>
-    <span>
-
+    <span v-if="sources">
     <sup v-for="source in normalizedSources" v-bind:key="source">
         <b-button variant="link" class="p-0 biblio-link" size="sm"
                   @click="displayBibliography(source)">
@@ -18,20 +17,26 @@
         props: {
             sources: {
                 type: Array,
-                required: true,
+                required: false,
             },
         },
         computed: {
             normalizedSources: function () {
-                return this.sources.map(sourceId =>
-                    refs.bibliography
-                        .find(b => b.id === sourceId)
-                        .index);
+                return this.sources.map(this.findBiblio)
+                    .filter(source => !!source)
+                    .map(source => source.index);
             }
         },
         methods: {
             displayBibliography: function (index) {
                 this.$emit('display-bibliography', index);
+            },
+            findBiblio: function (sourceId) {
+                let source = refs.bibliography.find(b => b.id === sourceId);
+                if (!source) {
+                    console.error("unknown biblio id: " + sourceId)
+                }
+                return source;
             }
         },
     }
