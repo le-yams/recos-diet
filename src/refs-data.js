@@ -88,13 +88,6 @@ export default {
                     clauses: ["si apports < 1500 kcal/j"],
                     sources: ["tnctav-p2137"],
                 },
-                {
-                    label: "Vit. D3",
-                    quantity: "500000",
-                    unit: "UI",
-                    clauses: ["si le dosage de la vit. D est inférieur à 12.5 ng/ml (ou 50 nmol/l)", "dans la première semaine suivant l'admission"],
-                    sources: ["espen-p66"],
-                },
             ],
         },
         'Parentérale': {
@@ -147,13 +140,6 @@ export default {
                     unit: "ampoule 10ml 2 fois par semaine",
                     clauses: ["en IV"],
                     sources: ["tnctav-p1499", "tnctav-p1735-1736", "bd-pub-medocs-cernevit"],
-                },
-                {
-                    label: "Vit. D3",
-                    quantity: "500000",
-                    unit: "UI",
-                    clauses: ["si le dosage de la vit. D est inférieur à 12.5 ng/ml (ou 50 nmol/l)", "dans la première semaine suivant l'admission"],
-                    sources: ["espen-p66"],
                 },
             ],
         },
