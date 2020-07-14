@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.0](https://gitlab.com/ydisanto/recos-diet/compare/1.16.0...1.17.0) (2020-07-14)
+
+
+### Features
+
+* **biblio:** mise a jour reco Vit. K ([0056e04](https://gitlab.com/ydisanto/recos-diet/commit/0056e04144072fe7b7dfddc9e56d1ac29a5bcbb3))
+* **biblio:** suppression reco générale Vit. D3 ([3881f0d](https://gitlab.com/ydisanto/recos-diet/commit/3881f0d6bb2d861404f7edc38405a472a4b2f2bc))
+* **pathologies:** ajout d'un warning pour l'anorexie ([b981975](https://gitlab.com/ydisanto/recos-diet/commit/b981975748d4193533fb56cb097829a075af70f6))
+
 ## [1.16.0](https://gitlab.com/ydisanto/recos-diet/compare/1.15.0...1.16.0) (2020-07-06)
 
 
