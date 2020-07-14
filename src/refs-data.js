@@ -228,6 +228,11 @@ export default {
                 ],
                 exclusions: ['Alvityl (po/sng)', 'Vit. K']
             },
+            warning: {
+                text: "Démarrer la nutrition seulement après correction des bilans biologiques",
+                sources: [],
+                variant: "danger",
+            },
             dietOpinionWarningLevel: 1,
         },
         {
