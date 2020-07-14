@@ -136,9 +136,9 @@ export default {
                 },
                 {
                     label: "Vit. K",
-                    quantity: "1",
-                    unit: "ampoule 10ml 2 fois par semaine",
-                    clauses: ["en IV"],
+                    quantity: "10",
+                    unit: "mg par semaine",
+                    clauses: ["en IV", "si pas de contre-indication médicale"],
                     sources: ["tnctav-p1499", "tnctav-p1735-1736", "bd-pub-medocs-cernevit"],
                 },
             ],
@@ -226,7 +226,7 @@ export default {
                         sources: ["tnctav-p2737", "md374smani"],
                     },
                 ],
-                exclusions: ['Alvityl (po/sng)']
+                exclusions: ['Alvityl (po/sng)', 'Vit. K']
             },
             dietOpinionWarningLevel: 1,
         },
