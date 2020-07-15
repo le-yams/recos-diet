@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://gitlab.com/ydisanto/recos-diet/compare/1.18.0...1.19.0) (2020-07-15)
+
+
+### Features
+
+* **analytics:** replace clicky with google analytics ([5a0e18e](https://gitlab.com/ydisanto/recos-diet/commit/5a0e18e8ecd6306b53d56010f294efc24ba65d00))
+
 ## [1.18.0](https://gitlab.com/ydisanto/recos-diet/compare/1.17.0...1.18.0) (2020-07-15)
 
 
