@@ -11,7 +11,6 @@
                 <div class="col text-right">
                     <copyright name="Yann D'Isanto" url="https://gitlab.com/ydisanto/recos-diet"></copyright>&nbsp;
                     <licence-badge licence="cc-by-4.0"></licence-badge>
-                    <clicky-analytics site-id="101267359"></clicky-analytics>
                 </div>
             </div>
         </div>
@@ -21,11 +20,10 @@
 <script>
     import Copyright from "./Copyright";
     import LicenceBadge from "./LicenceBadge";
-    import ClickyAnalytics from "./ClickyAnalytics";
 
     export default {
         name: "AppFooter",
-        components: {ClickyAnalytics, Copyright, LicenceBadge},
+        components: {Copyright, LicenceBadge},
     }
 </script>
 
