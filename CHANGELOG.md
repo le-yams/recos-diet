@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.1](https://gitlab.com/ydisanto/recos-diet/compare/1.20.0...1.20.1) (2020-07-21)
+
+
+### Bug Fixes
+
+* **analytics:** put clicky script in index.html ([d035475](https://gitlab.com/ydisanto/recos-diet/commit/d035475b7923e113fd6052cc3a24fb931bfbb0e2))
+
 ## [1.20.0](https://gitlab.com/ydisanto/recos-diet/compare/1.19.0...1.20.0) (2020-07-21)
 
 
