@@ -28,7 +28,6 @@ import VueScrollTo from 'vue-scrollto'
 import Home from "./components/Home";
 import About from "./components/About";
 import RefData from "./components/ref-data/RefData";
-import VueAnalytics from 'vue-analytics';
 
 library.add(faUserInjured)
 library.add(faFire)
@@ -64,11 +63,6 @@ const router = new VueRouter({
         {path: '/refs', component: RefData},
     ]
 })
-
-Vue.use(VueAnalytics, {
-    id: 'UA-172735207-1',
-    router
-});
 
 new Vue({
     render: h => h(App),
