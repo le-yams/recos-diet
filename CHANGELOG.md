@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.0](https://gitlab.com/ydisanto/recos-diet/compare/1.20.1...1.21.0) (2020-07-23)
+
+
+### Features
+
+* **index:** configure to not cache the page ([de2628a](https://gitlab.com/ydisanto/recos-diet/commit/de2628a7e72c17a0aa316f88f092601c9671ad09))
+
 ### [1.20.1](https://gitlab.com/ydisanto/recos-diet/compare/1.20.0...1.20.1) (2020-07-21)
 
 
