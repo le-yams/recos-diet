@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.1](https://gitlab.com/ydisanto/recos-diet/compare/1.21.0...1.21.1) (2020-08-03)
+
+
+### Bug Fixes
+
+* **patient:** poids à 1 décimale ([379b296](https://gitlab.com/ydisanto/recos-diet/commit/379b296e82f0bdb9e776e795aec5bbecc684c74c))
+
 ## [1.21.0](https://gitlab.com/ydisanto/recos-diet/compare/1.20.1...1.21.0) (2020-07-23)
 
 
