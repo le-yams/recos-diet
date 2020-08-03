@@ -16,7 +16,7 @@
                 <div class="form-group form-row mb-1">
                     <label for="inputWeight" class="col-sm-4 col-form-label">Poids</label>
                     <div class="col-sm">
-                        <input type="number" v-bind:value="weight" ref="weight" @focus="$event.target.select()"
+                        <input type="number" step="0.1" v-bind:value="weight" ref="weight" @focus="$event.target.select()"
                                v-on:change="updateWeight" v-on:keyup.enter="$refs.bmi.focus()"
                                class="form-control" id="inputWeight" placeholder="Poids">
                     </div>
