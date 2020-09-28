@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.1](https://gitlab.com/ydisanto/recos-diet/compare/1.22.0...1.22.1) (2020-09-28)
+
+
+### Bug Fixes
+
+* **ci:** add release build for deployment ([8bb3da8](https://gitlab.com/ydisanto/recos-diet/commit/8bb3da8f0249984760166b8ae7403887343e3ef6))
+
 ## [1.22.0](https://gitlab.com/ydisanto/recos-diet/compare/1.21.1...1.22.0) (2020-09-28)
 
 
