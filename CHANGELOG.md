@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://gitlab.com/ydisanto/recos-diet/compare/1.21.1...1.22.0) (2020-09-28)
+
+
+### Features
+
+* **nutrition:** remove product selection caching ([540bb3f](https://gitlab.com/ydisanto/recos-diet/commit/540bb3fbe59b49e645db63e900d933363071237a))
+* **version:** add check for update ([379e3e6](https://gitlab.com/ydisanto/recos-diet/commit/379e3e6fe868515b7753bb7b205a33f7ae985295))
+
 ### [1.21.1](https://gitlab.com/ydisanto/recos-diet/compare/1.21.0...1.21.1) (2020-08-03)
 
 
