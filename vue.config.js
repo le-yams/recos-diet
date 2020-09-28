@@ -1,3 +1,18 @@
+const webpack = require('webpack');
+const fs = require('fs')
+const packageJson = fs.readFileSync('./package.json').toString()
+const version = JSON.parse(packageJson).version || 0
+const outputfilePath = "./public/version.json";
+
+fs.writeFile(
+    outputfilePath,
+    JSON.stringify({version: version}),
+    function (err) {
+        if (err) {
+            return console.error(err);
+        }
+    });
+
 module.exports = {
     pages: {
         index: {
@@ -14,5 +29,17 @@ module.exports = {
             // extracted common chunks and vendor chunks.
             chunks: ['chunk-vendors', 'chunk-common', 'index']
         },
+    },
+    configureWebpack: {
+        output: {
+            filename: '[name].[hash:8].js'
+        },
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env': {
+                    PACKAGE_VERSION: '"' + version + '"'
+                }
+            })
+        ]
     },
 }

@@ -2,9 +2,18 @@ import Vuex from "vuex";
 import refs from "./refs-data";
 import {comparingByLabel} from "./utils";
 
+const secondInMillis = 1000;
+const minute = 60 * secondInMillis;
+const hour = 60 * minute;
+
 export function initStore() {
     return new Vuex.Store({
         state: {
+            appVersion: {
+                current: process.env.PACKAGE_VERSION || '0',
+                checkForUpdateDelay: 20 * minute,
+                updateWarningSleep: 2 * hour,
+            },
             idealBmi: 24.9,
             patient: {
                 height: 170,
@@ -21,6 +30,11 @@ export function initStore() {
             bibliography: {
                 outlinedIndex: 0,
             }
+        },
+        getters: {
+            currentVersion: (state) => {
+                return state.appVersion.current
+            },
         },
         mutations: {
             updatePatientInfo(state, heightAndWeight) {

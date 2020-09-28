@@ -5,7 +5,7 @@ variables:
   RELEASE_IMAGE: "node:lts"
 
   BUILD_DIR: "dist"
-  
+
   NPM_RELEASE_TAG_PREFIX: ""
   NPM_RELEASE_COMMIT_MESSAGE_FORMAT: "[ci skip] release {{currentTag}}"
 
@@ -120,7 +120,6 @@ create-release:
   script:
     - npx standard-version -t "${NPM_RELEASE_TAG_PREFIX}" --releaseCommitMessageFormat "${NPM_RELEASE_COMMIT_MESSAGE_FORMAT}"
     - git push --follow-tags
-  when: manual
   only:
     refs:
       - master
@@ -142,7 +141,6 @@ upload-to-prod:
     - cat $DEPLOY_PROD_KNOWN_HOSTS > ~/.ssh/known_hosts
   script:
     - lftp -c "debug; set net:timeout 5; set net:max-retries 2; set net:reconnect-interval-base 5; set sftp:auto-confirm yes; open -u $DEPLOY_PROD_USER,$DEPLOY_PROD_PASSWORD sftp://$DEPLOY_PROD_HOST ; mirror -Renvp $BUILD_DIR/ recos-diet; bye"
-  when: manual
   only:
     refs:
       - master

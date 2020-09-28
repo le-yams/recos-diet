@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource';
 import Vuex from 'vuex'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
@@ -47,6 +48,7 @@ Vue.component('v-select', vSelect)
 
 Vue.config.productionTip = false
 
+Vue.use(VueResource);
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(BootstrapVue)
