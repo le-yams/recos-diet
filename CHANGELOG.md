@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.2](https://gitlab.com/ydisanto/recos-diet/compare/1.22.1...1.22.2) (2020-09-28)
+
+
+### Bug Fixes
+
+* **ci:** missing artifact on release job ([a35fdb2](https://gitlab.com/ydisanto/recos-diet/commit/a35fdb271be8db5de8f01a09b8a2fd9b47781e2f))
+
 ### [1.22.1](https://gitlab.com/ydisanto/recos-diet/compare/1.22.0...1.22.1) (2020-09-28)
 
 
