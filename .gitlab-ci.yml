@@ -120,6 +120,7 @@ create-release:
   script:
     - npx standard-version -t "${NPM_RELEASE_TAG_PREFIX}" --releaseCommitMessageFormat "${NPM_RELEASE_COMMIT_MESSAGE_FORMAT}"
     - git push --follow-tags
+    - npm run build --prod
   only:
     refs:
       - master
