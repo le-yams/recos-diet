@@ -267,7 +267,7 @@ export default {
                         quantity: "500",
                         unit: "mg/jour",
                         clauses: [],
-                        sources: ["sfncm-covid-rea-p2"],
+                        sources: ["sfncm-covid-rea-p2", "sfncm-prev-sri-covid-p2"],
                     },
                 ],
                 'Parentérale': [
@@ -276,7 +276,7 @@ export default {
                         quantity: "500",
                         unit: "mg/j",
                         clauses: [],
-                        sources: ["sfncm-prev-sri-covid-p2"],
+                        sources: ["sfncm-covid-rea-p2", "sfncm-prev-sri-covid-p2"],
                     },],
             },
         },
