@@ -2,6 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <disclaimer></disclaimer>
+    </div>
     <div class="row">
       <div class="col-4">
         <div class="container-fluid pr-0">
