@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.24.1](https://gitlab.com/ydisanto/recos-diet/compare/1.24.0...1.24.1) (2020-09-29)
+
+
+### Bug Fixes
+
+* **onglets:** correction bug d'affichage ([96e4dfb](https://gitlab.com/ydisanto/recos-diet/commit/96e4dfbe18086def2a955bd21cd1400d7bde7bd4))
+
 ## [1.24.0](https://gitlab.com/ydisanto/recos-diet/compare/1.23.0...1.24.0) (2020-09-29)
 
 
