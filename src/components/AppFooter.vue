@@ -9,7 +9,7 @@
           </router-link>
         </div>
         <div class="col text-right">
-          <app-version></app-version>&nbsp;
+          <app-version url="https://gitlab.com/ydisanto/recos-diet/-/blob/master/CHANGELOG.md"></app-version>&nbsp;
           <copyright name="Yann D'Isanto" url="https://gitlab.com/ydisanto/recos-diet"></copyright>&nbsp;
           <licence-badge licence="cc-by-4.0"></licence-badge>
         </div>

@@ -1,6 +1,7 @@
 <template>
   <b-badge variant="secondary">
-    <span>{{ $store.getters.currentVersion }}</span>
+    <span v-if="!url">{{ $store.getters.currentVersion }}</span>
+    <a v-if="url" :href="url">{{ $store.getters.currentVersion }}</a>
   </b-badge>
 </template>
 
@@ -10,6 +11,12 @@ import {mapState} from "vuex";
 
 export default {
   name: "AppVersion",
+  props: {
+    url: {
+      type: String,
+
+    },
+  },
   data: function () {
     return {
       checkForUpdateIntervalId: null,
@@ -73,5 +80,12 @@ export default {
 </script>
 
 <style scoped>
+a {
+  color: #fff !important;
+  text-decoration: none !important;
+}
 
+a:hover {
+  color: goldenrod !important;
+}
 </style>
