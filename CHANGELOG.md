@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.24.0](https://gitlab.com/ydisanto/recos-diet/compare/1.23.0...1.24.0) (2020-09-29)
+
+
+### Features
+
+* **footer:** ajout d'un lien vers le changelog ([6bda919](https://gitlab.com/ydisanto/recos-diet/commit/6bda9197af47692ee225c50b3c18f50405868808))
+
+
+### Bug Fixes
+
+* **biblio:** correction auto-scroll sur click source biblio ([21c9c38](https://gitlab.com/ydisanto/recos-diet/commit/21c9c38dbc4622b115ee048d2f27c91b7ddccd39))
+
 ## [1.23.0](https://gitlab.com/ydisanto/recos-diet/compare/1.22.2...1.23.0) (2020-09-29)
 
 
