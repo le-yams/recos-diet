@@ -8,8 +8,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <p class="mb-0">{{reco.label}}: {{reco.quantity}} {{reco.unit}}
-                            <biblio-links :sources="reco.sources"
-                                          @display-bibliography="displayBibliography"></biblio-links>
+                            <biblio-links :sources="reco.sources"></biblio-links>
                         </p>
                     </div>
                     <div class="row">
@@ -73,9 +72,6 @@
             },
         },
         methods: {
-            displayBibliography: function (index) {
-                this.$emit('display-bibliography', index);
-            },
             displayableCausesOf(reco) {
                 let excluded = reco.excludeClauses;
                 if (excluded) {

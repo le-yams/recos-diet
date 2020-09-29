@@ -66,6 +66,8 @@ const router = new VueRouter({
     ]
 })
 
+export const bus = new Vue();
+
 new Vue({
     render: h => h(App),
     store,

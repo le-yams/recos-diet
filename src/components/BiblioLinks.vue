@@ -11,6 +11,8 @@
 
 <script>
     import refs from "../refs-data";
+    import {bus} from "@/main";
+    import {DISPLAY_BIBLIOGRAPHY} from "@/bus-events";
 
     export default {
         name: "BiblioLinks",
@@ -29,7 +31,7 @@
         },
         methods: {
             displayBibliography: function (index) {
-                this.$emit('display-bibliography', index);
+              bus.$emit(DISPLAY_BIBLIOGRAPHY, index);
             },
             findBiblio: function (sourceId) {
                 let source = refs.bibliography.find(b => b.id === sourceId);

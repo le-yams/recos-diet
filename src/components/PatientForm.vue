@@ -24,7 +24,8 @@
 
                 <div class="form-group form-row mb-1" v-if="bmi > idealBmi">
                     <label for="inputAdjustedWeight" class="col-sm-4 col-form-label">Poids ajusté<biblio-links
-                            :sources="['espen-p52', 'ideal-body-weight-equation']" @display-bibliography="displayBibliography"></biblio-links></label>
+                            :sources="['espen-p52', 'ideal-body-weight-equation']"></biblio-links>
+                    </label>
                     <div class="col-sm">
                         <input v-bind:value="adjustedWeight" class="form-control" id="inputAdjustedWeight" readonly>
                     </div>
