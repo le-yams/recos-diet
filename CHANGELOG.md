@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.23.0](https://gitlab.com/ydisanto/recos-diet/compare/1.22.2...1.23.0) (2020-09-29)
+
+
+### Features
+
+* **sri:** lien d'aide pour la correction des troubles métaboliques ([bf9ec58](https://gitlab.com/ydisanto/recos-diet/commit/bf9ec58e78273218ca51bff0b763f8ec53d9e38e))
+
+
+### Bug Fixes
+
+* **recos:** correction clause Zinc ([fdd1b59](https://gitlab.com/ydisanto/recos-diet/commit/fdd1b599be186df6698da44bbc85f68e4a62f257))
+* **recos:** correction sources bibliographiques pour le covid ([96e6d4c](https://gitlab.com/ydisanto/recos-diet/commit/96e6d4ced8756eb0b8416d153e40fa4b41a91b29))
+
 ### [1.22.2](https://gitlab.com/ydisanto/recos-diet/compare/1.22.1...1.22.2) (2020-09-28)
 
 
