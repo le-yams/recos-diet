@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.0](https://gitlab.com/ydisanto/recos-diet/compare/1.26.0...1.27.0) (2020-10-02)
+
+
+### Features
+
+* **pathologies:** renommage de 'cirrothique' en 'cirrhose' ([510cf3c](https://gitlab.com/ydisanto/recos-diet/commit/510cf3cf6d59946a3b11bdd996face72a45d6f6b))
+
 ## [1.26.0](https://gitlab.com/ydisanto/recos-diet/compare/1.25.0...1.26.0) (2020-10-02)
 
 
