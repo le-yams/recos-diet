@@ -1,7 +1,15 @@
 <template>
     <b-card no-body>
         <b-card-header>
-            <font-awesome-icon icon="bullseye"/>&nbsp;Débits cible
+            <span><font-awesome-icon icon="bullseye"/>&nbsp;Débits cible</span>
+
+          <span class="strip p-aigue ml-5">phase aigu&euml;</span>
+          <span class="strip p-aigue"><font-awesome-icon icon="angle-double-right"/></span>
+          <span class="strip p-gradient"><strong>25</strong> kcal</span>
+          <span class="strip p-rehab"><font-awesome-icon icon="angle-double-right"/></span>
+          <span class="strip p-rehab">phase de r&eacute;habilitation</span>
+          <span class="strip p-rehab"><font-awesome-icon icon="angle-double-right"/></span>
+          <span class="strip p-rehab"><strong>30</strong> kcal</span>
         </b-card-header>
         <b-card-title></b-card-title>
         <b-card-body class="p-1">
@@ -65,5 +73,21 @@
 </script>
 
 <style scoped>
+
+.strip {
+  padding: 1em 0.5em;
+}
+
+.p-aigue {
+  background-color: #f8d7da;
+}
+
+.p-gradient {
+  background: linear-gradient(to right, #f8d7da, #d4edda);
+}
+
+.p-rehab {
+  background-color: #d4edda;
+}
 
 </style>

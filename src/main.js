@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {
+    faAngleDoubleRight,
     faBalanceScale,
     faBookMedical,
     faBullseye,
@@ -42,6 +43,7 @@ library.add(faStickyNote)
 library.add(faLongArrowAltDown)
 library.add(faBalanceScale)
 library.add(faSmile)
+library.add(faAngleDoubleRight)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('v-select', vSelect)
 
