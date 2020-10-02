@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.25.0](https://gitlab.com/ydisanto/recos-diet/compare/1.24.1...1.25.0) (2020-10-02)
+
+
+### Features
+
+* **débits:** indication de la progression des phases ([93abdd4](https://gitlab.com/ydisanto/recos-diet/commit/93abdd48519bc3cdb7903af1d023b713d2d1972f))
+
 ### [1.24.1](https://gitlab.com/ydisanto/recos-diet/compare/1.24.0...1.24.1) (2020-09-29)
 
 
