@@ -19,7 +19,7 @@ export const productsLabel = {
 
 export const pathologieNames = {
     ANOREXIE_MENTALE: 'Anorexie mentale',
-    CIRRHOTIQUE: 'Cirrhotique',
+    CIRRHOTIQUE: 'Cirrhose',
     COVID_19: 'COVID-19',
     CVVHDF: 'EER continue',
     DENUTRITION_SRI: 'Dénutrition-SRI',
