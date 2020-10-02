@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.0](https://gitlab.com/ydisanto/recos-diet/compare/1.25.0...1.26.0) (2020-10-02)
+
+
+### Features
+
+* **covid:** déplacement du message pour la correction des troubles métaboliques ([75b1ac3](https://gitlab.com/ydisanto/recos-diet/commit/75b1ac3f1f63d0a8b1df0809685c37f6fb6859e4))
+
 ## [1.25.0](https://gitlab.com/ydisanto/recos-diet/compare/1.24.1...1.25.0) (2020-10-02)
 
 
