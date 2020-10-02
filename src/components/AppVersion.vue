@@ -35,6 +35,7 @@ export default {
         this.checkForUpdate()
       }, this.checkForUpdateDelay);
       console.log("new interval set with handle id=" + this.checkForUpdateIntervalId + " and delay=" + this.checkForUpdateDelay);
+      this.checkForUpdate();
       console.groupEnd()
     },
     checkForUpdate() {
