@@ -279,6 +279,11 @@ export default {
                         sources: ["sfncm-covid-rea-p2", "sfncm-prev-sri-covid-p2"],
                     },],
             },
+            warning: {
+                text: 'Pour une aide à la correction des troubles métaboliques cf',
+                sources: ['sfncm-prev-sri-covid-p2'],
+                variant: 'warning',
+            },
         },
         {
             label: pathologieNames.CVVHDF,
