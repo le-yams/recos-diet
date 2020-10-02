@@ -45,23 +45,13 @@
         </b-card>
       </div>
     </div>
-    <div class="row mt-5">
-      <b-alert show variant="warning">
-        <p>
-          Pour une aide &agrave; la correction des troubles m&eacute;taboliques cf
-          <biblio-links :sources="['sfncm-prev-sri-covid-p2']"></biblio-links>.
-        </p>
-      </b-alert>
-    </div>
   </div>
 </template>
 
 <script>
-import BiblioLinks from "@/components/BiblioLinks";
 
 export default {
   name: "Sri",
-  components: {BiblioLinks},
 }
 </script>
 
