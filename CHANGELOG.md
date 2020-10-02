@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.29.0](https://gitlab.com/ydisanto/recos-diet/compare/1.28.0...1.29.0) (2020-10-02)
+
+
+### Features
+
+* **update-check:** vérification d'une nouvelle version au lancement de la page ([f254170](https://gitlab.com/ydisanto/recos-diet/commit/f254170c9a5bc90ea2390cc39ca3d3fe28645ec7))
+
 ## [1.28.0](https://gitlab.com/ydisanto/recos-diet/compare/1.27.0...1.28.0) (2020-10-02)
 
 
