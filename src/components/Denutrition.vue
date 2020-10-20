@@ -26,7 +26,7 @@
                     </b-card-body>
                     <b-list-group flush>
                         <b-list-group-item>Perte de poids &ge; 5 &percnt; en 1 mois ou &ge; 10 &percnt; en 6 mois ou
-                            &ge; 10 &percnt; par rapport au poids habituel avant le d&egrave;but de la maladie.
+                            &ge; 10 &percnt; par rapport au poids habituel avant le d&eacute;but de la maladie.
                         </b-list-group-item>
                         <b-list-group-item>IMC &lt; 18,5 kg/m.</b-list-group-item>
                         <b-list-group-item>R&eacute;duction quantifi&eacute;e de la masse musculaire et/ou de la
@@ -50,7 +50,7 @@
                         <b-list-group-item>Absorption r&eacute;duite (maldigestion/malabsorption).</b-list-group-item>
                         <b-list-group-item>Situation d'agression (hypercatabolisme prot&egrave;ique avec ou sans
                             syndrome inflammatoire) : pathologie aigu&euml; ou pathologie chronique
-                            &egrave;volutive ou pathologie maligne &egrave;volutive.
+                            &eacute;volutive ou pathologie maligne &eacute;volutive.
                         </b-list-group-item>
                     </b-list-group>
                 </b-card>
@@ -93,7 +93,7 @@
                         <b-list-group-item>Perte de poids &ge; 5 &percnt; en 1 mois ou &ge; 10 &percnt; en 6 mois ou
                             &ge; 10 &percnt; par rapport au poids habituel avant le d&eacute;but de la maladie.
                         </b-list-group-item>
-                        <b-list-group-item>Albumin&egrave;mie &gt; 30 g/L et &lt; 35 g/L.</b-list-group-item>
+                        <b-list-group-item>Albumin&eacute;mie &gt; 30 g/L et &lt; 35 g/L.</b-list-group-item>
                     </b-list-group>
                 </b-card>
             </div>
@@ -118,7 +118,7 @@
             <div class="col">
                 <b-card>
                     <b-card-body>
-                        <b-card-title>D&egrave;nutrition s&eacute;v&eacute;re</b-card-title>
+                        <b-card-title>D&eacute;nutrition s&eacute;v&eacute;re</b-card-title>
                         <b-card-sub-title>(1 seul crit&egrave;re suffit)</b-card-sub-title>
                     </b-card-body>
                     <b-list-group flush>
@@ -133,7 +133,7 @@
 
         <div class="row mt-5">
             <span>Source:</span>
-            <a :href="sourceUrl">Fiche outil pour le diagnostic de la d&eacute;nutrition de l'enfant et de l'adulte.</a>
+            <a :href="sourceUrl" class="pl-1">Fiche outil pour le diagnostic de la d&eacute;nutrition de l'enfant et de l'adulte.</a>
         </div>
 
     </div>
