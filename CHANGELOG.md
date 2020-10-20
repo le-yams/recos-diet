@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.30.0](https://gitlab.com/ydisanto/recos-diet/compare/1.29.0...1.30.0) (2020-10-20)
+
+
+### Features
+
+* **recos:** ajout vitamine D pour covid-19 ([4f8cf9d](https://gitlab.com/ydisanto/recos-diet/commit/4f8cf9d8feff44eeffdc23ce2da9b51506b69dfc)), closes [#34](https://gitlab.com/ydisanto/recos-diet/issues/34)
+
+
+### Bug Fixes
+
+* **denutrition:** correction d'accentuations ([6d17827](https://gitlab.com/ydisanto/recos-diet/commit/6d17827f950cc3f5871759b8db1f224cc96474b9)), closes [#33](https://gitlab.com/ydisanto/recos-diet/issues/33)
+
 ## [1.29.0](https://gitlab.com/ydisanto/recos-diet/compare/1.28.0...1.29.0) (2020-10-02)
 
 
