@@ -269,6 +269,16 @@ export default {
                         clauses: [],
                         sources: ["sfncm-covid-rea-p2", "sfncm-prev-sri-covid-p2"],
                     },
+                    {
+                        label: "Vit. D",
+                        quantity: "",
+                        unit: "",
+                        clauses: [
+                            "si age >= 60 ans : doser 25 OHD et si carence administrer 1/2 ampoule de VIT D3 200.000UI/2ml (100.000 UI) ",
+                            "si age < 60 ans : 3 gouttes d'Adrigyl/j, prescription hors livret (800 à 1000 UI/jour)"
+                        ],
+                        sources: ["com-ac-med-vitd-covid19"],
+                    },
                 ],
                 'Parentérale': [
                     {
@@ -556,6 +566,12 @@ export default {
             index: 25,
             label: 'Peterson CM, Thomas DM, Blackburn GL, Heymsfield SB. Universal equation for estimating ideal body weight and body weight at any BMI. Am J Clin Nutr 2016;103:1197-203',
             url: 'http://refhub.elsevier.com/S0261-5614(18)32432-4/sref14',
+        },
+        {
+            id: "com-ac-med-vitd-covid19",
+            index: 26,
+            label: 'Communiqué de l’Académie nationale de Médecine : Vitamine D et Covid-19',
+            url: 'http://www.academie-medecine.fr/communique-de-lacademie-nationale-de-medecine-vitamine-d-et-covid-19',
         },
 
     ],

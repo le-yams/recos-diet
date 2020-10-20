@@ -7,12 +7,12 @@
             <div class="row" v-for="reco in recommendations" v-bind:key="reco.label">
                 <div class="container-fluid">
                     <div class="row">
-                        <p class="mb-0">{{reco.label}}: {{reco.quantity}} {{reco.unit}}
+                        <p class="mb-0 mt-1">{{reco.label}}: {{reco.quantity}} {{reco.unit}}
                             <biblio-links :sources="reco.sources"></biblio-links>
                         </p>
                     </div>
                     <div class="row">
-                        <ul v-if="displayableCausesOf(reco).length > 0" class="font-italic font-weight-light">
+                        <ul v-if="displayableCausesOf(reco).length > 0" class="font-italic font-weight-light mb-0">
                             <li v-for="clause in displayableCausesOf(reco)" v-bind:key="clause">{{clause}}</li>
                         </ul>
                     </div>
