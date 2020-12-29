@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col">
           Site &eacute;labor&eacute; en partenariat avec
-          <router-link to="/about" href="about.html">l'&eacute;quipe di&eacute;t&eacute;tique du
+          <router-link to="/about">l'&eacute;quipe di&eacute;t&eacute;tique du
             service de r&eacute;animation du CHU de Toulouse
           </router-link>
         </div>
