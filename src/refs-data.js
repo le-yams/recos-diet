@@ -274,8 +274,10 @@ export default {
                         quantity: "",
                         unit: "",
                         clauses: [
-                            "si age >= 60 ans : doser 25 OHD et si carence administrer 1/2 ampoule de VIT D3 200.000UI/2ml (100.000 UI) ",
-                            "si age < 60 ans : 3 gouttes d'Adrigyl/j, prescription hors livret (800 à 1000 UI/jour)"
+                            "si age &ge; 60 ans : doser 25 OHD",
+                            "&nbsp;&nbsp;&nbsp;&nbsp;&rArr; si carence et IMC &lt; 30 : doser 25 OHD + administrer 2 ampoules de ZYMA D 50.000UI/amp (100.000 UI) à J0 puis à J7",
+                            "&nbsp;&nbsp;&nbsp;&nbsp;&rArr; si carence et IMC &ge; 30 : doser 25 OHD + administrer 1 ampoules de VIT D3 200.000UI/amp (200.000 UI) à J0 puis à J7",
+                            "si age &lt; 60 ans : 3 gouttes d'Adrigyl/j, prescription hors livret (800 à 1000 UI/jour)"
                         ],
                         sources: ["com-ac-med-vitd-covid19"],
                     },
