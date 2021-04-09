@@ -7,6 +7,9 @@
             Il ne tient cependant pas compte de l'ensemble des paramètres médicaux.
             <br/>
             Aussi, en cas de doute, <strong>n'h&eacute;sitez pas &agrave; solliciter l'avis de votre di&eacute;t&eacute;ticien(ne)</strong>.
+            <br/>
+            <b-icon-exclamation-triangle-fill></b-icon-exclamation-triangle-fill>
+            Ces recommendations ne sont valables que pour les <strong>adultes</strong>.
         </small>
     </b-alert>
 </template>
