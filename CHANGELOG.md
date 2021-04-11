@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.32.0](https://gitlab.com/ydisanto/recos-diet/compare/1.31.0...1.32.0) (2021-04-11)
+
+
+### Features
+
+* **recos:** mise à jour des clauses pour  VitD enterale pour  covid19 ([81c1714](https://gitlab.com/ydisanto/recos-diet/commit/81c1714446600f21a47488625a463935fa7dfea5))
+
 ## [1.31.0](https://gitlab.com/ydisanto/recos-diet/compare/1.30.2...1.31.0) (2021-04-11)
 
 
