@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.31.0](https://gitlab.com/ydisanto/recos-diet/compare/1.30.2...1.31.0) (2021-04-11)
+
+
+### Features
+
+* **disclaimer:** ajout de la mention pour les adultes ([42659c9](https://gitlab.com/ydisanto/recos-diet/commit/42659c97181817f604bde9c54cd13ac9a0b07472))
+
 ### [1.30.2](https://gitlab.com/ydisanto/recos-diet/compare/1.30.1...1.30.2) (2020-12-29)
 
 
