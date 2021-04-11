@@ -7,7 +7,7 @@ variables:
   BUILD_DIR: "dist"
 
   NPM_RELEASE_TAG_PREFIX: ""
-  NPM_RELEASE_COMMIT_MESSAGE_FORMAT: "[ci skip] release {{currentTag}}"
+  NPM_RELEASE_COMMIT_MESSAGE_FORMAT: "release {{currentTag}}"
 
 
 stages:
