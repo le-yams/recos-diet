@@ -13,7 +13,7 @@
                     </div>
                     <div class="row">
                         <ul v-if="displayableCausesOf(reco).length > 0" class="font-italic font-weight-light mb-0">
-                            <li v-for="clause in displayableCausesOf(reco)" v-bind:key="clause">{{clause}}</li>
+                            <li v-for="clause in displayableCausesOf(reco)" v-bind:key="clause" v-html="clause"></li>
                         </ul>
                     </div>
                 </div>
