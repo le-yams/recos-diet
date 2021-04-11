@@ -7,7 +7,7 @@ variables:
   BUILD_DIR: "dist"
 
   NPM_RELEASE_TAG_PREFIX: ""
-  NPM_RELEASE_COMMIT_MESSAGE_FORMAT: "release {{currentTag}}"
+  NPM_RELEASE_COMMIT_MESSAGE_FORMAT: "[ci skip] release {{currentTag}}"
 
 
 stages:
@@ -127,9 +127,11 @@ create-release:
       - $BUILD_DIR
       - reports/
     expire_in: 1 day
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "master"'
-      when: manual
+  only:
+    refs:
+      - master
+  when: manual
+  allow_failure: false
 
 
 ###############################################################################################
@@ -148,5 +150,8 @@ upload-to-prod:
     - cat $DEPLOY_PROD_KNOWN_HOSTS > ~/.ssh/known_hosts
   script:
     - lftp -c "debug; set net:timeout 5; set net:max-retries 2; set net:reconnect-interval-base 5; set sftp:auto-confirm yes; open -u $DEPLOY_PROD_USER,$DEPLOY_PROD_PASSWORD sftp://$DEPLOY_PROD_HOST ; mirror -Renvp $BUILD_DIR/ recos-diet; bye"
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "master" && $CI_COMMIT_TAG && $DEPLOY_PROD_ENABLED'
+  only:
+    refs:
+      - master
+  when: on_success
+  
