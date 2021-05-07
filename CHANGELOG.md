@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.33.0](https://gitlab.com/ydisanto/recos-diet/compare/1.32.3...1.33.0) (2021-05-07)
+
+
+### Features
+
+* **produits:** ajout des indications dans la page des références ([883617e](https://gitlab.com/ydisanto/recos-diet/commit/883617edcc45392420e529ead025f8a7521d531e))
+
+
+### Bug Fixes
+
+* **recos:** mise à jour covid ([61878d4](https://gitlab.com/ydisanto/recos-diet/commit/61878d4d0887f22d84fb00a9021a9fad3b919ffe))
+
 ### [1.32.3](https://gitlab.com/ydisanto/recos-diet/compare/1.32.2...1.32.3) (2021-04-11)
 
 ### [1.32.2](https://gitlab.com/ydisanto/recos-diet/compare/1.32.1...1.32.2) (2021-04-11)
