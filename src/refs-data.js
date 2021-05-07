@@ -50,32 +50,38 @@ export default {
             products: [
                 {
                     label: productsLabel.NUTRISON_PROTEIN_PLUS_ENERGY_MULTIFIBRES,
+                    indications: "Produit hypercalorique hyperprotidique avec fibres solubles et insolubles destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés ou nécessitant une réduction des apports hydriques. A utiliser à partir de 1 mois de séjour en réa ou sur avis médical et diététique.",
                     kcalPerLiter: 1530,
                     proteinsGramsPerLiter: 75,
                 },
                 {
                     label: productsLabel.PEPTAMEN_HN,
+                    indications: "Nutrition semi-élémentaire destinés aux patients avec une fonction digestive altérée (syndrome de malabsorption, grêle court).",
                     kcalPerLiter: 1330,
                     proteinsGramsPerLiter: 66,
                 },
                 {
                     label: productsLabel.PEPTISORB,
+                    indications: "Nutriton semi-élémentaire hypolipidique indiquée en cas de malaborption/maldigestion (chylothorax).",
                     kcalPerLiter: 1000,
                     proteinsGramsPerLiter: 40,
                 },
                 {
                     label: productsLabel.SONDALIS_HP_ENERGY,
+                    indications: "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés.",
                     kcalPerLiter: 1500,
                     proteinsGramsPerLiter: 75,
                     default: true,
                 },
                 {
                     label: productsLabel.SONDALIS_JUNIOR_STANDARD,
+                    indications: "Indiqué pour les patients souffrant d'anorexie mentale.",
                     kcalPerLiter: 1000,
                     proteinsGramsPerLiter: 20,
                 },
                 {
                     label: productsLabel.SONDALIS_T_ENERGY,
+                    indications: "Produit destiné aux patients souffrant de diarrhées non infectieuses (à base de gomme de guar partiellement hydrolysée).",
                     kcalPerLiter: 1550,
                     proteinsGramsPerLiter: 60,
                 },
@@ -94,27 +100,32 @@ export default {
             products: [
                 {
                     label: productsLabel.MEDNUTRIFLEX_OMEGA,
+                    indications: "Produit réservé aux patients de SMC et hospitalisation traditionnelle, Alimentation <strong><u>AVEC</u></strong> électrolytes. Sur avis médical/diet.",
                     kcalPerLiter: 1010,
                     proteinsGramsPerLiter: 38,
                 },
                 {
                     label: productsLabel.OLIMEL_N7E,
+                    indications: "Produit réservé aux patients de SMC et hospitalisation traditionnelle, Alimentation <strong><u>AVEC</u></strong> électrolytes. Sur avis médical/diet.",
                     kcalPerLiter: 1140,
                     proteinsGramsPerLiter: 44.3,
                 },
                 {
                     label: productsLabel.OLIMEL_N9E,
+                    indications: "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés; Alimentation <strong><u>AVEC</u></strong> électrolytes. Sur avis médical/diet.",
                     kcalPerLiter: 1070,
                     proteinsGramsPerLiter: 56.9,
                 },
                 {
                     label: productsLabel.REANUTRIFLEX_OMEGA,
+                    indications: " Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés; Alimentation <strong><u>SANS</u></strong> électrolytes.",
                     kcalPerLiter: 1180,
                     proteinsGramsPerLiter: 56,
                     default: true,
                 },
                 {
                     label: productsLabel.SMOKABIVEN_PROTEIN,
+                    indications: "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés. Alimentation <strong><u>SANS</u></strong> électrolytes. Sur avis médical/diet (EER, patient obèse en phase aiguë).",
                     kcalPerLiter: 889,
                     proteinsGramsPerLiter: 65.5,
                 },
