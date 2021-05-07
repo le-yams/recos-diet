@@ -16,8 +16,8 @@ import {
     faDisease,
     faFire,
     faHeartbeat,
-    faLongArrowAltDown,
-    faPills,
+    faLongArrowAltDown, faMinusSquare,
+    faPills, faPlus, faPlusSquare,
     faSmile,
     faStickyNote,
     faUserInjured,
@@ -37,6 +37,9 @@ library.add(faHeartbeat)
 library.add(faUtensils)
 library.add(faBullseye)
 library.add(faPills)
+library.add(faPlus)
+library.add(faPlusSquare)
+library.add(faMinusSquare)
 library.add(faDisease)
 library.add(faBookMedical)
 library.add(faStickyNote)
