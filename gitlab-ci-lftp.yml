@@ -1,0 +1,123 @@
+variables:
+  LFTP_IMAGE: "yanndisanto/lftp-ssh"
+  LFTP_SRC: "public"
+  LFTP_DEST: "."
+  LFTP_MIRROR_ARGS: "set net:timeout 5; set net:max-retries 2; set net:reconnect-interval-base 5; set sftp:auto-confirm yes;"
+
+  # default production ref name (pattern)
+  PROD_REF: '/^master$/'
+  # default integration ref name (pattern)
+  INTEG_REF: '/^develop$/'
+
+
+
+stages:
+  - deploy
+  - production
+
+
+.lftp-scripts: &lftp-scripts |
+  # BEGSCRIPT
+  set -e
+
+  function log_info() {
+      echo -e "[\\e[1;94mINFO\\e[0m] $*"
+  }
+
+  function log_warn() {
+      echo -e "[\\e[1;93mWARN\\e[0m] $*"
+  }
+
+  function log_error() {
+      echo -e "[\\e[1;91mERROR\\e[0m] $*"
+  }
+
+  function assert_defined() {
+    if [[ -z "$1" ]]
+    then
+      log_error "$2"
+      exit 1
+    fi
+  }
+
+  function lftp_mirror() {
+    host=$1
+    username=$2
+    password=$3
+    src=$4
+    dest=$5
+
+    mkdir -p ~/.ssh
+    ssh-keyscan -H ${host} >> ~/.ssh/known_hosts
+
+    lftp -c "${TRACE:+debug;} ${LFTP_MIRROR_ARGS} open -u ${username},${password} sftp://${host} ; mirror -Renvp ${src}/ ${dest}; bye"
+  }
+
+  # ENDSCRIPT
+
+.lftp-base:
+  image: $LFTP_IMAGE
+  stage: deploy
+  script:
+    - *lftp-scripts
+    - assert_defined "${ENV_HOST}" "unspecified host"
+    - assert_defined "${ENV_USERNAME}" "unspecified username"
+    - assert_defined "${ENV_PASSWORD}" "unspecified password"
+    - assert_defined "${ENV_SRC}" "unspecified source"
+    - assert_defined "${ENV_DEST}" "unspecified target"
+    - lftp_mirror "${ENV_HOST}" "${ENV_USERNAME}" "${ENV_PASSWORD}" "${ENV_SRC}" "${ENV_DEST}"
+
+lftp-integration:
+  extends: .lftp-base
+  before_script:
+    - ENV_HOST="${LFTP_INTEGRATION_HOST:-$LFTP_HOST}"
+    - ENV_USERNAME="${LFTP_INTEGRATION_USERNAME:-$LFTP_USERNAME}"
+    - ENV_PASSWORD="${LFTP_INTEGRATION_PASSWORD:-$LFTP_PASSWORD}"
+    - ENV_SRC="${LFTP_INTEGRATION_SRC:-$LFTP_SRC}"
+    - ENV_DEST="${LFTP_INTEGRATION_DEST:-$LFTP_DEST}"
+  environment:
+    name: integration
+  rules:
+    # exclude merge requests
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    # on integration branch(es) : auto
+    - if: '$CI_COMMIT_REF_NAME =~ $INTEG_REF && $LFTP_INTEGRATION_ENABLED'
+
+lftp-staging:
+  extends: .lftp-base
+  before_script:
+    - ENV_HOST="${LFTP_STAGING_HOST:-$LFTP_HOST}"
+    - ENV_USERNAME="${LFTP_STAGING_USERNAME:-$LFTP_USERNAME}"
+    - ENV_PASSWORD="${LFTP_STAGING_PASSWORD:-$LFTP_PASSWORD}"
+    - ENV_SRC="${LFTP_STAGING_SRC:-$LFTP_SRC}"
+    - ENV_DEST="${LFTP_STAGING_DEST:-$LFTP_DEST}"
+  environment:
+    name: staging
+  rules:
+    # exclude merge requests
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    # on production branch(es) : auto
+    - if: '$CI_COMMIT_REF_NAME =~ $PROD_REF && $LFTP_STAGING_ENABLED'
+
+lftp-production:
+  extends: .lftp-base
+  stage: production
+  before_script:
+    - ENV_HOST="${LFTP_PROD_HOST:-$LFTP_HOST}"
+    - ENV_USERNAME="${LFTP_PROD_USERNAME:-$LFTP_USERNAME}"
+    - ENV_PASSWORD="${LFTP_PROD_PASSWORD:-$LFTP_PASSWORD}"
+    - ENV_SRC="${LFTP_PROD_SRC:-$LFTP_SRC}"
+    - ENV_DEST="${LFTP_PROD_DEST:-$LFTP_DEST}"
+  environment:
+    name: production
+  rules:
+    # exclude merge requests
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    # on production branch(es) and LFTP_PROD_AUTO is set : auto
+    - if: '$CI_COMMIT_REF_NAME =~ $PROD_REF && $LFTP_PROD_AUTO'
+    # on production branch(es): manual
+    - if: '$CI_COMMIT_REF_NAME =~ $PROD_REF'
+      when: manual

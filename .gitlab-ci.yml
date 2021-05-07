@@ -1,3 +1,5 @@
+include: 'gitlab-ci-lftp.yml'
+
 variables:
   # Default docker image for Node
   NODE_IMAGE: "node:lts-alpine"
@@ -5,6 +7,8 @@ variables:
   RELEASE_IMAGE: "node:lts"
 
   BUILD_DIR: "dist"
+  LFTP_SRC: "dist"
+  LFTP_STAGING_ENABLED: "true"
 
   NPM_RELEASE_TAG_PREFIX: ""
   NPM_RELEASE_COMMIT_MESSAGE_FORMAT: "[ci skip] release {{currentTag}}"
@@ -12,8 +16,9 @@ variables:
 
 stages:
   - build
-  - release
   - deploy
+  - release
+  - production
 
 
 .internal-scripts: &internal-scripts |
@@ -132,26 +137,3 @@ create-release:
       - master
   when: manual
   allow_failure: false
-
-
-###############################################################################################
-#                                      deploy stage:                                          #
-#                                        - upload-to-prod                                     #
-###############################################################################################
-upload-to-prod:
-  stage: deploy
-  image: alpine:latest
-  environment:
-    name: prod
-  before_script:
-    - apk --no-cache add lftp openssh
-    - lftp --version
-    - mkdir -p ~/.ssh
-    - cat $DEPLOY_PROD_KNOWN_HOSTS > ~/.ssh/known_hosts
-  script:
-    - lftp -c "debug; set net:timeout 5; set net:max-retries 2; set net:reconnect-interval-base 5; set sftp:auto-confirm yes; open -u $DEPLOY_PROD_USER,$DEPLOY_PROD_PASSWORD sftp://$DEPLOY_PROD_HOST ; mirror -Renvp $BUILD_DIR/ recos-diet; bye"
-  only:
-    refs:
-      - master
-  when: on_success
-  
