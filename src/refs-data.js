@@ -266,7 +266,7 @@ export default {
                         label: "Vit. B1",
                         quantity: "500",
                         unit: "mg/jour",
-                        clauses: [],
+                        clauses: ["pendant 3 jours"],
                         sources: ["sfncm-covid-rea-p2", "sfncm-prev-sri-covid-p2"],
                     },
                     {
@@ -275,9 +275,9 @@ export default {
                         unit: "",
                         clauses: [
                             "si age &ge; 60 ans : doser 25 OHD",
-                            "&nbsp;&nbsp;&nbsp;&nbsp;&rArr; si carence et IMC &lt; 30 : doser 25 OHD + administrer 2 ampoules de ZYMA D 50.000UI/amp (100.000 UI) à J0 puis à J7",
-                            "&nbsp;&nbsp;&nbsp;&nbsp;&rArr; si carence et IMC &ge; 30 : doser 25 OHD + administrer 1 ampoules de VIT D3 200.000UI/amp (200.000 UI) à J0 puis à J7",
-                            "si age &lt; 60 ans : 3 gouttes d'Adrigyl/j, prescription hors livret (800 à 1000 UI/jour)"
+                            "&nbsp;&nbsp;&nbsp;&nbsp;&rArr; si carence et IMC &lt; 30 : 25 OHD + administrer 2 ampoules de ZYMA D 50.000UI/amp (100.000 UI) à J0 puis à J7",
+                            "&nbsp;&nbsp;&nbsp;&nbsp;&rArr; si carence et IMC &ge; 30 : 25 OHD + administrer 1 ampoules de VIT D3 200.000UI/amp (200.000 UI) à J0 puis à J7",
+                            "si age &lt; 60 ans : 4 gouttes de ZYMA D par jour, prescription hors livret (1000 UI/jour)"
                         ],
                         sources: ["com-ac-med-vitd-covid19"],
                     },
