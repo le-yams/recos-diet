@@ -8,6 +8,12 @@
             service de r&eacute;animation du CHU de Toulouse
           </router-link>
         </div>
+        <div class="col text-center clignote">
+          <b-button variant="outline-warning" class="ml-5"
+                    @click="$router.push('/survey')">Donnez votre avis ici !
+          </b-button>
+        </div>
+
         <div class="col text-right">
           <app-version url="https://gitlab.com/ydisanto/recos-diet/-/blob/master/CHANGELOG.md"></app-version>&nbsp;
           <copyright name="Yann D'Isanto" url="https://gitlab.com/ydisanto/recos-diet"></copyright>&nbsp;
@@ -30,5 +36,14 @@ export default {
 </script>
 
 <style scoped>
+.clignote {
+  /*color:green;*/
+  animation: clignote 2s linear infinite;
+}
 
+@keyframes clignote {
+  50% {
+    opacity: 0;
+  }
+}
 </style>

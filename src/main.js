@@ -16,8 +16,11 @@ import {
     faDisease,
     faFire,
     faHeartbeat,
-    faLongArrowAltDown, faMinusSquare,
-    faPills, faPlus, faPlusSquare,
+    faLongArrowAltDown,
+    faMinusSquare,
+    faPills,
+    faPlus,
+    faPlusSquare,
     faSmile,
     faStickyNote,
     faUserInjured,
@@ -30,6 +33,7 @@ import VueScrollTo from 'vue-scrollto'
 import Home from "./components/Home";
 import About from "./components/About";
 import RefData from "./components/ref-data/RefData";
+import SurveyFrame from "@/components/SurveyFrame";
 
 library.add(faUserInjured)
 library.add(faFire)
@@ -68,6 +72,7 @@ const router = new VueRouter({
         {path: '/home', component: Home},
         {path: '/about', component: About},
         {path: '/refs', component: RefData},
+        {path: '/survey', component: SurveyFrame},
     ]
 })
 
