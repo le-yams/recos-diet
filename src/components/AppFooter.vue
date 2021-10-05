@@ -9,7 +9,7 @@
           </router-link>
         </div>
         <div class="col text-center clignote">
-          <b-button variant="outline-warning" class="ml-5"
+          <b-button variant="warning" class="ml-5"
                     @click="$router.push('/survey')">Donnez votre avis ici !
           </b-button>
         </div>

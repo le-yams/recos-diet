@@ -17,7 +17,11 @@
 
 <script>
 export default {
-  name: "SurveyFrame"
+  name: "SurveyFrame",
+  mounted: function () {
+    console.log('mounted!');
+    window.scrollTo(0,0);
+  }
 }
 </script>
 
@@ -30,8 +34,6 @@ export default {
 
 .survey iframe {
   display: block;
-  width: 100%;
-  height: 100%;
   border: none; /* Reset default border */
   height: 100vh; /* Viewport-relative units */
   width: 100vw;
