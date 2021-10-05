@@ -1,4 +1,7 @@
-include: 'gitlab-ci-lftp.yml'
+include:
+  - project: 'ydisanto/tbc-lftp'
+    ref: '1.0.0'
+    file: '/templates/gitlab-ci-lftp.yml'
 
 variables:
   # Default docker image for Node
@@ -8,7 +11,6 @@ variables:
 
   BUILD_DIR: "dist"
   LFTP_SRC: "dist"
-  LFTP_STAGING_ENABLED: "true"
 
   NPM_RELEASE_TAG_PREFIX: ""
   NPM_RELEASE_COMMIT_MESSAGE_FORMAT: "[ci skip] release {{currentTag}}"
