@@ -21,6 +21,12 @@
 
       <div class="col-8">
         <b-card no-body>
+          <div style="display: flex; justify-content: center">
+            <b-button variant="warning" class="m-2 clignote text-center"
+                      @click="$router.push('/survey')">Donnez votre avis ici !
+            </b-button>
+          </div>
+
           <b-tabs card v-model="tabIndex" v-on:input="tabChanged">
             <b-tab class="p-0">
               <template v-slot:title>
@@ -28,7 +34,8 @@
               </template>
               <b-card-body>
                 <warnings :pathologies="pathologies"></warnings>
-                <target-flows :patient-info="patientInfo" :nutrition="nutrition" :pathologies="pathologies"></target-flows>
+                <target-flows :patient-info="patientInfo" :nutrition="nutrition"
+                              :pathologies="pathologies"></target-flows>
                 <recos :nutrition="nutrition" :pathologies="pathologies"></recos>
               </b-card-body>
             </b-tab>
@@ -129,5 +136,13 @@ export default {
 </script>
 
 <style scoped>
+.clignote {
+  animation: clignote 2s linear infinite;
+}
 
+@keyframes clignote {
+  50% {
+    opacity: 0;
+  }
+}
 </style>
