@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.35.0](https://gitlab.com/ydisanto/recos-diet/compare/1.34.0...1.35.0) (2021-11-14)
+
+
+### Features
+
+* disable survey ([cf0bf8b](https://gitlab.com/ydisanto/recos-diet/commit/cf0bf8b514b8b6a3793fe70150e8fb44663b7c34))
+
 ## [1.34.0](https://gitlab.com/ydisanto/recos-diet/compare/1.33.0...1.34.0) (2021-10-15)
 
 
