@@ -21,7 +21,7 @@
 
       <div class="col-8">
         <b-card no-body>
-          <div style="display: flex; justify-content: center">
+          <div v-if="survey.enabled" style="display: flex; justify-content: center">
             <b-button variant="warning" class="m-2 clignote text-center"
                       @click="$router.push('/survey')">Donnez votre avis ici !
             </b-button>
@@ -116,7 +116,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['nutrition', 'pathologies']),
+    ...mapState(['nutrition', 'pathologies', 'survey']),
     ...mapState({
       patientInfo: 'patient',
       outlinedBibliography: state => state.bibliography.outlinedIndex,

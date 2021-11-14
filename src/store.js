@@ -29,6 +29,9 @@ export function initStore() {
             constants: refs,
             bibliography: {
                 outlinedIndex: 0,
+            },
+            survey: {
+                enabled: false
             }
         },
         getters: {
