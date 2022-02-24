@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.35.1](https://gitlab.com/ydisanto/recos-diet/compare/1.35.0...1.35.1) (2022-02-24)
+
+
+### Bug Fixes
+
+* IMC denutrition criteria ([1e2221a](https://gitlab.com/ydisanto/recos-diet/commit/1e2221a789e04e86deafe2764da4b53042986143))
+
 ## [1.35.0](https://gitlab.com/ydisanto/recos-diet/compare/1.34.0...1.35.0) (2021-11-14)
 
 
