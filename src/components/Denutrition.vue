@@ -65,7 +65,7 @@
                     <b-list-group flush>
                         <b-list-group-item>Perte de poids &ge; 5 &percnt; en 1 mois ou &ge; 10 &percnt; en 6 mois.
                         </b-list-group-item>
-                        <b-list-group-item>IMC &lt; 21 kg/m.</b-list-group-item>
+                        <b-list-group-item>IMC &lt; 22 kg/m.</b-list-group-item>
                         <b-list-group-item>Albumin&eacute;mie &lt; 35 g/L.</b-list-group-item>
                         <b-list-group-item>MNA global &lt; 17.</b-list-group-item>
                     </b-list-group>
