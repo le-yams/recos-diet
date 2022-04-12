@@ -31,7 +31,8 @@ export function initStore() {
                 outlinedIndex: 0,
             },
             survey: {
-                enabled: false
+                enabled: true,
+                url: "https://docs.google.com/forms/d/e/1FAIpQLSd0nJFcal1zccKiFLOhPPZK5bjw2BL2PDYatHedq8HfIoTi4Q/viewform?embedded=true"
             }
         },
         getters: {

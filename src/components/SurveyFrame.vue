@@ -4,8 +4,7 @@
               @click="$router.push('/')">Retour
     </b-button>
     <div class="survey">
-      <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLSfpgafhXhrTCMxt1h68rmn6oKI_viUSZxZcfSy_Vnd89qom6w/viewform?embedded=true">
+      <iframe :src="survey.url">
         Loading…
       </iframe>
     </div>
@@ -16,11 +15,16 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: "SurveyFrame",
   mounted: function () {
     console.log('mounted!');
     window.scrollTo(0,0);
+  },
+  computed: {
+    ...mapState(['survey']),
   }
 }
 </script>
