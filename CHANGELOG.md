@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.35.2](https://gitlab.com/ydisanto/recos-diet/compare/1.35.1...1.35.2) (2022-04-12)
+
 ### [1.35.1](https://gitlab.com/ydisanto/recos-diet/compare/1.35.0...1.35.1) (2022-02-24)
 
 
