@@ -1,0 +1,29 @@
+<mat-expansion-panel expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <fa-icon [icon]="faUtensils" aria-hidden="true"></fa-icon>&nbsp;Nutrition
+    </mat-panel-title>
+    <mat-panel-description>{{selectedProduct$ | async}}</mat-panel-description>
+  </mat-expansion-panel-header>
+  <form>
+    <p>
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select [value]="selectedNutritionType$ | async" #nutritionSelect
+                    (selectionChange)="selectNutritionType($event.value)">
+          <mat-option [value]="enterale">{{enterale}}</mat-option>
+          <mat-option [value]="parenterale">{{parenterale}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Produit</mat-label>
+        <mat-select [value]="selectedProduct$ | async" (selectionChange)="selectProduct($event.value)">
+          <mat-option *ngFor="let product of availableProduct$ | async" [value]="product">{{product}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+  </form>
+
+</mat-expansion-panel>

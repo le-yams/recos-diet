@@ -1,0 +1,15 @@
+mat-card {
+  margin-bottom: 3em;
+}
+
+mat-card-title {
+  color: rgba(64, 64, 64, .87) !important;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+mat-card-footer * {
+  color: rgba(56, 65, 73, .87) !important;
+}

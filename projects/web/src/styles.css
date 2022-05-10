@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.my-4 {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+div.info {
+  padding: 0 0.5em 0 0.5em;
+  color: #0c5460;
+  background-color: #d1ecf1;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  border: 1px solid #bee5eb;
+  border-radius: .25rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.level_medium {
+  color: #856404;
+  border-color: #ffeeba;
+  background-color: #fff3cd;
+}
+
+.level_high {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.column {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.row {
+  display: flex;
+  flex-flow: row wrap;
+  flex-grow: 1;
+}

@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-title>{{product.name}}</mat-card-title>
+  <mat-card-content>
+    <p [innerHTML]="product.indications"></p>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-expansion-panel expanded="false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Apports:</mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul>
+        <li>Apport énergétique: {{product.nutritionInfo.kcalPerLiter}} kcal/L</li>
+        <li>Apport en protéines: {{product.nutritionInfo.proteinsGramsPerLiter}} g/L</li>
+      </ul>
+    </mat-expansion-panel>
+  </mat-card-footer>
+</mat-card>
+

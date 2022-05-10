@@ -1,0 +1,37 @@
+[
+  {
+    "pathology": "Anorexie mentale",
+    "nutritionistOpinionRequirementLevel": "high",
+    "warnings": [
+      {
+        "text": "Démarrer la nutrition seulement après correction des bilans biologiques",
+        "level": "high"
+      }
+    ]
+  },
+  {
+    "pathology": "Dénutrition-SRI",
+    "nutritionistOpinionRequirementLevel": "medium",
+    "warnings": [
+      {
+        "text": "Ne pas débuter la nutrition avec un débit supérieur à 15 kcal/kg/j",
+        "level": "high",
+        "sources": [
+          "tnctav-p1852"
+        ]
+      }
+    ]
+  },
+  {
+    "pathology": "COVID-19",
+    "warnings": [
+      {
+        "text": "Pour une aide à la correction des troubles métaboliques cf",
+        "level": "medium",
+        "sources": [
+          "sfncm-prev-sri-covid-p2"
+        ]
+      }
+    ]
+  }
+]

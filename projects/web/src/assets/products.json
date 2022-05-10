@@ -1,0 +1,118 @@
+{
+  "defaultEnteraleProduct": "Sondalis HP Energy",
+  "defaultParenteraleProduct": "Réanutriflex Omega N8 (Réa)",
+  "products": [
+    {
+      "name": "Olimel N7E (USC)",
+      "nutritionType": "Parentérale",
+      "indications": "Produit réservé aux patients de SMC et hospitalisation traditionnelle, Alimentation <strong><u>AVEC</u></strong> électrolytes. Sur avis médical/diet.",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 1140,
+      "proteinsGramsPerLiter": 44.3
+    },
+    {
+      "name": "Olimel N9E (Réa)",
+      "nutritionType": "Parentérale",
+      "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés; Alimentation <strong><u>AVEC</u></strong> électrolytes. Sur avis médical/diet.",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 1070,
+      "proteinsGramsPerLiter": 56.9
+    },
+    {
+      "name": "Mednutriflex Omega N5E (USC)",
+      "nutritionType": "Parentérale",
+      "indications": "Produit réservé aux patients de SMC et hospitalisation traditionnelle, Alimentation <strong><u>AVEC</u></strong> électrolytes. Sur avis médical/diet.",
+      "compatibleWithAnorexia": true,
+      "kcalPerLiter": 1010,
+      "proteinsGramsPerLiter": 38
+    },
+    {
+      "name": "Nutrison Protein intense",
+      "nutritionType": "Entérale",
+      "indications": "Produit hyperprotidique destiné à la prise en charge nutritionnelle des patients dénutris en soins intensifs.",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 1260,
+      "proteinsGramsPerLiter": 100
+    },
+    {
+      "name": "Peptamen HN",
+      "nutritionType": "Entérale",
+      "indications": "Nutrition semi-élémentaire destinés aux patients avec une fonction digestive altérée (syndrome de malabsorption, grêle court).",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 1330,
+      "proteinsGramsPerLiter": 66
+    },
+    {
+      "name": "Peptisorb (hypolipidique)",
+      "nutritionType": "Entérale",
+      "indications": "Nutriton semi-élémentaire hypolipidique indiquée en cas de malaborption/maldigestion (chylothorax).",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 1000,
+      "proteinsGramsPerLiter": 40
+    },
+    {
+      "name": "Réanutriflex Omega N8 (Réa)",
+      "nutritionType": "Parentérale",
+      "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés; Alimentation <strong><u>SANS</u></strong> électrolytes.",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 1180,
+      "proteinsGramsPerLiter": 56
+    },
+    {
+      "name": "SMOFKABIVEN PROTEINE N10 (Réa)",
+      "nutritionType": "Parentérale",
+      "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés. Alimentation <strong><u>SANS</u></strong> électrolytes. Sur avis médical/diet (EER, patient obèse en phase aiguë).",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 889,
+      "proteinsGramsPerLiter": 65.5
+    },
+    {
+      "name": "Sondalis HP 2kcal",
+      "nutritionType": "Entérale",
+      "indications": "Produit hypercalorique et hyperprotéiné indiqué en cas de dénutrition ou risque de dénutrition des patients adultes avec des besoins énergétiques et protéiques élevés ou nécessitant une restriction des apports hydriques.",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 2000,
+      "proteinsGramsPerLiter": 100
+    },
+    {
+      "name": "Sondalis HP 2kcal fibres",
+      "nutritionType": "Entérale",
+      "indications": "Produit hypercalorique et hyperprotéiné avec fibres indiqué en cas de dénutrition ou risque de dénutrition des patients adultes avec des besoins énergétiques et protéiques élevés ou nécessitant une restriction des apports hydriques. A utiliser à partir de 1 mois de séjour en réa ou sur avis médical et diététique.",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 2000,
+      "proteinsGramsPerLiter": 100
+    },
+    {
+      "name": "Sondalis HP Energy",
+      "nutritionType": "Entérale",
+      "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés.",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 1500,
+      "proteinsGramsPerLiter": 75
+    },
+    {
+      "name": "Sondalis HP Energy Fibres",
+      "nutritionType": "Entérale",
+      "indications": "Produit hypercalorique hyperprotidique avec fibres solubles et insolubles destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés ou nécessitant une réduction des apports hydriques. A utiliser à partir de 1 mois de séjour en réa ou sur avis médical et diététique.",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 1530,
+      "proteinsGramsPerLiter": 75
+    },
+    {
+      "name": "Sondalis Junior Standard",
+      "nutritionType": "Entérale",
+      "indications": "Indiqué pour les patients souffrant d'anorexie mentale.",
+      "compatibleWithAnorexia": true,
+      "kcalPerLiter": 1000,
+      "proteinsGramsPerLiter": 20
+    },
+    {
+      "name": "Sondalis T Energy",
+      "nutritionType": "Entérale",
+      "indications": "Produit destiné aux patients souffrant de diarrhées non infectieuses (à base de gomme de guar partiellement hydrolysée).",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 1550,
+      "proteinsGramsPerLiter": 60
+    }
+  ]
+}

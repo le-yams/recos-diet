@@ -1,141 +1,48 @@
 include:
+  - project: 'to-be-continuous/angular'
+    ref: '2.1.0'
+    file: '/templates/gitlab-ci-angular.yml'
+  - project: "to-be-continuous/semantic-release"
+    ref: "2.0.1"
+    file: '/templates/gitlab-ci-semrel.yml'
   - project: 'ydisanto/tbc-lftp'
     ref: '1.0.0'
     file: '/templates/gitlab-ci-lftp.yml'
 
-variables:
-  # Default docker image for Node
-  NODE_IMAGE: "node:lts-alpine"
-  # Release docker image needs git and ssh
-  RELEASE_IMAGE: "node:lts"
-
-  BUILD_DIR: "dist"
-  LFTP_SRC: "dist"
-
-  NPM_RELEASE_TAG_PREFIX: ""
-  NPM_RELEASE_COMMIT_MESSAGE_FORMAT: "[ci skip] release {{currentTag}}"
-
-
 stages:
   - build
+  - test
+  - package-build
+  - package-test
+  - infra
   - deploy
-  - release
+  - acceptance
+  - publish
+  - infra-prod
   - production
 
 
-.internal-scripts: &internal-scripts |
-  # BEGSCRIPT
-  set -e
+variables:
+  # Angular template
+  NG_CLI_IMAGE: trion/ng-cli-karma:13.3.1
+  LFTP_SRC: "dist/web"
 
-  function log_info() {
-      echo -e "[\\e[1;94mINFO\\e[0m] $*"
-  }
-
-  function log_warn() {
-      echo -e "[\\e[1;93mWARN\\e[0m] $*"
-  }
-
-  function log_error() {
-      echo -e "[\\e[1;91mERROR\\e[0m] $*"
-  }
-
-  function assert_defined() {
-    if [[ -z "$1" ]]
-    then
-      log_error "$2"
-      exit 1
-    fi
-  }
-
-  # ENDSCRIPT
-
-
-##############################################################################################
-#                                Generic job definition                                      #
-##############################################################################################
-.node-base:
-  image: $NODE_IMAGE
-  # Cache downloaded dependencies and plugins between builds.
-  # To keep cache across branches add 'key: "$CI_JOB_NAME"'
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
+semantic-release:
+  artifacts:
+    name: "$CI_JOB_NAME artifacts from $CI_PROJECT_NAME on $CI_COMMIT_REF_SLUG"
     paths:
-      - .npm/
-      - node_modules/
+      - package.json
+    expire_in: 1 day
+
+ng-build:
   before_script:
-    - npm ci --cache .npm --prefer-offline
+    - !reference [ .ng-cli-base, before_script ]
+    - npm run "generate version asset"
 
-
-###############################################################################################
-#                                      check stage:                                           #
-#                                        - npm-lint                                           #
-###############################################################################################
-npm-lint:
-  extends: .node-base
-  stage: build
-  script:
-    - npm run lint
-  allow_failure: true
-  artifacts:
-    when: always # store artifact even if test Failed
-    name: "$CI_JOB_NAME artifacts from $CI_PROJECT_NAME on $CI_COMMIT_REF_SLUG"
-    paths:
-      - reports/
-    expire_in: 1 day
-
-
-###############################################################################################
-#                                      build stage:                                           #
-#                                        - npm-build                                          #
-###############################################################################################
-npm-build:
-  extends: .node-base
-  stage: build
-  script:
-    - npm run build --prod
-  artifacts:
-    when: always
-    name: "$CI_JOB_NAME artifacts from $CI_PROJECT_NAME on $CI_COMMIT_REF_SLUG"
-    paths:
-      - $BUILD_DIR
-      - reports/
-    expire_in: 1 day
-
-
-###############################################################################################
-#                                     release stage:                                          #
-#                                        - create-release                                     #
-###############################################################################################
-create-release:
-  extends: .node-base
-  image: $RELEASE_IMAGE
-  stage: release
-  before_script:
-    - *internal-scripts
-    - assert_defined "$GIT_PRIVATE_KEY" 'Missing required env $GIT_PRIVATE_KEY'
-    - eval "$(ssh-agent -s)"
-    - mkdir -m 700 "$HOME/.ssh"
-    - echo -e "-----BEGIN OPENSSH PRIVATE KEY-----\\n${GIT_PRIVATE_KEY}\\n-----END OPENSSH PRIVATE KEY-----" | tr -d '\r' | ssh-add -
-    - ssh-keyscan -H "${CI_SERVER_HOST}" >> ~/.ssh/known_hosts
-    - git config user.name "${GITLAB_USER_NAME}"
-    - git config user.email "${GITLAB_USER_EMAIL}"
-    - git checkout ${CI_COMMIT_REF_NAME}
-    - git pull origin ${CI_COMMIT_REF_NAME}
-    - echo "----- Switching to a SSH GIT ACCESS to allow write access through private key"
-    - git remote set-url origin "git@${CI_SERVER_HOST}:$(echo $CI_REPOSITORY_URL | cut -d'/' -f4-)"
-  script:
-    - npx standard-version -t "${NPM_RELEASE_TAG_PREFIX}" --releaseCommitMessageFormat "${NPM_RELEASE_COMMIT_MESSAGE_FORMAT}"
-    - git push --follow-tags
-    - npm run build --prod
-  artifacts:
-    when: always
-    name: "$CI_JOB_NAME artifacts from $CI_PROJECT_NAME on $CI_COMMIT_REF_SLUG"
-    paths:
-      - $BUILD_DIR
-      - reports/
-    expire_in: 1 day
-  only:
-    refs:
-      - master
-  when: manual
-  allow_failure: false
+build-for-prod:
+  extends: ng-build
+  stage: infra-prod
+  needs:
+    - semantic-release
+  rules:
+    - if: '$CI_COMMIT_REF_NAME =~ $PROD_REF'

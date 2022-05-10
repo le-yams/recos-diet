@@ -1,0 +1,16 @@
+<mat-card class="bibliography">
+  <mat-card-title>
+    <fa-icon [icon]="faBookMedical" aria-hidden="true"></fa-icon>&nbsp;Bibliographie
+  </mat-card-title>
+  <mat-card-content>
+
+    <hr class="my-4">
+
+    <div *ngFor="let entry of bibliography.allEntries().sortedByIndex()">
+      <p [id]="'bibliography-' + entry.index" [class.highlighted]="isHighlighted(entry)">
+        <span *ngIf="entry.url">[{{entry.index}}]&nbsp;<a [href]="entry.url">{{entry.label}}</a></span>
+        <span *ngIf="!entry.url">[{{entry.index}}]&nbsp;{{entry.label}}</span>
+      </p>
+    </div>
+  </mat-card-content>
+</mat-card>

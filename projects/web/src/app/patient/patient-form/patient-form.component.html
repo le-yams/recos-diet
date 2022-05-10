@@ -1,0 +1,50 @@
+<mat-expansion-panel expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <fa-icon [icon]="faUserInjured" aria-hidden="true"></fa-icon>&nbsp;Patient
+    </mat-panel-title>
+    <mat-panel-description>
+      {{patient.heightCm.toFixed(0)}}cm/{{patient.weightKg.toFixed(0)}}kg
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <form>
+    <p>
+      <mat-form-field>
+        <mat-label>Taille (cm)</mat-label>
+        <input type="number" matInput placeholder="taille du patient" required
+               [value]="patient.heightCm.toFixed(0)" (change)="updateHeight($event)">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field>
+        <mat-label>Poids (kg)</mat-label>
+        <input type="number" matInput placeholder="poids du patient" required
+               [value]="patient.weightKg.toFixed(0)" (change)="updateWeight($event)">
+      </mat-form-field>
+    </p>
+
+    <p *ngIf="patient.isOverweight()">
+      <mat-form-field>
+        <mat-label>Poids ajusté (kg)</mat-label>
+        <input matInput readonly
+               [value]="patient.adjustedWeightKg.toFixed(1)">
+        <mat-hint>
+          références
+          <app-biblio-links [references]="['espen-p52', 'ideal-body-weight-equation']"></app-biblio-links>
+        </mat-hint>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field>
+        <mat-label>IMC</mat-label>
+        <input matInput readonly
+               [value]="patient.bmi.toFixed(1)">
+      </mat-form-field>
+    </p>
+
+  </form>
+
+</mat-expansion-panel>

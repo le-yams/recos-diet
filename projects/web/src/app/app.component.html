@@ -1,0 +1,36 @@
+<app-disclaimer></app-disclaimer>
+
+<div>
+
+  <div id="flyingMenu" *ngIf="(isHandset$ | async) && !drawer.opened">
+    <button mat-button color="primary" type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()"
+            onclick="this.blur()">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      <span>Menu</span>
+    </button>
+  </div>
+
+  <mat-sidenav-container>
+    <mat-sidenav #drawer
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [opened]="(isHandset$ | async) === false">
+
+      <button *ngIf="(isHandset$ | async)" mat-icon-button color="primary" type="button" aria-label="Toggle sidenav"
+              (click)="drawer.toggle()" onclick="this.blur()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+
+      <mat-nav-list>
+        <mat-list-item *ngFor="let menu of menus" [routerLink]="[menu.route]" (click)="closeDrawerIfHandset(drawer)">
+          <a mat-button color="primary" [class.mat-flat-button]="isSelected(menu)">
+            <fa-icon [icon]="menu.icon" aria-hidden="true"></fa-icon>&nbsp;{{menu.label}}
+          </a>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+<app-footer></app-footer>

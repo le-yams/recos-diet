@@ -1,0 +1,14 @@
+<div class="strip">
+
+  <span class="p-aigue"><strong>20</strong> kcal</span>
+  <span class="p-aigue"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></span>
+  <span class="p-aigue">phase aigu&euml;</span>
+  <span class="p-aigue"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></span>
+  <span class="p-gradient"><strong>25</strong> kcal</span>
+  <span class="p-rehab"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></span>
+  <span class="p-rehab">phase de r&eacute;habilitation</span>
+  <ng-container *ngIf="(hasObesity$ | async) === false">
+    <span class="p-rehab"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></span>
+    <span class="p-rehab"><strong>30</strong> kcal</span>
+  </ng-container>
+</div>

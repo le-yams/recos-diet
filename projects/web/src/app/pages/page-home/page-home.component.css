@@ -1,0 +1,18 @@
+div.page-target-flows {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.left-pane {
+  display: flex;
+  flex-flow: column wrap;
+  margin-top: 5px;
+  margin-right: 5px;
+
+}
+
+.center-pane {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  flex: 1;
+}

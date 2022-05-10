@@ -1,0 +1,7 @@
+<span>
+  <sup *ngFor="let entry of bibliographyEntries.sortedByIndex()">
+    <a class="biblio-link"
+       [routerLink]="['/bibliography']"
+       [queryParams]="{ index: entry.index}">[<span>{{entry.index}}</span>]</a>
+  </sup>
+</span>

@@ -1,0 +1,13 @@
+
+#flyingMenu {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1000000;
+  opacity: 1;
+  background: white;
+}
+
+#flyingMenu button.mat-button {
+  padding: 0 !important;
+}

@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-title>
+    <fa-icon [icon]="faVials" aria-hidden="true"></fa-icon>&nbsp;Produits
+  </mat-card-title>
+  <mat-card-content>
+
+    <hr class="my-4">
+
+    <div class="row">
+
+      <div [class.max-height-50-percent]="(notHandset$ | async)">
+
+        <mat-card>
+          <mat-card-title><u>Entérale</u></mat-card-title>
+          <mat-card-content>
+            <app-product-detail *ngFor="let product of productsEnterale" [product]="product"></app-product-detail>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div [class.max-height-50-percent]="(notHandset$ | async)">
+        <mat-card>
+          <mat-card-title><u>Parentérale</u></mat-card-title>
+          <mat-card-content>
+            <app-product-detail *ngFor="let product of productsParenterale" [product]="product"></app-product-detail>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </div>
+  </mat-card-content>
+</mat-card>

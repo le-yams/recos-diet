@@ -1,24 +1,6 @@
 # Recos Diet
 
-## Project setup
-```
-npm install
-```
+Site web présentant les recommandations nutritionnelles pour le patient adulte de réanimation alimenté en nutrition
+artificielle.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Cet outil a été élaboré en partenariat avec l'équipe diététique du service de réanimation du CHU de Toulouse.

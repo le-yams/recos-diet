@@ -1,0 +1,32 @@
+[
+    {
+      "pathology": "Anorexie mentale",
+      "excludedNutriments":[
+        "Alvityl (po/sng)", "Vit. K"
+      ]
+    },
+    {
+      "pathology": "Cirrhose",
+      "excludedNutriments": []
+    },
+    {
+      "pathology": "COVID-19",
+      "excludedNutriments": []
+    },
+    {
+      "pathology": "EER continue",
+      "excludedNutriments": []
+    },
+    {
+      "pathology": "Dénutrition-SRI",
+      "excludedNutriments": []
+    },
+    {
+      "pathology": "Obésité",
+      "excludedNutriments": []
+    },
+    {
+      "pathology": "OH",
+      "excludedNutriments": []
+    }
+  ]

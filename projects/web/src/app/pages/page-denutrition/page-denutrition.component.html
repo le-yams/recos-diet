@@ -1,0 +1,103 @@
+<mat-card>
+  <mat-card-title>
+    <fa-icon [icon]="faStickyNote" aria-hidden="true"></fa-icon>&nbsp;Critères de dénutrition HAS
+  </mat-card-title>
+
+  <mat-card-content>
+
+    <hr class="my-4">
+
+    <mat-checkbox [(ngModel)]="patientIsOld">Patient agé (cocher si age ≥ 70 ans)</mat-checkbox>
+
+    <hr class="my-4"/>
+
+
+    <div class="info">
+      Une d&eacute;nutrition est pr&eacute;sente s'il y a pr&eacute;sence d'au moins <strong>1 crit&egrave;re
+      ph&eacute;notypique et 1 crit&egrave;re &eacute;tiologique</strong>.
+    </div>
+    <div class="column">
+      <div class="row">
+        <div class="column">
+          <h3>Crit&egrave;res ph&eacute;notypiques</h3>
+          <ul>
+            <li>perte de poids &ge; 5 &percnt; en 1 mois ou &ge; 10 &percnt; en 6 mois ou
+              &ge; 10 &percnt; par rapport au poids habituel avant le d&eacute;but de la maladie
+            </li>
+            <li *ngIf="patientIsOld">IMC &lt; 22</li>
+            <li *ngIf="!patientIsOld">IMC &lt; 18,5</li>
+            <li>r&eacute;duction quantifi&eacute;e de la masse musculaire et/ou de la
+              fonction musculaire
+            </li>
+          </ul>
+        </div>
+        <div class="column">
+          <h3>Crit&egrave;res &eacute;tiologiques</h3>
+          <ul>
+            <li>r&eacute;duction de la prise alimentaire &ge; 50 &percnt; pendant plus d'1
+              semaine,
+              ou toute r&eacute;duction des apports pendant plus de 2 semaines par rapport &agrave; la
+              consommation alimentaire habituelle quantifi&eacute;e ou aux besoins prot&eacute;ino-&eacute;nerg&eacute;tiques
+              estim&eacute;s
+            </li>
+            <li>absorption r&eacute;duite (maldigestion/malabsorption)</li>
+            <li>situation d'agression (hypercatabolisme prot&eacute;ique avec ou sans
+              syndrome inflammatoire) : pathologie aigu&euml; ou pathologie chronique
+              &eacute;volutive ou pathologie maligne &eacute;volutive
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4"/>
+
+    <div class="info">
+      La s&eacute;v&eacute;rit&eacute; d'une d&eacute;nutrition av&eacute;r&eacute;e est &eacute;valu&eacute;e selon les
+      crit&egrave;res suivants.
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <h3>D&eacute;nutrition mod&eacute;r&eacute;e</h3>
+        <h5>(1 seul crit&egrave;re suffit)</h5>
+        <ul>
+          <li *ngIf="!patientIsOld">17 &lt; IMC &lt; 18,5</li>
+          <li *ngIf="patientIsOld">20 &lt; IMC &lt; 22</li>
+          <li>perte de poids &ge; 5 &percnt; en 1 mois ou &ge; 10 &percnt; en 6 mois ou
+            &ge; 10 &percnt; par rapport au poids habituel avant le d&eacute;but de la maladie
+          </li>
+          <li>albumin&eacute;mie &gt; 30 g/L et &lt; 35 g/L</li>
+        </ul>
+      </div>
+      <div class="column">
+        <h3>D&eacute;nutrition s&eacute;v&egrave;re</h3>
+        <h5>(1 seul crit&egrave;re suffit)</h5>
+        <ul>
+          <li *ngIf="!patientIsOld">IMC &le; 17</li>
+          <li *ngIf="patientIsOld">IMC &le; 20</li>
+          <li>perte de poids &ge; 10 &percnt; en 1 mois ou &ge; 15 &percnt; en 6 mois ou
+            &ge; 15 &percnt; par rapport au poids habituel avant le d&eacute;but de la maladie
+          </li>
+          <li>albumin&eacute;mie &le; 30 g/L</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <span>
+      Source:
+      <a *ngIf="!patientIsOld"
+        href="https://www.has-sante.fr/jcms/p_3120231/fr/diagnostic-de-la-denutrition-de-l-enfant-et-de-l-adulte-fiche-outil">
+        Fiche outil pour le diagnostic de la d&eacute;nutrition de l'enfant et de l'adulte
+      </a>
+      <a *ngIf="patientIsOld"
+        href="https://www.has-sante.fr/jcms/p_3165944/fr/diagnostic-de-la-denutrition-chez-la-personne-de-70-ans-et-plus">
+        Diagnostic de la dénutrition chez la personne de 70 ans et plus
+      </a>
+    </span>
+
+
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,27 @@
+<mat-expansion-panel expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <fa-icon [icon]="faDisease" aria-hidden="true"></fa-icon>&nbsp;Pathologies
+
+    </mat-panel-title>
+    <mat-panel-description *ngIf="selectedPathologies$ | async as selectedPathologies">
+      <span *ngIf="selectedPathologies.length === 1">{{selectedPathologies[0]}}</span>
+      <span *ngIf="selectedPathologies.length > 1">{{selectedPathologies.length}} sélectionnées</span>
+      <span *ngIf="hasWarnings$ | async">&nbsp;<fa-icon [icon]="faExclamationCircle" aria-hidden="true"></fa-icon></span>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <form *ngIf="selectedPathologies$ | async as selectedPathologies">
+    <ul>
+      <li *ngFor="let pathology of allPathologies">
+        <mat-checkbox [disabled]="isObesity(pathology)"
+                      [checked]="selectedPathologies.includes(pathology)"
+                      (change)="pathologySelectionChange(pathology, $event.checked)"
+        >{{pathology}}</mat-checkbox>
+      </li>
+
+    </ul>
+  </form>
+
+  <app-warnings></app-warnings>
+</mat-expansion-panel>

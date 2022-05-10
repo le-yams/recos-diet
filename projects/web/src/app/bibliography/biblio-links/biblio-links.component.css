@@ -1,0 +1,8 @@
+a.biblio-link span:hover {
+  text-decoration: underline;
+}
+
+a.biblio-link {
+  cursor: pointer;
+  color: #006bff;
+}

@@ -1,0 +1,253 @@
+{
+  "sharedRecommendations": [
+    {
+      "micronutriment": "Alvityl (po/sng)",
+      "administrationTerms": {
+        "quantity": "1",
+        "unit": "comprimé/jour"
+      },
+      "clauses": [
+        "si apports < 1500 kcal/j"
+      ],
+      "sources": [
+        "tnctav-p2137"
+      ]
+    }
+  ],
+  "pathologiesRecommendations": [
+    {
+      "pathology": "Anorexie mentale",
+      "recommendations": [
+        {
+          "micronutriment": "Nutryelt",
+          "administrationTerms": {
+            "quantity": "1",
+            "unit": "ampoule 10ml/jour"
+          },
+          "clauses": [
+            "en IV"
+          ],
+          "sources": [
+            "tnctav-p2742"
+          ]
+        },
+        {
+          "micronutriment": "Cernevit",
+          "administrationTerms": {
+            "quantity": "1",
+            "unit": "ampoule 5ml/jour"
+          },
+          "clauses": [
+            "en IV"
+          ],
+          "sources": [
+            "tnctav-p2742"
+          ]
+        },
+        {
+          "micronutriment": "Vit. B1",
+          "administrationTerms": {
+            "quantity": "500",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "en IV"
+          ],
+          "sources": [
+            "tnctav-p2742",
+            "md374smani"
+          ]
+        },
+        {
+          "micronutriment": "Vit. B9",
+          "administrationTerms": {
+            "quantity": "25",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "en IV"
+          ],
+          "excludeClauses": [
+            "Si dénutrition sévère uniquement",
+            "pendant les 3 premier jours"
+          ],
+          "sources": [
+            "tnctav-p1853"
+          ]
+        },
+        {
+          "micronutriment": "Zinc",
+          "administrationTerms": {
+            "quantity": "10",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "en IV"
+          ],
+          "excludeClauses": [
+            "seulement si encéphalopathie hépatique, carence ou infection du liquide d'ascite"
+          ],
+          "sources": [
+            "tnctav-p2737",
+            "md374smani"
+          ]
+        }
+      ]
+    },
+    {
+      "pathology": "Cirrhose",
+      "recommendations": [
+        {
+          "micronutriment": "Zinc",
+          "administrationTerms": {
+            "quantity": "15",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "en IV",
+            "seulement si encéphalopathie hépatique, carence ou infection du liquide d'ascite"
+          ],
+          "sources": [
+            "monitoring-in-cirrhosis-p927-928",
+            "easl-cpgonicld-p14",
+            "srmauozthe-p2-p5"
+          ]
+        }
+      ]
+    },
+    {
+      "pathology": "COVID-19",
+      "recommendations": [
+        {
+          "micronutriment": "Vit. B1",
+          "administrationTerms": {
+            "quantity": "500",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "en IV",
+            "pendant 3 jours"
+          ],
+          "sources": [
+            "sfncm-covid-rea-p2",
+            "sfncm-prev-sri-covid-p2"
+          ]
+        },
+        {
+          "micronutriment": "Vit. D",
+          "clauses": [
+            "par voie entérale",
+            "dosage vit. D (25-OH D3) pour TOUS les patients",
+            "en cas de carence (vit D < 30 ng/ml), merci de contacter votre diététicien(ne)"
+          ],
+          "sources": [
+            "com-ac-med-vitd-covid19"
+          ]
+        }
+      ]
+    },
+    {
+      "pathology": "EER continue",
+      "recommendations": [
+        {
+          "micronutriment": "Alvityl (po/sng)",
+          "administrationTerms": {
+            "quantity": "2",
+            "unit": "comprimés/jour"
+          },
+          "clauses": [
+            "puis 1 comprimé/jour lorsque le besoin énergétique est atteint"
+          ],
+          "sources": [
+            "afar-p208"
+          ]
+        }
+      ]
+    },
+    {
+      "pathology": "Dénutrition-SRI",
+      "recommendations": [
+        {
+          "micronutriment": "Alvityl (po/sng)",
+          "administrationTerms": {
+            "quantity": "1",
+            "unit": "comprimé/jour"
+          },
+          "clauses": [
+            "pendant 10 jours minimum"
+          ],
+          "sources": [
+            "nice"
+          ]
+        },
+        {
+          "micronutriment": "Vit. B1",
+          "administrationTerms": {
+            "quantity": "500",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "en IV",
+            "pendant 10 jours minimum"
+          ],
+          "sources": [
+            "nice"
+          ]
+        },
+        {
+          "micronutriment": "Vit. B9",
+          "administrationTerms": {
+            "quantity": "25",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "par voie entérale",
+            "si dénutrition sévère uniquement",
+            "pendant les 3 premiers jours"
+          ],
+          "sources": [
+            "tnctav-p1853"
+          ]
+        }
+      ]
+    },
+    {
+      "pathology": "Obésité",
+      "recommendations": []
+    },
+    {
+      "pathology": "OH",
+      "recommendations": [
+        {
+          "micronutriment": "Vit. B1",
+          "administrationTerms": {
+            "quantity": "500",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "en IV",
+            "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19"
+          ],
+          "sources": [
+            "sri-prev"
+          ]
+        },
+        {
+          "micronutriment": "Vit. B6",
+          "administrationTerms": {
+            "quantity": "250",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "en IV",
+            "sur une courte durée"
+          ],
+          "sources": [
+            "pc-alcool-p376",
+            "ncm-v25-p172-176"
+          ]
+        }
+      ]
+    }
+  ]
+}

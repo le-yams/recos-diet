@@ -1,0 +1,249 @@
+{
+  "sharedRecommendations": [
+    {
+      "micronutriment": "Nutryelt",
+      "administrationTerms": {
+        "quantity": "1",
+        "unit": "ampoule 10ml/jour"
+      },
+      "clauses": [],
+      "sources": [
+        "tnctav-p2133"
+      ]
+    },
+    {
+      "micronutriment": "Cernevit",
+      "administrationTerms": {
+        "quantity": "1",
+        "unit": "ampoule 5ml/jour"
+      },
+      "clauses": [],
+      "sources": [
+        "tnctav-p2133"
+      ]
+    },
+    {
+      "micronutriment": "Vit. K",
+      "administrationTerms": {
+        "quantity": "10",
+        "unit": "mg par semaine"
+      },
+      "clauses": [
+        "si pas de contre-indication médicale"
+      ],
+      "sources": [
+        "tnctav-p1499",
+        "tnctav-p1735-1736",
+        "bd-pub-medocs-cernevit"
+      ]
+    }
+  ],
+  "pathologiesRecommendations": [
+    {
+      "pathology": "Anorexie mentale",
+      "recommendations": [
+        {
+          "micronutriment": "Nutryelt",
+          "administrationTerms": {
+            "quantity": "1",
+            "unit": "ampoule 10ml/jour"
+          },
+          "clauses": [
+          ],
+          "sources": [
+            "tnctav-p2742"
+          ]
+        },
+        {
+          "micronutriment": "Cernevit",
+          "administrationTerms": {
+            "quantity": "1",
+            "unit": "ampoule 5ml/jour"
+          },
+          "clauses": [
+          ],
+          "sources": [
+            "tnctav-p2742"
+          ]
+        },
+        {
+          "micronutriment": "Vit. B1",
+          "administrationTerms": {
+            "quantity": "500",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+          ],
+          "sources": [
+            "tnctav-p2742",
+            "md374smani"
+          ]
+        },
+        {
+          "micronutriment": "Vit. B9",
+          "administrationTerms": {
+            "quantity": "25",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+          ],
+          "excludeClauses": [
+            "Si dénutrition sévère uniquement",
+            "pendant les 3 premier jours"
+          ],
+          "sources": [
+            "tnctav-p1853"
+          ]
+        },
+        {
+          "micronutriment": "Zinc",
+          "administrationTerms": {
+            "quantity": "10",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+          ],
+          "excludeClauses": [
+            "seulement si encéphalopathie hépatique, carence ou infection du liquide d'ascite"
+          ],
+          "sources": [
+            "tnctav-p2737",
+            "md374smani"
+          ]
+        }
+      ]
+    },
+    {
+      "pathology": "Cirrhose",
+      "recommendations": [
+        {
+          "micronutriment": "Zinc",
+          "administrationTerms": {
+            "quantity": "15",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "seulement si encéphalopathie hépatique, carence ou infection du liquide d'ascite"
+          ],
+          "sources": [
+            "monitoring-in-cirrhosis-p927-928",
+            "easl-cpgonicld-p14",
+            "srmauozthe-p2-p5"
+          ]
+        }
+      ]
+    },
+    {
+      "pathology": "COVID-19",
+      "recommendations": [
+        {
+          "micronutriment": "Vit. B1",
+          "administrationTerms": {
+            "quantity": "500",
+            "unit": "mg/j"
+          },
+          "clauses": [],
+          "sources": [
+            "sfncm-covid-rea-p2",
+            "sfncm-prev-sri-covid-p2"
+          ]
+        }
+      ]
+    },
+    {
+      "pathology": "EER continue",
+      "recommendations": [
+        {
+          "micronutriment": "Nutryelt",
+          "administrationTerms": {
+            "quantity": "2",
+            "unit": "ampoules 10ml"
+          },
+          "clauses": [],
+          "sources": [
+            "afar-p208"
+          ]
+        },
+        {
+          "micronutriment": "Cernevit",
+          "administrationTerms": {
+            "quantity": "2",
+            "unit": "ampoule 5ml"
+          },
+          "clauses": [],
+          "sources": [
+            "afar-p208"
+          ]
+        }
+      ]
+    },
+    {
+      "pathology": "Dénutrition-SRI",
+      "recommendations": [
+        {
+          "micronutriment": "Vit. B1",
+          "administrationTerms": {
+            "quantity": "500",
+            "unit": "mg/j"
+          },
+          "clauses": [
+            "pendant 10 jours minimum"
+          ],
+          "sources": [
+            "nice"
+          ]
+        },
+        {
+          "micronutriment": "Vit. B9",
+          "administrationTerms": {
+            "quantity": "25",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "si dénutrition sévère uniquement",
+            "pendant les 3 premiers jours"
+          ],
+          "sources": [
+            "tnctav-p1853"
+          ]
+        }
+      ]
+    },
+    {
+      "pathology": "Obésité",
+      "recommendations": []
+    },
+    {
+      "pathology": "OH",
+      "recommendations": [
+        {
+          "micronutriment": "Vit. B1",
+          "administrationTerms": {
+            "quantity": "500",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19"
+          ],
+          "sources": [
+            "sri-prev"
+          ]
+        },
+        {
+          "micronutriment": "Vit. B6",
+          "administrationTerms": {
+            "quantity": "250",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "sur une courte durée"
+          ],
+          "sources": [
+            "pc-alcool-p376",
+            "ncm-v25-p172-176"
+          ]
+        }
+      ]
+    }
+  ]
+}

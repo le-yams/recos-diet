@@ -1,0 +1,45 @@
+footer {
+  padding: 1rem 1rem 1rem 2rem !important;
+  margin-top: 3rem !important;
+  border-top: 1px solid #dee2e6 !important;
+  background-color: #f8f9fa !important;
+  font-size: 80%;
+  font-weight: 400;
+}
+
+footer div {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.push-right {
+  margin-left: auto;
+}
+
+.badge {
+  color: #673ab7;
+  background-color: #e9ecef;
+  transition: none;
+  display: inline-block;
+  padding: .25em .4em;
+  margin-left: 0.25em;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+}
+
+
+a.badge {
+  text-decoration: none !important;
+}
+
+a.badge:hover {
+  color: #e9ecef !important;
+  background-color: #673ab7 !important;
+}
+
+/*span.badge a:hover {*/
+/*  !*color: goldenrod !important;*!*/
+/*}*/

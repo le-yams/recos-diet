@@ -1,0 +1,8 @@
+
+.max-height-50-percent {
+  max-width: 50%;
+}
+
+div .max-height-50-percent mat-card {
+  margin: 0.5em;
+}
