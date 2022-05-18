@@ -1,3 +1,15 @@
+# [2.0.0](https://gitlab.com/ydisanto/recos-diet/compare/1.35.2...2.0.0) (2022-05-18)
+
+
+### Features
+
+* recos-diet v2 ([1ba0adb](https://gitlab.com/ydisanto/recos-diet/commit/1ba0adbc77c457b823bba3e7955734f3d0bd28ab))
+
+
+### BREAKING CHANGES
+
+* v2
+
 # [1.8.0](https://gitlab.com/ydisanto/recos-diet-ddd/compare/1.7.0...1.8.0) (2022-04-07)
 
 
