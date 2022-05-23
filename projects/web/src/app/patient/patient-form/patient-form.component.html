@@ -12,16 +12,18 @@
     <p>
       <mat-form-field>
         <mat-label>Taille (cm)</mat-label>
-        <input type="number" matInput placeholder="taille du patient" required
-               [value]="patient.heightCm.toFixed(0)" (change)="updateHeight($event)">
+        <input #heightInput type="number" matInput placeholder="taille du patient" required
+               [value]="patient.heightCm.toFixed(0)" (change)="updateHeight($event)"
+                (focus)="heightInput.select()" (keyup.enter)="weightInput.focus()">
       </mat-form-field>
     </p>
 
     <p>
       <mat-form-field>
         <mat-label>Poids (kg)</mat-label>
-        <input type="number" matInput placeholder="poids du patient" required
-               [value]="patient.weightKg.toFixed(0)" (change)="updateWeight($event)">
+        <input #weightInput type="number" matInput placeholder="poids du patient" required
+               [value]="patient.weightKg.toFixed(0)" (change)="updateWeight($event)"
+               (focus)="weightInput.select()">
       </mat-form-field>
     </p>
 
