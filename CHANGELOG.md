@@ -1,3 +1,10 @@
+## [2.0.1](https://gitlab.com/ydisanto/recos-diet/compare/2.0.0...2.0.1) (2022-05-23)
+
+
+### Bug Fixes
+
+* **patient-form:** enter key event regression ([0ffe528](https://gitlab.com/ydisanto/recos-diet/commit/0ffe528fe3bdeab5b437b6d6118e3a2e19f9b6d2))
+
 # [2.0.0](https://gitlab.com/ydisanto/recos-diet/compare/1.35.2...2.0.0) (2022-05-18)
 
 
