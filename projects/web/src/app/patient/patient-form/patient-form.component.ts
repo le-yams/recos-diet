@@ -25,12 +25,17 @@ export class PatientFormComponent {
 
   updateWeight(event: Event): void {
     this.patient.updateSize({
-      weightKg: PatientFormComponent.intValueFromInput(event)
+      weightKg: PatientFormComponent.numberValueFromInput(event)
     })
   }
 
   private static intValueFromInput(event: Event): number {
     let target = event.target as HTMLInputElement;
     return parseInt(target.value)
+  }
+
+  private static numberValueFromInput(event: Event): number {
+    let target = event.target as HTMLInputElement;
+    return parseFloat(target.value);
   }
 }

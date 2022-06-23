@@ -21,8 +21,8 @@
     <p>
       <mat-form-field>
         <mat-label>Poids (kg)</mat-label>
-        <input #weightInput type="number" matInput placeholder="poids du patient" required
-               [value]="patient.weightKg.toFixed(0)" (change)="updateWeight($event)"
+        <input #weightInput type="number" step="0.1" matInput placeholder="poids du patient" required
+               [value]="patient.weightKg" (change)="updateWeight($event)"
                (focus)="weightInput.select()">
       </mat-form-field>
     </p>
