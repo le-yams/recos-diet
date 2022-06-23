@@ -1,3 +1,10 @@
+## [2.0.2](https://gitlab.com/ydisanto/recos-diet/compare/2.0.1...2.0.2) (2022-06-23)
+
+
+### Bug Fixes
+
+* weight input with 1 fraction digit ([5b23f4f](https://gitlab.com/ydisanto/recos-diet/commit/5b23f4f2aac44bb11bdd45deb3c6fae1f365a235))
+
 ## [2.0.1](https://gitlab.com/ydisanto/recos-diet/compare/2.0.0...2.0.1) (2022-05-23)
 
 
