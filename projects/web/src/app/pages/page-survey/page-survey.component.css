@@ -1,0 +1,12 @@
+
+.survey {
+  margin: 0;
+  padding: 0;
+}
+
+.survey iframe {
+  display: block;
+  border: none; /* Reset default border */
+  height: 100vh; /* Viewport-relative units */
+  width: 90vw;
+}

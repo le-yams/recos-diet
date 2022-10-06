@@ -23,6 +23,7 @@ import {PageDenutritionComponent} from "./pages/page-denutrition/page-denutritio
 import {PageHomeComponent} from './pages/page-home/page-home.component';
 import {PageProductsComponent} from './pages/page-products/page-products.component';
 import {PagePhosphorusComponent} from "./pages/page-phosphorus/page-phosphorus.component";
+import {PageSurveyComponent} from "./pages/page-survey/page-survey.component";
 
 const routes: Routes = [
   {
@@ -45,6 +46,9 @@ const routes: Routes = [
   },
   {
     path: 'about', component: PageAboutComponent, pathMatch: 'full'
+  },
+  {
+    path: 'survey', component: PageSurveyComponent, pathMatch: 'full'
   }
 ];
 

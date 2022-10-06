@@ -45,6 +45,13 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
+      <ng-container *ngIf="(survey$ | async) || noSurvey; let survey">
+        <div *ngIf="survey.enabled && currentRoute !== '/survey'" style="display: flex; justify-content: center">
+          <button mat-button color="warn" class="m-2 blinking text-center" routerLink="/survey">
+            Donnez votre avis ici !
+          </button>
+        </div>
+      </ng-container>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

@@ -53,6 +53,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {ProductDetailComponent} from './pages/page-products/product-detail/product-detail.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { PagePhosphorusComponent } from './pages/page-phosphorus/page-phosphorus.component';
+import { PageSurveyComponent } from './pages/page-survey/page-survey.component';
 
 export function loadDomain(domainLoader: DomainLoaderService) {
   return () => {
@@ -74,6 +75,7 @@ export function loadDomain(domainLoader: DomainLoaderService) {
     PageProductsComponent,
     ProductDetailComponent,
     PagePhosphorusComponent,
+    PageSurveyComponent,
   ],
   imports: [
     BrowserModule,

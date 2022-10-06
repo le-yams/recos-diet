@@ -28,6 +28,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {NavigationEnd, Router} from "@angular/router";
 import {AppService} from './app.service';
+import {NoSurvey, Survey, SurveyService} from "./survey/survey.service";
 
 @Component({
   selector: 'app-root',
@@ -38,8 +39,13 @@ import {AppService} from './app.service';
 
 export class AppComponent {
 
+  survey$: Promise<Survey>;
+  noSurvey = NoSurvey;
+
   readonly isHandset$: Observable<boolean>;
   selectedMenuLabel: string;
+  currentRoute?: string;
+
   menus: Menu[] = [
     {
       label: 'Débits cibles et Micronutriments',
@@ -79,18 +85,20 @@ export class AppComponent {
   ];
 
 
-  constructor(appService: AppService, private router: Router) {
+  constructor(appService: AppService, private router: Router, survey: SurveyService) {
     this.isHandset$ = appService.isHandset$;
     this.selectedMenuLabel = this.findSelectedMenuLabel();
     router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe(e => {
+        this.currentRoute = this.router.url.split('?')[0];
         this.selectedMenuLabel = this.findSelectedMenuLabel();
       });
+    this.survey$ = survey.get();
   }
 
   findSelectedMenuLabel() {
-    return this.menus.find(menu => this.isSelected(menu))!.label;
+    return this.menus.find(menu => this.isSelected(menu))?.label ?? "";
   }
 
   async closeDrawerIfHandset(drawer: MatSidenav) {
@@ -101,8 +109,7 @@ export class AppComponent {
   }
 
   public isSelected(menu: Menu) {
-    const urlWithoutParams = this.router.url.split('?')[0];
-    return urlWithoutParams === menu.route;
+    return this.currentRoute === menu.route;
   }
 
 }

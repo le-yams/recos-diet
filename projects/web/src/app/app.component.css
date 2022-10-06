@@ -27,3 +27,13 @@
 #flyingMenu button.mat-button {
   padding: 0 !important;
 }
+
+.blinking {
+  animation: blinking 2s linear infinite;
+}
+
+@keyframes blinking {
+  50% {
+    opacity: 0;
+  }
+}

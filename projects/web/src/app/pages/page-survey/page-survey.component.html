@@ -1,0 +1,13 @@
+<div class="container-fluid mt-3" *ngIf="(survey$ | async) || noSurvey; let survey">
+<!--  <button mat-stroked-button color="primary" class="ml-5" routerLink="/">Retour</button>-->
+  <div class="survey" *ngIf="survey.enabled">
+    <iframe [src]="domSanitizer.bypassSecurityTrustResourceUrl(survey.url)">
+<!--    <iframe [src]="domSanitizer.sanitize(resourceUrlSecurityContext, domSanitizer.bypassSecurityTrustResourceUrl(survey.url))">-->
+      Loading…
+    </iframe>
+  </div>
+  <div class="survey" *ngIf="!survey.enabled">
+    <p>No survey in progress</p>
+  </div>
+<!--  <button mat-stroked-button color="primary" class="ml-5" routerLink="/">Retour</button>-->
+</div>
