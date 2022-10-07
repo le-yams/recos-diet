@@ -1,3 +1,15 @@
+# [2.1.0](https://gitlab.com/ydisanto/recos-diet/compare/2.0.2...2.1.0) (2022-10-07)
+
+
+### Bug Fixes
+
+* survey link ([a09cb9e](https://gitlab.com/ydisanto/recos-diet/commit/a09cb9eca41d9373c3120126f7ddf6bdd6fa6885))
+
+
+### Features
+
+* survey ([41c8203](https://gitlab.com/ydisanto/recos-diet/commit/41c8203b1061b5eeab63aa223a97ee7229c4ac96))
+
 ## [2.0.2](https://gitlab.com/ydisanto/recos-diet/compare/2.0.1...2.0.2) (2022-06-23)
 
 
