@@ -42,17 +42,17 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require("path").resolve("reports"),
+      dir: require("path").resolve("reports/web"),
       subdir: '.',
+      file : 'ng-coverage-web.cobertura.xml',
       reporters: [
-        {type: 'lcovonly'},
-        {type: 'text-summary'}
+        {type: 'cobertura'},
       ]
     },
     reporters: ['progress', 'kjhtml'],
     junitReporter: {
-      outputDir: require('path').resolve('reports'),
-      outputFile: 'junit_test_report.xml',
+      outputDir: require('path').resolve('reports/web'),
+      outputFile: 'ng-test-web.xunit.xml',
       useBrowserName: false,
     },
     port: 9876,

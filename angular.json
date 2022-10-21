@@ -7,7 +7,6 @@
       "projectType": "library",
       "schematics": {
         "@schematics/angular:library": {
-          "strict": true
         }
       },
       "root": "projects/domain",
@@ -159,7 +158,6 @@
       }
     }
   },
-  "defaultProject": "web",
   "cli": {
     "analytics": false
   }
