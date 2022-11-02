@@ -1,6 +1,6 @@
 {
   "name": "recos-diet",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "scripts": {
     "ng": "ng",
     "generate version asset": "node generate-version-asset.js",

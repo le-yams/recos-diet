@@ -1,3 +1,10 @@
+## [2.1.1](https://gitlab.com/ydisanto/recos-diet/compare/2.1.0...2.1.1) (2022-11-02)
+
+
+### Bug Fixes
+
+* update dependency ([071bcc9](https://gitlab.com/ydisanto/recos-diet/commit/071bcc90b0b4af46a38f3b65b3704e92d6ce8734))
+
 # [2.1.0](https://gitlab.com/ydisanto/recos-diet/compare/2.0.2...2.1.0) (2022-10-07)
 
 
