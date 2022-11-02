@@ -15,7 +15,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import {JsonAssetLoaderService} from "../infra/json-asset-loader.service";
+import {JsonAssetLoaderService} from "../../infra/json-asset-loader.service";
 
 @Injectable({
   providedIn: 'root'

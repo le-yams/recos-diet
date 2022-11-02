@@ -18,7 +18,6 @@
  * Public API Surface of domain
  */
 
-export * from './pubsub/pubsub';
 export * from './domain';
 export * from './domain.events';
 export * from './bibliography/bibliography';
@@ -38,4 +37,3 @@ export * from './micronutriments/micronutriments';
 export * from './micronutriments/micronutriments.events';
 export * from './target-flows/target-flows';
 export * from './target-flows/target-flows.events';
-export {Verbose} from './utils'

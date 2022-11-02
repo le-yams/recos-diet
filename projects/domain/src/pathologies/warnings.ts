@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-import {DomainEvents} from "../domain.events";
+import {DomainEventBus, Subscription} from "../domain.events";
 import {Pathology} from "./pathologies.data";
-import {Subscription} from "../pubsub/pubsub";
 import {SelectedPathologiesEvent} from "./pathologies.event";
 import {Warning, WarningLevel} from './warnings.data';
 import {NutritionistOpinionRequirementLevelChange, WarningsChange} from './warnings.events';
@@ -35,9 +34,9 @@ export class Warnings {
   private warnings: Warning[] = [];
   private subscriptions: Subscription[];
 
-  constructor(private repo: WarningsRead) {
+  constructor(private repo: WarningsRead, private events: DomainEventBus) {
     this.subscriptions = [
-      DomainEvents.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
+      this.events.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
         evt => this.selectedPathologiesChange(evt.pathologies))
     ];
   }
@@ -52,10 +51,10 @@ export class Warnings {
 
   private selectedPathologiesChange(pathologies: Pathology[]) {
     this.nutritionistOpinionRequirementLevel = this.computeNutritionistOpinionRequirementLevel(pathologies);
-    DomainEvents.publish(new NutritionistOpinionRequirementLevelChange(this.nutritionistOpinionRequirementLevel));
+    this.events.publish(new NutritionistOpinionRequirementLevelChange(this.nutritionistOpinionRequirementLevel));
 
     this.warnings = this.computeWarnings(pathologies);
-    DomainEvents.publish(new WarningsChange(this.warnings));
+    this.events.publish(new WarningsChange(this.warnings));
   }
 
   private computeNutritionistOpinionRequirementLevel(pathologies: Pathology[]) {

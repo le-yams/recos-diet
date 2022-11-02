@@ -15,7 +15,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import {DomainEvents, Pathology, SelectedPathologiesEvent} from "@recos-diet/domain";
+import {Pathology, SelectedPathologiesEvent} from "@recos-diet/domain";
 import {BehaviorSubject} from "rxjs";
 import {DomainService} from "../domain.service";
 
@@ -31,7 +31,7 @@ export class PathologiesService {
 
   constructor(private domainService: DomainService) {
     this.pathologies = domainService.pathologies;
-    DomainEvents.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
+    domainService.EventBus().subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
       evt => this.selectedPathologies.next(evt.pathologies));
   }
 

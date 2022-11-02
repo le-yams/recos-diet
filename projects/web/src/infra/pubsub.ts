@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-import {Verbose} from "../utils";
-
-export interface Subscription {
-  unsubscribe(): void;
-}
+import {Consumer, DomainEvent, DomainEventBus, Subscription} from "@recos-diet/domain";
+import {Verbose} from "./utils";
 
 const EMPTY_SUBSCRIPTION: Subscription = {
   unsubscribe: () => undefined,
 };
 
-export type Consumer<T> = (value: T) => void;
-
 export type Predicate<T> = (value: T) => boolean;
 
 const TRUE_PREDICATE: Predicate<unknown> = t => true;
 
-export interface Publisher<T> {
-  subscribe(consumer: Consumer<T>, filter?: Predicate<T>): Subscription;
+
+export interface Bus<T> {
+
+  publish(event: T): void;
+
+  subscribe(consumer: Consumer<T>, filter: Predicate<T>): Subscription;
 }
 
-export class Emitter<T> implements Publisher<T> {
+
+export class InMemoryBus<T> implements Bus<T> {
 
   private readonly consumers: Map<EmitterSubscription<T>, Consumer<T>> = new Map();
 
@@ -47,8 +47,8 @@ export class Emitter<T> implements Publisher<T> {
     return subscription;
   }
 
-  emit(event: T): void {
-    Verbose.log('emitting event', event);
+  publish(event: T): void {
+    Verbose.log('publishing event', event);
     if (this.consumers.size === 0) {
       Verbose.log('no consumers registered');
       return;
@@ -81,4 +81,26 @@ class EmitterSubscription<T> implements Subscription {
     this.consumers = undefined;
     this.filter = undefined;
   }
+}
+
+
+export class DomainEvents implements DomainEventBus {
+
+  private readonly bus: Bus<DomainEvent>;
+
+  constructor(bus: Bus<DomainEvent>) {
+    this.bus = bus;
+  }
+
+  public publish(event: DomainEvent): void {
+    this.bus.publish(event);
+  }
+
+  public subscribe<T extends DomainEvent>(eventName: string, consumer: Consumer<T>): Subscription {
+    return this.bus.subscribe(consumer as Consumer<DomainEvent>, forEvent(eventName));
+  }
+}
+
+function forEvent(eventName: string): Predicate<DomainEvent> {
+  return evt => evt.name === eventName;
 }

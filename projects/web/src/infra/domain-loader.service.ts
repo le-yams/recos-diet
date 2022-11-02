@@ -35,6 +35,8 @@ import {
   PathologyExclusions
 } from "./memory-micronutriment-exclusions.repository";
 import {MemoryWarningsRepository, PathologyWarnings} from "./memory-warnings.repository";
+import {DomainEvents, InMemoryBus} from "./pubsub";
+
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +74,7 @@ export class DomainLoaderService {
          warningsRead,
        ]) =>
         this.domain = new Domain(
+          new DomainEvents(new InMemoryBus()),
           productsRepository,
           productsRepository,
           bibliographyRepository,

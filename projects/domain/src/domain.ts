@@ -22,10 +22,12 @@ import {Pathologies} from "./pathologies/pathologies";
 import {Patient} from "./patient/patient";
 import {MicronutrimentExclusionsRead, Micronutriments, MicronutrimentRecommendationsRead} from "./micronutriments/micronutriments";
 import {Warnings, WarningsRead} from "./pathologies/warnings";
+import {DomainEventBus} from "./domain.events";
 
 
 export class Domain {
 
+  public readonly eventBus: DomainEventBus;
   public readonly bibliography: Bibliography;
   public readonly micronutriments: Micronutriments;
   public readonly targetFlows: TargetFlows;
@@ -37,6 +39,7 @@ export class Domain {
 
 
   constructor(
+    eventBus: DomainEventBus,
     productsRepository: ProductsRepository,
     nutritionRepository: ProductNutritionRepository,
     bibliographyRepository: BibliographyRepository,
@@ -44,19 +47,21 @@ export class Domain {
     parenteraleRecommendationsRead: MicronutrimentRecommendationsRead,
     exclusionsRead: MicronutrimentExclusionsRead,
     warningsRead: WarningsRead) {
-    this.warnings = new Warnings(warningsRead);
+
+    this.eventBus = eventBus;
+    this.warnings = new Warnings(warningsRead, this.eventBus);
     this.bibliography = new Bibliography(bibliographyRepository);
-    this.targetFlows = new TargetFlows();
-    this.products = new Products(productsRepository, nutritionRepository);
-    this.nutrition = new Nutrition();
-    this.pathologies = new Pathologies();
-    this.patient = new Patient();
+    this.targetFlows = new TargetFlows(this.eventBus);
+    this.products = new Products(productsRepository, nutritionRepository, this.eventBus);
+    this.nutrition = new Nutrition(this.eventBus);
+    this.pathologies = new Pathologies(this.eventBus);
+    this.patient = new Patient(this.eventBus);
     this.micronutriments = new Micronutriments({
       pathologies: this.pathologies.selectedPathologies,
       nutritionType: this.nutrition.getSelectedNutritionType(),
       enteraleRecommendationsRead: enteraleRecommendationsRead,
       parenteraleRecommendationsRead: parenteraleRecommendationsRead,
       exclusionsRead: exclusionsRead
-    });
+    }, this.eventBus);
   }
 }

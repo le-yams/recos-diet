@@ -23,19 +23,21 @@ import {
 } from './micronutriments';
 import {NutritionType} from '../nutrition/nutrition';
 import {Pathology} from '../pathologies/pathologies.data';
-import {DomainEvents} from "../domain.events";
+import {DomainEventBus} from "../domain.events";
 import {SummarizedMicronutrimentRecommendationsUpdatedEvent} from "./micronutriments.events";
 import {SelectedNutritionTypeEvent} from "../nutrition/nutrition.events";
-import {EventsCaptor} from '../shared.spec';
+import {EventsCaptor, TestDomainEventBus} from '../shared.spec';
 import {SelectedPathologiesEvent} from '../pathologies/pathologies.event';
 
 describe('Micronutriments', () => {
 
   let recommendations: Micronutriments;
+  let events: DomainEventBus;
   let eventsCaptor: EventsCaptor<SummarizedMicronutrimentRecommendationsUpdatedEvent>;
 
   beforeEach(() => {
-    eventsCaptor = new EventsCaptor(SummarizedMicronutrimentRecommendationsUpdatedEvent.name);
+    events = new TestDomainEventBus();
+    eventsCaptor = new EventsCaptor(SummarizedMicronutrimentRecommendationsUpdatedEvent.name, events);
   });
 
   afterEach(() => {
@@ -53,10 +55,10 @@ describe('Micronutriments', () => {
       exclusionsRead: new TestRecoEclusionsRead(),
       nutritionType: NutritionType.PARENTERALE,
       pathologies: []
-    });
+    }, events);
 
     // When
-    DomainEvents.publish(new SelectedNutritionTypeEvent(NutritionType.ENTERALE));
+    events.publish(new SelectedNutritionTypeEvent(NutritionType.ENTERALE));
 
     // Then
     eventsCaptor.expectEventsCount(1);
@@ -77,10 +79,10 @@ describe('Micronutriments', () => {
       exclusionsRead: new TestRecoEclusionsRead(),
       nutritionType: NutritionType.ENTERALE,
       pathologies: []
-    });
+    }, events);
 
     // When
-    DomainEvents.publish(new SelectedNutritionTypeEvent(NutritionType.PARENTERALE));
+    events.publish(new SelectedNutritionTypeEvent(NutritionType.PARENTERALE));
 
     // Then
     eventsCaptor.expectEventsCount(1);
@@ -104,10 +106,10 @@ describe('Micronutriments', () => {
       exclusionsRead: new TestRecoEclusionsRead(),
       nutritionType: NutritionType.ENTERALE,
       pathologies: []
-    });
+    }, events);
 
     // When
-    DomainEvents.publish(new SelectedPathologiesEvent([Pathology.CIRRHOTIQUE]));
+    events.publish(new SelectedPathologiesEvent([Pathology.CIRRHOTIQUE]));
 
     // Then
     eventsCaptor.expectEventsCount(1);
@@ -135,10 +137,10 @@ describe('Micronutriments', () => {
       exclusionsRead: new TestRecoEclusionsRead(),
       nutritionType: NutritionType.ENTERALE,
       pathologies: []
-    });
+    }, events);
 
     // When
-    DomainEvents.publish(new SelectedPathologiesEvent([Pathology.CIRRHOTIQUE, Pathology.CVVHDF]));
+    events.publish(new SelectedPathologiesEvent([Pathology.CIRRHOTIQUE, Pathology.CVVHDF]));
 
     // Then
     eventsCaptor.expectEventsCount(1);
@@ -164,10 +166,10 @@ describe('Micronutriments', () => {
       exclusionsRead: new TestRecoEclusionsRead(),
       nutritionType: NutritionType.ENTERALE,
       pathologies: []
-    });
+    }, events);
 
     // When
-    DomainEvents.publish(new SelectedPathologiesEvent([Pathology.CIRRHOTIQUE]));
+    events.publish(new SelectedPathologiesEvent([Pathology.CIRRHOTIQUE]));
 
     // Then
     eventsCaptor.expectEventsCount(1);
@@ -192,10 +194,10 @@ describe('Micronutriments', () => {
       exclusionsRead: new TestRecoEclusionsRead(),
       nutritionType: NutritionType.ENTERALE,
       pathologies: []
-    });
+    }, events);
 
     // When
-    DomainEvents.publish(new SelectedPathologiesEvent([Pathology.CIRRHOTIQUE]));
+    events.publish(new SelectedPathologiesEvent([Pathology.CIRRHOTIQUE]));
 
     // Then
     eventsCaptor.expectEventsCount(1);
@@ -223,10 +225,10 @@ describe('Micronutriments', () => {
       ])),
       nutritionType: NutritionType.ENTERALE,
       pathologies: []
-    });
+    }, events);
 
     // When
-    DomainEvents.publish(new SelectedPathologiesEvent([Pathology.ANOREXIE_MENTALE, Pathology.CVVHDF]));
+    events.publish(new SelectedPathologiesEvent([Pathology.ANOREXIE_MENTALE, Pathology.CVVHDF]));
 
     // Then
     eventsCaptor.expectEventsCount(1);

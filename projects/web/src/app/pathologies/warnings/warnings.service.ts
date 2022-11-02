@@ -18,7 +18,6 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {DomainService} from "../../domain.service";
 import {
-  DomainEvents,
   NutritionistOpinionRequirementLevelChange,
   Warning,
   WarningLevel,
@@ -44,9 +43,9 @@ export class WarningsService {
     this.warnings = new BehaviorSubject<Warning[]>(domainService.warnings.getWarnings());
     this.warnings$ = this.warnings.asObservable();
 
-    DomainEvents.subscribe<NutritionistOpinionRequirementLevelChange>(NutritionistOpinionRequirementLevelChange.name,
+    domainService.EventBus().subscribe<NutritionistOpinionRequirementLevelChange>(NutritionistOpinionRequirementLevelChange.name,
       evt => this.nutritionistOpinionRequirementLevel.next(evt.nutritionistOpinionRequirementLevel));
-    DomainEvents.subscribe<WarningsChange>(WarningsChange.name,
+    domainService.EventBus().subscribe<WarningsChange>(WarningsChange.name,
       evt => this.warnings.next(evt.warnings));
   }
 }

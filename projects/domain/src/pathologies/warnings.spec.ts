@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import {EventsCaptor} from "../shared.spec";
+import {EventsCaptor, TestDomainEventBus} from "../shared.spec";
 import {Warnings, WarningsRead} from "./warnings";
 import {SelectedPathologiesEvent} from "./pathologies.event";
-import {DomainEvents} from "../domain.events";
+import {DomainEventBus} from "../domain.events";
 import {Pathology} from "./pathologies.data";
 import {NutritionistOpinionRequirementLevelChange, WarningsChange} from './warnings.events';
 import {Warning, WarningLevel} from './warnings.data';
@@ -25,10 +25,12 @@ import {Warning, WarningLevel} from './warnings.data';
 describe('Warnings should', () => {
 
   let warnings: Warnings;
+  let events: DomainEventBus;
   let eventsCaptor: EventsCaptor<NutritionistOpinionRequirementLevelChange>;
 
   beforeEach(() => {
-    eventsCaptor = new EventsCaptor(NutritionistOpinionRequirementLevelChange.name);
+    events = new TestDomainEventBus();
+    eventsCaptor = new EventsCaptor(NutritionistOpinionRequirementLevelChange.name, events);
   });
 
   afterEach(() => {
@@ -66,10 +68,10 @@ describe('Warnings should', () => {
 
   params.forEach(param => it(param.description, () => {
     // Given
-    warnings = new Warnings(new TestWarningsRead(param.definedRequirements));
+    warnings = new Warnings(new TestWarningsRead(param.definedRequirements), events);
 
     // When
-    DomainEvents.publish(new SelectedPathologiesEvent(param.pathologies))
+    events.publish(new SelectedPathologiesEvent(param.pathologies))
 
     // Then
     eventsCaptor.expectEventsCount(1);
@@ -103,10 +105,12 @@ const WARN4 = {
 describe('Warnings should', () => {
 
   let warnings: Warnings;
+  let events: DomainEventBus;
   let eventsCaptor: EventsCaptor<WarningsChange>;
 
   beforeEach(() => {
-    eventsCaptor = new EventsCaptor(WarningsChange.name);
+    events = new TestDomainEventBus();
+    eventsCaptor = new EventsCaptor(WarningsChange.name, events);
   });
 
   afterEach(() => {
@@ -121,11 +125,11 @@ describe('Warnings should', () => {
       [Pathology.OH, [WARN1, WARN2, WARN3]],
       [Pathology.COVID_19, [WARN4]],
     ]);
-    warnings = new Warnings(new TestWarningsRead(new Map(), warns));
+    warnings = new Warnings(new TestWarningsRead(new Map(), warns), events);
 
     // When
     let pathologies: Pathology[] = [Pathology.CIRRHOTIQUE, Pathology.OH];
-    DomainEvents.publish(new SelectedPathologiesEvent(pathologies))
+    events.publish(new SelectedPathologiesEvent(pathologies))
 
     // Then
     eventsCaptor.expectEventsCount(1);

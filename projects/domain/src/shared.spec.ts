@@ -18,8 +18,65 @@
  * Shared utilities for testing
  */
 
-import {DomainEvent, DomainEvents} from './domain.events';
-import {Subscription} from './pubsub/pubsub';
+import {Consumer, DomainEvent, DomainEventBus, Subscription} from './domain.events';
+import {Predicate, TRUE_PREDICATE} from "./utils";
+
+export class TestDomainEventBus implements DomainEventBus {
+
+  private readonly consumers: Map<EmitterSubscription<DomainEvent>, Consumer<DomainEvent>> = new Map();
+
+  public subscribe<T extends DomainEvent>(eventName: string, consumer: Consumer<T>): Subscription {
+    const filter = forEvent(eventName);
+
+    if (!consumer) {
+      return EMPTY_SUBSCRIPTION;
+    }
+    const subscription = new EmitterSubscription<DomainEvent>(this.consumers, filter);
+    this.consumers.set(subscription, consumer as Consumer<DomainEvent>);
+    return subscription;
+  }
+
+  publish(event: DomainEvent): void {
+    if (this.consumers.size === 0) {
+      return;
+    }
+    let n = 0;
+    this.consumers.forEach((consumer, subscription) => {
+      const filter = subscription.filter ?? TRUE_PREDICATE;
+      if (filter(event)) {
+        n++;
+        consumer(event);
+      }
+    });
+  }
+}
+
+const EMPTY_SUBSCRIPTION: Subscription = {
+  unsubscribe: () => undefined,
+};
+
+class EmitterSubscription<T> implements Subscription {
+  private consumers: Map<EmitterSubscription<T>, Consumer<T>> | undefined;
+  filter: Predicate<T> | undefined;
+
+  constructor(consumers: Map<EmitterSubscription<T>, Consumer<T>>, filter?: Predicate<T>) {
+    this.consumers = consumers;
+    this.filter = filter;
+  }
+
+  unsubscribe(): void {
+    if (this.consumers) {
+      this.consumers.delete(this);
+    }
+    this.consumers = undefined;
+    this.filter = undefined;
+  }
+}
+
+function forEvent(eventName: string): Predicate<DomainEvent> {
+  return evt => evt.name === eventName;
+}
+
 
 export class EventsCaptor<T extends DomainEvent> {
 
@@ -27,8 +84,8 @@ export class EventsCaptor<T extends DomainEvent> {
   private subscription: Subscription;
   raisedEvents: T[] = [];
 
-  constructor(eventName: string) {
-    this.subscription = DomainEvents.subscribe<T>(eventName, evt => this.raisedEvents.push(evt as T))
+  constructor(eventName: string, events: DomainEventBus) {
+    this.subscription = events.subscribe<T>(eventName, evt => this.raisedEvents.push(evt as T))
   }
 
   expectEventsCount(expected: number) {

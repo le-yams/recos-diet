@@ -15,7 +15,7 @@
  */
 
 import {DEFAULT_NUTRITION_TYPE, NutritionType} from "./nutrition";
-import {DomainEvents} from '../domain.events';
+import {DomainEventBus} from '../domain.events';
 import {AvailableProductsEvent, SelectedProductNutritionInfoEvent, SelectedProductsEvent} from "./products.events";
 import {SelectedNutritionTypeEvent} from "./nutrition.events";
 import {SelectedPathologiesEvent} from "../pathologies/pathologies.event";
@@ -76,10 +76,10 @@ export class Products {
 
   private availableProducts: ProductInfo[] = [];
 
-  constructor(private repository: ProductsRepository, private productNutritionRepository: ProductNutritionRepository) {
-    DomainEvents.subscribe<SelectedNutritionTypeEvent>(SelectedNutritionTypeEvent.name,
+  constructor(private repository: ProductsRepository, private productNutritionRepository: ProductNutritionRepository, private events: DomainEventBus) {
+    this.events.subscribe<SelectedNutritionTypeEvent>(SelectedNutritionTypeEvent.name,
       evt => this.nutritionTypeChanged(evt.selectedNutritionType));
-    DomainEvents.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
+    this.events.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
       evt => this.updatePatientAnorexiaStatus(evt.hasAnorexia()));
   }
 
@@ -100,7 +100,7 @@ export class Products {
       .filter(product => product.nutritionType === nutritionType)
       .filter(product => product.compatibleWithAnorexia || !hasAnorexia);
     this.availableProducts = products;
-    DomainEvents.publish(new AvailableProductsEvent(products.map(product => product.name)));
+    this.events.publish(new AvailableProductsEvent(products.map(product => product.name)));
   }
 
   private updateSelectedProductIfNecessary() {
@@ -139,9 +139,9 @@ export class Products {
     this.selectedProduct = product;
     const productName = product.name;
     this.lastSelectedProducts.set(product.nutritionType, productName);
-    DomainEvents.publish(new SelectedProductsEvent(productName));
+    this.events.publish(new SelectedProductsEvent(productName));
     const nutritionInfo = this.productNutritionRepository.productNutritionInfo(productName);
-    DomainEvents.publish(new SelectedProductNutritionInfoEvent(nutritionInfo));
+    this.events.publish(new SelectedProductNutritionInfoEvent(nutritionInfo));
   }
 
   public getSelectedProduct(): ProductInfo | undefined {

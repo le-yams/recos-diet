@@ -17,7 +17,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {
-  DomainEvents,
   SelectedNutritionTypeEvent,
   NutritionType,
   AvailableProductsEvent,
@@ -54,13 +53,13 @@ export class NutritionService {
     this.selectedProduct.next(this.products.getSelectedProduct()?.name);
     this.availableProducts.next(this.products.listAvailableProducts().map(p => p.name));
 
-    DomainEvents.subscribe<SelectedNutritionTypeEvent>(SelectedNutritionTypeEvent.name,
+    domainService.EventBus().subscribe<SelectedNutritionTypeEvent>(SelectedNutritionTypeEvent.name,
       evt => this.nutritionType.next(evt.selectedNutritionType));
 
-    DomainEvents.subscribe<AvailableProductsEvent>(AvailableProductsEvent.name,
+    domainService.EventBus().subscribe<AvailableProductsEvent>(AvailableProductsEvent.name,
       evt => this.availableProducts.next(evt.availableProducts));
 
-    DomainEvents.subscribe<SelectedProductsEvent>(SelectedProductsEvent.name,
+    domainService.EventBus().subscribe<SelectedProductsEvent>(SelectedProductsEvent.name,
       evt => this.selectedProduct.next(evt.selectedProduct));
 
   }

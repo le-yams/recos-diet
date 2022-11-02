@@ -14,26 +14,19 @@
  * limitations under the License.
  */
 
-import {Consumer, Emitter, Predicate, Subscription} from './pubsub/pubsub'
-
 export interface DomainEvent {
     name: string
 }
 
-export class DomainEvents {
+export interface DomainEventBus {
 
-  static readonly emitter = new Emitter<DomainEvent>();
+  publish(event: DomainEvent): void;
 
-  static publish(event: DomainEvent): void {
-    DomainEvents.emitter.emit(event);
-  }
-
-  static subscribe<T extends DomainEvent>(eventName: string, consumer: Consumer<T>): Subscription {
-    return DomainEvents.emitter.subscribe(consumer as Consumer<DomainEvent>, forEvent(eventName));
-  }
-
+  subscribe<T extends DomainEvent>(eventName: string, consumer: Consumer<T>): Subscription;
 }
 
-function forEvent(eventName: string): Predicate<DomainEvent> {
-  return evt => evt.name === eventName;
+export type Consumer<T> = (value: T) => void;
+
+export interface Subscription {
+  unsubscribe(): void;
 }

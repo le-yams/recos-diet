@@ -35,7 +35,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {FlowsStripComponent} from './flows-strip/flows-strip.component';
 import {TargetFlowsModule} from "./target-flows/target-flows.module";
 import {MatCardModule} from "@angular/material/card";
-import {DomainLoaderService} from "./infra/domain-loader.service";
+import {DomainLoaderService} from "../infra/domain-loader.service";
 import {DisclaimerComponent} from './disclaimer/disclaimer.component';
 import {PageBibliographyComponent} from './pages/page-bibliography/page-bibliography.component';
 import {FooterComponent} from './footer/footer.component';

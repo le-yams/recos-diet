@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {DomainEvents} from '../domain.events';
+import {DomainEventBus} from '../domain.events';
 import {SelectedNutritionTypeEvent} from "./nutrition.events";
 
 
@@ -29,7 +29,7 @@ export class Nutrition {
 
   private selectedNutritionType!: NutritionType;
 
-  constructor() {
+  constructor(private events: DomainEventBus) {
     this.selectNutritionType(DEFAULT_NUTRITION_TYPE)
   }
 
@@ -40,7 +40,7 @@ export class Nutrition {
   selectNutritionType(nutritionType: NutritionType) {
     if (this.selectedNutritionType !== nutritionType) {
       this.selectedNutritionType = nutritionType;
-      DomainEvents.publish(new SelectedNutritionTypeEvent(nutritionType))
+      this.events.publish(new SelectedNutritionTypeEvent(nutritionType))
     }
   }
 

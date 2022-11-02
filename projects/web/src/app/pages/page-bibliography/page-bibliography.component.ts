@@ -18,7 +18,8 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {DomainService} from "../../domain.service";
 import {faBookMedical} from '@fortawesome/free-solid-svg-icons';
 import {ActivatedRoute} from "@angular/router";
-import {BibliographyEntry, Verbose} from '@recos-diet/domain';
+import {BibliographyEntry} from '@recos-diet/domain';
+import {Verbose} from "../../../infra/utils";
 
 @Component({
   selector: 'app-page-bibliography',

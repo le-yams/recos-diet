@@ -17,7 +17,7 @@
 import { Injectable } from '@angular/core';
 import {DomainService} from "../domain.service";
 import {BehaviorSubject} from "rxjs";
-import {TargetFlow, TargetlowsUpdatedEvent, DomainEvents} from "@recos-diet/domain";
+import {TargetFlow, TargetlowsUpdatedEvent} from "@recos-diet/domain";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class TargetFlowsService {
 
   constructor(domainService: DomainService) {
     this.targetFlows.next(domainService.targetFlows.getTargetFlows());
-    DomainEvents.subscribe<TargetlowsUpdatedEvent>(TargetlowsUpdatedEvent.name,
+    domainService.EventBus().subscribe<TargetlowsUpdatedEvent>(TargetlowsUpdatedEvent.name,
       evt => this.targetFlows.next(evt.targetFlows));
   }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {DomainEvents} from "../domain.events";
+import {DomainEventBus} from "../domain.events";
 import {PatientInfo} from "../patient/patient";
 import {PatientInfoUpdatedEvent} from "../patient/patient.events";
 import {SelectedPathologiesEvent} from "../pathologies/pathologies.event";
@@ -105,10 +105,10 @@ export class TargetFlows {
   private selectedPathologies: Pathology[] = [];
   private targetFlows: TargetFlow[] = [];
 
-  constructor() {
-    DomainEvents.subscribe<PatientInfoUpdatedEvent>(PatientInfoUpdatedEvent.name, evt => this.patientInfoUpdated(evt.patient));
-    DomainEvents.subscribe<SelectedProductNutritionInfoEvent>(SelectedProductNutritionInfoEvent.name, evt => this.nutritionInfoUpdated(evt.selectedProductProductNutritionInfo));
-    DomainEvents.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name, evt => this.selectedPathologiesUpdated(evt.pathologies));
+  constructor(private events: DomainEventBus) {
+    this.events.subscribe<PatientInfoUpdatedEvent>(PatientInfoUpdatedEvent.name, evt => this.patientInfoUpdated(evt.patient));
+    this.events.subscribe<SelectedProductNutritionInfoEvent>(SelectedProductNutritionInfoEvent.name, evt => this.nutritionInfoUpdated(evt.selectedProductProductNutritionInfo));
+    this.events.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name, evt => this.selectedPathologiesUpdated(evt.pathologies));
   }
 
   getTargetFlows() {
@@ -137,7 +137,7 @@ export class TargetFlows {
         .filter(target => target.isRelevant(context))
         .map(target => this.computeTargetFlow(target.value));
       this.targetFlows = targetFlows;
-      DomainEvents.publish(new TargetlowsUpdatedEvent(targetFlows))
+      this.events.publish(new TargetlowsUpdatedEvent(targetFlows))
     }
   }
 

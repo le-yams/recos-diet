@@ -17,8 +17,9 @@
 import {Component} from '@angular/core';
 import {MicronutrimentsService} from "./micronutriments.service";
 import {Observable} from "rxjs";
-import {SummarizedMicronutrimentRecommendation, Verbose} from "@recos-diet/domain";
+import {SummarizedMicronutrimentRecommendation} from "@recos-diet/domain";
 import {map, tap} from "rxjs/operators";
+import {Verbose} from "../../infra/utils";
 
 @Component({
   selector: 'app-nutriments',

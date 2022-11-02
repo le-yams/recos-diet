@@ -16,11 +16,10 @@
 
 import {NutritionType} from '../nutrition/nutrition';
 import {Pathology} from '../pathologies/pathologies.data';
-import {group, mapValues, notIn, Verbose} from '../utils';
-import {DomainEvents} from "../domain.events";
+import {group, mapValues, notIn} from '../utils';
+import {DomainEventBus, Subscription} from "../domain.events";
 import {SelectedNutritionTypeEvent} from "../nutrition/nutrition.events";
 import {SummarizedMicronutrimentRecommendationsUpdatedEvent} from "./micronutriments.events";
-import {Subscription} from '../pubsub/pubsub';
 import {SelectedPathologiesEvent} from '../pathologies/pathologies.event';
 import {Comparable, maxOf} from "../comparison/comparison";
 
@@ -44,7 +43,6 @@ export class AdministrationTerms implements Comparable<AdministrationTerms>{
 
   merge(other: AdministrationTerms): AdministrationTerms {
     const max = maxOf(this, other);
-    Verbose.log('merging AdministrationTerms with quantities', this.quantity, other.quantity, 'max is', max.quantity);
     return new AdministrationTerms(max.quantity, max.unit);
   }
 
@@ -193,13 +191,13 @@ export class Micronutriments {
   private subscriptions: Subscription[];
   private summarizedRecommendations: SummarizedMicronutrimentRecommendation[] = [];
 
-  constructor(contextParams: MicronutrimentRecommendationsContext) {
+  constructor(contextParams: MicronutrimentRecommendationsContext, private events: DomainEventBus) {
     this.context = new Context(contextParams);
     this.summarizedRecommendations = this.context.summarizeRecommendations();
     this.subscriptions = [
-      DomainEvents.subscribe<SelectedNutritionTypeEvent>(SelectedNutritionTypeEvent.name,
+      this.events.subscribe<SelectedNutritionTypeEvent>(SelectedNutritionTypeEvent.name,
         evt => this.updateSelectedNutritionType(evt.selectedNutritionType)),
-      DomainEvents.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
+      this.events.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
         evt => this.updateSelectedPathologies(evt.pathologies))
     ];
   }
@@ -211,7 +209,7 @@ export class Micronutriments {
   private updateContext(context: Context) {
     this.context = context;
     this.summarizedRecommendations = context.summarizeRecommendations();
-    DomainEvents.publish(new SummarizedMicronutrimentRecommendationsUpdatedEvent(this.summarizedRecommendations));
+    this.events.publish(new SummarizedMicronutrimentRecommendationsUpdatedEvent(this.summarizedRecommendations));
   }
 
   private updateSelectedNutritionType(nutritionType: NutritionType) {

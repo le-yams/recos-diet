@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {DomainEvents} from '../domain.events';
+import {DomainEventBus} from '../domain.events';
 import {PatientInfoUpdatedEvent} from "./patient.events";
 
 export interface PatientSize {
@@ -45,7 +45,7 @@ export class Patient implements PatientInfo {
   bmi!: number;
   adjustedWeightKg!: number;
 
-  constructor() {
+  constructor(private events: DomainEventBus) {
     this.updateSize(defaultPatientSize);
   }
 
@@ -54,7 +54,7 @@ export class Patient implements PatientInfo {
     this.weightKg = patientSize.weightKg ?? this.weightKg;
     this.bmi = this.computeBMI();
     this.adjustedWeightKg = this.computeAdjustedWeight();
-    DomainEvents.publish(new PatientInfoUpdatedEvent(this));
+    this.events.publish(new PatientInfoUpdatedEvent(this));
   }
 
   private computeBMI(): number {

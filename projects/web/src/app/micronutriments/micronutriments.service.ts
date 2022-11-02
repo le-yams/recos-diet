@@ -17,7 +17,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {DomainService} from "../domain.service";
-import {DomainEvents, SummarizedMicronutrimentRecommendation, SummarizedMicronutrimentRecommendationsUpdatedEvent} from "@recos-diet/domain";
+import {SummarizedMicronutrimentRecommendation, SummarizedMicronutrimentRecommendationsUpdatedEvent} from "@recos-diet/domain";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class MicronutrimentsService {
 
   constructor(domainService: DomainService) {
     this.nutrimentRecommendations.next(domainService.micronutriments.getSummarizedRecommendations());
-    DomainEvents.subscribe<SummarizedMicronutrimentRecommendationsUpdatedEvent>(SummarizedMicronutrimentRecommendationsUpdatedEvent.name,
+    domainService.EventBus().subscribe<SummarizedMicronutrimentRecommendationsUpdatedEvent>(SummarizedMicronutrimentRecommendationsUpdatedEvent.name,
       evt => this.nutrimentRecommendations.next(evt.recommendations));
   }
 }

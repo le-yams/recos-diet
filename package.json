@@ -9,7 +9,7 @@
     "build": "ng build domain && ng build web",
     "watch": "ng build --watch --configuration development",
     "test domain": "ng test domain --code-coverage",
-    "test": "ng test",
+    "test": "ng test domain --no-watch && ng test web --no-watch",
     "lint domain": "ng lint domain",
     "lint webapp": "ng lint web"
   },

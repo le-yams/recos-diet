@@ -15,18 +15,20 @@
  */
 
 import {Patient} from './patient';
-import {DomainEvent, DomainEvents} from "../domain.events";
+import {DomainEventBus} from "../domain.events";
 import {PatientInfoUpdatedEvent} from "./patient.events";
-import {EventsCaptor} from '../shared.spec';
+import {EventsCaptor, TestDomainEventBus} from '../shared.spec';
 
 describe('Patient', () => {
 
-  let patient: Patient;
+  let events: DomainEventBus
   let eventsCaptor: EventsCaptor<PatientInfoUpdatedEvent>;
+  let patient: Patient;
 
   beforeEach(() => {
-    patient = new Patient();
-    eventsCaptor = new EventsCaptor(PatientInfoUpdatedEvent.name);
+    events = new TestDomainEventBus();
+    patient = new Patient(events);
+    eventsCaptor = new EventsCaptor(PatientInfoUpdatedEvent.name, events);
   });
 
   afterEach(() => {
@@ -50,8 +52,6 @@ describe('Patient', () => {
   });
 
   it('should emit an event on patient info update', () => {
-    const raisedEvents: DomainEvent[] = [];
-    DomainEvents.subscribe(PatientInfoUpdatedEvent.name, value => raisedEvents.push(value));
     patient.updateSize({
       heightCm: 182,
       weightKg: 86

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {DomainEvents} from '../domain.events';
+import {DomainEventBus} from '../domain.events';
 import {PatientInfo} from "../patient/patient";
 import {SelectedPathologiesEvent} from "./pathologies.event";
 import {PatientInfoUpdatedEvent} from "../patient/patient.events";
@@ -24,14 +24,14 @@ export class Pathologies {
 
   selectedPathologies: Pathology[] = [];
 
-  constructor() {
-    DomainEvents.subscribe<PatientInfoUpdatedEvent>(PatientInfoUpdatedEvent.name,
+  constructor(private events: DomainEventBus) {
+    this.events.subscribe<PatientInfoUpdatedEvent>(PatientInfoUpdatedEvent.name,
       evt => this.updateObesityPathologySelection(evt.patient));
   }
 
   selectPathologies(pathologies: Pathology[]) {
     this.selectedPathologies = pathologies;
-    DomainEvents.publish(new SelectedPathologiesEvent(pathologies));
+    this.events.publish(new SelectedPathologiesEvent(pathologies));
   }
 
   private updateObesityPathologySelection(patient: PatientInfo) {

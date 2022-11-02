@@ -15,12 +15,15 @@
  */
 
 import { Injectable } from '@angular/core';
-import {DomainLoaderService} from "./infra/domain-loader.service";
+import {DomainLoaderService} from "../infra/domain-loader.service";
+import {DomainEventBus} from "../../../domain/src/domain.events";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DomainService {
+
+  readonly domain;
 
   readonly warnings;
 
@@ -48,6 +51,11 @@ export class DomainService {
     this.nutrition = domain.nutrition;
     this.pathologies = domain.pathologies;
     this.patient = domain.patient;
+    this.domain = domain;
+  }
+
+  public EventBus(): DomainEventBus {
+    return this.domain.eventBus;
   }
 
 }

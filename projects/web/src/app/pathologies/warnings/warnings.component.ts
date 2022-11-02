@@ -17,8 +17,9 @@
 import {Component} from '@angular/core';
 import {WarningsService} from "./warnings.service";
 import {Observable} from "rxjs";
-import {Verbose, Warning, WarningLevel} from '@recos-diet/domain';
+import {Warning, WarningLevel} from '@recos-diet/domain';
 import {map} from "rxjs/operators";
+import {Verbose} from "../../../infra/utils";
 
 @Component({
   selector: 'app-warnings',
