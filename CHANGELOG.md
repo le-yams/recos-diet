@@ -1,3 +1,10 @@
+# [2.2.0](https://gitlab.com/ydisanto/recos-diet/compare/2.1.1...2.2.0) (2023-02-21)
+
+
+### Features
+
+* add periolimel product ([f4c6aaa](https://gitlab.com/ydisanto/recos-diet/commit/f4c6aaa79ccf483cf9a0f8453f75eb7c22b3d8ad))
+
 ## [2.1.1](https://gitlab.com/ydisanto/recos-diet/compare/2.1.0...2.1.1) (2022-11-02)
 
 
