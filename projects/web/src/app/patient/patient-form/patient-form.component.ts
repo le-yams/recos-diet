@@ -45,6 +45,12 @@ export class PatientFormComponent {
     })
   }
 
+  shouldDisplayAdjustedWeight(): boolean {
+    return this.patient.isOverweight() &&
+      this.round(this.patient.adjustedWeightKg, 1) <
+      this.round(this.patient.weightKg, 1)
+  }
+
   private static intValueFromInput(event: Event): number {
     let target = event.target as HTMLInputElement;
     return parseInt(target.value)
@@ -53,5 +59,10 @@ export class PatientFormComponent {
   private static numberValueFromInput(event: Event): number {
     let target = event.target as HTMLInputElement;
     return parseFloat(target.value);
+  }
+
+  private round(value: number, precision: number): number {
+    const multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
   }
 }

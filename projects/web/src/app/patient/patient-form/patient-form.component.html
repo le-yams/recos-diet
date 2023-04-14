@@ -43,7 +43,7 @@
       </mat-form-field>
     </p>
 
-    <p *ngIf="patient.isOverweight()">
+    <p *ngIf="shouldDisplayAdjustedWeight()">
       <mat-form-field>
         <mat-label>Poids ajusté (kg)</mat-label>
         <input matInput readonly

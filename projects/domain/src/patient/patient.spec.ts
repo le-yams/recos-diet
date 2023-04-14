@@ -40,7 +40,7 @@ describe('Patient', () => {
       heightCm: 182,
       weightKg: 86
     });
-    expect(patient.bmi).toBeCloseTo(26, 0.1);
+    expect(patient.bmi).toBeCloseTo(26, 0.01);
   });
 
   it('should compute adjusted weight', () => {
@@ -48,7 +48,23 @@ describe('Patient', () => {
       heightCm: 182,
       weightKg: 86
     });
-    expect(patient.adjustedWeightKg).toBeCloseTo(83.8, 0.1);
+    expect(patient.adjustedWeightKg).toBeCloseTo(83.8, 0.01);
+  });
+
+  it('should have adjusted weight equals weight when bmi < 25', () => {
+    patient.updateSize({
+      heightCm: 175,
+      weightKg: 76.3
+    });
+    expect(patient.adjustedWeightKg).toBeCloseTo(76.3, 0.01);
+  });
+
+  it('should not be overweight bmi < 25', () => {
+    patient.updateSize({
+      heightCm: 175,
+      weightKg: 76.3
+    });
+    expect(patient.isOverweight()).toBeFalse();
   });
 
   it('should emit an event on patient info update', () => {
