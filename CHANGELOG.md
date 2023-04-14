@@ -1,3 +1,10 @@
+## [2.2.1](https://gitlab.com/ydisanto/recos-diet/compare/2.2.0...2.2.1) (2023-04-14)
+
+
+### Bug Fixes
+
+* adjusted weight ([46d5412](https://gitlab.com/ydisanto/recos-diet/commit/46d5412045bdab86225f15f526a8950da5fa4a8c))
+
 # [2.2.0](https://gitlab.com/ydisanto/recos-diet/compare/2.1.1...2.2.0) (2023-02-21)
 
 
