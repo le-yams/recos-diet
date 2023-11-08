@@ -17,6 +17,7 @@
 import {Injectable, SecurityContext} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {DomSanitizer} from "@angular/platform-browser";
+import {firstValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,7 @@ export class JsonAssetLoaderService {
 
     let trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
     let sanitizedUrl = this.domSanitizer.sanitize(SecurityContext.RESOURCE_URL, trustedUrl)!;
-    return this.http.get<T>(sanitizedUrl).toPromise();
+
+    return firstValueFrom(this.http.get<T>(sanitizedUrl))
   }
 }

@@ -24,7 +24,7 @@ stages:
 
 variables:
   # Angular template
-  NG_CLI_IMAGE: trion/ng-cli-karma:15.2.10
+  NG_CLI_IMAGE: trion/ng-cli-karma:16.2.9
 #  NG_DEFAULT_PROJECT: "web"
   LFTP_SRC: "dist/web"
 

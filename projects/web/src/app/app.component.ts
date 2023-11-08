@@ -15,7 +15,7 @@
  */
 
 import {Component} from '@angular/core';
-import {Observable} from "rxjs";
+import {firstValueFrom, Observable} from "rxjs";
 import {filter, first} from "rxjs/operators";
 import {MatSidenav} from "@angular/material/sidenav";
 import {
@@ -102,7 +102,7 @@ export class AppComponent {
   }
 
   async closeDrawerIfHandset(drawer: MatSidenav) {
-    const isHandset: boolean = await this.isHandset$.pipe(first()).toPromise();
+    const isHandset: boolean = await firstValueFrom(this.isHandset$)
     if (isHandset) {
       await drawer.close();
     }
