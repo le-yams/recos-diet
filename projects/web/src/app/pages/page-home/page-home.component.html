@@ -25,11 +25,13 @@
   <div class="center-pane">
 
     <mat-card>
-      <mat-card-title>
-        <fa-icon [icon]="faBullseye" aria-hidden="true"></fa-icon>&nbsp;Débits cibles
-      </mat-card-title>
+      <mat-card-header>
+        <mat-card-title>
+          <fa-icon [icon]="faBullseye" aria-hidden="true"></fa-icon>&nbsp;Débits cibles
+        </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
       <mat-card-content>
-        <hr class="my-4">
         <div>
           <app-flows-strip></app-flows-strip>
           <app-target-flows></app-target-flows>
@@ -38,11 +40,13 @@
     </mat-card>
 
     <mat-card class="center-pane">
-      <mat-card-title>
-        <fa-icon [icon]="faPills" aria-hidden="true"></fa-icon>&nbsp;Micronutriments
-      </mat-card-title>
+      <mat-card-header>
+        <mat-card-title>
+          <fa-icon [icon]="faPills" aria-hidden="true"></fa-icon>&nbsp;Micronutriments
+        </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
       <mat-card-content>
-        <hr class="my-4">
         <app-nutriments></app-nutriments>
       </mat-card-content>
     </mat-card>

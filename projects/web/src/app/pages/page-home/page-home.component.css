@@ -32,3 +32,15 @@ div.page-target-flows {
   margin-bottom: 5px;
   flex: 1;
 }
+
+app-patient-form {
+  margin-bottom: 5px;
+}
+
+app-nutrition-form {
+  margin-bottom: 5px;
+}
+
+app-pathologies {
+  margin-bottom: 5px;
+}

@@ -15,12 +15,16 @@
   -->
 
 <mat-card class="bibliography">
-  <mat-card-title>
-    <fa-icon [icon]="faBookMedical" aria-hidden="true"></fa-icon>&nbsp;Bibliographie
-  </mat-card-title>
+  <mat-card-header>
+    <mat-card-title>
+      <fa-icon [icon]="faBookMedical" aria-hidden="true"></fa-icon>&nbsp;Bibliographie
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
   <mat-card-content>
 
-    <hr class="my-4">
 
     <div *ngFor="let entry of bibliography.allEntries().sortedByIndex()">
       <p [id]="'bibliography-' + entry.index" [class.highlighted]="isHighlighted(entry)">

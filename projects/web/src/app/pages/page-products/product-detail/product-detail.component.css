@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-mat-card {
-  margin-bottom: 3em;
+.mat-mdc-card {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
-mat-card-title {
+.mat-mdc-card-title {
   color: rgba(64, 64, 64, .87) !important;
 }
 
-.mat-expansion-panel-body {
+.mat-mdc-expansion-panel-body {
   padding: 0 !important;
 }
 
-mat-card-footer * {
+.mat-mdc-card-footer * {
   color: rgba(56, 65, 73, .87) !important;
 }

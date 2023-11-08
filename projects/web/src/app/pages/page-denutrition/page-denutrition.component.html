@@ -15,17 +15,20 @@
   -->
 
 <mat-card>
-  <mat-card-title>
-    <fa-icon [icon]="faStickyNote" aria-hidden="true"></fa-icon>&nbsp;Critères de dénutrition HAS
-  </mat-card-title>
+  <mat-card-header>
+    <mat-card-title>
+      <fa-icon [icon]="faStickyNote" aria-hidden="true"></fa-icon>&nbsp;Critères de dénutrition HAS
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
 
   <mat-card-content>
 
-    <hr class="my-4">
 
     <mat-checkbox [(ngModel)]="patientIsOld">Patient agé (cocher si age ≥ 70 ans)</mat-checkbox>
 
-    <hr class="my-4"/>
+    <mat-divider></mat-divider>
 
 
     <div class="info">
@@ -66,7 +69,7 @@
       </div>
     </div>
 
-    <hr class="my-4"/>
+    <mat-divider></mat-divider>
 
     <div class="info">
       La s&eacute;v&eacute;rit&eacute; d'une d&eacute;nutrition av&eacute;r&eacute;e est &eacute;valu&eacute;e selon les
@@ -100,19 +103,22 @@
       </div>
     </div>
 
-    <hr class="my-4">
+    <mat-divider></mat-divider>
+
+    <div class="sources-footer">
 
     <span>
       Source:
       <a *ngIf="!patientIsOld"
-        href="https://www.has-sante.fr/jcms/p_3120231/fr/diagnostic-de-la-denutrition-de-l-enfant-et-de-l-adulte-fiche-outil">
+         href="https://www.has-sante.fr/jcms/p_3120231/fr/diagnostic-de-la-denutrition-de-l-enfant-et-de-l-adulte-fiche-outil">
         Fiche outil pour le diagnostic de la d&eacute;nutrition de l'enfant et de l'adulte
       </a>
       <a *ngIf="patientIsOld"
-        href="https://www.has-sante.fr/jcms/p_3165944/fr/diagnostic-de-la-denutrition-chez-la-personne-de-70-ans-et-plus">
+         href="https://www.has-sante.fr/jcms/p_3165944/fr/diagnostic-de-la-denutrition-chez-la-personne-de-70-ans-et-plus">
         Diagnostic de la dénutrition chez la personne de 70 ans et plus
       </a>
     </span>
+    </div>
 
 
   </mat-card-content>

@@ -24,8 +24,12 @@
   background: white;
 }
 
-#flyingMenu button.mat-button {
+#flyingMenu button.mat-mdc-button {
   padding: 0 !important;
+}
+
+.main-content {
+  margin-left: 0.5em;
 }
 
 .blinking {

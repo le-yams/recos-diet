@@ -15,7 +15,9 @@
   -->
 
 <mat-card>
-  <mat-card-title>{{product.name}}</mat-card-title>
+  <mat-card-header>
+    <mat-card-title>{{product.name}}</mat-card-title>
+  </mat-card-header>
   <mat-card-content>
     <p [innerHTML]="product.indications"></p>
   </mat-card-content>

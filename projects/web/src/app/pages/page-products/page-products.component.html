@@ -15,19 +15,23 @@
   -->
 
 <mat-card>
-  <mat-card-title>
-    <fa-icon [icon]="faVials" aria-hidden="true"></fa-icon>&nbsp;Produits
-  </mat-card-title>
+  <mat-card-header>
+    <mat-card-title>
+      <fa-icon [icon]="faVials" aria-hidden="true"></fa-icon>&nbsp;Produits
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
   <mat-card-content>
-
-    <hr class="my-4">
 
     <div class="row">
 
       <div [class.max-height-50-percent]="(notHandset$ | async)">
 
         <mat-card>
-          <mat-card-title><u>Entérale</u></mat-card-title>
+          <mat-card-header>
+            <mat-card-title><u>Entérale</u></mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
           <mat-card-content>
             <app-product-detail *ngFor="let product of productsEnterale" [product]="product"></app-product-detail>
           </mat-card-content>
@@ -36,7 +40,10 @@
 
       <div [class.max-height-50-percent]="(notHandset$ | async)">
         <mat-card>
-          <mat-card-title><u>Parentérale</u></mat-card-title>
+          <mat-card-header>
+            <mat-card-title><u>Parentérale</u></mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
           <mat-card-content>
             <app-product-detail *ngFor="let product of productsParenterale" [product]="product"></app-product-detail>
           </mat-card-content>

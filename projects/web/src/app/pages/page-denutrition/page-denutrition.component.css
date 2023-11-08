@@ -23,3 +23,8 @@ h5 {
   margin: 0;
   color: #6c757d !important;
 }
+
+div.sources-footer {
+  margin-top: 1em;
+  font-size: 0.75em;
+}
