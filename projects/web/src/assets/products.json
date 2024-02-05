@@ -27,6 +27,14 @@
       "proteinsGramsPerLiter": 38
     },
     {
+      "name": "Nutrison Energy Multifibres",
+      "nutritionType": "Entérale",
+      "indications": "Produit hypercalorique hyperprotidique avec fibres solubles et insolubles destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés. A utiliser à partir de 1 mois de séjour en réa. Sur avis médical/diet.",
+      "compatibleWithAnorexia": false,
+      "kcalPerLiter": 1530,
+      "proteinsGramsPerLiter": 60
+    },
+    {
       "name": "Nutrison Protein intense",
       "nutritionType": "Entérale",
       "indications": "Produit hyperprotidique destiné à la prise en charge nutritionnelle des patients dénutris en soins intensifs.",
