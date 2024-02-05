@@ -113,8 +113,9 @@ export class Products {
   private updateSelectedProductIfNecessary() {
     const nutritionType = this.selectedNutritionType;
     if (this.selectedProductIsNotCompatibleWith(nutritionType)) {
-      const compatibleProduct = this.lastSelectedProducts.get(nutritionType) ?? this.defaultProductFor(nutritionType);
-      this.selectProduct(compatibleProduct);
+      const lastSelectedProduct = this.lastSelectedProducts.get(nutritionType) ?? this.defaultProductFor(nutritionType);
+      const compatibleProduct = this.availableProducts.find(p => p.name === lastSelectedProduct) ?? this.availableProducts[0];
+      this.selectProduct(compatibleProduct.name);
     } else if (this.patientHasAnorexia && !this.selectedProduct?.compatibleWithAnorexia) {
       const compatibleProduct = this.availableProducts.find(p => p.compatibleWithAnorexia)!;
       this.updateSelectedProduct(compatibleProduct);
