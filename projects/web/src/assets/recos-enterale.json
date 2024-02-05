@@ -65,7 +65,8 @@
             "unit": "mg/jour"
           },
           "clauses": [
-            "en IV"
+            "en IV",
+            "pendant les 3 premiers jours"
           ],
           "excludeClauses": [
             "Si dénutrition sévère uniquement",
