@@ -30,10 +30,10 @@
   <form *ngIf="selectedPathologies$ | async as selectedPathologies">
     <ul>
       <li *ngFor="let pathology of allPathologies">
-        <mat-checkbox [disabled]="isObesity(pathology)"
-                      [checked]="selectedPathologies.includes(pathology)"
-                      (change)="pathologySelectionChange(pathology, $event.checked)"
-        >{{pathology}}</mat-checkbox>
+          <mat-checkbox [disabled]="(isPathologyDisabled(pathology) | async) || false"
+                        [checked]="selectedPathologies.includes(pathology)"
+                        (change)="pathologySelectionChange(pathology, $event.checked)"
+          >{{pathology}}</mat-checkbox>
       </li>
 
     </ul>

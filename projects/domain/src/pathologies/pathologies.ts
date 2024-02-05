@@ -37,6 +37,7 @@ export class Pathologies {
   private updateObesityPathologySelection(patient: PatientInfo) {
     if (Pathologies.hasObesity(patient)) {
       this.addPathologyToSelection(Pathology.OBESITE);
+      this.removePathologyFromSelection(Pathology.ANOREXIE_MENTALE);
     } else {
       this.removePathologyFromSelection(Pathology.OBESITE);
     }

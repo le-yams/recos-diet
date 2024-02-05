@@ -27,4 +27,15 @@ export class SelectedPathologiesEvent implements DomainEvent {
     return !!this.pathologies
       .find(pathology => pathology === Pathology.ANOREXIE_MENTALE);
   }
+  hasEer(): boolean {
+    return !!this.pathologies
+      .find(pathology => pathology === Pathology.CVVHDF);
+  }
+  hasObesity(): boolean {
+    return !!this.pathologies
+      .find(pathology => pathology === Pathology.OBESITE);
+  }
+  hasEerObesity(): boolean {
+    return this.hasEer() && this.hasObesity();
+  }
 }

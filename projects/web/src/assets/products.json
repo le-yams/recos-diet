@@ -7,6 +7,7 @@
       "nutritionType": "Parentérale",
       "indications": "Produit réservé aux patients de SMC et hospitalisation traditionnelle, Alimentation <strong><u>AVEC</u></strong> électrolytes. Sur avis médical/diet.",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 1140,
       "proteinsGramsPerLiter": 44.3
     },
@@ -15,6 +16,7 @@
       "nutritionType": "Parentérale",
       "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés; Alimentation <strong><u>AVEC</u></strong> électrolytes. Sur avis médical/diet.",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 1070,
       "proteinsGramsPerLiter": 56.9
     },
@@ -23,6 +25,7 @@
       "nutritionType": "Parentérale",
       "indications": "Produit réservé aux patients de SMC et hospitalisation traditionnelle, Alimentation <strong><u>AVEC</u></strong> électrolytes. Sur avis médical/diet.",
       "compatibleWithAnorexia": true,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 1010,
       "proteinsGramsPerLiter": 38
     },
@@ -31,6 +34,7 @@
       "nutritionType": "Entérale",
       "indications": "Produit hypercalorique hyperprotidique avec fibres solubles et insolubles destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés. A utiliser à partir de 1 mois de séjour en réa. Sur avis médical/diet.",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 1530,
       "proteinsGramsPerLiter": 60
     },
@@ -39,6 +43,7 @@
       "nutritionType": "Entérale",
       "indications": "Produit hyperprotidique destiné à la prise en charge nutritionnelle des patients dénutris en soins intensifs.",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": true,
       "kcalPerLiter": 1260,
       "proteinsGramsPerLiter": 100
     },
@@ -47,6 +52,7 @@
       "nutritionType": "Entérale",
       "indications": "Nutrition semi-élémentaire destinés aux patients avec une fonction digestive altérée (syndrome de malabsorption, grêle court).",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 1330,
       "proteinsGramsPerLiter": 66
     },
@@ -55,6 +61,7 @@
       "nutritionType": "Entérale",
       "indications": "Nutriton semi-élémentaire hypolipidique indiquée en cas de malaborption/maldigestion (chylothorax).",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 1000,
       "proteinsGramsPerLiter": 40
     },
@@ -63,6 +70,7 @@
       "nutritionType": "Parentérale",
       "indications": "Produit à utiliser sur <strong>VVP</strong>, réservé au patient n'ayant pas de <strong>VVC</strong>. Alimentation <strong><u>AVEC</u></strong> électrolytes. Sur avis médical/diet.",
       "compatibleWithAnorexia": true,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 700,
       "proteinsGramsPerLiter": 25
     },
@@ -71,6 +79,7 @@
       "nutritionType": "Parentérale",
       "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés; Alimentation <strong><u>SANS</u></strong> électrolytes.",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 1180,
       "proteinsGramsPerLiter": 56
     },
@@ -79,6 +88,7 @@
       "nutritionType": "Parentérale",
       "indications": "Produit hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins P majorés. Alimentation <strong><u>SANS</u></strong> électrolytes. Sur avis médical/diet (EER, patient obèse en phase aiguë).",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": true,
       "kcalPerLiter": 889,
       "proteinsGramsPerLiter": 65.5
     },
@@ -87,6 +97,7 @@
       "nutritionType": "Entérale",
       "indications": "Produit hypercalorique et hyperprotéiné indiqué en cas de dénutrition ou risque de dénutrition des patients adultes avec des besoins énergétiques et protéiques élevés ou nécessitant une restriction des apports hydriques.",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 2000,
       "proteinsGramsPerLiter": 100
     },
@@ -95,6 +106,7 @@
       "nutritionType": "Entérale",
       "indications": "Produit hypercalorique et hyperprotéiné avec fibres indiqué en cas de dénutrition ou risque de dénutrition des patients adultes avec des besoins énergétiques et protéiques élevés ou nécessitant une restriction des apports hydriques. A utiliser à partir de 1 mois de séjour en réa. Sur avis médical/diet.",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 2000,
       "proteinsGramsPerLiter": 100
     },
@@ -103,6 +115,7 @@
       "nutritionType": "Entérale",
       "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés.",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 1500,
       "proteinsGramsPerLiter": 75
     },
@@ -111,6 +124,7 @@
       "nutritionType": "Entérale",
       "indications": "Produit hypercalorique hyperprotidique avec fibres solubles et insolubles destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés. A utiliser à partir de 1 mois de séjour en réa. Sur avis médical/diet.",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 1530,
       "proteinsGramsPerLiter": 75
     },
@@ -119,6 +133,7 @@
       "nutritionType": "Entérale",
       "indications": "Indiqué pour les patients souffrant d'anorexie mentale.",
       "compatibleWithAnorexia": true,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 1000,
       "proteinsGramsPerLiter": 20
     },
@@ -127,6 +142,7 @@
       "nutritionType": "Entérale",
       "indications": "Produit destiné aux patients souffrant de diarrhées non infectieuses (à base de gomme de guar partiellement hydrolysée).",
       "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
       "kcalPerLiter": 1550,
       "proteinsGramsPerLiter": 60
     }

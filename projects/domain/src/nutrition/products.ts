@@ -39,6 +39,7 @@ export interface ProductInfo {
   name: string
   nutritionType: NutritionType
   compatibleWithAnorexia: boolean
+  compatibleWithEerObesity: boolean
 }
 
 export interface ProductDetail {
@@ -74,31 +75,37 @@ export class Products {
 
   private patientHasAnorexia = false;
 
+  private patientHasEerObesity = false;
+
   private availableProducts: ProductInfo[] = [];
 
   constructor(private repository: ProductsRepository, private productNutritionRepository: ProductNutritionRepository, private events: DomainEventBus) {
     this.events.subscribe<SelectedNutritionTypeEvent>(SelectedNutritionTypeEvent.name,
       evt => this.nutritionTypeChanged(evt.selectedNutritionType));
     this.events.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
-      evt => this.updatePatientAnorexiaStatus(evt.hasAnorexia()));
+      evt => this.updatePatientPathologiesStatus(evt));
   }
 
   private nutritionTypeChanged(nutritionType: NutritionType) {
     this.selectedNutritionType = nutritionType;
-    this.updateAvailableProducts(nutritionType, this.patientHasAnorexia);
+    this.updateAvailableProducts(nutritionType, this.patientHasAnorexia, this.patientHasEerObesity);
     this.updateSelectedProductIfNecessary();
   }
 
-  private updatePatientAnorexiaStatus(hasAnorexia: boolean) {
+  private updatePatientPathologiesStatus(event: SelectedPathologiesEvent) {
+    const hasAnorexia = event.hasAnorexia();
+    const hasEerObesity = event.hasEerObesity();
     this.patientHasAnorexia = hasAnorexia;
-    this.updateAvailableProducts(this.selectedNutritionType, hasAnorexia);
+    this.patientHasEerObesity = hasEerObesity;
+    this.updateAvailableProducts(this.selectedNutritionType, hasAnorexia, hasEerObesity);
     this.updateSelectedProductIfNecessary();
   }
 
-  private updateAvailableProducts(nutritionType: NutritionType, hasAnorexia: boolean) {
+  private updateAvailableProducts(nutritionType: NutritionType, hasAnorexia: boolean, hasEerObesity: boolean) {
     const products = this.repository.read()
       .filter(product => product.nutritionType === nutritionType)
-      .filter(product => product.compatibleWithAnorexia || !hasAnorexia);
+      .filter(product => product.compatibleWithAnorexia || !hasAnorexia)
+      .filter(product => product.compatibleWithEerObesity || !hasEerObesity);
     this.availableProducts = products;
     this.events.publish(new AvailableProductsEvent(products.map(product => product.name)));
   }
@@ -110,6 +117,9 @@ export class Products {
       this.selectProduct(compatibleProduct);
     } else if (this.patientHasAnorexia && !this.selectedProduct?.compatibleWithAnorexia) {
       const compatibleProduct = this.availableProducts.find(p => p.compatibleWithAnorexia)!;
+      this.updateSelectedProduct(compatibleProduct);
+    } else if (this.patientHasEerObesity && !this.selectedProduct?.compatibleWithEerObesity) {
+      const compatibleProduct = this.availableProducts.find(p => p.compatibleWithEerObesity)!;
       this.updateSelectedProduct(compatibleProduct);
     }
   }
@@ -158,7 +168,8 @@ export class Products {
 
   private productDetail(product: ProductInfo): ProductDetail {
     return {
-      ...product,
+      name: product.name,
+      nutritionType: product.nutritionType,
       indications: this.repository.productIndications(product.name),
       nutritionInfo: this.productNutritionRepository.productNutritionInfo(product.name)
     };
