@@ -109,7 +109,7 @@
     {
       "name": "Sondalis HP Energy Fibres",
       "nutritionType": "Entérale",
-      "indications": "Produit hypercalorique hyperprotidique avec fibres solubles et insolubles destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés ou nécessitant une réduction des apports hydriques. A utiliser à partir de 1 mois de séjour en réa. Sur avis médical/diet.",
+      "indications": "Produit hypercalorique hyperprotidique avec fibres solubles et insolubles destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et P majorés. A utiliser à partir de 1 mois de séjour en réa. Sur avis médical/diet.",
       "compatibleWithAnorexia": false,
       "kcalPerLiter": 1530,
       "proteinsGramsPerLiter": 75
