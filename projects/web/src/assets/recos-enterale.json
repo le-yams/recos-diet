@@ -126,7 +126,6 @@
             "unit": "mg/jour"
           },
           "clauses": [
-            "en IV",
             "pendant 3 jours"
           ],
           "sources": [
@@ -188,7 +187,6 @@
             "unit": "mg/jour"
           },
           "clauses": [
-            "en IV",
             "pendant 10 jours minimum"
           ],
           "sources": [
@@ -202,7 +200,6 @@
             "unit": "mg/jour"
           },
           "clauses": [
-            "par voie entérale",
             "si dénutrition sévère uniquement",
             "pendant les 3 premiers jours"
           ],
