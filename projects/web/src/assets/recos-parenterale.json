@@ -97,6 +97,12 @@
           ]
         },
         {
+          "micronutriment": "Vit. K ",
+          "clauses": [
+            "sur avis médical"
+          ]
+        },
+        {
           "micronutriment": "Zinc",
           "administrationTerms": {
             "quantity": "10",
