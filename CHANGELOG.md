@@ -1,3 +1,23 @@
+# [2.3.0](https://gitlab.com/ydisanto/recos-diet/compare/2.2.1...2.3.0) (2025-05-04)
+
+
+### Bug Fixes
+
+* anorexia specific Vit K recos ([52892f5](https://gitlab.com/ydisanto/recos-diet/commit/52892f54620798a73a4fd0312cb1e93ce10399ad))
+* default enterale product ([442003a](https://gitlab.com/ydisanto/recos-diet/commit/442003a43172845429622aa0b86f057d784c1689))
+* phosphorus title ([b00fb40](https://gitlab.com/ydisanto/recos-diet/commit/b00fb405872a5fa7a2440ebae374a53385bdba2f))
+* product selection on nutrition type change ([5ffca53](https://gitlab.com/ydisanto/recos-diet/commit/5ffca533b24ee3a596df078370c8bb48cbcb5be1))
+* products indication ([a768c75](https://gitlab.com/ydisanto/recos-diet/commit/a768c756f164f4c55e7dac20ac7101c7b49ffc5d))
+* **products:** sondalis hp energy fibres indications ([eb403e1](https://gitlab.com/ydisanto/recos-diet/commit/eb403e16e462eb7cd6adadff288eb8a4c86a4b0a))
+* remove enterale B1 IV clause ([340848c](https://gitlab.com/ydisanto/recos-diet/commit/340848c0c090f431883a2a339559312af3f7daec))
+
+
+### Features
+
+* filter products for eer with obesity ([5013296](https://gitlab.com/ydisanto/recos-diet/commit/5013296179cd92b8817419abccef16936b593fee))
+* product warnings ([24282e4](https://gitlab.com/ydisanto/recos-diet/commit/24282e4ff3214a3d23032a84515a55b26579f691))
+* **products:** nutrison energy multifibres ([5534fd9](https://gitlab.com/ydisanto/recos-diet/commit/5534fd9601e887adfa742c3216703c623d07b3b0))
+
 ## [2.2.1](https://gitlab.com/ydisanto/recos-diet/compare/2.2.0...2.2.1) (2023-04-14)
 
 
