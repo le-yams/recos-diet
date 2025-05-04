@@ -20,7 +20,7 @@ import {
   SelectedNutritionTypeEvent,
   NutritionType,
   AvailableProductsEvent,
-  SelectedProductsEvent,
+  SelectedProductEvent,
   DEFAULT_NUTRITION_TYPE
 } from "@recos-diet/domain";
 import {DomainService} from "../domain.service";
@@ -59,7 +59,7 @@ export class NutritionService {
     domainService.EventBus().subscribe<AvailableProductsEvent>(AvailableProductsEvent.name,
       evt => this.availableProducts.next(evt.availableProducts));
 
-    domainService.EventBus().subscribe<SelectedProductsEvent>(SelectedProductsEvent.name,
+    domainService.EventBus().subscribe<SelectedProductEvent>(SelectedProductEvent.name,
       evt => this.selectedProduct.next(evt.selectedProduct));
 
   }

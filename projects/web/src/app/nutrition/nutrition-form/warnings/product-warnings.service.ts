@@ -16,36 +16,28 @@
 
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {DomainService} from "../../domain.service";
 import {
   NutritionistOpinionRequirementLevelChange,
   Warning,
   WarningLevel,
-  WarningsChange
+  PathologiesWarningsChange, ProductWarningsChange
 } from '@recos-diet/domain';
+import {DomainService} from "../../../domain.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class WarningsService {
-
-  private readonly nutritionistOpinionRequirementLevel: BehaviorSubject<WarningLevel>;
-
-  readonly nutritionistOpinionRequirementLevel$: Observable<WarningLevel>;
+export class ProductWarningsService {
 
   private readonly warnings: BehaviorSubject<Warning[]>;
 
   readonly warnings$: Observable<Warning[]>;
 
   constructor(domainService: DomainService) {
-    this.nutritionistOpinionRequirementLevel = new BehaviorSubject<WarningLevel>(domainService.warnings.getNutritionistOpinionRequirementLevel());
-    this.nutritionistOpinionRequirementLevel$ = this.nutritionistOpinionRequirementLevel.asObservable();
-    this.warnings = new BehaviorSubject<Warning[]>(domainService.warnings.getWarnings());
+    this.warnings = new BehaviorSubject<Warning[]>(domainService.warnings.getProductWarnings());
     this.warnings$ = this.warnings.asObservable();
 
-    domainService.EventBus().subscribe<NutritionistOpinionRequirementLevelChange>(NutritionistOpinionRequirementLevelChange.name,
-      evt => this.nutritionistOpinionRequirementLevel.next(evt.nutritionistOpinionRequirementLevel));
-    domainService.EventBus().subscribe<WarningsChange>(WarningsChange.name,
+    domainService.EventBus().subscribe<ProductWarningsChange>(ProductWarningsChange.name,
       evt => this.warnings.next(evt.warnings));
   }
 }

@@ -15,7 +15,7 @@
  */
 
 import {DomainEvent} from '../domain.events';
-import {Warning, WarningLevel} from './warnings.data';
+import {Warning, WarningLevel} from '../warnings.data';
 
 export class NutritionistOpinionRequirementLevelChange implements DomainEvent {
 
@@ -25,9 +25,17 @@ export class NutritionistOpinionRequirementLevelChange implements DomainEvent {
   }
 }
 
-export class WarningsChange implements DomainEvent {
+export class PathologiesWarningsChange implements DomainEvent {
 
-  readonly name = WarningsChange.name;
+  readonly name = PathologiesWarningsChange.name;
+
+  constructor(public warnings: Warning[]) {
+  }
+}
+
+export class ProductWarningsChange implements DomainEvent {
+
+  readonly name = ProductWarningsChange.name;
 
   constructor(public warnings: Warning[]) {
   }

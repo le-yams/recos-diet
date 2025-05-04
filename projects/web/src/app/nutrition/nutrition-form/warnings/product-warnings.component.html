@@ -14,21 +14,10 @@
   ~ limitations under the License.
   -->
 
-<ng-container *ngIf="nutritionistOpinionRequirementLevel$ | async as nutritionistOpinionRequirementLevel">
-
-  <div *ngIf="nutritionistOpinionRequirementLevel.isMedium()" class="nutritionist_opinion_requirement level_medium">
-    <small><strong>Avis diététique recommandé</strong></small>
-  </div>
-
-  <div *ngIf="nutritionistOpinionRequirementLevel.isHigh()" class="nutritionist_opinion_requirement level_high">
-    <small><strong>Avis diététique fortement recommandé</strong></small>
-  </div>
-</ng-container>
-
 <div *ngFor="let warning of warnings$ | async"
-     class="nutritionist_opinion_requirement"
-     [class.level_high]="warning.isHigh"
-     [class.level_medium]="warning.isMedium">
+     class="product_warnings"
+     [class.level_high]="warning.isHigh()"
+     [class.level_medium]="warning.isMedium()">
   <small>{{warning.text}}</small>&nbsp;<app-biblio-links *ngIf="warning.sources" [references]="warning.sources"></app-biblio-links>
 </div>
 

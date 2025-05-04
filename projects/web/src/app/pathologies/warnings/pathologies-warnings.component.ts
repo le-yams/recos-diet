@@ -15,7 +15,7 @@
  */
 
 import {Component} from '@angular/core';
-import {WarningsService} from "./warnings.service";
+import {PathologiesWarningsService} from "./pathologies-warnings.service";
 import {Observable} from "rxjs";
 import {Warning, WarningLevel} from '@recos-diet/domain';
 import {map} from "rxjs/operators";
@@ -23,15 +23,15 @@ import {Verbose} from "../../../infra/utils";
 
 @Component({
   selector: 'app-warnings',
-  templateUrl: './warnings.component.html',
-  styleUrls: ['./warnings.component.css']
+  templateUrl: './pathologies-warnings.component.html',
+  styleUrls: ['./pathologies-warnings.component.css']
 })
-export class WarningsComponent {
+export class PathologiesWarningsComponent {
 
   readonly nutritionistOpinionRequirementLevel$: Observable<NutritionistOpinionRequirementLevelWrapper>;
   readonly warnings$: Observable<WarningView[]>;
 
-  constructor(warningsService: WarningsService) {
+  constructor(warningsService: PathologiesWarningsService) {
     this.nutritionistOpinionRequirementLevel$ = warningsService.nutritionistOpinionRequirementLevel$
       .pipe(map(req => new NutritionistOpinionRequirementLevelWrapper(req)));
     this.warnings$ = warningsService.warnings$.pipe(
@@ -54,7 +54,7 @@ class WarningView implements Warning {
     this.text = warning.text;
     this.level = warning.level;
     this.sources = warning.sources;
-    Verbose.log(warning.level, 'warning:', warning.text);
+    Verbose.log(WarningLevel[this.level], 'warning:', warning.text);
   }
 
   isHigh(): boolean {

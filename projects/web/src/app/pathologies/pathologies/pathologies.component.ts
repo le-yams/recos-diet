@@ -20,7 +20,7 @@ import {Pathology} from "@recos-diet/domain";
 import {Observable} from "rxjs";
 import {PathologiesService} from "../pathologies.service";
 import {map} from "rxjs/operators";
-import {WarningsService} from "../warnings/warnings.service";
+import {PathologiesWarningsService} from "../warnings/pathologies-warnings.service";
 
 @Component({
   selector: 'app-pathologies',
@@ -38,7 +38,7 @@ export class PathologiesComponent {
 
   readonly hasWarnings$: Observable<boolean>;
 
-  constructor(private pathologyService: PathologiesService, warningsService: WarningsService) {
+  constructor(private pathologyService: PathologiesService, warningsService: PathologiesWarningsService) {
     this.selectedPathologies$ = this.pathologyService.selectedPathologies$;
     this.patientHasObesity$ = this.selectedPathologies$.pipe(map(selectedPathologies => selectedPathologies.includes(Pathology.OBESITE)));
     this.hasWarnings$ = warningsService.warnings$.pipe(

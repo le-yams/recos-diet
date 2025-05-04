@@ -18,7 +18,7 @@ import {Pathology, Warning, WarningLevel, WarningsRead} from "@recos-diet/domain
 
 export class MemoryWarningsRepository implements WarningsRead {
 
-  constructor(private requirements: PathologyWarnings[]) {
+  constructor(private requirements: ProductOrPathologiesWarnings[]) {
   }
 
   nutritionistOpinionRequirement(pathology: Pathology): WarningLevel {
@@ -28,7 +28,25 @@ export class MemoryWarningsRepository implements WarningsRead {
 
   pathologyWarnings(pathology: Pathology): Warning[] {
     const item = this.requirements.find(item => item.pathology === pathology);
-    return item?.warnings ?? [];
+    return this.getWarningsFromDTO(item);
+  }
+
+  productWarnings(product:string): Warning[] {
+    const item = this.requirements.find(item => item.product === product);
+    return this.getWarningsFromDTO(item);
+  }
+
+  getWarningsFromDTO(dto?: ProductOrPathologiesWarnings): Warning[]{
+    if (!dto) {
+      return []
+    }
+    return dto.warnings.map(w => {
+      return {
+        text: w.text,
+        level: parseRequirementLevel(w.level),
+        sources: w.sources
+      } as Warning
+    });
   }
 
 }
@@ -38,14 +56,24 @@ const requirementLevels = new Map<string, WarningLevel>([
   ['high', WarningLevel.HIGH]
 ]);
 
-const parseRequirementLevel = function (s: string): WarningLevel {
+const parseRequirementLevel = function (s?: string): WarningLevel {
+  if (!s) {
+    return WarningLevel.NONE;
+  }
   return requirementLevels.get(s) ?? WarningLevel.NONE;
 };
 
 export type RequirementLevel = 'medium' | 'high';
 
-export interface PathologyWarnings {
-  pathology: Pathology;
+export interface ProductOrPathologiesWarnings {
+  pathology?: Pathology;
+  product?: string;
   nutritionistOpinionRequirementLevel?: RequirementLevel;
-  warnings: Warning[];
+  warnings: WarningDTO[];
+}
+
+export interface WarningDTO {
+  text: string;
+  level?: string;
+  sources: string[];
 }

@@ -31,7 +31,7 @@ export * from './pathologies/pathologies';
 export * from './pathologies/pathologies.data';
 export * from './pathologies/pathologies.event';
 export * from './pathologies/warnings';
-export * from './pathologies/warnings.data';
+export * from './warnings.data';
 export * from './pathologies/warnings.events';
 export * from './micronutriments/micronutriments';
 export * from './micronutriments/micronutriments.events';

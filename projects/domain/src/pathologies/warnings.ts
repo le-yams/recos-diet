@@ -17,8 +17,13 @@
 import {DomainEventBus, Subscription} from "../domain.events";
 import {Pathology} from "./pathologies.data";
 import {SelectedPathologiesEvent} from "./pathologies.event";
-import {Warning, WarningLevel} from './warnings.data';
-import {NutritionistOpinionRequirementLevelChange, WarningsChange} from './warnings.events';
+import {Warning, WarningLevel} from '../warnings.data';
+import {
+  NutritionistOpinionRequirementLevelChange,
+  PathologiesWarningsChange,
+  ProductWarningsChange
+} from './warnings.events';
+import {SelectedProductEvent} from "../nutrition/products.events";
 
 export interface WarningsRead {
 
@@ -26,18 +31,23 @@ export interface WarningsRead {
 
   pathologyWarnings(pathology: Pathology): Warning[]
 
+  productWarnings(product: string): Warning[]
+
 }
 
 export class Warnings {
 
   private nutritionistOpinionRequirementLevel: WarningLevel = WarningLevel.NONE;
-  private warnings: Warning[] = [];
+  private pathologiesWarnings: Warning[] = [];
+  private productWarnings: Warning[] = [];
   private subscriptions: Subscription[];
 
   constructor(private repo: WarningsRead, private events: DomainEventBus) {
     this.subscriptions = [
       this.events.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
-        evt => this.selectedPathologiesChange(evt.pathologies))
+        evt => this.selectedPathologiesChange(evt.pathologies)),
+      this.events.subscribe<SelectedProductEvent>(SelectedProductEvent.name,
+        evt => this.selectedProductChange(evt.selectedProduct))
     ];
   }
 
@@ -45,16 +55,25 @@ export class Warnings {
     return this.nutritionistOpinionRequirementLevel;
   }
 
-  getWarnings(): Warning[] {
-    return this.warnings;
+  getPathologiesWarnings(): Warning[] {
+    return this.pathologiesWarnings;
+  }
+
+  getProductWarnings(): Warning[] {
+    return this.productWarnings;
   }
 
   private selectedPathologiesChange(pathologies: Pathology[]) {
     this.nutritionistOpinionRequirementLevel = this.computeNutritionistOpinionRequirementLevel(pathologies);
     this.events.publish(new NutritionistOpinionRequirementLevelChange(this.nutritionistOpinionRequirementLevel));
 
-    this.warnings = this.computeWarnings(pathologies);
-    this.events.publish(new WarningsChange(this.warnings));
+    this.pathologiesWarnings = this.computePathologiesWarnings(pathologies);
+    this.events.publish(new PathologiesWarningsChange(this.pathologiesWarnings));
+  }
+
+  private selectedProductChange(product: string) {
+    this.productWarnings = this.computeProductWarnings(product);
+    this.events.publish(new ProductWarningsChange(this.productWarnings));
   }
 
   private computeNutritionistOpinionRequirementLevel(pathologies: Pathology[]) {
@@ -63,9 +82,17 @@ export class Warnings {
     return Math.max(...levels);
   }
 
-  private computeWarnings(pathologies: Pathology[]) {
+  private computePathologiesWarnings(pathologies: Pathology[]): Warning[] {
     return pathologies
       .flatMap(pathology => this.repo.pathologyWarnings(pathology))
+      .filter((warn: Warning, index: number, warns: Warning[]) => {
+        let foundIndex = warns.findIndex(warn2 => warn.text === warn2.text);
+        return index === foundIndex;
+      });
+  }
+
+  private computeProductWarnings(product: string): Warning[] {
+    return this.repo.productWarnings(product)
       .filter((warn: Warning, index: number, warns: Warning[]) => {
         let foundIndex = warns.findIndex(warn2 => warn.text === warn2.text);
         return index === foundIndex;

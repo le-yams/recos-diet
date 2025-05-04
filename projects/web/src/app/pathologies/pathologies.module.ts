@@ -23,7 +23,7 @@ import {MatCardModule} from "@angular/material/card";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatExpansionModule} from "@angular/material/expansion";
-import {WarningsComponent} from "./warnings/warnings.component";
+import {PathologiesWarningsComponent} from "./warnings/pathologies-warnings.component";
 import {BibliographyModule} from "../bibliography/bibliography.module";
 
 
@@ -31,7 +31,7 @@ import {BibliographyModule} from "../bibliography/bibliography.module";
 @NgModule({
   declarations: [
     PathologiesComponent,
-    WarningsComponent,
+    PathologiesWarningsComponent,
   ],
   exports: [
     PathologiesComponent

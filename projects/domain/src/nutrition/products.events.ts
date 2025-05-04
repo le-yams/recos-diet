@@ -26,9 +26,9 @@ export class AvailableProductsEvent implements DomainEvent {
 
 }
 
-export class SelectedProductsEvent implements DomainEvent {
+export class SelectedProductEvent implements DomainEvent {
 
-  readonly name = SelectedProductsEvent.name;
+  readonly name = SelectedProductEvent.name;
 
   constructor(public readonly selectedProduct: string) {
   }

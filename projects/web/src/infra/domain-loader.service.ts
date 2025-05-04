@@ -34,7 +34,7 @@ import {
   MemoryMicronutrimentExclusionsRepository,
   PathologyExclusions
 } from "./memory-micronutriment-exclusions.repository";
-import {MemoryWarningsRepository, PathologyWarnings} from "./memory-warnings.repository";
+import {MemoryWarningsRepository, ProductOrPathologiesWarnings} from "./memory-warnings.repository";
 import {DomainEvents, InMemoryBus} from "./pubsub";
 
 
@@ -113,7 +113,7 @@ export class DomainLoaderService {
   }
 
   private loadWarningsRead(): Promise<WarningsRead> {
-    return this.jsonAssets.load<PathologyWarnings[]>("warnings")
+    return this.jsonAssets.load<ProductOrPathologiesWarnings[]>("warnings")
       .then(warnings => new MemoryWarningsRepository(warnings))
   }
 

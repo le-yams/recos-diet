@@ -19,8 +19,8 @@ import {Warnings, WarningsRead} from "./warnings";
 import {SelectedPathologiesEvent} from "./pathologies.event";
 import {DomainEventBus} from "../domain.events";
 import {Pathology} from "./pathologies.data";
-import {NutritionistOpinionRequirementLevelChange, WarningsChange} from './warnings.events';
-import {Warning, WarningLevel} from './warnings.data';
+import {NutritionistOpinionRequirementLevelChange, PathologiesWarningsChange} from './warnings.events';
+import {Warning, WarningLevel} from '../warnings.data';
 
 describe('Warnings should', () => {
 
@@ -106,11 +106,11 @@ describe('Warnings should', () => {
 
   let warnings: Warnings;
   let events: DomainEventBus;
-  let eventsCaptor: EventsCaptor<WarningsChange>;
+  let eventsCaptor: EventsCaptor<PathologiesWarningsChange>;
 
   beforeEach(() => {
     events = new TestDomainEventBus();
-    eventsCaptor = new EventsCaptor(WarningsChange.name, events);
+    eventsCaptor = new EventsCaptor(PathologiesWarningsChange.name, events);
   });
 
   afterEach(() => {
@@ -152,5 +152,9 @@ class TestWarningsRead implements WarningsRead {
 
   pathologyWarnings(pathology: Pathology): Warning[] {
     return this.warnings.get(pathology) ?? [];
+  }
+
+  productWarnings(product: string): Warning[] {
+    return [];
   }
 }

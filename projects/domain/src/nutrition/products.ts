@@ -16,7 +16,7 @@
 
 import {DEFAULT_NUTRITION_TYPE, NutritionType} from "./nutrition";
 import {DomainEventBus} from '../domain.events';
-import {AvailableProductsEvent, SelectedProductNutritionInfoEvent, SelectedProductsEvent} from "./products.events";
+import {AvailableProductsEvent, SelectedProductNutritionInfoEvent, SelectedProductEvent} from "./products.events";
 import {SelectedNutritionTypeEvent} from "./nutrition.events";
 import {SelectedPathologiesEvent} from "../pathologies/pathologies.event";
 
@@ -150,7 +150,7 @@ export class Products {
     this.selectedProduct = product;
     const productName = product.name;
     this.lastSelectedProducts.set(product.nutritionType, productName);
-    this.events.publish(new SelectedProductsEvent(productName));
+    this.events.publish(new SelectedProductEvent(productName));
     const nutritionInfo = this.productNutritionRepository.productNutritionInfo(productName);
     this.events.publish(new SelectedProductNutritionInfoEvent(nutritionInfo));
   }
