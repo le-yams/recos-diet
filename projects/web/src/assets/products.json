@@ -12,9 +12,9 @@
       "proteinsGramsPerLiter": 44.3
     },
     {
-      "name": "Olimel N9E (Réa)",
+      "name": "Olimel N9 (Réa)",
       "nutritionType": "Parentérale",
-      "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et protéines majorées; Alimentation <strong><u>AVEC</u></strong> électrolytes. Sur avis médical/diet.",
+      "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et protéines majorées; Alimentation <strong><u>SANS</u></strong> électrolyte. Sur avis médical/diet.",
       "compatibleWithAnorexia": false,
       "compatibleWithEerObesity": false,
       "kcalPerLiter": 1070,
@@ -30,15 +30,6 @@
       "proteinsGramsPerLiter": 38
     },
     {
-      "name": "Nutrison Energy Multifibres",
-      "nutritionType": "Entérale",
-      "indications": "Produit hypercalorique normoprotidique avec fibres solubles et insolubles destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et protéines majorées. A utiliser à partir de 1 mois de séjour en réa. Sur avis médical/diet.",
-      "compatibleWithAnorexia": false,
-      "compatibleWithEerObesity": false,
-      "kcalPerLiter": 1530,
-      "proteinsGramsPerLiter": 60
-    },
-    {
       "name": "Nutrison Protein intense",
       "nutritionType": "Entérale",
       "indications": "Produit hyperprotidique destiné à la prise en charge nutritionnelle des patients dénutris en soins intensifs.",
@@ -46,6 +37,24 @@
       "compatibleWithEerObesity": true,
       "kcalPerLiter": 1260,
       "proteinsGramsPerLiter": 100
+    },
+    {
+      "name": "Nutrison Protein Plus Energy",
+      "nutritionType": "Entérale",
+      "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et protéines majorées.",
+      "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
+      "kcalPerLiter": 1500,
+      "proteinsGramsPerLiter": 75
+    },
+    {
+      "name": "Nutrison Protein Plus Energy Multi Fibre",
+      "nutritionType": "Entérale",
+      "indications": "Produit hypercalorique hyperprotidique avec fibres solubles et insolubles destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et protéines majorées. A utiliser à partir de 1 mois de séjour en réa. Sur avis médical/diet.",
+      "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
+      "kcalPerLiter": 1530,
+      "proteinsGramsPerLiter": 75
     },
     {
       "name": "Peptamen HN",
@@ -77,7 +86,7 @@
     {
       "name": "Réanutriflex Omega N8 (Réa)",
       "nutritionType": "Parentérale",
-      "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et protéines majorées; Alimentation <strong><u>SANS</u></strong> électrolytes.",
+      "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et protéines majorées; Alimentation <strong><u>SANS</u></strong> électrolyte.",
       "compatibleWithAnorexia": false,
       "compatibleWithEerObesity": false,
       "kcalPerLiter": 1180,
@@ -93,6 +102,15 @@
       "proteinsGramsPerLiter": 65.5
     },
     {
+      "name": "Sondalis Energy Fibre",
+      "nutritionType": "Entérale",
+      "indications": "Produit hypercalorique normoprotidique avec fibres solubles et insolubles destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et protéines majorées. A utiliser à partir de 1 mois de séjour en réa. Sur avis médical/diet.",
+      "compatibleWithAnorexia": false,
+      "compatibleWithEerObesity": false,
+      "kcalPerLiter": 1530,
+      "proteinsGramsPerLiter": 60
+    },
+    {
       "name": "Sondalis HP 2kcal",
       "nutritionType": "Entérale",
       "indications": "Produit hypercalorique et hyperprotéiné indiqué en cas de dénutrition ou risque de dénutrition des patients adultes avec des besoins énergétiques et protéiques élevés ou nécessitant une restriction des apports hydriques.",
@@ -102,31 +120,13 @@
       "proteinsGramsPerLiter": 100
     },
     {
-      "name": "Sondalis HP 2kcal fibres",
+      "name": "Sondalis HP 2kcal Fibre",
       "nutritionType": "Entérale",
       "indications": "Produit hypercalorique et hyperprotéiné avec fibres indiqué en cas de dénutrition ou risque de dénutrition des patients adultes avec des besoins énergétiques et protéiques élevés ou nécessitant une restriction des apports hydriques. A utiliser à partir de 1 mois de séjour en réa. Sur avis médical/diet.",
       "compatibleWithAnorexia": false,
       "compatibleWithEerObesity": false,
       "kcalPerLiter": 2000,
       "proteinsGramsPerLiter": 100
-    },
-    {
-      "name": "Sondalis HP Energy",
-      "nutritionType": "Entérale",
-      "indications": "Produit hypercalorique hyperprotidique destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et protéines majorées.",
-      "compatibleWithAnorexia": false,
-      "compatibleWithEerObesity": false,
-      "kcalPerLiter": 1500,
-      "proteinsGramsPerLiter": 75
-    },
-    {
-      "name": "Sondalis HP Energy Fibres",
-      "nutritionType": "Entérale",
-      "indications": "Produit hypercalorique hyperprotidique avec fibres solubles et insolubles destiné aux patients dénutris ou à risque de dénutrition ayant des besoins Kcal et protéines majorées. A utiliser à partir de 1 mois de séjour en réa. Sur avis médical/diet.",
-      "compatibleWithAnorexia": false,
-      "compatibleWithEerObesity": false,
-      "kcalPerLiter": 1530,
-      "proteinsGramsPerLiter": 75
     },
     {
       "name": "Sondalis Junior Standard",
