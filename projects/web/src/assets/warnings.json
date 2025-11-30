@@ -33,35 +33,5 @@
         ]
       }
     ]
-  },
-  {
-    "product": "Nutrison Protein Plus Energy",
-    "warnings": [
-      {
-        "text": "remplace Sondalis HP energy",
-        "level": "medium",
-        "sources": []
-      }
-    ]
-  },
-  {
-    "product": "Nutrison Protein Plus Energy Multi Fibre",
-    "warnings": [
-      {
-        "text": "remplace Sondalis HP energy fibre",
-        "level": "medium",
-        "sources": []
-      }
-    ]
-  },
-  {
-    "product": "Sondalis Energy Fibre",
-    "warnings": [
-      {
-        "text": "remplace Nutrison Energy Multi fibres",
-        "level": "medium",
-        "sources": []
-      }
-    ]
   }
 ]
