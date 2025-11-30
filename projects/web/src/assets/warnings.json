@@ -21,17 +21,5 @@
         ]
       }
     ]
-  },
-  {
-    "pathology": "COVID-19",
-    "warnings": [
-      {
-        "text": "Pour une aide à la correction des troubles métaboliques cf",
-        "level": "medium",
-        "sources": [
-          "sfncm-prev-sri-covid-p2"
-        ]
-      }
-    ]
   }
 ]

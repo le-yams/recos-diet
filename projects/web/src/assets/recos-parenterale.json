@@ -159,23 +159,6 @@
       ]
     },
     {
-      "pathology": "COVID-19",
-      "recommendations": [
-        {
-          "micronutriment": "Vit. B1",
-          "administrationTerms": {
-            "quantity": "500",
-            "unit": "mg/j"
-          },
-          "clauses": [],
-          "sources": [
-            "sfncm-covid-rea-p2",
-            "sfncm-prev-sri-covid-p2"
-          ]
-        }
-      ]
-    },
-    {
       "pathology": "EER continue",
       "recommendations": [
         {
@@ -265,7 +248,7 @@
             "unit": "mg/jour"
           },
           "clauses": [
-            "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19"
+            "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI"
           ],
           "excludedClauses": [
             "100 à 300 mg/jour",

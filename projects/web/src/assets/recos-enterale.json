@@ -137,36 +137,6 @@
       ]
     },
     {
-      "pathology": "COVID-19",
-      "recommendations": [
-        {
-          "micronutriment": "Vit. B1",
-          "administrationTerms": {
-            "quantity": "500",
-            "unit": "mg/jour"
-          },
-          "clauses": [
-            "pendant 3 jours"
-          ],
-          "sources": [
-            "sfncm-covid-rea-p2",
-            "sfncm-prev-sri-covid-p2"
-          ]
-        },
-        {
-          "micronutriment": "Vit. D",
-          "clauses": [
-            "par voie entérale",
-            "dosage vit. D (25-OH D3) pour TOUS les patients",
-            "en cas de carence (vit D < 30 ng/ml), merci de contacter votre diététicien(ne)"
-          ],
-          "sources": [
-            "com-ac-med-vitd-covid19"
-          ]
-        }
-      ]
-    },
-    {
       "pathology": "EER continue",
       "recommendations": [
         {
@@ -260,7 +230,7 @@
           },
           "clauses": [
             "en IV",
-            "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19"
+            "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI"
           ],
           "excludedClauses": [
             "100 à 300 mg/jour",

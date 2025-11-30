@@ -123,7 +123,6 @@ describe('Warnings should', () => {
     let warns = new Map([
       [Pathology.CIRRHOTIQUE, [WARN1]],
       [Pathology.OH, [WARN1, WARN2, WARN3]],
-      [Pathology.COVID_19, [WARN4]],
     ]);
     warnings = new Warnings(new TestWarningsRead(new Map(), warns), events);
 

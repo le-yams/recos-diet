@@ -10,10 +10,6 @@
       "excludedNutriments": []
     },
     {
-      "pathology": "COVID-19",
-      "excludedNutriments": ["Vit. B1 (po/sng)"]
-    },
-    {
       "pathology": "EER continue",
       "excludedNutriments": []
     },

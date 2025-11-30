@@ -35,7 +35,7 @@ const target10 = {
   value: 10,
   isRelevant(context: PathologyContext): boolean {
     return context.patientHasOnePathologyOf(
-      Pathology.ANOREXIE_MENTALE, Pathology.DENUTRITION_SRI, Pathology.COVID_19
+      Pathology.ANOREXIE_MENTALE, Pathology.DENUTRITION_SRI
     );
   }
 }
@@ -44,7 +44,7 @@ const target15 = {
   value: 15,
   isRelevant(context: PathologyContext): boolean {
     return context.patientHasNotPathology(Pathology.ANOREXIE_MENTALE) &&
-      context.patientHasOnePathologyOf(Pathology.DENUTRITION_SRI, Pathology.COVID_19);
+      context.patientHasOnePathologyOf(Pathology.DENUTRITION_SRI);
   }
 }
 
