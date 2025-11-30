@@ -12,6 +12,20 @@
       "sources": [
         "tnctav-p2137"
       ]
+    },
+    {
+      "micronutriment": "Vit. B1",
+      "administrationTerms": {
+        "quantity": "100",
+        "unit": "mg/jour"
+      },
+      "clauses": [
+        "100 à 300 mg/jour",
+        "pendant 3 à 4 jours"
+      ],
+      "sources": [
+        "espen-p27"
+      ]
     }
   ],
   "pathologiesRecommendations": [
@@ -52,6 +66,12 @@
           },
           "clauses": [
             "en IV"
+          ],
+          "excludedClauses": [
+            "100 à 300 mg/jour",
+            "pendant 3 à 4 jours",
+            "Si dénutrition sévère uniquement",
+            "pendant les 3 premier jours"
           ],
           "sources": [
             "tnctav-p2742",
@@ -161,6 +181,18 @@
           "sources": [
             "afar-p208"
           ]
+        },
+        {
+          "micronutriment": "Vit. B1",
+          "administrationTerms": {
+            "quantity": "100",
+            "unit": "mg/jour"
+          },
+          "clauses": [],
+          "excludedClauses": [
+            "100 à 300 mg/jour",
+            "pendant 3 à 4 jours"
+          ]
         }
       ]
     },
@@ -188,6 +220,10 @@
           },
           "clauses": [
             "pendant 10 jours minimum"
+          ],
+          "excludedClauses": [
+            "100 à 300 mg/jour",
+            "pendant 3 à 4 jours"
           ],
           "sources": [
             "nice"
@@ -225,6 +261,10 @@
           "clauses": [
             "en IV",
             "majorer à 1g/jour pendant 10 jours en cas de dénutrition-SRI ou de COVID-19"
+          ],
+          "excludedClauses": [
+            "100 à 300 mg/jour",
+            "pendant 3 à 4 jours"
           ],
           "sources": [
             "sri-prev"

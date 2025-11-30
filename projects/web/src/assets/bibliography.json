@@ -140,5 +140,11 @@
     "index": 26,
     "label": "Communiqué de l’Académie nationale de Médecine : Vitamine D et Covid-19",
     "url": "http://www.academie-medecine.fr/communique-de-lacademie-nationale-de-medecine-vitamine-d-et-covid-19"
+  },
+  {
+    "reference": "espen-p27",
+    "index": 27,
+    "label": "ESPEN (2022), Clinical Nutrition - Recommendation 14.5. p.27",
+    "url": "https://www.espen.org/files/ESPEN-Guidelines/ESPEN_micronutrient_guideline.pdf"
   }
 ]
