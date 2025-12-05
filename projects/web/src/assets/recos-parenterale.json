@@ -40,7 +40,7 @@
     {
       "micronutriment": "Vit. B1",
       "administrationTerms": {
-        "quantity": "100",
+        "quantity": "250",
         "unit": "mg/jour"
       },
       "clauses": [
@@ -184,7 +184,7 @@
           ]
         },
         {
-          "micronutriment": "Vit. B1",
+          "micronutriment": "Vit. B1 ",
           "administrationTerms": {
             "quantity": "100",
             "unit": "mg/jour"
@@ -193,6 +193,26 @@
           "excludedClauses": [
             "100 à 300 mg/jour",
             "pendant 3 à 4 jours"
+          ],
+          "sources": []
+        },
+        {
+          "micronutriment": "Vit. B6",
+          "administrationTerms": {
+            "quantity": "100",
+            "unit": "mg/jour"
+          },
+          "clauses": [],
+          "sources": []
+        },
+        {
+          "micronutriment": "Vit. C",
+          "administrationTerms": {
+            "quantity": "250",
+            "unit": "mg/jour"
+          },
+          "clauses": [
+            "250 mg/jour maximum"
           ],
           "sources": []
         }

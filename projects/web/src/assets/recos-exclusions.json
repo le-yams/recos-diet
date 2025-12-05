@@ -11,7 +11,7 @@
     },
     {
       "pathology": "EER continue",
-      "excludedNutriments": []
+      "excludedNutriments": ["Vit. B1"]
     },
     {
       "pathology": "Dénutrition-SRI",
