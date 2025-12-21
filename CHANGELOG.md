@@ -1,3 +1,10 @@
+## [2.3.1](https://gitlab.com/ydisanto/recos-diet/compare/2.3.0...2.3.1) (2025-12-21)
+
+
+### Bug Fixes
+
+* vit C ([3c80ba0](https://gitlab.com/ydisanto/recos-diet/commit/3c80ba04b18cfc5e674b5413401b014287f82aec))
+
 # [2.3.0](https://gitlab.com/ydisanto/recos-diet/compare/2.2.1...2.3.0) (2025-05-04)
 
 
