@@ -118,7 +118,8 @@
           "micronutriment": "Vit. K ",
           "clauses": [
             "sur avis médical"
-          ]
+          ],
+          "sources": []
         },
         {
           "micronutriment": "Zinc",
@@ -207,12 +208,9 @@
         },
         {
           "micronutriment": "Vit. C",
-          "administrationTerms": {
-            "quantity": "250",
-            "unit": "mg/jour"
-          },
           "clauses": [
-            "250 mg/jour maximum"
+            "250 mg/jour maximum",
+            "incluse dans le Cernevit"
           ],
           "sources": []
         }

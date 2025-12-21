@@ -162,7 +162,8 @@
           "excludedClauses": [
             "100 à 300 mg/jour",
             "pendant 3 à 4 jours"
-          ]
+          ],
+          "sources": []
         },
         {
           "micronutriment": "Vit. B6",
@@ -175,12 +176,9 @@
         },
         {
           "micronutriment": "Vit. C",
-          "administrationTerms": {
-            "quantity": "250",
-            "unit": "mg/jour"
-          },
           "clauses": [
-            "250 mg/jour maximum"
+            "250 mg/jour maximum",
+            "incluse dans l'Alvityl"
           ],
           "sources": []
         }
