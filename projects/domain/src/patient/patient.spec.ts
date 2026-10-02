@@ -37,18 +37,18 @@ describe('Patient', () => {
 
   it('should compute BMI', () => {
     patient.updateSize({
-      heightCm: 182,
-      weightKg: 86
+      heightCm: 155,
+      weightKg: 96
     });
-    expect(patient.bmi).toBeCloseTo(26, 0.01);
+    expect(patient.bmi).toBeCloseTo(39.95, 0.01);
   });
 
   it('should compute adjusted weight', () => {
     patient.updateSize({
-      heightCm: 182,
-      weightKg: 86
+      heightCm: 155,
+      weightKg: 96
     });
-    expect(patient.adjustedWeightKg).toBeCloseTo(83.8, 0.01);
+    expect(patient.adjustedWeightKg).toBeCloseTo(68.91, 0.01);
   });
 
   it('should have adjusted weight equals weight when bmi < 25', () => {
@@ -69,15 +69,15 @@ describe('Patient', () => {
 
   it('should emit an event on patient info update', () => {
     patient.updateSize({
-      heightCm: 182,
-      weightKg: 86
+      heightCm: 155,
+      weightKg: 96
     });
     eventsCaptor.expectEventsCount(1);
     let patientInfo = eventsCaptor.mapSingleEvent(evt => evt.patient);
-    expect(patientInfo.heightCm).toBe(182);
-    expect(patientInfo.weightKg).toBe(86);
-    expect(patientInfo.bmi).toBeCloseTo(26, 0.1);
-    expect(patientInfo.adjustedWeightKg).toBeCloseTo(83.8, 0.1);
+    expect(patientInfo.heightCm).toBe(155);
+    expect(patientInfo.weightKg).toBe(96);
+    expect(patientInfo.bmi).toBeCloseTo(39.95, 0.1);
+    expect(patientInfo.adjustedWeightKg).toBeCloseTo(68.91, 0.1);
   });
 
 });

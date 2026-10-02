@@ -39,6 +39,7 @@ const defaultPatientSize = {
 export class Patient implements PatientInfo {
 
   static readonly IDEAL_BMI = 25
+  static readonly OVERWEIGHT_BMI = 30
 
   heightCm!: number;
   weightKg!: number;
@@ -74,7 +75,7 @@ export class Patient implements PatientInfo {
   }
 
   isOverweight(): boolean {
-    return this.bmi > Patient.IDEAL_BMI;
+    return this.bmi > Patient.OVERWEIGHT_BMI;
   }
 
   private static bmi(weightKg: number, heightM: number): number {
@@ -83,10 +84,10 @@ export class Patient implements PatientInfo {
 
   private static adjustWeight(heightCm: number, weightKg: number): number {
     const idealWeight = Patient.idealWeightForHeight(heightCm);
-    return idealWeight + (weightKg - idealWeight) * 0.33;
+    return idealWeight + (weightKg - idealWeight) * 0.25;
   }
 
   private static idealWeightForHeight(heightCm: number): number {
-    return 2.2 * Patient.IDEAL_BMI + (3.5 * Patient.IDEAL_BMI * ((heightCm / 100) - 1.5));
+    return Patient.IDEAL_BMI*(heightCm / 100)*(heightCm / 100)
   }
 }
