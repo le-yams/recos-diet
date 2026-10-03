@@ -15,9 +15,9 @@
  */
 
 import {Component} from '@angular/core';
-import {TargetFlowsService} from "./target-flows.service";
-import {Observable} from "rxjs";
-import {DailyTargetFlow} from "../../../../domain/src/target-flows/daily-target-flows";
+import {TargetFlowsService} from './target-flows.service';
+import {Observable} from 'rxjs';
+import {DailyTargetFlow} from '@recos-diet/domain';
 
 @Component({
   selector: 'app-target-flows',

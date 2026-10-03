@@ -16,11 +16,10 @@
 
 import {Component} from '@angular/core';
 import {faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons';
-import {DomainService} from "../domain.service";
-import {PathologiesService} from "../pathologies/pathologies.service";
-import {Pathology} from "../../../../domain/src/pathologies/pathologies.data";
-import {map} from "rxjs/operators";
-import {Observable} from "rxjs";
+import {PathologiesService} from '../pathologies/pathologies.service';
+import {Pathology} from '@recos-diet/domain';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-flows-strip',
