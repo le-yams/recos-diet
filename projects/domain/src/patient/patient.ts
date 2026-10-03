@@ -66,7 +66,6 @@ export class Patient implements PatientInfo {
   }
 
   private computeAdjustedWeight(): number {
-    console.log("bmi", this.bmi, "isOverweight:", this.isOverweight());
     if (this.isOverweight()) {
       return Patient.adjustWeight(this.heightCm, this.weightKg);
     } else {
