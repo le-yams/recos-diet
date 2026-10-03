@@ -35,5 +35,5 @@ export * from './warnings.data';
 export * from './pathologies/warnings.events';
 export * from './micronutriments/micronutriments';
 export * from './micronutriments/micronutriments.events';
-export * from './target-flows/target-flows';
-export * from './target-flows/target-flows.events';
+export * from './target-flows/daily-target-flows';
+export * from './target-flows/daily-target-flows.events';

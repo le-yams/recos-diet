@@ -18,64 +18,50 @@ import {DomainEventBus} from "../domain.events";
 import {PatientInfo} from "../patient/patient";
 import {PatientInfoUpdatedEvent} from "../patient/patient.events";
 import {SelectedPathologiesEvent} from "../pathologies/pathologies.event";
-import {TargetlowsUpdatedEvent} from "./target-flows.events";
+import {DailyTargetFlowsUpdatedEvent} from "./daily-target-flows.events";
 import {Pathology} from "../pathologies/pathologies.data";
 import {NutritionInfo} from "../nutrition/products";
 import {SelectedProductNutritionInfoEvent} from "../nutrition/products.events";
 
-export interface Target {
-
-  value: number;
-
+interface DailyTarget {
+  energyPerKg: number;
   isRelevant(context: PathologyContext): boolean;
-
 }
 
-const target10 = {
-  value: 10,
-  isRelevant(context: PathologyContext): boolean {
-    return context.patientHasOnePathologyOf(
-      Pathology.ANOREXIE_MENTALE, Pathology.DENUTRITION_SRI
-    );
+const target10 : DailyTarget = {
+  energyPerKg: 10,
+  isRelevant(_: PathologyContext): boolean {
+    return true;
   }
 }
 
-const target15 = {
-  value: 15,
+const target15 : DailyTarget = {
+  energyPerKg: 15,
   isRelevant(context: PathologyContext): boolean {
     return context.patientHasNotPathology(Pathology.ANOREXIE_MENTALE) &&
       context.patientHasOnePathologyOf(Pathology.DENUTRITION_SRI);
   }
 }
 
-const target20 = {
-  value: 20,
+const target20 : DailyTarget = {
+  energyPerKg: 20,
   isRelevant(context: PathologyContext): boolean {
     return context.patientHasNotPathology(Pathology.ANOREXIE_MENTALE);
   }
 }
 
-const target25 = {
-  value: 25,
+const target25 : DailyTarget = {
+  energyPerKg: 25,
   isRelevant(context: PathologyContext): boolean {
     return context.patientHasNotPathology(Pathology.ANOREXIE_MENTALE);
   }
 }
 
-const target30 = {
-  value: 30,
-  isRelevant(context: PathologyContext): boolean {
-    return context.patientHasNotPathology(Pathology.ANOREXIE_MENTALE)
-      && context.patientHasNotPathology(Pathology.OBESITE);
+const target30 : DailyTarget = {
+  energyPerKg: 30,
+  isRelevant(_: PathologyContext): boolean {
+    return false;
   }
-}
-
-export interface TargetFlow {
-  targetCal: number
-  dayEnergyKcal: number
-  dayProteinsG: number
-  proteinsForWeightGPerKg: number
-  hourFlowML: number
 }
 
 export class PathologyContext {
@@ -97,13 +83,24 @@ export class PathologyContext {
 
 }
 
-export class TargetFlows {
+/**
+ * energy in kcal
+ */
+export interface DailyTargetFlow {
+  energy: number
+  energyPerKg: number
+  proteins: number
+  proteinsPerKg: number
+  hourFlowML: number
+}
 
-  private readonly targets: Target[] = [target10, target15, target20, target25, target30];
+export class DailyTargetFlows {
+
+  private readonly targets: DailyTarget[] = [target10, target15, target20, target25, target30];
   private patient?: PatientInfo;
-  private selectedPoductNutritionInfo?: NutritionInfo;
+  private selectedProductNutritionInfo?: NutritionInfo;
   private selectedPathologies: Pathology[] = [];
-  private targetFlows: TargetFlow[] = [];
+  private targetFlows: DailyTargetFlow[] = [];
 
   constructor(private events: DomainEventBus) {
     this.events.subscribe<PatientInfoUpdatedEvent>(PatientInfoUpdatedEvent.name, evt => this.patientInfoUpdated(evt.patient));
@@ -121,7 +118,7 @@ export class TargetFlows {
   }
 
   private nutritionInfoUpdated(selectedProductProductNutritionInfo: NutritionInfo) {
-    this.selectedPoductNutritionInfo = selectedProductProductNutritionInfo;
+    this.selectedProductNutritionInfo = selectedProductProductNutritionInfo;
     this.updateTargets();
   }
 
@@ -131,30 +128,30 @@ export class TargetFlows {
   }
 
   private updateTargets() {
-    if (this.patient && this.selectedPoductNutritionInfo) {
+    if (this.patient && this.selectedProductNutritionInfo) {
       const context = new PathologyContext(this.selectedPathologies);
       const targetFlows = this.targets
         .filter(target => target.isRelevant(context))
-        .map(target => this.computeTargetFlow(target.value));
+        .map(target => this.computeTargetFlow(target.energyPerKg));
       this.targetFlows = targetFlows;
-      this.events.publish(new TargetlowsUpdatedEvent(targetFlows))
+      this.events.publish(new DailyTargetFlowsUpdatedEvent(targetFlows))
     }
   }
 
-  private computeTargetFlow(target: number): TargetFlow {
+  private computeTargetFlow(target: number): DailyTargetFlow {
     const patient = this.patient!;
-    const nutrition = this.selectedPoductNutritionInfo!;
+    const nutrition = this.selectedProductNutritionInfo!;
     const dayFlowLiter = patient.adjustedWeightKg * target / nutrition.kcalPerLiter;
     const hourFlowML = dayFlowLiter * 1000 / 24;
     const dayEnergy = nutrition.kcalPerLiter * dayFlowLiter;
     const dayProteins = nutrition.proteinsGramsPerLiter * dayFlowLiter;
     const proteinsForWeight = dayProteins / patient.adjustedWeightKg;
     return {
-      targetCal: target,
-      dayEnergyKcal: dayEnergy,
-      dayProteinsG: dayProteins,
+      energyPerKg: target,
+      energy: dayEnergy,
+      proteinsPerKg: proteinsForWeight,
+      proteins: dayProteins,
       hourFlowML: hourFlowML,
-      proteinsForWeightGPerKg: proteinsForWeight
     }
   }
 

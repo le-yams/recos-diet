@@ -15,12 +15,12 @@
  */
 
 import {DomainEvent} from "../domain.events";
-import {TargetFlow} from "./target-flows";
+import {DailyTargetFlow} from "./daily-target-flows";
 
-export class TargetlowsUpdatedEvent implements DomainEvent {
+export class DailyTargetFlowsUpdatedEvent implements DomainEvent {
 
-  readonly name = TargetlowsUpdatedEvent.name;
+  readonly name = DailyTargetFlowsUpdatedEvent.name;
 
-  constructor(public readonly targetFlows: TargetFlow[]) {
+  constructor(public readonly dailyTargetFlows: DailyTargetFlow[]) {
   }
 }

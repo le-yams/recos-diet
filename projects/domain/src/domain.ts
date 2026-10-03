@@ -17,7 +17,7 @@
 import {Products, ProductsRepository, ProductNutritionRepository} from "./nutrition/products";
 import {Nutrition} from "./nutrition/nutrition";
 import {Bibliography, BibliographyRepository} from "./bibliography/bibliography";
-import {TargetFlows} from "./target-flows/target-flows";
+import {DailyTargetFlows} from "./target-flows/daily-target-flows";
 import {Pathologies} from "./pathologies/pathologies";
 import {Patient} from "./patient/patient";
 import {MicronutrimentExclusionsRead, Micronutriments, MicronutrimentRecommendationsRead} from "./micronutriments/micronutriments";
@@ -30,7 +30,7 @@ export class Domain {
   public readonly eventBus: DomainEventBus;
   public readonly bibliography: Bibliography;
   public readonly micronutriments: Micronutriments;
-  public readonly targetFlows: TargetFlows;
+  public readonly targetFlows: DailyTargetFlows;
   public readonly products: Products;
   public readonly nutrition: Nutrition;
   public readonly pathologies: Pathologies;
@@ -51,7 +51,7 @@ export class Domain {
     this.eventBus = eventBus;
     this.warnings = new Warnings(warningsRead, this.eventBus);
     this.bibliography = new Bibliography(bibliographyRepository);
-    this.targetFlows = new TargetFlows(this.eventBus);
+    this.targetFlows = new DailyTargetFlows(this.eventBus);
     this.products = new Products(productsRepository, nutritionRepository, this.eventBus);
     this.nutrition = new Nutrition(this.eventBus);
     this.pathologies = new Pathologies(this.eventBus);

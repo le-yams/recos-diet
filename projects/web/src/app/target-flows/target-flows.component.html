@@ -18,10 +18,10 @@
 
   <li *ngFor="let targetFlow of targetFlows">
     <p>
-      Pour un apport de <strong>{{ targetFlow.targetCal }}</strong> kcal/kg/jour
+      Pour un apport de <strong>{{ targetFlow.energyPerKg }}</strong> kcal/kg/jour
       <!--      <biblio-links :sources="sources"></biblio-links>-->
-      soit {{ targetFlow.dayEnergyKcal.toFixed(0) }} kcal et {{ targetFlow.dayProteinsG.toFixed(0) }} g de prot&eacute;ines
-      ({{ targetFlow.proteinsForWeightGPerKg.toFixed(1).replace(reg, "") }} g/kg/jour)
+      soit {{ targetFlow.energy.toFixed(0) }} kcal et {{ targetFlow.proteins.toFixed(0) }} g de prot&eacute;ines
+      ({{ targetFlow.proteinsPerKg.toFixed(1).replace(reg, "") }} g/kg/jour)
       <br/>
       &rArr; d&eacute;bit cible=<strong>{{ targetFlow.hourFlowML.toFixed(0) }}</strong> ml/h
     </p>

@@ -17,7 +17,7 @@
 import {Component} from '@angular/core';
 import {TargetFlowsService} from "./target-flows.service";
 import {Observable} from "rxjs";
-import {TargetFlow} from "../../../../domain/src/target-flows/target-flows";
+import {DailyTargetFlow} from "../../../../domain/src/target-flows/daily-target-flows";
 
 @Component({
   selector: 'app-target-flows',
@@ -26,7 +26,7 @@ import {TargetFlow} from "../../../../domain/src/target-flows/target-flows";
 })
 export class TargetFlowsComponent {
 
-  readonly targetFlows$: Observable<TargetFlow[]>;
+  readonly targetFlows$: Observable<DailyTargetFlow[]>;
 
   readonly reg = /[.,]0+$/;
 
