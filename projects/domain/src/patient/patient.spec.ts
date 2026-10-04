@@ -80,4 +80,45 @@ describe('Patient', () => {
     expect(patientInfo.adjustedWeightKg).toBeCloseTo(68.91, 0.1);
   });
 
+  describe('invalid size', () => {
+    const invalidSizes = [
+      {name: 'NaN height', size: {heightCm: NaN}},
+      {name: 'NaN weight', size: {weightKg: NaN}},
+      {name: 'Infinity weight', size: {weightKg: Infinity}},
+      {name: 'zero height', size: {heightCm: 0}},
+      {name: 'negative weight', size: {weightKg: -70}},
+      {name: 'height below min', size: {heightCm: 17}},
+      {name: 'height above max', size: {heightCm: 1700}},
+      {name: 'weight below min', size: {weightKg: 0.5}},
+      {name: 'weight above max', size: {weightKg: 701}},
+      {name: 'valid height with invalid weight', size: {heightCm: 180, weightKg: NaN}},
+    ];
+
+    invalidSizes.forEach(param => {
+      it(`should ignore ${param.name}`, () => {
+        const before = {height: patient.heightCm, weight: patient.weightKg, bmi: patient.bmi};
+        eventsCaptor.expectEventsCount(0);
+        expect(patient.updateSize(param.size)).toBeFalse();
+        expect(patient.heightCm).toBe(before.height);
+        expect(patient.weightKg).toBe(before.weight);
+        expect(patient.bmi).toBe(before.bmi);
+        eventsCaptor.expectEventsCount(0);
+      });
+    });
+
+    it('should accept bounds', () => {
+      expect(patient.updateSize({
+        heightCm: Patient.HEIGHT_CM.min,
+        weightKg: Patient.WEIGHT_KG.max
+      })).toBeTrue();
+      eventsCaptor.expectEventsCount(1);
+    });
+
+    it('should update a single field', () => {
+      expect(patient.updateSize({weightKg: 80})).toBeTrue();
+      expect(patient.weightKg).toBe(80);
+      expect(patient.heightCm).toBe(170);
+    });
+  });
+
 });

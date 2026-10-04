@@ -28,18 +28,26 @@
     <p>
       <mat-form-field>
         <mat-label>Taille (cm)</mat-label>
-        <input #heightInput type="number" matInput placeholder="taille du patient" required
-               [value]="patient.heightCm.toFixed(0)" (change)="updateHeight($event)"
-                (focus)="heightInput.select()" (keyup.enter)="weightInput.focus()">
+        <input #heightInput #heightCtrl="ngModel" name="height" type="number" matInput placeholder="taille du patient"
+               required [min]="heightBounds.min" [max]="heightBounds.max"
+               [ngModel]="patient.heightCm" (change)="updateHeight($event)"
+               (focus)="heightInput.select()" (keyup.enter)="weightInput.focus()">
+        <mat-error *ngIf="heightCtrl.invalid">
+          Taille attendue entre {{heightBounds.min}} et {{heightBounds.max}} cm
+        </mat-error>
       </mat-form-field>
     </p>
 
     <p>
       <mat-form-field>
         <mat-label>Poids (kg)</mat-label>
-        <input #weightInput type="number" step="0.1" matInput placeholder="poids du patient" required
-               [value]="patient.weightKg" (change)="updateWeight($event)"
+        <input #weightInput #weightCtrl="ngModel" name="weight" type="number" step="0.1" matInput
+               placeholder="poids du patient" required [min]="weightBounds.min" [max]="weightBounds.max"
+               [ngModel]="patient.weightKg" (change)="updateWeight($event)"
                (focus)="weightInput.select()">
+        <mat-error *ngIf="weightCtrl.invalid">
+          Poids attendu entre {{weightBounds.min}} et {{weightBounds.max}} kg
+        </mat-error>
       </mat-form-field>
     </p>
 

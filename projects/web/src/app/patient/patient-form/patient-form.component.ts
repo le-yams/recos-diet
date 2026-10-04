@@ -16,6 +16,7 @@
 
 import {Component} from '@angular/core';
 import {faUserInjured} from '@fortawesome/free-solid-svg-icons';
+import {Patient} from '@recos-diet/domain';
 import {DomainService} from "../../domain.service";
 
 @Component({
@@ -28,6 +29,9 @@ export class PatientFormComponent {
   patient;
 
   faUserInjured = faUserInjured;
+
+  readonly heightBounds = Patient.HEIGHT_CM;
+  readonly weightBounds = Patient.WEIGHT_KG;
 
   constructor(private domainService: DomainService) {
     this.patient = this.domainService.patient;

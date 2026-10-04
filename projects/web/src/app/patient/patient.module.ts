@@ -16,6 +16,7 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 import {PatientFormComponent} from './patient-form/patient-form.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {BibliographyModule} from '../bibliography/bibliography.module';
@@ -33,6 +34,7 @@ import {MatInputModule} from "@angular/material/input";
   ],
   imports: [
     CommonModule,
+    FormsModule,
     FontAwesomeModule,
     BibliographyModule,
     MatExpansionModule,

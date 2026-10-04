@@ -40,6 +40,8 @@ export class Patient implements PatientInfo {
 
   static readonly IDEAL_BMI = 25
   static readonly OVERWEIGHT_BMI = 30
+  static readonly HEIGHT_CM = {min: 50, max: 300}
+  static readonly WEIGHT_KG = {min: 1, max: 700}
 
   heightCm!: number;
   weightKg!: number;
@@ -50,12 +52,26 @@ export class Patient implements PatientInfo {
     this.updateSize(defaultPatientSize);
   }
 
-  updateSize(patientSize: Partial<PatientSize>): void {
+  /**
+   * Updates the patient size. Undefined fields are left unchanged.
+   * If a given value is not a finite number within bounds, nothing is updated and no event is published.
+   * @return true if the update has been applied
+   */
+  updateSize(patientSize: Partial<PatientSize>): boolean {
+    if (!Patient.isValid(patientSize.heightCm, Patient.HEIGHT_CM) ||
+      !Patient.isValid(patientSize.weightKg, Patient.WEIGHT_KG)) {
+      return false;
+    }
     this.heightCm = patientSize.heightCm ?? this.heightCm;
     this.weightKg = patientSize.weightKg ?? this.weightKg;
     this.bmi = this.computeBMI();
     this.adjustedWeightKg = this.computeAdjustedWeight();
     this.events.publish(new PatientInfoUpdatedEvent(this));
+    return true;
+  }
+
+  private static isValid(value: number | undefined, bounds: { min: number, max: number }): boolean {
+    return value === undefined || (Number.isFinite(value) && value >= bounds.min && value <= bounds.max);
   }
 
   private computeBMI(): number {
