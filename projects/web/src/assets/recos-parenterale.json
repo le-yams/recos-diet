@@ -106,9 +106,8 @@
           "clauses": [
             "pendant les 3 premiers jours"
           ],
-          "excludeClauses": [
-            "Si dénutrition sévère uniquement",
-            "pendant les 3 premier jours"
+          "excludedClauses": [
+            "si dénutrition sévère uniquement"
           ],
           "sources": [
             "tnctav-p1853"
@@ -129,7 +128,7 @@
           },
           "clauses": [
           ],
-          "excludeClauses": [
+          "excludedClauses": [
             "seulement si encéphalopathie hépatique, carence ou infection du liquide d'ascite"
           ],
           "sources": [

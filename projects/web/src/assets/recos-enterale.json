@@ -69,9 +69,7 @@
           ],
           "excludedClauses": [
             "100 à 300 mg/jour",
-            "pendant 3 à 4 jours",
-            "Si dénutrition sévère uniquement",
-            "pendant les 3 premier jours"
+            "pendant 3 à 4 jours"
           ],
           "sources": [
             "tnctav-p2742",
@@ -88,9 +86,8 @@
             "en IV",
             "pendant les 3 premiers jours"
           ],
-          "excludeClauses": [
-            "Si dénutrition sévère uniquement",
-            "pendant les 3 premier jours"
+          "excludedClauses": [
+            "si dénutrition sévère uniquement"
           ],
           "sources": [
             "tnctav-p1853"
@@ -105,7 +102,7 @@
           "clauses": [
             "en IV"
           ],
-          "excludeClauses": [
+          "excludedClauses": [
             "seulement si encéphalopathie hépatique, carence ou infection du liquide d'ascite"
           ],
           "sources": [
