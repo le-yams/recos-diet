@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<title>Débits cibles par phase</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* Layout : une colonne de lecture (max 1100px), un panneau de simulation en tête,
+     puis trois maquettes empilées, chacune dans une "mat-card" comme dans l'application. */
+  /* Thème unique, repris de l'application : Angular Material prebuilt « deeppurple-amber »
+     (fond #fafafa, cartes blanches, texte rgba(0,0,0,.87), primaire deep purple), police Roboto,
+     et les couleurs d'alerte déjà utilisées par flows-strip / styles.css (rose, jaune, vert). */
+  :root {
+    --bg: #fafafa;
+    --card: #ffffff;
+    --fg: rgba(0, 0, 0, .87);
+    --muted: rgba(0, 0, 0, .6);
+    --line: rgba(0, 0, 0, .12);
+    --accent: #673ab7;          /* primaire deep purple */
+    --accent-soft: #ede7f6;
+    --p1: #721c24;  --p1-soft: #f8d7da;   /* état de choc : rose « phase aiguë » */
+    --p2: #856404;  --p2-soft: #fff3cd;   /* stabilisation : jaune « level_medium » */
+    --p3: #155724;  --p3-soft: #d4edda;   /* réhabilitation : vert « phase de réhabilitation » */
+    --ok: #155724;  --ok-soft: #d4edda;
+    --warn: #856404; --warn-soft: #fff3cd;
+    --font-body: Roboto, "Helvetica Neue", sans-serif;
+    --shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    color-scheme: light;
+  }
+
+  body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; margin: 0; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding-block: 24px 48px; padding-inline: 16px; display: grid; gap: 28px; }
+  h1 { font-size: 1.6rem; font-weight: 500; margin: 0 0 4px; text-wrap: balance; }
+  h2 { font-size: 1.15rem; font-weight: 500; margin: 0; text-wrap: balance; }
+  h2 small { font-weight: 400; color: var(--muted); font-size: .85rem; margin-left: .5em; }
+  p { margin: 0; max-width: 70ch; }
+  .lead { color: var(--muted); }
+  .eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: var(--muted); font-weight: 500; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* Panneau de simulation (joue le rôle du volet gauche de l'app) */
+  .sim { background: var(--card); border-radius: 4px; box-shadow: var(--shadow); padding: 16px 20px; display: grid; gap: 14px; }
+  .sim-row { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: end; }
+  .field { display: grid; gap: 4px; min-width: 0; }
+  .field label { font-size: .8rem; color: var(--muted); }
+  .field input, .field select { font: inherit; color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 6px 10px; min-width: 0; }
+  .field input { width: 7em; }
+  .field select { max-width: 100%; }
+  .field input:focus-visible, .field select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .sim-note { font-size: .85rem; color: var(--muted); }
+  .sim-note strong { color: var(--fg); font-weight: 500; }
+
+  /* Carte "Débits cibles" telle qu'elle apparaît dans l'app */
+  .card { background: var(--card); border-radius: 4px; box-shadow: var(--shadow); }
+  .card-title { padding: 16px; font-weight: 500; font-size: 1.25rem; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px; }
+  .card-title svg { width: 18px; height: 18px; fill: currentColor; }
+  .card-body { padding: 18px 20px 20px; }
+  .section-head { display: grid; gap: 4px; }
+
+  /* Éléments communs aux maquettes */
+  .phase-chip { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+  .phase-chip .rank { width: 24px; height: 24px; border-radius: 50%; display: inline-grid; place-items: center; font-size: .8rem; color: var(--card); background: var(--pc); flex: none; }
+  .reco { font-size: .82rem; color: var(--muted); }
+  .reco b { color: var(--fg); font-weight: 500; }
+  .flow { display: flex; align-items: baseline; gap: 6px; }
+  .flow .v { font-size: 2.2rem; font-weight: 500; line-height: 1; color: var(--pc); }
+  .flow .u { color: var(--muted); font-size: .95rem; }
+  .theo { font-size: .78rem; color: var(--muted); }
+  .kv { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 12px; font-size: .92rem; align-items: baseline; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; text-align: right; min-width: 0; }
+  .kv dd .tot { display: inline-block; color: var(--muted); font-size: .85rem; margin-left: .35em; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 3px 10px; font-size: .8rem; font-weight: 500; white-space: nowrap; }
+  .pill.ok { background: var(--ok-soft); color: var(--ok); }
+  .pill.warn { background: var(--warn-soft); color: var(--warn); }
+  .pill svg { width: 13px; height: 13px; fill: currentColor; flex: none; }
+  .p1 { --pc: var(--p1); --pc-soft: var(--p1-soft); }
+  .p2 { --pc: var(--p2); --pc-soft: var(--p2-soft); }
+  .p3 { --pc: var(--p3); --pc-soft: var(--p3-soft); }
+
+  /* Maquette A : colonnes */
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .col { border: 1px solid var(--line); border-top: 4px solid var(--pc); border-radius: 4px; padding: 14px 16px 16px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+  .col .head { display: grid; gap: 6px; }
+  .col .reco-band { background: var(--pc-soft); border-radius: 4px; padding: 6px 10px; display: grid; gap: 2px; }
+  .arrows { display: none; }
+  @media (min-width: 760px) {
+    .cols { grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; }
+    .arrows { display: grid; place-items: center; color: var(--muted); }
+    .arrows svg { width: 16px; height: 16px; fill: currentColor; }
+  }
+
+  /* Maquette B : frise verticale */
+  .steps { display: grid; gap: 0; }
+  .step { display: grid; grid-template-columns: 40px 1fr; gap: 0 16px; }
+  .rail { display: grid; grid-template-rows: auto 1fr; justify-items: center; }
+  .rail .dot { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--card); background: var(--pc); font-weight: 500; }
+  .rail .line { width: 2px; background: var(--line); margin-block: 4px; }
+  .step:last-child .rail .line { background: transparent; }
+  .step-body { padding-bottom: 22px; display: grid; gap: 8px; min-width: 0; }
+  .step-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+  .step-head .name { font-weight: 500; font-size: 1.02rem; }
+  .step-grid { display: grid; grid-template-columns: minmax(130px, auto) 1fr; gap: 12px 24px; align-items: center; background: var(--pc-soft); border-radius: 4px; padding: 12px 14px; }
+  .step-grid .flow .v { font-size: 1.9rem; }
+  .step-values { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 6px 18px; font-size: .92rem; min-width: 0; }
+  .step-values .lab { color: var(--muted); font-size: .78rem; }
+  .step-values .val { font-weight: 500; }
+  .step-values .val .tot { display: inline-block; font-weight: 400; color: var(--muted); font-size: .85rem; margin-left: .35em; }
+  @media (max-width: 520px) { .step-grid { grid-template-columns: 1fr; } }
+
+  /* Maquette C : tableau */
+  .tbl-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .92rem; }
+  th, td { padding: 9px 12px; text-align: right; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th:first-child, td:first-child { text-align: left; color: var(--muted); font-weight: 400; }
+  thead th { text-align: right; border-bottom: 2px solid var(--line); vertical-align: bottom; }
+  thead th .phase-chip { justify-content: flex-end; width: 100%; }
+  thead th .reco { display: block; font-weight: 400; margin-top: 4px; }
+  tr.main td { font-size: 1.4rem; font-weight: 500; }
+  tr.main td:first-child { font-size: .92rem; font-weight: 400; }
+  tr.main td.p1 { color: var(--p1); } tr.main td.p2 { color: var(--p2); } tr.main td.p3 { color: var(--p3); }
+  td .sub { display: block; color: var(--muted); font-size: .8rem; font-weight: 400; }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  /* Fiche de lecture sous chaque maquette */
+  .notes { font-size: .88rem; color: var(--muted); display: grid; gap: 4px; max-width: 80ch; }
+  .notes ul { margin: 0; padding-left: 1.2em; }
+  .hyp { background: var(--accent-soft); border-radius: 4px; padding: 12px 16px; font-size: .88rem; display: grid; gap: 4px; }
+  .hyp ul { margin: 0; padding-left: 1.2em; }
+  @media (prefers-reduced-motion: no-preference) { .flow .v { transition: color .2s; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="section-head">
+    <div class="eyebrow">Recos Diet · carte « Débits cibles » · maquettes de travail</div>
+    <h1>Débits cibles par phase</h1>
+    <p class="lead">Trois propositions d'affichage pour la même information. Les valeurs sont calculées en direct à partir du poids et du produit choisis ci-dessous, avec le débit arrondi à l'entier le plus proche et les apports réels dérivés de ce débit arrondi.</p>
+  </header>
+
+  <section class="sim" aria-label="Simulation">
+    <div class="eyebrow">Simulation (remplace le volet patient / nutrition de l'application)</div>
+    <div class="sim-row">
+      <div class="field">
+        <label for="weight">Poids de référence (kg)</label>
+        <input id="weight" type="number" min="20" max="250" step="1" value="70">
+      </div>
+      <div class="field">
+        <label for="product">Produit</label>
+        <select id="product"></select>
+      </div>
+    </div>
+    <p class="sim-note" id="product-note"></p>
+  </section>
+
+  <section class="hyp">
+    <div class="eyebrow">Hypothèses prises par ces maquettes (à confirmer par l'équipe diététique)</div>
+    <ul>
+      <li>Débit calculé sur 24 h/24, avec le poids de référence saisi (dans l'application : poids ajusté si IMC &gt; 30, sinon poids réel).</li>
+      <li>Cible énergétique = borne haute de la phase (10, 20, 25 kcal/kg/j).</li>
+      <li>Protéines « dans la cible » si ≤ 0,4 (phase 1), ≤ 0,9 (phase 2), entre 1,2 et 1,5 g/kg/j (phase 3), sans tolérance.</li>
+      <li>Les pathologies (SRI, anorexie mentale, obésité) et le cas particulier « 30 kcal » ne sont pas représentés ici.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== MAQUETTE A ===================== -->
+  <section class="section-head">
+    <h2>Maquette A <small>phases horizontales, une colonne par phase</small></h2>
+    <p class="lead">La frise et les valeurs ne font plus qu'un : chaque colonne est une phase, lue de gauche à droite dans l'ordre clinique.</p>
+  </section>
+  <div class="card">
+    <div class="card-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-14a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Débits cibles</div>
+    <div class="card-body">
+      <div class="cols" id="mockA"></div>
+    </div>
+  </div>
+  <div class="notes">
+    <ul>
+      <li>Le débit en mL/h est la seule grande valeur : c'est ce que le soignant programme.</li>
+      <li>Le bandeau coloré rappelle la recommandation (fourchettes) ; les lignes en dessous donnent les apports réels obtenus avec le débit arrondi.</li>
+      <li>Sur écran étroit, les colonnes s'empilent et redeviennent une liste verticale.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== MAQUETTE B ===================== -->
+  <section class="section-head">
+    <h2>Maquette B <small>phases verticales, frise chronologique</small></h2>
+    <p class="lead">Une frise verticale, comme un parcours de soins : le rail numéroté donne l'ordre, chaque étape porte sa recommandation et ses valeurs sur une seule ligne.</p>
+  </section>
+  <div class="card">
+    <div class="card-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-14a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Débits cibles</div>
+    <div class="card-body">
+      <div class="steps" id="mockB"></div>
+    </div>
+  </div>
+  <div class="notes">
+    <ul>
+      <li>Même contenu que la maquette A, mais la lecture se fait de haut en bas ; convient mieux si on ajoute plus tard des phases (cas particuliers, palier 30).</li>
+      <li>Le rail peut servir à mettre en avant la phase courante du patient (nœud plein, autres estompés) si cette notion est retenue.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== MAQUETTE C ===================== -->
+  <section class="section-head">
+    <h2>Maquette C <small>tableau comparatif, phases en colonnes</small></h2>
+    <p class="lead">Variante dense pour comparer les phases d'un coup d'œil : une ligne par grandeur, une colonne par phase. Proche d'un protocole papier.</p>
+  </section>
+  <div class="card">
+    <div class="card-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-14a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Débits cibles</div>
+    <div class="card-body">
+      <div class="tbl-wrap"><table id="mockC"></table></div>
+    </div>
+  </div>
+  <div class="notes">
+    <ul>
+      <li>La plus compacte des trois ; le tableau défile horizontalement sur téléphone.</li>
+      <li>Les recommandations sont placées dans l'en-tête de colonne, sous le nom de la phase.</li>
+    </ul>
+  </div>
+
+
+</div>
+
+<script>
+(function () {
+  // Données : produits réels de assets/products.json (densité kcal/L, protéines g/L).
+  var PRODUCTS = [
+    ["Nutrison Protein Plus Energy", "Entérale", 1500, 75],
+    ["Nutrison Protein intense", "Entérale", 1260, 100],
+    ["Nutrison Protein Plus Energy Multi Fibre", "Entérale", 1530, 75],
+    ["Peptamen HN", "Entérale", 1330, 66],
+    ["Peptisorb (hypolipidique)", "Entérale", 1000, 40],
+    ["Sondalis Energy Fibre", "Entérale", 1530, 60],
+    ["Sondalis HP 2kcal", "Entérale", 2000, 100],
+    ["Sondalis HP 2kcal Fibre", "Entérale", 2000, 100],
+    ["Sondalis T Energy", "Entérale", 1550, 60],
+    ["Olimel N7E (USC)", "Parentérale", 1140, 44.3],
+    ["Olimel N9 (Réa)", "Parentérale", 1070, 56.9],
+    ["Mednutriflex Omega N5E (USC)", "Parentérale", 1010, 38],
+    ["Periolimel N4E", "Parentérale", 700, 25],
+    ["Réanutriflex Omega N8 (Réa)", "Parentérale", 1180, 56],
+    ["SMOFKABIVEN PROTEINE N10 (Réa)", "Parentérale", 889, 65.5]
+  ];
+
+  // Phases : bornes transmises par l'équipe diététique. energyMin/proteinMin null = pas de borne basse.
+  var PHASES = [
+    { rank: 1, cls: "p1", name: "État de choc / Défaillance multiviscérale", shortName: "État de choc", energyMin: null, energyMax: 10, proteinMin: null, proteinMax: 0.4 },
+    { rank: 2, cls: "p2", name: "Stabilisation", shortName: "Stabilisation", energyMin: 10, energyMax: 20, proteinMin: null, proteinMax: 0.9 },
+    { rank: 3, cls: "p3", name: "Réhabilitation", shortName: "Réhabilitation", energyMin: 20, energyMax: 25, proteinMin: 1.2, proteinMax: 1.5 }
+  ];
+
+  var fmt0 = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
+  var fmt1 = new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  var fmt2 = new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  function rangeText(min, max, unit) {
+    if (min == null) return "≤ " + fmt1.format(max).replace(/,0$/, "") + " " + unit;
+    return fmt1.format(min).replace(/,0$/, "") + " à " + fmt1.format(max).replace(/,0$/, "") + " " + unit;
+  }
+
+  function compute(phase, weight, product) {
+    var kcalPerL = product[2], gPerL = product[3];
+    var theo = weight * phase.energyMax / kcalPerL * 1000 / 24;
+    var flow = Math.round(theo); // débit entier : seul débit applicable sur une pompe
+    var liters = flow * 24 / 1000;
+    var energy = liters * kcalPerL, proteins = liters * gPerL;
+    var ppk = proteins / weight;
+    var status;
+    if (phase.proteinMin != null && ppk < phase.proteinMin) status = { ok: false, text: "Protéines sous la cible", delta: ppk - phase.proteinMin };
+    else if (ppk > phase.proteinMax) status = { ok: false, text: "Protéines au-dessus de la cible", delta: ppk - phase.proteinMax };
+    else status = { ok: true, text: "Protéines dans la cible", delta: 0 };
+    return { theo: theo, flow: flow, energy: energy, energyPerKg: energy / weight, proteins: proteins, proteinsPerKg: ppk, status: status };
+  }
+
+  var ICON_OK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>';
+  var ICON_WARN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>';
+  var ICON_ARROW = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.9 4.3 4.5 5.7 10.8 12l-6.3 6.3 1.4 1.4L13.6 12zm7 0-1.4 1.4 6.3 6.3-6.3 6.3 1.4 1.4L20.6 12z"/></svg>';
+
+  function pill(st) {
+    var d = st.delta === 0 ? "" : " (" + (st.delta > 0 ? "+" : "−") + fmt2.format(Math.abs(st.delta)) + " g/kg)";
+    return '<span class="pill ' + (st.ok ? "ok" : "warn") + '">' + (st.ok ? ICON_OK : ICON_WARN) + st.text + d + "</span>";
+  }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+
+  function renderA(rows) {
+    var html = "";
+    rows.forEach(function (r, i) {
+      var ph = r.phase, c = r.calc;
+      if (i > 0) html += '<div class="arrows">' + ICON_ARROW + "</div>";
+      html += '<div class="col ' + ph.cls + '">' +
+        '<div class="head">' +
+        '<div class="phase-chip"><span class="rank">' + ph.rank + "</span>" + esc(ph.name) + "</div></div>" +
+        '<div class="reco-band"><span class="reco">Énergie <b>' + rangeText(ph.energyMin, ph.energyMax, "kcal/kg/j") + "</b></span>" +
+        '<span class="reco">Protéines <b>' + rangeText(ph.proteinMin, ph.proteinMax, "g/kg/j") + "</b></span></div>" +
+        '<div><div class="eyebrow">Débit cible</div><div class="flow"><span class="v num">' + c.flow + '</span><span class="u">mL/h</span></div>' +
+        '<div class="theo">théorique ' + fmt2.format(c.theo) + " mL/h, arrondi à l'entier le plus proche</div></div>" +
+        '<dl class="kv"><dt>Énergie</dt><dd><span class="num">' + fmt1.format(c.energyPerKg) + '</span> kcal/kg/j<span class="tot num">' + fmt0.format(c.energy) + " kcal/j</span></dd>" +
+        '<dt>Protéines</dt><dd><span class="num">' + fmt2.format(c.proteinsPerKg) + '</span> g/kg/j<span class="tot num">' + fmt1.format(c.proteins) + " g/j</span></dd></dl>" +
+        "<div>" + pill(c.status) + "</div>" +
+        "</div>";
+    });
+    document.getElementById("mockA").innerHTML = html;
+  }
+
+  function renderB(rows) {
+    var html = "";
+    rows.forEach(function (r) {
+      var ph = r.phase, c = r.calc;
+      html += '<div class="step ' + ph.cls + '">' +
+        '<div class="rail"><div class="dot">' + ph.rank + '</div><div class="line"></div></div>' +
+        '<div class="step-body">' +
+        '<div class="step-head"><span class="name">' + esc(ph.name) + "</span>" +
+        '<span class="reco">Énergie <b>' + rangeText(ph.energyMin, ph.energyMax, "kcal/kg/j") + "</b> · Protéines <b>" + rangeText(ph.proteinMin, ph.proteinMax, "g/kg/j") + "</b></span></div>" +
+        '<div class="step-grid">' +
+        '<div><div class="eyebrow">Débit cible</div><div class="flow"><span class="v num">' + c.flow + '</span><span class="u">mL/h</span></div><div class="theo">théorique ' + fmt2.format(c.theo) + "</div></div>" +
+        '<div class="step-values">' +
+        '<div><div class="lab">Énergie réelle</div><div class="val"><span class="num">' + fmt1.format(c.energyPerKg) + '</span> kcal/kg/j<span class="tot num">' + fmt0.format(c.energy) + " kcal/j</span></div></div>" +
+        '<div><div class="lab">Protéines réelles</div><div class="val"><span class="num">' + fmt2.format(c.proteinsPerKg) + '</span> g/kg/j<span class="tot num">' + fmt1.format(c.proteins) + " g/j</span></div></div>" +
+        '<div><div class="lab">Statut protéique</div><div>' + pill(c.status) + "</div></div>" +
+        "</div></div></div></div>";
+    });
+    document.getElementById("mockB").innerHTML = html;
+  }
+
+  function renderC(rows) {
+    var head = "<thead><tr><th></th>";
+    rows.forEach(function (r) {
+      var ph = r.phase;
+      head += '<th class="' + ph.cls + '"><div class="phase-chip"><span class="rank">' + ph.rank + "</span>" + esc(ph.shortName) + "</div>" +
+        '<span class="reco">' + rangeText(ph.energyMin, ph.energyMax, "kcal/kg/j") + "<br>" + rangeText(ph.proteinMin, ph.proteinMax, "g/kg/j") + "</span></th>";
+    });
+    head += "</tr></thead>";
+    function row(label, cell, cls) {
+      var h = "<tr" + (cls ? ' class="' + cls + '"' : "") + "><td>" + label + "</td>";
+      rows.forEach(function (r) { h += '<td class="' + r.phase.cls + '">' + cell(r.calc) + "</td>"; });
+      return h + "</tr>";
+    }
+    var body = "<tbody>" +
+      row("Débit cible", function (c) { return '<span class="num">' + c.flow + '</span> <span class="sub">mL/h · théorique ' + fmt2.format(c.theo) + "</span>"; }, "main") +
+      row("Énergie réelle", function (c) { return '<span class="num">' + fmt1.format(c.energyPerKg) + '</span> kcal/kg/j<span class="sub num">' + fmt0.format(c.energy) + " kcal/j</span>"; }) +
+      row("Protéines réelles", function (c) { return '<span class="num">' + fmt2.format(c.proteinsPerKg) + '</span> g/kg/j<span class="sub num">' + fmt1.format(c.proteins) + " g/j</span>"; }) +
+      row("Statut protéique", function (c) { return pill(c.status); }) +
+      "</tbody>";
+    document.getElementById("mockC").innerHTML = head + body;
+  }
+
+  var weightEl = document.getElementById("weight"), productEl = document.getElementById("product");
+  PRODUCTS.forEach(function (p, i) {
+    var o = document.createElement("option");
+    o.value = i; o.textContent = p[0] + " (" + p[1] + ")";
+    productEl.appendChild(o);
+  });
+
+  function update() {
+    var weight = parseFloat(weightEl.value);
+    if (!isFinite(weight) || weight <= 0) weight = 70;
+    var product = PRODUCTS[parseInt(productEl.value, 10)] || PRODUCTS[0];
+    document.getElementById("product-note").innerHTML = "<strong>" + esc(product[0]) + "</strong> : " + fmt0.format(product[2]) + " kcal/L, " + fmt1.format(product[3]).replace(/,0$/, "") + " g de protéines/L · poids de référence " + fmt0.format(weight) + " kg · 24 h/24.";
+    var rows = PHASES.map(function (ph) { return { phase: ph, calc: compute(ph, weight, product) }; });
+    renderA(rows); renderB(rows); renderC(rows);
+  }
+  weightEl.addEventListener("input", update);
+  productEl.addEventListener("change", update);
+  update();
+})();
+</script>
+</body>
+</html>
