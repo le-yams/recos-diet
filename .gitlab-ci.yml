@@ -35,6 +35,20 @@ semantic-release:
     paths:
       - package.json
     expire_in: 1 day
+  # template rules, except the manual release stays blocking (allow_failure: false): the template
+  # makes it optional, which let build-for-prod be skipped and lftp-production deploy without a release
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
+    - if: '$SEMREL_RELEASE_DISABLED == "true"'
+      when: never
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: '$CI_COMMIT_REF_NAME !~ $SEMREL_BRANCHES_REF'
+      when: never
+    - if: '$SEMREL_AUTO_RELEASE_ENABLED == "true"'
+    - when: manual
+      allow_failure: false
 
 ng-build:
   before_script:
@@ -48,3 +62,8 @@ build-for-prod:
     - semantic-release
   rules:
     - if: '$CI_COMMIT_REF_NAME =~ $PROD_REF'
+
+# production only ever receives the release build, never the ng-build artifacts
+lftp-production:
+  needs:
+    - build-for-prod
