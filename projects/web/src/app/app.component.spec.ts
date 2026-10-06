@@ -17,7 +17,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {RouterTestingModule} from '@angular/router/testing';
-import {HttpClientModule} from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 
 describe('AppComponent', () => {
@@ -26,8 +26,9 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientModule],
-      declarations: [AppComponent]
+      imports: [RouterTestingModule],
+      declarations: [AppComponent],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
     })
       .compileComponents();
   });
