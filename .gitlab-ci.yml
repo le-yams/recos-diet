@@ -27,6 +27,8 @@ variables:
   NG_CLI_IMAGE: trion/ng-cli-karma:22.2.1
   # the template default ("build --no-progress") is also applied to the domain library, whose ng-packagr builder rejects it
   NG_BUILD_ARGS: "build"
+  # ng-audit: production dependencies only, failing on high and critical advisories
+  NG_AUDIT_ARGS: "--omit=dev --audit-level=high"
   LFTP_SRC: "dist/web"
 
 semantic-release:
@@ -49,6 +51,15 @@ semantic-release:
     - if: '$SEMREL_AUTO_RELEASE_ENABLED == "true"'
     - when: manual
       allow_failure: false
+
+# template rules: manual and non-blocking. Here automatic, blocking on ready MRs only: elsewhere (master, Draft
+# MRs) a newly published advisory is a warning, so it never blocks an urgent release such as a clinical data fix
+ng-audit:
+  rules:
+    - if: '$NG_AUDIT_DISABLED == "true"'
+      when: never
+    - if: '$CI_MERGE_REQUEST_ID && $CI_MERGE_REQUEST_TITLE !~ /^Draft:.*/'
+    - allow_failure: true
 
 # the template calls ng directly, so the npm prebuild hook does not run: generate version.json here
 ng-build:
