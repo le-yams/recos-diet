@@ -15,11 +15,12 @@
  */
 
 import {hourInMillis, minuteInMillis} from '../utils';
-import packageJson from '../../../../package.json';
+// named import: esbuild then keeps only this value of package.json in the bundle
+import {version} from '../../../../package.json';
 
 export const environment = {
   production: true,
-  appVersion: packageJson.version,
+  appVersion: version,
   appUpdateCheckDelay: 20 * minuteInMillis,
   updateWarningSleep: 2 * hourInMillis
 };
