@@ -40,8 +40,8 @@ export class Patient implements PatientInfo {
 
   static readonly IDEAL_BMI = 25
   static readonly OVERWEIGHT_BMI = 30
-  static readonly HEIGHT_CM = {min: 50, max: 300}
-  static readonly WEIGHT_KG = {min: 1, max: 700}
+  static readonly HEIGHT_CM = {min: 100, max: 300}
+  static readonly WEIGHT_KG = {min: 10, max: 700}
 
   heightCm!: number;
   weightKg!: number;

@@ -62,10 +62,10 @@ describe('PatientFormComponent', () => {
   });
 
   [
-    {name: 'height', value: '', message: 'Taille attendue entre 50 et 300 cm'},
-    {name: 'height', value: '17', message: 'Taille attendue entre 50 et 300 cm'},
-    {name: 'weight', value: '', message: 'Poids attendu entre 1 et 700 kg'},
-    {name: 'weight', value: '0.5', message: 'Poids attendu entre 1 et 700 kg'},
+    {name: 'height', value: '', message: 'Taille attendue entre 100 et 300 cm'},
+    {name: 'height', value: '17', message: 'Taille attendue entre 100 et 300 cm'},
+    {name: 'weight', value: '', message: 'Poids attendu entre 10 et 700 kg'},
+    {name: 'weight', value: '0.5', message: 'Poids attendu entre 10 et 700 kg'},
   ].forEach(param => {
     it(`should keep patient size and show an error when ${param.name} is '${param.value}'`, async () => {
       await type(param.name, param.value);
