@@ -1,14 +1,15 @@
 include:
   - project: 'to-be-continuous/angular'
-    ref: '4.0.0'
+    ref: '4.15.0'
     file: '/templates/gitlab-ci-angular.yml'
   - project: "to-be-continuous/semantic-release"
-    ref: "2.0.1"
+    ref: "4.3.0"
     file: '/templates/gitlab-ci-semrel.yml'
   - project: 'ydisanto/tbc-lftp'
     ref: '1.0.0'
     file: '/templates/gitlab-ci-lftp.yml'
 
+# required: the tbc-lftp template declares its own stages, which would override the TBC ones
 stages:
   - build
   - test
@@ -21,11 +22,11 @@ stages:
   - infra-prod
   - production
 
-
 variables:
   # Angular template
   NG_CLI_IMAGE: trion/ng-cli-karma:16.2.9
-#  NG_DEFAULT_PROJECT: "web"
+  # the template default ("build --no-progress") is also applied to the domain library, whose ng-packagr builder rejects it
+  NG_BUILD_ARGS: "build"
   LFTP_SRC: "dist/web"
 
 semantic-release:
