@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faLongArrowAltRight, faStickyNote} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-page-phosphorus',
   templateUrl: './page-phosphorus.component.html',
   styleUrls: ['./page-phosphorus.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PagePhosphorusComponent {

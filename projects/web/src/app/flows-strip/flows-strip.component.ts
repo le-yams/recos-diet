@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons';
 import {PathologiesService} from '../pathologies/pathologies.service';
 import {Pathology} from '@recos-diet/domain';
@@ -25,6 +25,7 @@ import {Observable} from 'rxjs';
   selector: 'app-flows-strip',
   templateUrl: './flows-strip.component.html',
   styleUrls: ['./flows-strip.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class FlowsStripComponent {

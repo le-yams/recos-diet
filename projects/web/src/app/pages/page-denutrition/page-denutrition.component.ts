@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-import { Component} from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {faStickyNote} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-page-denutrition',
   templateUrl: './page-denutrition.component.html',
   styleUrls: ['./page-denutrition.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PageDenutritionComponent {

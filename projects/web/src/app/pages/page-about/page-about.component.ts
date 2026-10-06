@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-page-about',
   templateUrl: './page-about.component.html',
   styleUrls: ['./page-about.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PageAboutComponent {

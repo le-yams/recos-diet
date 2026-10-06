@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faDisease, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import {Pathology} from "@recos-diet/domain";
 import {Observable} from "rxjs";
@@ -26,6 +26,7 @@ import {PathologiesWarningsService} from "../warnings/pathologies-warnings.servi
   selector: 'app-pathologies',
   templateUrl: './pathologies.component.html',
   styleUrls: ['./pathologies.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PathologiesComponent {

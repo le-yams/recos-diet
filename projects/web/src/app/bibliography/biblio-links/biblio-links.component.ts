@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Bibliography, BibliographyEntries, EMPTY_BIBLIOGRAPHY} from '@recos-diet/domain';
 import {DomainService} from "../../domain.service";
 
@@ -22,6 +22,7 @@ import {DomainService} from "../../domain.service";
   selector: 'app-biblio-links',
   templateUrl: './biblio-links.component.html',
   styleUrls: ['./biblio-links.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class BiblioLinksComponent implements OnInit {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faUtensils} from '@fortawesome/free-solid-svg-icons';
 import {NutritionType} from "@recos-diet/domain";
 import {NutritionService} from "../nutrition.service";
@@ -24,6 +24,7 @@ import {NutritionService} from "../nutrition.service";
   selector: 'app-nutrition-form',
   templateUrl: './nutrition-form.component.html',
   styleUrls: ['./nutrition-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class NutritionFormComponent {

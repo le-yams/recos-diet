@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faUserInjured} from '@fortawesome/free-solid-svg-icons';
 import {Patient} from '@recos-diet/domain';
 import {DomainService} from "../../domain.service";
@@ -23,6 +23,7 @@ import {DomainService} from "../../domain.service";
   selector: 'app-patient-form',
   templateUrl: './patient-form.component.html',
   styleUrls: ['./patient-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PatientFormComponent {

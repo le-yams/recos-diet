@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {PathologiesWarningsService} from "./pathologies-warnings.service";
 import {Observable} from "rxjs";
 import {Warning, WarningLevel} from '@recos-diet/domain';
@@ -25,6 +25,7 @@ import {Verbose} from "../../../infra/utils";
   selector: 'app-warnings',
   templateUrl: './pathologies-warnings.component.html',
   styleUrls: ['./pathologies-warnings.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PathologiesWarningsComponent {

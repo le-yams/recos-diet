@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faBullseye, faPills} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-page-home',
   templateUrl: './page-home.component.html',
   styleUrls: ['./page-home.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PageHomeComponent {

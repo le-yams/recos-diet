@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faVials} from '@fortawesome/free-solid-svg-icons';
 import {DomainService} from '../../domain.service';
 import {NutritionType, ProductDetail} from '@recos-diet/domain';
@@ -26,6 +26,7 @@ import {map} from 'rxjs/operators';
   selector: 'app-page-products',
   templateUrl: './page-products.component.html',
   styleUrls: ['./page-products.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PageProductsComponent {

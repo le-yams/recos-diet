@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, OnInit, SecurityContext} from '@angular/core';
+import {Component, OnInit, SecurityContext, ChangeDetectionStrategy} from '@angular/core';
 import {NoSurvey, Survey, SurveyService} from "../../survey/survey.service";
 import {DomSanitizer} from "@angular/platform-browser";
 
@@ -22,6 +22,7 @@ import {DomSanitizer} from "@angular/platform-browser";
   selector: 'app-page-survey',
   templateUrl: './page-survey.component.html',
   styleUrls: ['./page-survey.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PageSurveyComponent implements OnInit {

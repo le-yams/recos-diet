@@ -20,7 +20,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BibliographyModule} from './bibliography/bibliography.module';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi, withXhr} from '@angular/common/http';
 import {MatButtonModule} from '@angular/material/button';
 import {PatientModule} from './patient/patient.module';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
@@ -96,7 +96,7 @@ export function loadDomain(domainLoader: DomainLoaderService) {
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
     DomainLoaderService,
     {provide: APP_INITIALIZER, useFactory: loadDomain, deps: [DomainLoaderService], multi: true},
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withXhr(), withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]
 })

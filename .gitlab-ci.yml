@@ -24,7 +24,7 @@ stages:
 
 variables:
   # Angular template
-  NG_CLI_IMAGE: trion/ng-cli-karma:21.2.14
+  NG_CLI_IMAGE: trion/ng-cli-karma:22.2.1
   # the template default ("build --no-progress") is also applied to the domain library, whose ng-packagr builder rejects it
   NG_BUILD_ARGS: "build"
   LFTP_SRC: "dist/web"

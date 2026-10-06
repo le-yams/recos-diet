@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {DomainService} from "../../domain.service";
 import {faBookMedical} from '@fortawesome/free-solid-svg-icons';
 import {ActivatedRoute} from "@angular/router";
@@ -25,6 +25,7 @@ import {Verbose} from "../../../infra/utils";
   selector: 'app-page-bibliography',
   templateUrl: './page-bibliography.component.html',
   styleUrls: ['./page-bibliography.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PageBibliographyComponent implements OnInit, AfterViewInit {

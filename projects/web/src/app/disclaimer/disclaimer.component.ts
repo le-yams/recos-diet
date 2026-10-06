@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-disclaimer',
   templateUrl: './disclaimer.component.html',
   styleUrls: ['./disclaimer.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class DisclaimerComponent {

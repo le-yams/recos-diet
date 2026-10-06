@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {MicronutrimentsService} from "./micronutriments.service";
 import {Observable} from "rxjs";
 import {SummarizedMicronutrimentRecommendation} from "@recos-diet/domain";
@@ -25,6 +25,7 @@ import {Verbose} from "../../infra/utils";
   selector: 'app-nutriments',
   templateUrl: './micronutriments.component.html',
   styleUrls: ['./micronutriments.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class MicronutrimentsComponent {

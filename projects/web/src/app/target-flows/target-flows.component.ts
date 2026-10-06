@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {TargetFlowsService} from './target-flows.service';
 import {Observable} from 'rxjs';
 import {DailyTargetFlow} from '@recos-diet/domain';
@@ -23,6 +23,7 @@ import {DailyTargetFlow} from '@recos-diet/domain';
   selector: 'app-target-flows',
   templateUrl: './target-flows.component.html',
   styleUrls: ['./target-flows.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class TargetFlowsComponent {

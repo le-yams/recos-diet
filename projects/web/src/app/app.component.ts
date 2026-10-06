@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {firstValueFrom, Observable} from "rxjs";
 import {filter} from "rxjs/operators";
 import {MatSidenav} from "@angular/material/sidenav";
@@ -34,6 +34,7 @@ import {NoSurvey, Survey, SurveyService} from "./survey/survey.service";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 
