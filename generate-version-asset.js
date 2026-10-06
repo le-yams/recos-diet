@@ -15,24 +15,19 @@
  */
 
 const path = require('path');
-const colors = require('colors/safe');
 const fs = require('fs');
 const appVersion = require('./package.json').version;
 
 const outputfilePath = path.join(__dirname + '/projects/web/src/version.json');
 
-console.log(colors.cyan('\nGenerating application version asset...'));
+console.log('Generating application version asset...');
 
-// semgrep detect-non-literal-fs-filename: false positive, the path is built from __dirname and a constant
-// nosemgrep
-fs.writeFile(
-  outputfilePath,
-  JSON.stringify({version: appVersion}),
-  function (err) {
-    if (err) {
-      return console.error(colors.red(err));
-    }
-    console.log(
-      colors.green(`asset successfully generated with version ${colors.yellow(appVersion)} at ${colors.yellow(outputfilePath)}`)
-    );
-  });
+try {
+  // semgrep detect-non-literal-fs-filename: false positive, the path is built from __dirname and a constant
+  // nosemgrep
+  fs.writeFileSync(outputfilePath, JSON.stringify({version: appVersion}));
+  console.log(`asset successfully generated with version ${appVersion} at ${outputfilePath}`);
+} catch (err) {
+  console.error(err);
+  process.exitCode = 1;
+}

@@ -15,11 +15,11 @@
  */
 
 import {hourInMillis, minuteInMillis} from '../utils';
+import packageJson from '../../../../package.json';
 
 export const environment = {
   production: true,
-  // eslint-disable-next-line @typescript-eslint/no-require-imports -- remplacé par la lecture de version.json (#75)
-  appVersion: require('../../../../package.json').version,
+  appVersion: packageJson.version,
   appUpdateCheckDelay: 20 * minuteInMillis,
   updateWarningSleep: 2 * hourInMillis
 };

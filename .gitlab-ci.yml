@@ -50,10 +50,11 @@ semantic-release:
     - when: manual
       allow_failure: false
 
+# the template calls ng directly, so the npm prebuild hook does not run: generate version.json here
 ng-build:
   before_script:
     - !reference [ .ng-cli-base, before_script ]
-    - npm run "generate version asset"
+    - npm run generate:version
 
 build-for-prod:
   extends: ng-build

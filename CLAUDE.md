@@ -30,12 +30,12 @@ npm script names contain spaces, so quote them.
 npm run "build domain"          # required before `npm start` / web tests; rebuild after domain edits
 npx ng build domain --watch     # keep dist/domain fresh while editing the library
 npm start                       # ng serve (web, development config)
-npm run build                   # ng build domain && ng build web (production config)
+npm run build                   # generate:version (prebuild), then ng build domain && ng build web (production)
 npm test                        # ng test domain --no-watch && ng test web --no-watch
 npm run lint                    # ng lint domain && ng lint web
 npm run "lint domain"
 npm run "lint webapp"
-npm run "generate version asset"  # writes projects/web/src/version.json from package.json version
+npm run generate:version        # writes projects/web/src/version.json (gitignored) from package.json version
 ```
 
 Tests use Karma + Jasmine and launch a real `Chrome` (see `karma.conf.js` in each project). Headless:
@@ -130,8 +130,9 @@ value silently breaks data matching; change both sides together.
   semantic-release, which bumps `package.json`, rewrites `CHANGELOG.md` and commits `chore(release): x.y.z
   [skip ci]`. Data-only edits have historically used `fix:` or `chore:` depending on whether users should see a
   release.
-- Version flow: `environment.prod.ts` reads `package.json` version at build time; CI runs
-  `generate version asset` before building so `version.json` matches. In production `AppUpdater` polls
-  `/version.json` and prompts a reload when it differs from the running build. Dev builds report
-  `SNAPSHOT-<timestamp>`.
+- Version flow: `environment.prod.ts` imports the `package.json` version at build time (only that value ends up
+  in the bundle); `version.json` is generated, not tracked, by `generate:version`: the npm `prebuild` hook runs it
+  locally, the `ng-build` job's `before_script` in CI (the template calls `ng` directly). In production
+  `AppUpdater` polls `/version.json` and prompts a reload when it differs from the running build. Dev builds
+  report `SNAPSHOT-<timestamp>`.
 - Default branch is `master`; feature work happens on `feat/*` branches.
