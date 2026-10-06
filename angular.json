@@ -72,7 +72,7 @@
               "projects/web/src/.htaccess"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "projects/web/src/theme.scss",
               "projects/web/src/styles.css"
             ],
             "scripts": []
@@ -140,7 +140,7 @@
               "projects/web/src/version.json"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "projects/web/src/theme.scss",
               "projects/web/src/styles.css"
             ],
             "scripts": []

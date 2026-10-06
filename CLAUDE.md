@@ -100,6 +100,9 @@ matrices. Classes that hold subscriptions (`Warnings`, `Micronutriments`) expose
 - **Import rule**: web code imports domain types from `@recos-diet/domain`. Two files currently reach into
   `../../../../domain/src/...` (`target-flows.component.ts`, `flows-strip.component.ts`); do not add more.
 - `infra/utils.ts` `Verbose` logging is on when the hostname contains `localhost` or `staging`.
+- **Material theme**: `src/theme.scss` (M2 API, deep-purple/amber like the former `deeppurple-amber` prebuilt
+  theme) only includes the `*-theme` mixins of the components in use. Using a new Material component means adding
+  its mixin there, otherwise it renders without theme colors.
 
 ## Clinical data is JSON, not code
 
