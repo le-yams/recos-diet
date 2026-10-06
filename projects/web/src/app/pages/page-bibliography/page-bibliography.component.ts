@@ -24,7 +24,8 @@ import {Verbose} from "../../../infra/utils";
 @Component({
   selector: 'app-page-bibliography',
   templateUrl: './page-bibliography.component.html',
-  styleUrls: ['./page-bibliography.component.css']
+  styleUrls: ['./page-bibliography.component.css'],
+  standalone: false
 })
 export class PageBibliographyComponent implements OnInit, AfterViewInit {
 

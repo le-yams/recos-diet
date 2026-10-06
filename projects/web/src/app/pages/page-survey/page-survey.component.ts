@@ -21,7 +21,8 @@ import {DomSanitizer} from "@angular/platform-browser";
 @Component({
   selector: 'app-page-survey',
   templateUrl: './page-survey.component.html',
-  styleUrls: ['./page-survey.component.css']
+  styleUrls: ['./page-survey.component.css'],
+  standalone: false
 })
 export class PageSurveyComponent implements OnInit {
 

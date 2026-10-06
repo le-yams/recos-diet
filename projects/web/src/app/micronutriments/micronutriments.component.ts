@@ -24,7 +24,8 @@ import {Verbose} from "../../infra/utils";
 @Component({
   selector: 'app-nutriments',
   templateUrl: './micronutriments.component.html',
-  styleUrls: ['./micronutriments.component.css']
+  styleUrls: ['./micronutriments.component.css'],
+  standalone: false
 })
 export class MicronutrimentsComponent {
 

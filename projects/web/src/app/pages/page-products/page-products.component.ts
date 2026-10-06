@@ -25,7 +25,8 @@ import {map} from 'rxjs/operators';
 @Component({
   selector: 'app-page-products',
   templateUrl: './page-products.component.html',
-  styleUrls: ['./page-products.component.css']
+  styleUrls: ['./page-products.component.css'],
+  standalone: false
 })
 export class PageProductsComponent {
 

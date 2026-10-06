@@ -20,7 +20,8 @@ import {faLongArrowAltRight, faStickyNote} from '@fortawesome/free-solid-svg-ico
 @Component({
   selector: 'app-page-phosphorus',
   templateUrl: './page-phosphorus.component.html',
-  styleUrls: ['./page-phosphorus.component.css']
+  styleUrls: ['./page-phosphorus.component.css'],
+  standalone: false
 })
 export class PagePhosphorusComponent {
 

@@ -24,7 +24,8 @@ import {Verbose} from "../../../infra/utils";
 @Component({
   selector: 'app-warnings',
   templateUrl: './pathologies-warnings.component.html',
-  styleUrls: ['./pathologies-warnings.component.css']
+  styleUrls: ['./pathologies-warnings.component.css'],
+  standalone: false
 })
 export class PathologiesWarningsComponent {
 

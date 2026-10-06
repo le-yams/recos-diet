@@ -22,7 +22,8 @@ import {DomainService} from "../../domain.service";
 @Component({
   selector: 'app-patient-form',
   templateUrl: './patient-form.component.html',
-  styleUrls: ['./patient-form.component.css']
+  styleUrls: ['./patient-form.component.css'],
+  standalone: false
 })
 export class PatientFormComponent {
 

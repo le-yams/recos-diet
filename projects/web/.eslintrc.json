@@ -20,6 +20,7 @@
             "argsIgnorePattern": "^_"
           }
         ],
+        "@angular-eslint/prefer-standalone": "off",
         "@angular-eslint/directive-selector": [
           "error",
           {

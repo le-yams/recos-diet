@@ -22,7 +22,8 @@ import {DailyTargetFlow} from '@recos-diet/domain';
 @Component({
   selector: 'app-target-flows',
   templateUrl: './target-flows.component.html',
-  styleUrls: ['./target-flows.component.css']
+  styleUrls: ['./target-flows.component.css'],
+  standalone: false
 })
 export class TargetFlowsComponent {
 

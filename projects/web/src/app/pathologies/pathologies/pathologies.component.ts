@@ -25,7 +25,8 @@ import {PathologiesWarningsService} from "../warnings/pathologies-warnings.servi
 @Component({
   selector: 'app-pathologies',
   templateUrl: './pathologies.component.html',
-  styleUrls: ['./pathologies.component.css']
+  styleUrls: ['./pathologies.component.css'],
+  standalone: false
 })
 export class PathologiesComponent {
 

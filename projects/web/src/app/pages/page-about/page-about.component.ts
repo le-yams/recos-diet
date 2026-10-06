@@ -20,7 +20,8 @@ import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 @Component({
   selector: 'app-page-about',
   templateUrl: './page-about.component.html',
-  styleUrls: ['./page-about.component.css']
+  styleUrls: ['./page-about.component.css'],
+  standalone: false
 })
 export class PageAboutComponent {
 

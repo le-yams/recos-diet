@@ -24,7 +24,8 @@ import {Observable} from 'rxjs';
 @Component({
   selector: 'app-flows-strip',
   templateUrl: './flows-strip.component.html',
-  styleUrls: ['./flows-strip.component.css']
+  styleUrls: ['./flows-strip.component.css'],
+  standalone: false
 })
 export class FlowsStripComponent {
 

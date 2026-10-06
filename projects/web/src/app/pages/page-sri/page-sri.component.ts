@@ -20,7 +20,8 @@ import {faStickyNote} from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-page-sri',
   templateUrl: './page-sri.component.html',
-  styleUrls: ['./page-sri.component.css']
+  styleUrls: ['./page-sri.component.css'],
+  standalone: false
 })
 export class PageSriComponent {
 

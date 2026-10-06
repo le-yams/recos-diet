@@ -20,7 +20,8 @@ import {faStickyNote} from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-page-denutrition',
   templateUrl: './page-denutrition.component.html',
-  styleUrls: ['./page-denutrition.component.css']
+  styleUrls: ['./page-denutrition.component.css'],
+  standalone: false
 })
 export class PageDenutritionComponent {
 

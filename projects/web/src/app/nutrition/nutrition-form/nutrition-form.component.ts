@@ -23,7 +23,8 @@ import {NutritionService} from "../nutrition.service";
 @Component({
   selector: 'app-nutrition-form',
   templateUrl: './nutrition-form.component.html',
-  styleUrls: ['./nutrition-form.component.css']
+  styleUrls: ['./nutrition-form.component.css'],
+  standalone: false
 })
 export class NutritionFormComponent {
 

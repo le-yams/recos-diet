@@ -21,7 +21,8 @@ import {DomainService} from "../../domain.service";
 @Component({
   selector: 'app-biblio-links',
   templateUrl: './biblio-links.component.html',
-  styleUrls: ['./biblio-links.component.css']
+  styleUrls: ['./biblio-links.component.css'],
+  standalone: false
 })
 export class BiblioLinksComponent implements OnInit {
 
