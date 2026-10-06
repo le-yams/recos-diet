@@ -46,6 +46,11 @@ npx ng test domain --no-watch --include='**/patient.spec.ts'
 
 `fdescribe`/`fit` also work for focusing within a file. Web tests need `dist/domain` to exist.
 
+The production build enforces an `initial` bundle budget in `angular.json` (warning 1mb, error 1.5mb) and CI runs
+it, so exceeding the error fails the pipeline. Reference measure on 2026-10-06 (Angular 16, `browser` builder):
+978.96 kB initial (main 837.54 kB, styles 107.36 kB). A warning means the bundle drifted: find out why before
+raising the threshold, and re-measure after the Angular migration (#74).
+
 ## Domain architecture (projects/domain/src)
 
 The domain is **event-driven**. `Domain` (`domain.ts`) is the composition root: it constructs every sub-domain

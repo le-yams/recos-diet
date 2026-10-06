@@ -27,8 +27,6 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NutritionModule} from "./nutrition/nutrition.module";
 import {PathologiesModule} from "./pathologies/pathologies.module";
-import {MatGridListModule} from "@angular/material/grid-list";
-import {MatTabsModule} from "@angular/material/tabs";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
@@ -40,7 +38,6 @@ import {DisclaimerComponent} from './disclaimer/disclaimer.component';
 import {PageBibliographyComponent} from './pages/page-bibliography/page-bibliography.component';
 import {FooterComponent} from './footer/footer.component';
 import {PageAboutComponent} from './pages/page-about/page-about.component';
-import {MatChipsModule} from "@angular/material/chips";
 import {PageSriComponent} from './pages/page-sri/page-sri.component';
 import {PageDenutritionComponent} from './pages/page-denutrition/page-denutrition.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
@@ -48,8 +45,6 @@ import {FormsModule} from "@angular/forms";
 import {MicronutrimentsModule} from "./micronutriments/micronutriments.module";
 import {PageHomeComponent} from './pages/page-home/page-home.component';
 import {PageProductsComponent} from './pages/page-products/page-products.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatSortModule} from '@angular/material/sort';
 import {ProductDetailComponent} from './pages/page-products/product-detail/product-detail.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { PagePhosphorusComponent } from './pages/page-phosphorus/page-phosphorus.component';
@@ -88,19 +83,14 @@ export function loadDomain(domainLoader: DomainLoaderService) {
     PatientModule,
     NutritionModule,
     PathologiesModule,
-    MatGridListModule,
-    MatTabsModule,
     MatSidenavModule,
     MatListModule,
     MatIconModule,
     TargetFlowsModule,
     MatCardModule,
-    MatChipsModule,
     MatCheckboxModule,
     FormsModule,
     MicronutrimentsModule,
-    MatTableModule,
-    MatSortModule,
     MatExpansionModule,
   ],
   providers: [
