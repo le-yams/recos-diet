@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ProductWarningsService} from "./product-warnings.service";
 import {Observable} from "rxjs";
 import {Warning, WarningLevel} from '@recos-diet/domain';
@@ -27,7 +27,6 @@ import {AsyncPipe} from '@angular/common';
   selector: 'app-warnings',
   templateUrl: './product-warnings.component.html',
   styleUrls: ['./product-warnings.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BiblioLinksComponent, AsyncPipe]
 })
 export class ProductWarningsComponent {

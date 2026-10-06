@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {MicronutrimentsService} from "./micronutriments.service";
 import {Observable} from "rxjs";
 import {SummarizedMicronutrimentRecommendation} from "@recos-diet/domain";
@@ -27,7 +27,6 @@ import {AsyncPipe} from '@angular/common';
   selector: 'app-nutriments',
   templateUrl: './micronutriments.component.html',
   styleUrls: ['./micronutriments.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BiblioLinksComponent, AsyncPipe]
 })
 export class MicronutrimentsComponent {

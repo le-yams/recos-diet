@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component} from '@angular/core';
 import {faStickyNote} from '@fortawesome/free-solid-svg-icons';
 import {MatCard, MatCardHeader, MatCardTitle, MatCardContent} from '@angular/material/card';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
@@ -24,7 +24,6 @@ import {MatDivider} from '@angular/material/list';
   selector: 'app-page-sri',
   templateUrl: './page-sri.component.html',
   styleUrls: ['./page-sri.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MatCard, MatCardHeader, MatCardTitle, FaIconComponent, MatDivider, MatCardContent]
 })
 export class PageSriComponent {

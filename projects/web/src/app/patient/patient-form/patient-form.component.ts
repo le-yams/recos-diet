@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {faUserInjured} from '@fortawesome/free-solid-svg-icons';
 import {Patient} from '@recos-diet/domain';
 import {DomainService} from "../../domain.service";
@@ -34,7 +34,6 @@ import {BiblioLinksComponent} from '../../bibliography/biblio-links/biblio-links
   selector: 'app-patient-form',
   templateUrl: './patient-form.component.html',
   styleUrls: ['./patient-form.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     MatExpansionPanel,
     MatExpansionPanelHeader,

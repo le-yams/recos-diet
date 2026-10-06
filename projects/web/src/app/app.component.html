@@ -52,7 +52,7 @@
     </mat-sidenav>
     <mat-sidenav-content>
       @if ((survey$ | async) || noSurvey; as survey) {
-        @if (survey.enabled && currentRoute !== '/survey') {
+        @if (survey.enabled && currentRoute() !== '/survey') {
           <div style="display: flex; justify-content: center">
             <button mat-flat-button color="accent" class="m-2 blinking text-center" routerLink="/survey">
               Donnez votre avis ici !

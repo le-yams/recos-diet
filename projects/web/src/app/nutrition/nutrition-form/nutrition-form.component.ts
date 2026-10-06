@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {faUtensils} from '@fortawesome/free-solid-svg-icons';
 import {NutritionType} from "@recos-diet/domain";
 import {NutritionService} from "../nutrition.service";
@@ -35,7 +35,6 @@ import {AsyncPipe} from '@angular/common';
   selector: 'app-nutrition-form',
   templateUrl: './nutrition-form.component.html',
   styleUrls: ['./nutrition-form.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     MatExpansionPanel,
     MatExpansionPanelHeader,

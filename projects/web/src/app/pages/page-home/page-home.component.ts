@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component} from '@angular/core';
 import {faBullseye, faPills} from '@fortawesome/free-solid-svg-icons';
 import {PatientFormComponent} from '../../patient/patient-form/patient-form.component';
 import {NutritionFormComponent} from '../../nutrition/nutrition-form/nutrition-form.component';
@@ -30,7 +30,6 @@ import {MicronutrimentsComponent} from '../../micronutriments/micronutriments.co
   selector: 'app-page-home',
   templateUrl: './page-home.component.html',
   styleUrls: ['./page-home.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     PatientFormComponent,
     NutritionFormComponent,

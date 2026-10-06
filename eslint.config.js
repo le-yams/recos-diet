@@ -26,11 +26,7 @@ module.exports = defineConfig([
   },
   {
     files: ['projects/web/**/*.ts'],
-    rules: {
-      ...selectorRules('app'),
-      // components keep ChangeDetectionStrategy.Eager until the OnPush migration (step 13 of !69)
-      '@angular-eslint/prefer-on-push-component-change-detection': 'off',
-    },
+    rules: selectorRules('app'),
   },
   {
     files: ['projects/domain/**/*.ts'],

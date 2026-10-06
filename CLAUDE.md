@@ -95,7 +95,10 @@ matrices. Classes that hold subscriptions (`Warnings`, `Micronutriments`) expose
   from `infra/`, creates the bus (`InMemoryBus` wrapped by `DomainEvents` in `infra/pubsub.ts`) and builds the
   `Domain`. Nothing renders until this resolves.
 - **Components** are standalone and list what their template uses in `imports`; dependencies come from `inject()`,
-  not constructor parameters (both enforced by lint).
+  not constructor parameters (both enforced by lint). They use the default `OnPush` change detection: anything the
+  template shows must come from an `async` pipe, a signal, an input or one of the template's own events. A value
+  assigned in a `subscribe()` callback only shows up when something else refreshes the view (see `toSignal` in
+  `AppComponent.currentRoute`).
 - **`DomainService`** (`app/domain.service.ts`) exposes the built `Domain` and its sub-domains to Angular.
 - **Feature services** (`app/<feature>/<feature>.service.ts`) are the domain→RxJS bridge: seed a
   `BehaviorSubject` from the domain getter, then subscribe to the matching `...UpdatedEvent` on

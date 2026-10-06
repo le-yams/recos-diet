@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons';
 import {PathologiesService} from '../pathologies/pathologies.service';
 import {Pathology} from '@recos-diet/domain';
@@ -27,7 +27,6 @@ import {AsyncPipe} from '@angular/common';
   selector: 'app-flows-strip',
   templateUrl: './flows-strip.component.html',
   styleUrls: ['./flows-strip.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FaIconComponent, AsyncPipe]
 })
 export class FlowsStripComponent {

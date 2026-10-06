@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-import {AfterViewInit, Component, OnInit, ChangeDetectionStrategy, inject} from '@angular/core';
+import {AfterViewInit, Component, inject} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {DomainService} from "../../domain.service";
 import {faBookMedical} from '@fortawesome/free-solid-svg-icons';
 import {ActivatedRoute} from "@angular/router";
+import {map, tap} from 'rxjs/operators';
 import {BibliographyEntry} from '@recos-diet/domain';
 import {Verbose} from "../../../infra/utils";
 import {MatCard, MatCardHeader, MatCardTitle, MatCardContent} from '@angular/material/card';
@@ -28,16 +30,19 @@ import {MatDivider} from '@angular/material/list';
   selector: 'app-page-bibliography',
   templateUrl: './page-bibliography.component.html',
   styleUrls: ['./page-bibliography.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MatCard, MatCardHeader, MatCardTitle, FaIconComponent, MatDivider, MatCardContent]
 })
-export class PageBibliographyComponent implements OnInit, AfterViewInit {
+export class PageBibliographyComponent implements AfterViewInit {
 
   private activatedRoute = inject(ActivatedRoute);
 
   bibliography;
   faBookMedical = faBookMedical;
-  highlightedIndex?: number = undefined;
+  // a signal, so that the OnPush view refreshes when only the index query param changes
+  readonly highlightedIndex = toSignal(this.activatedRoute.queryParams.pipe(
+    tap(params => Verbose.log('highlighted bibliography index:', params['index'])),
+    map(params => parseInt(params['index']))
+  ));
 
   constructor() {
     const domainService = inject(DomainService);
@@ -45,17 +50,10 @@ export class PageBibliographyComponent implements OnInit, AfterViewInit {
     this.bibliography = domainService.bibliography;
   }
 
-  ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
-      const index: string = params['index'];
-      this.highlightedIndex = parseInt(index);
-      Verbose.log('highlighted bibliography index:', index);
-    });
-  }
-
   ngAfterViewInit(): void {
-    if (this.highlightedIndex) {
-      document.getElementById('bibliography-' + this.highlightedIndex)?.scrollIntoView({
+    const highlightedIndex = this.highlightedIndex();
+    if (highlightedIndex) {
+      document.getElementById('bibliography-' + highlightedIndex)?.scrollIntoView({
         behavior: "smooth",
         block: "start",
         inline: "nearest"
@@ -64,6 +62,6 @@ export class PageBibliographyComponent implements OnInit, AfterViewInit {
   }
 
   isHighlighted(entry: BibliographyEntry) {
-    return entry.index === this.highlightedIndex;
+    return entry.index === this.highlightedIndex();
   }
 }

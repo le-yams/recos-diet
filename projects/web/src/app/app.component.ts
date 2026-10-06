@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {firstValueFrom, Observable} from "rxjs";
-import {filter} from "rxjs/operators";
+import {filter, map} from "rxjs/operators";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {
   faBookMedical,
@@ -41,7 +42,6 @@ import {AsyncPipe} from '@angular/common';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     DisclaimerComponent,
     MatButton,
@@ -69,8 +69,11 @@ export class AppComponent {
   noSurvey = NoSurvey;
 
   readonly isHandset$: Observable<boolean>;
-  selectedMenuLabel: string;
-  currentRoute?: string;
+  // a signal, so that the OnPush view refreshes on each navigation
+  readonly currentRoute = toSignal(this.router.events.pipe(
+    filter(e => e instanceof NavigationEnd),
+    map(() => this.router.url.split('?')[0])
+  ));
 
   menus: Menu[] = [
     {
@@ -116,18 +119,7 @@ export class AppComponent {
     const survey = inject(SurveyService);
 
     this.isHandset$ = appService.isHandset$;
-    this.selectedMenuLabel = this.findSelectedMenuLabel();
-    this.router.events
-      .pipe(filter(e => e instanceof NavigationEnd))
-      .subscribe(() => {
-        this.currentRoute = this.router.url.split('?')[0];
-        this.selectedMenuLabel = this.findSelectedMenuLabel();
-      });
     this.survey$ = survey.get();
-  }
-
-  findSelectedMenuLabel() {
-    return this.menus.find(menu => this.isSelected(menu))?.label ?? "";
   }
 
   async closeDrawerIfHandset(drawer: MatSidenav) {
@@ -138,7 +130,7 @@ export class AppComponent {
   }
 
   public isSelected(menu: Menu) {
-    return this.currentRoute === menu.route;
+    return this.currentRoute() === menu.route;
   }
 
 }

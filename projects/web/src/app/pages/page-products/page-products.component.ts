@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {faVials} from '@fortawesome/free-solid-svg-icons';
 import {DomainService} from '../../domain.service';
 import {NutritionType, ProductDetail} from '@recos-diet/domain';
@@ -31,7 +31,6 @@ import {AsyncPipe} from '@angular/common';
   selector: 'app-page-products',
   templateUrl: './page-products.component.html',
   styleUrls: ['./page-products.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     MatCard,
     MatCardHeader,
