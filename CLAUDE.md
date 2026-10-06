@@ -107,8 +107,8 @@ matrices. Classes that hold subscriptions (`Warnings`, `Micronutriments`) expose
   `BehaviorSubject` from the domain getter, then subscribe to the matching `...UpdatedEvent` on
   `domainService.EventBus()` and `next()` the payload. Components consume the `x$` observables for reads and
   call domain methods directly (e.g. `patient.updateSize(...)`) for writes. Follow this pattern for new features.
-- **Import rule**: web code imports domain types from `@recos-diet/domain`. Two files currently reach into
-  `../../../../domain/src/...` (`target-flows.component.ts`, `flows-strip.component.ts`); do not add more.
+- **Import rule**: web code imports domain types from `@recos-diet/domain`, never from `projects/domain/src`
+  through a relative path.
 - `infra/utils.ts` `Verbose` logging is on when the hostname contains `localhost` or `staging`.
 - **Material theme**: `src/theme.scss` (M2 API, deep-purple/amber like the former `deeppurple-amber` prebuilt
   theme) only includes the `*-theme` mixins of the components in use. Using a new Material component means adding
