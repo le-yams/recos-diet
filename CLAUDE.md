@@ -10,16 +10,19 @@ values and JSON data are in French.
 
 ## Workspace layout
 
-Angular 16 workspace with two projects declared in `angular.json`:
+Angular 22 workspace with two projects declared in `angular.json`:
 
 - `projects/domain` — an **ng-packagr library** published as `@recos-diet/domain`. Pure TypeScript domain model
-  with no Angular dependency in its code (Angular is only a peer dep). All clinical computation lives here.
+  with no Angular dependency (its `package.json` declares only `tslib`). All clinical computation lives here.
 - `projects/web` — the Angular application (Material + FontAwesome). It consumes the domain **only through
   `dist/domain`**: `tsconfig.json` maps `@recos-diet/domain` to `dist/domain`, not to the source.
 
 Consequence: **the domain must be built before the web app will compile**, and rebuilt after any domain change.
 
 ## Commands
+
+Node 24 (`.nvmrc`, same as the CI image `trion/ng-cli-karma`); `engines` accepts what Angular 22 supports
+(`^22.22.3 || ^24.15.0 || >=26.0.0`) and `.npmrc` sets `engine-strict`, so `npm ci` fails on any other version.
 
 npm script names contain spaces, so quote them.
 
