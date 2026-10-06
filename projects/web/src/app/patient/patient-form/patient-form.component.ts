@@ -56,12 +56,12 @@ export class PatientFormComponent {
   }
 
   private static intValueFromInput(event: Event): number {
-    let target = event.target as HTMLInputElement;
+    const target = event.target as HTMLInputElement;
     return parseInt(target.value)
   }
 
   private static numberValueFromInput(event: Event): number {
-    let target = event.target as HTMLInputElement;
+    const target = event.target as HTMLInputElement;
     return parseFloat(target.value);
   }
 

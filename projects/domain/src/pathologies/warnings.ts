@@ -77,7 +77,7 @@ export class Warnings {
   }
 
   private computeNutritionistOpinionRequirementLevel(pathologies: Pathology[]) {
-    let levels = pathologies.map(pathology => this.repo.nutritionistOpinionRequirement(pathology));
+    const levels = pathologies.map(pathology => this.repo.nutritionistOpinionRequirement(pathology));
     levels.push(WarningLevel.NONE);
     return Math.max(...levels);
   }
@@ -86,7 +86,7 @@ export class Warnings {
     return pathologies
       .flatMap(pathology => this.repo.pathologyWarnings(pathology))
       .filter((warn: Warning, index: number, warns: Warning[]) => {
-        let foundIndex = warns.findIndex(warn2 => warn.text === warn2.text);
+        const foundIndex = warns.findIndex(warn2 => warn.text === warn2.text);
         return index === foundIndex;
       });
   }
@@ -94,7 +94,7 @@ export class Warnings {
   private computeProductWarnings(product: string): Warning[] {
     return this.repo.productWarnings(product)
       .filter((warn: Warning, index: number, warns: Warning[]) => {
-        let foundIndex = warns.findIndex(warn2 => warn.text === warn2.text);
+        const foundIndex = warns.findIndex(warn2 => warn.text === warn2.text);
         return index === foundIndex;
       });
   }

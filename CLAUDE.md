@@ -29,6 +29,7 @@ npx ng build domain --watch     # keep dist/domain fresh while editing the libra
 npm start                       # ng serve (web, development config)
 npm run build                   # ng build domain && ng build web (production config)
 npm test                        # ng test domain --no-watch && ng test web --no-watch
+npm run lint                    # ng lint domain && ng lint web
 npm run "lint domain"
 npm run "lint webapp"
 npm run "generate version asset"  # writes projects/web/src/version.json from package.json version

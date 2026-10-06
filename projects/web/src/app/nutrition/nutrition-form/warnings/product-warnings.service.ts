@@ -16,12 +16,7 @@
 
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {
-  NutritionistOpinionRequirementLevelChange,
-  Warning,
-  WarningLevel,
-  PathologiesWarningsChange, ProductWarningsChange
-} from '@recos-diet/domain';
+import {ProductWarningsChange, Warning} from '@recos-diet/domain';
 import {DomainService} from "../../../domain.service";
 
 @Injectable({

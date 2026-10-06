@@ -28,6 +28,4 @@ export class PageDenutritionComponent {
 
   patientIsOld = false;
 
-  constructor() { }
-
 }

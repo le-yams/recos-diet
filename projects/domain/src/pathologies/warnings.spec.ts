@@ -75,7 +75,7 @@ describe('Warnings should', () => {
 
     // Then
     eventsCaptor.expectEventsCount(1);
-    let nutritionistOpinionRequirement = eventsCaptor.mapSingleEvent(evt => evt.nutritionistOpinionRequirementLevel);
+    const nutritionistOpinionRequirement = eventsCaptor.mapSingleEvent(evt => evt.nutritionistOpinionRequirementLevel);
     expect(nutritionistOpinionRequirement).toBe(param.expectedRequirement);
   }));
 
@@ -97,11 +97,6 @@ const WARN3 = {
   level: WarningLevel.MEDIUM,
   sources: []
 };
-const WARN4 = {
-  text: 'warn 4',
-  level: WarningLevel.MEDIUM,
-  sources: []
-};
 describe('Warnings should', () => {
 
   let warnings: Warnings;
@@ -120,19 +115,19 @@ describe('Warnings should', () => {
 
   it('raise an event with selected pathologies warnings', () => {
     // Given
-    let warns = new Map([
+    const warns = new Map([
       [Pathology.CIRRHOTIQUE, [WARN1]],
       [Pathology.OH, [WARN1, WARN2, WARN3]],
     ]);
     warnings = new Warnings(new TestWarningsRead(new Map(), warns), events);
 
     // When
-    let pathologies: Pathology[] = [Pathology.CIRRHOTIQUE, Pathology.OH];
+    const pathologies: Pathology[] = [Pathology.CIRRHOTIQUE, Pathology.OH];
     events.publish(new SelectedPathologiesEvent(pathologies))
 
     // Then
     eventsCaptor.expectEventsCount(1);
-    let ws = eventsCaptor.mapSingleEvent(evt => evt.warnings);
+    const ws = eventsCaptor.mapSingleEvent(evt => evt.warnings);
     expect(ws).toEqual([WARN1, WARN2, WARN3]);
   })
 
@@ -153,7 +148,7 @@ class TestWarningsRead implements WarningsRead {
     return this.warnings.get(pathology) ?? [];
   }
 
-  productWarnings(product: string): Warning[] {
+  productWarnings(_product: string): Warning[] {
     return [];
   }
 }

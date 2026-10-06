@@ -73,7 +73,7 @@ describe('Patient', () => {
       weightKg: 96
     });
     eventsCaptor.expectEventsCount(1);
-    let patientInfo = eventsCaptor.mapSingleEvent(evt => evt.patient);
+    const patientInfo = eventsCaptor.mapSingleEvent(evt => evt.patient);
     expect(patientInfo.heightCm).toBe(155);
     expect(patientInfo.weightKg).toBe(96);
     expect(patientInfo.bmi).toBeCloseTo(39.95, 0.1);

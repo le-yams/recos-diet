@@ -26,7 +26,4 @@ export class DisclaimerComponent {
 
   faExclamationTriangle = faExclamationTriangle;
 
-  constructor() {
-  }
-
 }

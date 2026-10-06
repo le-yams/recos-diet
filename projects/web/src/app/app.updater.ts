@@ -67,8 +67,8 @@ export class AppUpdater {
 
   private refreshAppIfNecessary(data: VersionInfo) {
 
-    let currentVersion = this.app.version;
-    let newVersion = data.version;
+    const currentVersion = this.app.version;
+    const newVersion = data.version;
     if (newVersion !== currentVersion) {
       console.log(`app new version available: ${newVersion} (current is ${currentVersion})`);
       if (confirm('Une nouvelle version du site a été publiée, il est nécessaire de rafraîchir la page. Voulez-vous rafraîchir maintenant ?')) {

@@ -20,7 +20,6 @@ export class GroupableArray<T> {
   }
 
   by<K>(keyProvider: (item: T) => K): Map<K, T[]> {
-    const grouped = new Map<string, T[]>();
     return this.array.reduce((map, item) => {
       const key: K = keyProvider(item);
       let group = map.get(key);
@@ -40,7 +39,7 @@ export const group = function <T>(array: T[]): GroupableArray<T> {
 
 export type Predicate<T> = (item: T) => boolean
 
-export const TRUE_PREDICATE: Predicate<unknown> = t => true;
+export const TRUE_PREDICATE: Predicate<unknown> = () => true;
 
 export const notIn = function <T>(exclusion: T[]): Predicate<T> {
   return item => !exclusion.includes(item);

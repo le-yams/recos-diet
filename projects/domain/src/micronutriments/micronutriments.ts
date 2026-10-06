@@ -101,7 +101,7 @@ class MergeableMicronutrimentRecommendation implements SummarizedMicronutrimentR
 }
 
 const summarizeMicronutrimentRecommendations = function (micronutrimentRecos: MicronutrimentRecommendation[]) {
-  let firstRecommendation = micronutrimentRecos.shift()!;
+  const firstRecommendation = micronutrimentRecos.shift()!;
   return micronutrimentRecos.reduce((mergeableRecommendation: MergeableMicronutrimentRecommendation, nextRecommendation: MicronutrimentRecommendation) => {
     return mergeableRecommendation.merge(nextRecommendation);
   }, new MergeableMicronutrimentRecommendation(firstRecommendation));

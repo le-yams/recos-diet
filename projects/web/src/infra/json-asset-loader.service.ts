@@ -30,8 +30,8 @@ export class JsonAssetLoaderService {
   load<T>(name: string): Promise<T> {
     const url = location.origin + '/assets/' + name + '.json?no-cache=' + new Date().getTime();
 
-    let trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
-    let sanitizedUrl = this.domSanitizer.sanitize(SecurityContext.RESOURCE_URL, trustedUrl)!;
+    const trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
+    const sanitizedUrl = this.domSanitizer.sanitize(SecurityContext.RESOURCE_URL, trustedUrl)!;
 
     return firstValueFrom(this.http.get<T>(sanitizedUrl))
   }

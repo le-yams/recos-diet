@@ -40,11 +40,9 @@ export class TestDomainEventBus implements DomainEventBus {
     if (this.consumers.size === 0) {
       return;
     }
-    let n = 0;
     this.consumers.forEach((consumer, subscription) => {
       const filter = subscription.filter ?? TRUE_PREDICATE;
       if (filter(event)) {
-        n++;
         consumer(event);
       }
     });

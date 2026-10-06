@@ -62,7 +62,7 @@ describe('Micronutriments', () => {
 
     // Then
     eventsCaptor.expectEventsCount(1);
-    let summarizedRecommendations = eventsCaptor.mapSingleEvent(
+    const summarizedRecommendations = eventsCaptor.mapSingleEvent(
       evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
     expect(summarizedRecommendations).toEqual([
       summarizedReco('a')
@@ -86,7 +86,7 @@ describe('Micronutriments', () => {
 
     // Then
     eventsCaptor.expectEventsCount(1);
-    let summarizedRecommendations = eventsCaptor.mapSingleEvent(
+    const summarizedRecommendations = eventsCaptor.mapSingleEvent(
       evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
     expect(summarizedRecommendations).toEqual([summarizedReco('b')]);
   });
@@ -113,7 +113,7 @@ describe('Micronutriments', () => {
 
     // Then
     eventsCaptor.expectEventsCount(1);
-    let summarizedRecommendations = eventsCaptor.mapSingleEvent(
+    const summarizedRecommendations = eventsCaptor.mapSingleEvent(
       evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
     expect(summarizedRecommendations).toEqual([
       summarizedReco('a'),
@@ -144,7 +144,7 @@ describe('Micronutriments', () => {
 
     // Then
     eventsCaptor.expectEventsCount(1);
-    let summarizedRecommendations = eventsCaptor.mapSingleEvent(
+    const summarizedRecommendations = eventsCaptor.mapSingleEvent(
       evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
     expect(summarizedRecommendations).toEqual([
       summarizedRecoWithClauses("a", ["ca1", "ca2", "ca3"]),
@@ -173,7 +173,7 @@ describe('Micronutriments', () => {
 
     // Then
     eventsCaptor.expectEventsCount(1);
-    let summarizedRecommendations = eventsCaptor.mapSingleEvent(
+    const summarizedRecommendations = eventsCaptor.mapSingleEvent(
       evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
     expect(summarizedRecommendations).toEqual([
       summarizedRecoWithClauses("a", ["c1"]),
@@ -201,7 +201,7 @@ describe('Micronutriments', () => {
 
     // Then
     eventsCaptor.expectEventsCount(1);
-    let summarizedRecommendations = eventsCaptor.mapSingleEvent(
+    const summarizedRecommendations = eventsCaptor.mapSingleEvent(
       evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
     expect(summarizedRecommendations).toEqual([
       summarizedRecoWithAdministrationTerms("a", 42, 'unit2')
@@ -232,7 +232,7 @@ describe('Micronutriments', () => {
 
     // Then
     eventsCaptor.expectEventsCount(1);
-    let summarizedRecommendations = eventsCaptor.mapSingleEvent(
+    const summarizedRecommendations = eventsCaptor.mapSingleEvent(
       evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
     expect(summarizedRecommendations).toEqual([
       summarizedReco('a'),

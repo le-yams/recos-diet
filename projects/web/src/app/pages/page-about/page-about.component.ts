@@ -26,7 +26,4 @@ export class PageAboutComponent {
 
   faQuestionCircle = faQuestionCircle;
 
-  constructor() {
-  }
-
 }

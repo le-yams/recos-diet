@@ -26,7 +26,4 @@ export class PageSriComponent {
 
   faStickyNote = faStickyNote;
 
-  constructor() {
-  }
-
 }

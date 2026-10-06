@@ -51,7 +51,7 @@ const negate = function (b: boolean) {
 const GROUPED_ENTERALE_INDEX = 0;
 const GROUPED_PARENTERALE_INDEX = 1;
 
-const byNutritionType = function (acc: ProductDetail[][], product: ProductDetail, index: number, array: ProductDetail[]) {
+const byNutritionType = function (acc: ProductDetail[][], product: ProductDetail) {
   switch (product.nutritionType) {
     case NutritionType.ENTERALE:
       acc[GROUPED_ENTERALE_INDEX].push(product);

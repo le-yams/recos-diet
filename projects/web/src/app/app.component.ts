@@ -16,7 +16,7 @@
 
 import {Component} from '@angular/core';
 import {firstValueFrom, Observable} from "rxjs";
-import {filter, first} from "rxjs/operators";
+import {filter} from "rxjs/operators";
 import {MatSidenav} from "@angular/material/sidenav";
 import {
   faBookMedical,
@@ -90,7 +90,7 @@ export class AppComponent {
     this.selectedMenuLabel = this.findSelectedMenuLabel();
     router.events
       .pipe(filter(e => e instanceof NavigationEnd))
-      .subscribe(e => {
+      .subscribe(() => {
         this.currentRoute = this.router.url.split('?')[0];
         this.selectedMenuLabel = this.findSelectedMenuLabel();
       });

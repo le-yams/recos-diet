@@ -24,11 +24,9 @@ import {PatientFormComponent} from './patient-form.component';
 describe('PatientFormComponent', () => {
   let fixture: ComponentFixture<PatientFormComponent>;
   let patient: Patient;
-  let updateSize: jasmine.Spy;
 
   beforeEach(async () => {
-    patient = new Patient({publish: () => {}, subscribe: () => {}} as any);
-    updateSize = spyOn(patient, 'updateSize').and.callThrough();
+    patient = new Patient({publish: () => undefined, subscribe: () => ({unsubscribe: () => undefined})});
     await TestBed.configureTestingModule({
       imports: [PatientModule, NoopAnimationsModule],
       providers: [{provide: DomainService, useValue: {patient}}]

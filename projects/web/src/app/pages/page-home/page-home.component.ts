@@ -27,7 +27,4 @@ export class PageHomeComponent {
   faBullseye = faBullseye;
   faPills = faPills;
 
-  constructor() {
-  }
-
 }

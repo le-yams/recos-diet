@@ -23,7 +23,7 @@ const EMPTY_SUBSCRIPTION: Subscription = {
 
 export type Predicate<T> = (value: T) => boolean;
 
-const TRUE_PREDICATE: Predicate<unknown> = t => true;
+const TRUE_PREDICATE: Predicate<unknown> = () => true;
 
 
 export interface Bus<T> {

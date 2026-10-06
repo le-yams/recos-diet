@@ -1,19 +1,11 @@
 {
-  //  "parser": "@babel/eslint-parser",
   "root": true,
-  //  "ignorePatterns": [
-  //    "!**/*"
-  //  ],
-  //  "plugins": [
-  //    "@angular-eslint"
-  //  ],
   "overrides": [
     {
       "files": [
         "*.ts"
       ],
       "parserOptions": {
-        "requireConfigFile": false,
         "project": [
           "projects/domain/tsconfig.lib.json",
           "projects/domain/tsconfig.spec.json"
@@ -21,10 +13,20 @@
         "createDefaultProgram": true
       },
       "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-non-null-assertion": "warn",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ],
         "@angular-eslint/directive-selector": [
           "error",
           {
