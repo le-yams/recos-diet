@@ -14,19 +14,45 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {faUserInjured} from '@fortawesome/free-solid-svg-icons';
 import {Patient} from '@recos-diet/domain';
 import {DomainService} from "../../domain.service";
+import {
+  MatExpansionPanel,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle,
+  MatExpansionPanelDescription
+} from '@angular/material/expansion';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {FormsModule} from '@angular/forms';
+import {MatFormField, MatLabel, MatError, MatHint} from '@angular/material/form-field';
+import {MatInput} from '@angular/material/input';
+import {BiblioLinksComponent} from '../../bibliography/biblio-links/biblio-links.component';
 
 @Component({
   selector: 'app-patient-form',
   templateUrl: './patient-form.component.html',
   styleUrls: ['./patient-form.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    FaIconComponent,
+    MatExpansionPanelDescription,
+    FormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatHint,
+    BiblioLinksComponent
+  ]
 })
 export class PatientFormComponent {
+
+  private domainService = inject(DomainService);
 
   patient;
 
@@ -35,7 +61,7 @@ export class PatientFormComponent {
   readonly heightBounds = Patient.HEIGHT_CM;
   readonly weightBounds = Patient.WEIGHT_KG;
 
-  constructor(private domainService: DomainService) {
+  constructor() {
     this.patient = this.domainService.patient;
   }
 

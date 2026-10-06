@@ -14,25 +14,26 @@
  * limitations under the License.
  */
 
-import {Component, OnInit, SecurityContext, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, SecurityContext, ChangeDetectionStrategy, inject} from '@angular/core';
 import {NoSurvey, Survey, SurveyService} from "../../survey/survey.service";
 import {DomSanitizer} from "@angular/platform-browser";
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-page-survey',
   templateUrl: './page-survey.component.html',
   styleUrls: ['./page-survey.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [AsyncPipe]
 })
 export class PageSurveyComponent implements OnInit {
+
+  private survey = inject(SurveyService);
+  domSanitizer = inject(DomSanitizer);
 
   noSurvey = NoSurvey;
   survey$: Promise<Survey> = Promise.resolve(NoSurvey);
   readonly resourceUrlSecurityContext = SecurityContext.RESOURCE_URL
-
-  constructor(private survey: SurveyService, public domSanitizer: DomSanitizer) {
-  }
 
   ngOnInit(): void {
     this.survey$ = this.survey.get();

@@ -16,13 +16,18 @@
 
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {faStickyNote} from '@fortawesome/free-solid-svg-icons';
+import {MatCard, MatCardHeader, MatCardTitle, MatCardContent} from '@angular/material/card';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {MatDivider} from '@angular/material/list';
+import {MatCheckbox} from '@angular/material/checkbox';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-page-denutrition',
   templateUrl: './page-denutrition.component.html',
   styleUrls: ['./page-denutrition.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [MatCard, MatCardHeader, MatCardTitle, FaIconComponent, MatDivider, MatCardContent, MatCheckbox, FormsModule]
 })
 export class PageDenutritionComponent {
 

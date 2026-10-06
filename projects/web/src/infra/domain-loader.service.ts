@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {JsonAssetLoaderService} from "./json-asset-loader.service";
 import {
   BibliographyEntry,
@@ -43,10 +43,9 @@ import {DomainEvents, InMemoryBus} from "./pubsub";
 })
 export class DomainLoaderService {
 
-  private domain!: Domain
+  private jsonAssets = inject(JsonAssetLoaderService);
 
-  constructor(private jsonAssets: JsonAssetLoaderService) {
-  }
+  private domain!: Domain
 
   getDomain() {
     return this.domain;

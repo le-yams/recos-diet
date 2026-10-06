@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {DomainService} from "../domain.service";
 import {SummarizedMicronutrimentRecommendation, SummarizedMicronutrimentRecommendationsUpdatedEvent} from "@recos-diet/domain";
@@ -28,7 +28,9 @@ export class MicronutrimentsService {
 
   readonly nutrimentRecommendations$ = this.nutrimentRecommendations.asObservable();
 
-  constructor(domainService: DomainService) {
+  constructor() {
+    const domainService = inject(DomainService);
+
     this.nutrimentRecommendations.next(domainService.micronutriments.getSummarizedRecommendations());
     domainService.EventBus().subscribe<SummarizedMicronutrimentRecommendationsUpdatedEvent>(SummarizedMicronutrimentRecommendationsUpdatedEvent.name,
       evt => this.nutrimentRecommendations.next(evt.recommendations));

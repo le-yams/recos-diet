@@ -14,25 +14,29 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {MicronutrimentsService} from "./micronutriments.service";
 import {Observable} from "rxjs";
 import {SummarizedMicronutrimentRecommendation} from "@recos-diet/domain";
 import {map, tap} from "rxjs/operators";
 import {Verbose} from "../../infra/utils";
+import {BiblioLinksComponent} from '../bibliography/biblio-links/biblio-links.component';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-nutriments',
   templateUrl: './micronutriments.component.html',
   styleUrls: ['./micronutriments.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [BiblioLinksComponent, AsyncPipe]
 })
 export class MicronutrimentsComponent {
 
   readonly recommendations$: Observable<SummarizedMicronutrimentRecommendation[]>;
 
-  constructor(nutrimentsService: MicronutrimentsService) {
+  constructor() {
+    const nutrimentsService = inject(MicronutrimentsService);
+
     this.recommendations$ = nutrimentsService.nutrimentRecommendations$.pipe(
       map(recommendations => recommendations.sort(byNutrimentLabel)),
       tap(recommendations => Verbose.log('recommendations updated', recommendations))

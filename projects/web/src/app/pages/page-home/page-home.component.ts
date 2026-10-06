@@ -16,13 +16,35 @@
 
 import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faBullseye, faPills} from '@fortawesome/free-solid-svg-icons';
+import {PatientFormComponent} from '../../patient/patient-form/patient-form.component';
+import {NutritionFormComponent} from '../../nutrition/nutrition-form/nutrition-form.component';
+import {PathologiesComponent} from '../../pathologies/pathologies/pathologies.component';
+import {MatCard, MatCardHeader, MatCardTitle, MatCardContent} from '@angular/material/card';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {MatDivider} from '@angular/material/list';
+import {FlowsStripComponent} from '../../flows-strip/flows-strip.component';
+import {TargetFlowsComponent} from '../../target-flows/target-flows.component';
+import {MicronutrimentsComponent} from '../../micronutriments/micronutriments.component';
 
 @Component({
   selector: 'app-page-home',
   templateUrl: './page-home.component.html',
   styleUrls: ['./page-home.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [
+    PatientFormComponent,
+    NutritionFormComponent,
+    PathologiesComponent,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    FaIconComponent,
+    MatDivider,
+    MatCardContent,
+    FlowsStripComponent,
+    TargetFlowsComponent,
+    MicronutrimentsComponent
+  ]
 })
 export class PageHomeComponent {
 

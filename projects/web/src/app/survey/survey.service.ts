@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Injectable } from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {JsonAssetLoaderService} from "../../infra/json-asset-loader.service";
 
 @Injectable({
@@ -22,7 +22,7 @@ import {JsonAssetLoaderService} from "../../infra/json-asset-loader.service";
 })
 export class SurveyService {
 
-  constructor(private jsonAssets: JsonAssetLoaderService) { }
+  private jsonAssets = inject(JsonAssetLoaderService);
 
   public async get(): Promise<Survey> {
     return await this.jsonAssets.load<Survey>("survey");

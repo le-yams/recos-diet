@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {Observable} from 'rxjs';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {map} from 'rxjs/operators';
@@ -31,7 +31,10 @@ export class AppService {
 
   public readonly isHandset$: Observable<boolean>;
 
-  constructor(breakpointObserver: BreakpointObserver, http: HttpClient) {
+  constructor() {
+    const breakpointObserver = inject(BreakpointObserver);
+    const http = inject(HttpClient);
+
     this.isHandset$ = breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
     if (environment.production) {
       new AppUpdater(this, http).start();

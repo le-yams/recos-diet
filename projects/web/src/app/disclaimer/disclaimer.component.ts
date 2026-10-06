@@ -16,13 +16,14 @@
 
 import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-disclaimer',
   templateUrl: './disclaimer.component.html',
   styleUrls: ['./disclaimer.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [FaIconComponent]
 })
 export class DisclaimerComponent {
 

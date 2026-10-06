@@ -14,22 +14,43 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {faDisease, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import {Pathology} from "@recos-diet/domain";
 import {Observable} from "rxjs";
 import {PathologiesService} from "../pathologies.service";
 import {map} from "rxjs/operators";
 import {PathologiesWarningsService} from "../warnings/pathologies-warnings.service";
+import {
+  MatExpansionPanel,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle,
+  MatExpansionPanelDescription
+} from '@angular/material/expansion';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {MatCheckbox} from '@angular/material/checkbox';
+import {PathologiesWarningsComponent} from '../warnings/pathologies-warnings.component';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-pathologies',
   templateUrl: './pathologies.component.html',
   styleUrls: ['./pathologies.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    FaIconComponent,
+    MatExpansionPanelDescription,
+    MatCheckbox,
+    PathologiesWarningsComponent,
+    AsyncPipe
+  ]
 })
 export class PathologiesComponent {
+
+  private pathologyService = inject(PathologiesService);
 
   faDisease = faDisease;
   faExclamationCircle = faExclamationCircle;
@@ -40,7 +61,9 @@ export class PathologiesComponent {
 
   readonly hasWarnings$: Observable<boolean>;
 
-  constructor(private pathologyService: PathologiesService, warningsService: PathologiesWarningsService) {
+  constructor() {
+    const warningsService = inject(PathologiesWarningsService);
+
     this.selectedPathologies$ = this.pathologyService.selectedPathologies$;
     this.patientHasObesity$ = this.selectedPathologies$.pipe(map(selectedPathologies => selectedPathologies.includes(Pathology.OBESITE)));
     this.hasWarnings$ = warningsService.warnings$.pipe(

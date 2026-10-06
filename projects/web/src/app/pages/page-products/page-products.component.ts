@@ -14,20 +14,34 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {faVials} from '@fortawesome/free-solid-svg-icons';
 import {DomainService} from '../../domain.service';
 import {NutritionType, ProductDetail} from '@recos-diet/domain';
 import {AppService} from '../../app.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {MatCard, MatCardHeader, MatCardTitle, MatCardContent} from '@angular/material/card';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {MatDivider} from '@angular/material/list';
+import {ProductDetailComponent} from './product-detail/product-detail.component';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-page-products',
   templateUrl: './page-products.component.html',
   styleUrls: ['./page-products.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    FaIconComponent,
+    MatDivider,
+    MatCardContent,
+    ProductDetailComponent,
+    AsyncPipe
+  ]
 })
 export class PageProductsComponent {
 
@@ -36,7 +50,10 @@ export class PageProductsComponent {
   productsEnterale: ProductDetail[];
   productsParenterale: ProductDetail[];
 
-  constructor(domainService: DomainService, appService: AppService) {
+  constructor() {
+    const domainService = inject(DomainService);
+    const appService = inject(AppService);
+
     this.notHandset$ = appService.isHandset$.pipe(map(negate));
     const groupedProducts: ProductDetail[][] = domainService.products.listAllProducts()
       .sort(byProductName)

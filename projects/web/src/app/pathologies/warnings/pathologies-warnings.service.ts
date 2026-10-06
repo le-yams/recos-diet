@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {DomainService} from "../../domain.service";
 import {
@@ -37,7 +37,9 @@ export class PathologiesWarningsService {
 
   readonly warnings$: Observable<Warning[]>;
 
-  constructor(domainService: DomainService) {
+  constructor() {
+    const domainService = inject(DomainService);
+
     this.nutritionistOpinionRequirementLevel = new BehaviorSubject<WarningLevel>(domainService.warnings.getNutritionistOpinionRequirementLevel());
     this.nutritionistOpinionRequirementLevel$ = this.nutritionistOpinionRequirementLevel.asObservable();
     this.warnings = new BehaviorSubject<Warning[]>(domainService.warnings.getPathologiesWarnings());

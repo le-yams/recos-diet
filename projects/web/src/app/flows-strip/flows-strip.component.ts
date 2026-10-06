@@ -14,28 +14,32 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons';
 import {PathologiesService} from '../pathologies/pathologies.service';
 import {Pathology} from '@recos-diet/domain';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-flows-strip',
   templateUrl: './flows-strip.component.html',
   styleUrls: ['./flows-strip.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [FaIconComponent, AsyncPipe]
 })
 export class FlowsStripComponent {
+
+  private pathologiesService = inject(PathologiesService);
 
   faAngleDoubleRight = faAngleDoubleRight;
 
   hasObesity$: Observable<boolean>
 
-  constructor(private pathologiesService: PathologiesService) {
-    this.hasObesity$ = pathologiesService.selectedPathologies$.pipe(
+  constructor() {
+    this.hasObesity$ = this.pathologiesService.selectedPathologies$.pipe(
       map(pathologies => pathologies.includes(Pathology.OBESITE))
     );
   }

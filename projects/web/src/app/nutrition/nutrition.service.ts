@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {
   SelectedNutritionTypeEvent,
@@ -46,7 +46,9 @@ export class NutritionService {
 
   readonly selectedProduct$ = this.selectedProduct.asObservable();
 
-  constructor(domainService: DomainService) {
+  constructor() {
+    const domainService = inject(DomainService);
+
     this.products = domainService.products;
     this.nutrition = domainService.nutrition;
     this.nutritionType.next(this.nutrition.getSelectedNutritionType());

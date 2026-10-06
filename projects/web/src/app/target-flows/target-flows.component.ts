@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {TargetFlowsService} from './target-flows.service';
 import {Observable} from 'rxjs';
 import {DailyTargetFlow} from '@recos-diet/domain';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-target-flows',
   templateUrl: './target-flows.component.html',
   styleUrls: ['./target-flows.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [AsyncPipe]
 })
 export class TargetFlowsComponent {
 
@@ -32,7 +33,9 @@ export class TargetFlowsComponent {
 
   readonly reg = /[.,]0+$/;
 
-  constructor(targetFlowsService: TargetFlowsService) {
+  constructor() {
+    const targetFlowsService = inject(TargetFlowsService);
+
     this.targetFlows$ = targetFlowsService.targetFlows$;
   }
 

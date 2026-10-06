@@ -16,13 +16,15 @@
 
 import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {faLongArrowAltRight, faStickyNote} from '@fortawesome/free-solid-svg-icons';
+import {MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardSubtitle} from '@angular/material/card';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-page-phosphorus',
   templateUrl: './page-phosphorus.component.html',
   styleUrls: ['./page-phosphorus.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [MatCard, MatCardHeader, MatCardTitle, FaIconComponent, MatCardContent, MatCardSubtitle]
 })
 export class PagePhosphorusComponent {
 

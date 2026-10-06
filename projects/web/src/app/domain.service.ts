@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Injectable } from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {DomainLoaderService} from "../infra/domain-loader.service";
 import {DomainEventBus} from "@recos-diet/domain";
 
@@ -41,7 +41,9 @@ export class DomainService {
 
   readonly patient;
 
-  constructor(domainLoader: DomainLoaderService) {
+  constructor() {
+    const domainLoader = inject(DomainLoaderService);
+
     const domain = domainLoader.getDomain();
     this.warnings = domain.warnings;
     this.micronutriments = domain.micronutriments;

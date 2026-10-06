@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {ProductWarningsChange, Warning} from '@recos-diet/domain';
 import {DomainService} from "../../../domain.service";
@@ -28,7 +28,9 @@ export class ProductWarningsService {
 
   readonly warnings$: Observable<Warning[]>;
 
-  constructor(domainService: DomainService) {
+  constructor() {
+    const domainService = inject(DomainService);
+
     this.warnings = new BehaviorSubject<Warning[]>(domainService.warnings.getProductWarnings());
     this.warnings$ = this.warnings.asObservable();
 

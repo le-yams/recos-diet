@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Injectable } from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {DomainService} from "../domain.service";
 import {BehaviorSubject} from "rxjs";
 import {DailyTargetFlow, DailyTargetFlowsUpdatedEvent} from "@recos-diet/domain";
@@ -28,7 +28,9 @@ export class TargetFlowsService {
 
   readonly targetFlows$ = this.targetFlows.asObservable();
 
-  constructor(domainService: DomainService) {
+  constructor() {
+    const domainService = inject(DomainService);
+
     this.targetFlows.next(domainService.targetFlows.getTargetFlows());
     domainService.EventBus().subscribe<DailyTargetFlowsUpdatedEvent>(DailyTargetFlowsUpdatedEvent.name,
       evt => this.targetFlows.next(evt.dailyTargetFlows));

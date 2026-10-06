@@ -16,13 +16,24 @@
 
 import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import {ProductDetail} from '@recos-diet/domain';
+import {MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardFooter} from '@angular/material/card';
+import {MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
+    MatCardFooter,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle
+  ]
 })
 export class ProductDetailComponent {
 

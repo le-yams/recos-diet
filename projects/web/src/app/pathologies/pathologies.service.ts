@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Injectable } from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {Pathology, SelectedPathologiesEvent} from "@recos-diet/domain";
 import {BehaviorSubject} from "rxjs";
 import {DomainService} from "../domain.service";
@@ -24,14 +24,16 @@ import {DomainService} from "../domain.service";
 })
 export class PathologiesService {
 
+  private domainService = inject(DomainService);
+
   private readonly pathologies;
 
   private readonly selectedPathologies = new BehaviorSubject<Pathology[]>([]);
   readonly selectedPathologies$ = this.selectedPathologies.asObservable();
 
-  constructor(private domainService: DomainService) {
-    this.pathologies = domainService.pathologies;
-    domainService.EventBus().subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
+  constructor() {
+    this.pathologies = this.domainService.pathologies;
+    this.domainService.EventBus().subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
       evt => this.selectedPathologies.next(evt.pathologies));
   }
 

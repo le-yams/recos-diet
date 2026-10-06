@@ -28,9 +28,6 @@ module.exports = defineConfig([
     files: ['projects/web/**/*.ts'],
     rules: {
       ...selectorRules('app'),
-      // NgModule-based app until the standalone and inject() migrations (step 12 of !69)
-      '@angular-eslint/prefer-standalone': 'off',
-      '@angular-eslint/prefer-inject': 'off',
       // components keep ChangeDetectionStrategy.Eager until the OnPush migration (step 13 of !69)
       '@angular-eslint/prefer-on-push-component-change-detection': 'off',
     },

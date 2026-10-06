@@ -14,10 +14,21 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {faUtensils} from '@fortawesome/free-solid-svg-icons';
 import {NutritionType} from "@recos-diet/domain";
 import {NutritionService} from "../nutrition.service";
+import {
+  MatExpansionPanel,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle,
+  MatExpansionPanelDescription
+} from '@angular/material/expansion';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {MatFormField, MatLabel} from '@angular/material/form-field';
+import {MatSelect, MatOption} from '@angular/material/select';
+import {ProductWarningsComponent} from './warnings/product-warnings.component';
+import {AsyncPipe} from '@angular/common';
 
 
 @Component({
@@ -25,9 +36,23 @@ import {NutritionService} from "../nutrition.service";
   templateUrl: './nutrition-form.component.html',
   styleUrls: ['./nutrition-form.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    FaIconComponent,
+    MatExpansionPanelDescription,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    MatOption,
+    ProductWarningsComponent,
+    AsyncPipe
+  ]
 })
 export class NutritionFormComponent {
+
+  private nutritionService = inject(NutritionService);
 
   faUtensils = faUtensils;
   enterale = NutritionType.ENTERALE
@@ -37,10 +62,10 @@ export class NutritionFormComponent {
   availableProduct$;
   selectedProduct$;
 
-  constructor(private nutritionService: NutritionService) {
-    this.availableProduct$ = nutritionService.availableProducts$;
-    this.selectedNutritionType$ = nutritionService.nutritionType$;
-    this.selectedProduct$ = nutritionService.selectedProduct$;
+  constructor() {
+    this.availableProduct$ = this.nutritionService.availableProducts$;
+    this.selectedNutritionType$ = this.nutritionService.nutritionType$;
+    this.selectedProduct$ = this.nutritionService.selectedProduct$;
   }
 
   selectNutritionType(value: NutritionType) {

@@ -15,10 +15,9 @@
  */
 
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MATERIAL_ANIMATIONS} from '@angular/material/core';
 import {Patient} from '@recos-diet/domain';
 import {DomainService} from '../../domain.service';
-import {PatientModule} from '../patient.module';
 import {PatientFormComponent} from './patient-form.component';
 
 describe('PatientFormComponent', () => {
@@ -28,8 +27,11 @@ describe('PatientFormComponent', () => {
   beforeEach(async () => {
     patient = new Patient({publish: () => undefined, subscribe: () => ({unsubscribe: () => undefined})});
     await TestBed.configureTestingModule({
-      imports: [PatientModule, NoopAnimationsModule],
-      providers: [{provide: DomainService, useValue: {patient}}]
+      imports: [PatientFormComponent],
+      providers: [
+        {provide: DomainService, useValue: {patient}},
+        {provide: MATERIAL_ANIMATIONS, useValue: {animationsDisabled: true}},
+      ]
     }).compileComponents();
     fixture = TestBed.createComponent(PatientFormComponent);
     fixture.detectChanges();

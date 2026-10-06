@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {Routes} from '@angular/router';
 import {PageBibliographyComponent} from "./pages/page-bibliography/page-bibliography.component";
 import {PageAboutComponent} from "./pages/page-about/page-about.component";
 import {PageSriComponent} from "./pages/page-sri/page-sri.component";
@@ -25,7 +24,7 @@ import {PageProductsComponent} from './pages/page-products/page-products.compone
 import {PagePhosphorusComponent} from "./pages/page-phosphorus/page-phosphorus.component";
 import {PageSurveyComponent} from "./pages/page-survey/page-survey.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '', component: PageHomeComponent, pathMatch: 'full'
   },
@@ -51,10 +50,3 @@ const routes: Routes = [
     path: 'survey', component: PageSurveyComponent, pathMatch: 'full'
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {
-}

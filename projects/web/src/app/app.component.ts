@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {firstValueFrom, Observable} from "rxjs";
 import {filter} from "rxjs/operators";
-import {MatSidenav} from "@angular/material/sidenav";
+import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {
   faBookMedical,
   faPrescriptionBottle,
@@ -26,20 +26,44 @@ import {
   faVials,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
-import {NavigationEnd, Router} from "@angular/router";
+import {NavigationEnd, Router, RouterLink, RouterOutlet} from "@angular/router";
 import {AppService} from './app.service';
 import {NoSurvey, Survey, SurveyService} from "./survey/survey.service";
+import {DisclaimerComponent} from './disclaimer/disclaimer.component';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import {MatNavList, MatListItem} from '@angular/material/list';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {FooterComponent} from './footer/footer.component';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [
+    DisclaimerComponent,
+    MatButton,
+    MatIcon,
+    MatSidenavContainer,
+    MatSidenav,
+    MatIconButton,
+    MatNavList,
+    MatListItem,
+    RouterLink,
+    FaIconComponent,
+    MatSidenavContent,
+    RouterOutlet,
+    FooterComponent,
+    AsyncPipe
+  ]
 })
 
 
 export class AppComponent {
+
+  private router = inject(Router);
 
   survey$: Promise<Survey>;
   noSurvey = NoSurvey;
@@ -87,10 +111,13 @@ export class AppComponent {
   ];
 
 
-  constructor(appService: AppService, private router: Router, survey: SurveyService) {
+  constructor() {
+    const appService = inject(AppService);
+    const survey = inject(SurveyService);
+
     this.isHandset$ = appService.isHandset$;
     this.selectedMenuLabel = this.findSelectedMenuLabel();
-    router.events
+    this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe(() => {
         this.currentRoute = this.router.url.split('?')[0];

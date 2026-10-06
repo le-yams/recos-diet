@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy, inject} from '@angular/core';
 import {Bibliography, BibliographyEntries, EMPTY_BIBLIOGRAPHY} from '@recos-diet/domain';
 import {DomainService} from "../../domain.service";
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-biblio-links',
   templateUrl: './biblio-links.component.html',
   styleUrls: ['./biblio-links.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [RouterLink]
 })
 export class BiblioLinksComponent implements OnInit {
+
+  private domainService = inject(DomainService);
 
   @Input() references!: Array<string>;
 
@@ -33,7 +36,7 @@ export class BiblioLinksComponent implements OnInit {
 
   bibliographyEntries: BibliographyEntries = EMPTY_BIBLIOGRAPHY;
 
-  constructor(private domainService: DomainService) {
+  constructor() {
     this.bibliography = this.domainService.bibliography;
   }
 

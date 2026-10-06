@@ -14,27 +14,34 @@
  * limitations under the License.
  */
 
-import {AfterViewInit, Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ChangeDetectionStrategy, inject} from '@angular/core';
 import {DomainService} from "../../domain.service";
 import {faBookMedical} from '@fortawesome/free-solid-svg-icons';
 import {ActivatedRoute} from "@angular/router";
 import {BibliographyEntry} from '@recos-diet/domain';
 import {Verbose} from "../../../infra/utils";
+import {MatCard, MatCardHeader, MatCardTitle, MatCardContent} from '@angular/material/card';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {MatDivider} from '@angular/material/list';
 
 @Component({
   selector: 'app-page-bibliography',
   templateUrl: './page-bibliography.component.html',
   styleUrls: ['./page-bibliography.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [MatCard, MatCardHeader, MatCardTitle, FaIconComponent, MatDivider, MatCardContent]
 })
 export class PageBibliographyComponent implements OnInit, AfterViewInit {
+
+  private activatedRoute = inject(ActivatedRoute);
 
   bibliography;
   faBookMedical = faBookMedical;
   highlightedIndex?: number = undefined;
 
-  constructor(private activatedRoute: ActivatedRoute, domainService: DomainService) {
+  constructor() {
+    const domainService = inject(DomainService);
+
     this.bibliography = domainService.bibliography;
   }
 

@@ -14,26 +14,30 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {PathologiesWarningsService} from "./pathologies-warnings.service";
 import {Observable} from "rxjs";
 import {Warning, WarningLevel} from '@recos-diet/domain';
 import {map} from "rxjs/operators";
 import {Verbose} from "../../../infra/utils";
+import {BiblioLinksComponent} from '../../bibliography/biblio-links/biblio-links.component';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-warnings',
   templateUrl: './pathologies-warnings.component.html',
   styleUrls: ['./pathologies-warnings.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [BiblioLinksComponent, AsyncPipe]
 })
 export class PathologiesWarningsComponent {
 
   readonly nutritionistOpinionRequirementLevel$: Observable<NutritionistOpinionRequirementLevelWrapper>;
   readonly warnings$: Observable<WarningView[]>;
 
-  constructor(warningsService: PathologiesWarningsService) {
+  constructor() {
+    const warningsService = inject(PathologiesWarningsService);
+
     this.nutritionistOpinionRequirementLevel$ = warningsService.nutritionistOpinionRequirementLevel$
       .pipe(map(req => new NutritionistOpinionRequirementLevelWrapper(req)));
     this.warnings$ = warningsService.warnings$.pipe(

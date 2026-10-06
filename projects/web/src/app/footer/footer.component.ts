@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {faBalanceScale} from '@fortawesome/free-solid-svg-icons';
 import {AppService} from "../app.service";
+import {RouterLink} from '@angular/router';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [RouterLink, FaIconComponent]
 })
 export class FooterComponent {
 
@@ -31,7 +33,9 @@ export class FooterComponent {
 
   appVersion;
 
-  constructor(appService: AppService) {
+  constructor() {
+    const appService = inject(AppService);
+
     this.appVersion = appService.getAppInfo().version;
   }
 

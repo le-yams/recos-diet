@@ -88,10 +88,14 @@ matrices. Classes that hold subscriptions (`Warnings`, `Micronutriments`) expose
 
 ## Web architecture (projects/web/src)
 
-- **Bootstrap**: `DomainLoaderService.load()` runs as an `APP_INITIALIZER`. It fetches every JSON asset through
-  `JsonAssetLoaderService` (cache-busted `GET /assets/<name>.json`), wraps each in a `Memory*Repository`
+- **Bootstrap**: standalone app, no NgModule. `main.ts` calls `bootstrapApplication(AppComponent, appConfig)`;
+  `app/app.config.ts` holds the root providers (zone change detection, `provideRouter` with `app/app.routes.ts`,
+  HttpClient) and runs `DomainLoaderService.load()` through `provideAppInitializer`. It fetches every JSON asset
+  through `JsonAssetLoaderService` (cache-busted `GET /assets/<name>.json`), wraps each in a `Memory*Repository`
   from `infra/`, creates the bus (`InMemoryBus` wrapped by `DomainEvents` in `infra/pubsub.ts`) and builds the
   `Domain`. Nothing renders until this resolves.
+- **Components** are standalone and list what their template uses in `imports`; dependencies come from `inject()`,
+  not constructor parameters (both enforced by lint).
 - **`DomainService`** (`app/domain.service.ts`) exposes the built `Domain` and its sub-domains to Angular.
 - **Feature services** (`app/<feature>/<feature>.service.ts`) are the domain→RxJS bridge: seed a
   `BehaviorSubject` from the domain getter, then subscribe to the matching `...UpdatedEvent` on

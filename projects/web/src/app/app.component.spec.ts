@@ -16,8 +16,9 @@
 
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
-import {RouterTestingModule} from '@angular/router/testing';
-import {provideHttpClient, withInterceptorsFromDi, withXhr} from '@angular/common/http';
+import {provideRouter} from '@angular/router';
+import {provideHttpClient, withXhr} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 
 
 describe('AppComponent', () => {
@@ -26,9 +27,8 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [AppComponent],
-      providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())]
+      imports: [AppComponent],
+      providers: [provideRouter([]), provideHttpClient(withXhr()), provideHttpClientTesting()]
     })
       .compileComponents();
   });
