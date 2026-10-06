@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-import {Injectable, SecurityContext} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {DomSanitizer} from "@angular/platform-browser";
 import {firstValueFrom} from "rxjs";
 
 @Injectable({
@@ -24,15 +23,11 @@ import {firstValueFrom} from "rxjs";
 })
 export class JsonAssetLoaderService {
 
-  constructor(private http: HttpClient, private domSanitizer: DomSanitizer) {
+  constructor(private http: HttpClient) {
   }
 
   load<T>(name: string): Promise<T> {
     const url = location.origin + '/assets/' + name + '.json?no-cache=' + new Date().getTime();
-
-    const trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
-    const sanitizedUrl = this.domSanitizer.sanitize(SecurityContext.RESOURCE_URL, trustedUrl)!;
-
-    return firstValueFrom(this.http.get<T>(sanitizedUrl))
+    return firstValueFrom(this.http.get<T>(url))
   }
 }

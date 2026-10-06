@@ -39,8 +39,9 @@ export class PageProductsComponent {
     const groupedProducts: ProductDetail[][] = domainService.products.listAllProducts()
       .sort(byProductName)
       .reduce(byNutritionType, [[], []]);
-    this.productsEnterale = groupedProducts[GROUPED_ENTERALE_INDEX];
-    this.productsParenterale = groupedProducts[GROUPED_PARENTERALE_INDEX];
+    // semgrep detect-object-injection: false positives, the indexes are constants
+    this.productsEnterale = groupedProducts[GROUPED_ENTERALE_INDEX]; // nosemgrep
+    this.productsParenterale = groupedProducts[GROUPED_PARENTERALE_INDEX]; // nosemgrep
   }
 }
 
