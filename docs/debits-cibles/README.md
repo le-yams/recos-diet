@@ -10,7 +10,8 @@ réduit à un historique de décision ou supprimé.
 Fichiers associés :
 
 - [maquettes.html](maquettes.html) — maquette interactive à montrer à l'équipe (s'ouvre dans un
-  navigateur, sans serveur ni connexion).
+  navigateur, sans serveur ni connexion). HTML, CSS et JavaScript natifs, sans dépendance : elle
+  n'a pas à suivre les versions d'Angular de l'application.
 - [Note d'audit ARCH-1](../pistes-amelioration-2026-10-03.md) — constat de départ (paliers 10/30
   modifiés sans trace, bandeau `flows-strip` désynchronisé, absence de spec).
 
@@ -170,8 +171,28 @@ Ces valeurs sont celles à reprendre dans `daily-target-flows.spec.ts`.
 - `DailyTargetFlows` calcule toutes les phases applicables (avec arrondi, apports réels et statut
   protéique) et publie le résultat ; la phase sélectionnée reste un état d'affichage dans le
   composant, sauf si une autre partie de l'app doit en dépendre (avertissements, micronutriments).
-- Fusionner `flows-strip` et `target-flows` en un seul composant : la frise devient le sélecteur de
-  phase (rôle `tablist`, navigation clavier gauche/droite) ; l'UI ne doit plus arrondir.
+- Fusionner `flows-strip` et `target-flows` en un seul composant, dans la carte « Débits cibles » de
+  `page-home` : la frise devient le sélecteur de phase (rôle `tablist`, navigation clavier
+  gauche/droite) ; l'UI ne doit plus arrondir.
+- Composant fusionné selon les conventions de l'application depuis Angular 22 : standalone (ce que
+  le template utilise dans `imports`), dépendances par `inject()`, détection de changements `OnPush`
+  (par défaut), `@if` / `@for` dans le template.
+  - Les phases calculées passent par `TargetFlowsService` (`BehaviorSubject` initialisé par le
+    getter du domaine puis alimenté par `DailyTargetFlowsUpdatedEvent`), lues avec `async` ou
+    `toSignal`.
+  - La phase sélectionnée est un `signal` local ; la phase affichée, un `computed` qui revient en
+    phase 1 quand la phase choisie n'est plus proposée (anorexie). Avec `OnPush`, une valeur
+    affectée dans un `subscribe()` ne rafraîchirait pas la vue.
+- Reprendre le HTML et le CSS de la maquette (`.strip` / `.chev` en `clip-path`, `.steps` / `.rail` /
+  `.step-grid`, `.pill`) ; ses couleurs de phase viennent déjà de `flows-strip.component.css` et
+  `styles.css`. La frise reste sur mesure, sans `mat-tab-group` : aucun mixin à ajouter dans
+  `theme.scss` (à faire si un composant Material s'ajoute malgré tout). Les SVG en ligne de la
+  maquette deviennent des icônes FontAwesome (`FaIconComponent`), comme dans le reste de
+  l'application.
+- Formatage des nombres : la maquette affiche des virgules (`Intl.NumberFormat("fr-FR")`),
+  l'application actuelle des points (`toFixed`), et aucune locale n'y est enregistrée. Soit
+  `registerLocaleData(localeFr)` et `LOCALE_ID` à `'fr'` dans `app.config.ts` avec `DecimalPipe`,
+  soit un pipe dédié sur `Intl.NumberFormat`.
 - Supprimer la logique pathologie → paliers de `PathologyContext` (SRI) ; seule l'anorexie mentale
   restreint les phases.
 - Ajouter la pathologie « patient chronique » dans un second temps (enum `Pathology` + JSON).
