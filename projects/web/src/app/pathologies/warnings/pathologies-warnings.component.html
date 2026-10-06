@@ -14,21 +14,27 @@
   ~ limitations under the License.
   -->
 
-<ng-container *ngIf="nutritionistOpinionRequirementLevel$ | async as nutritionistOpinionRequirementLevel">
+@if (nutritionistOpinionRequirementLevel$ | async; as nutritionistOpinionRequirementLevel) {
+  @if (nutritionistOpinionRequirementLevel.isMedium()) {
+    <div class="pathologies_warnings level_medium">
+      <small><strong>Avis diététique recommandé</strong></small>
+    </div>
+  }
 
-  <div *ngIf="nutritionistOpinionRequirementLevel.isMedium()" class="pathologies_warnings level_medium">
-    <small><strong>Avis diététique recommandé</strong></small>
+  @if (nutritionistOpinionRequirementLevel.isHigh()) {
+    <div class="pathologies_warnings level_high">
+      <small><strong>Avis diététique fortement recommandé</strong></small>
+    </div>
+  }
+}
+
+@for (warning of warnings$ | async; track warning) {
+  <div class="pathologies_warnings"
+       [class.level_high]="warning.isHigh()"
+       [class.level_medium]="warning.isMedium()">
+    <small>{{warning.text}}</small>&nbsp;@if (warning.sources) {
+      <app-biblio-links [references]="warning.sources"></app-biblio-links>
+    }
   </div>
-
-  <div *ngIf="nutritionistOpinionRequirementLevel.isHigh()" class="pathologies_warnings level_high">
-    <small><strong>Avis diététique fortement recommandé</strong></small>
-  </div>
-</ng-container>
-
-<div *ngFor="let warning of warnings$ | async"
-     class="pathologies_warnings"
-     [class.level_high]="warning.isHigh()"
-     [class.level_medium]="warning.isMedium()">
-  <small>{{warning.text}}</small>&nbsp;<app-biblio-links *ngIf="warning.sources" [references]="warning.sources"></app-biblio-links>
-</div>
+}
 

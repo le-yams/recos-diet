@@ -26,11 +26,17 @@
   <mat-card-content>
 
 
-    <div *ngFor="let entry of bibliography.allEntries().sortedByIndex()">
-      <p [id]="'bibliography-' + entry.index" [class.highlighted]="isHighlighted(entry)">
-        <span *ngIf="entry.url">[{{entry.index}}]&nbsp;<a [href]="entry.url">{{entry.label}}</a></span>
-        <span *ngIf="!entry.url">[{{entry.index}}]&nbsp;{{entry.label}}</span>
-      </p>
-    </div>
+    @for (entry of bibliography.allEntries().sortedByIndex(); track entry) {
+      <div>
+        <p [id]="'bibliography-' + entry.index" [class.highlighted]="isHighlighted(entry)">
+          @if (entry.url) {
+            <span>[{{entry.index}}]&nbsp;<a [href]="entry.url">{{entry.label}}</a></span>
+          }
+          @if (!entry.url) {
+            <span>[{{entry.index}}]&nbsp;{{entry.label}}</span>
+          }
+        </p>
+      </div>
+    }
   </mat-card-content>
 </mat-card>

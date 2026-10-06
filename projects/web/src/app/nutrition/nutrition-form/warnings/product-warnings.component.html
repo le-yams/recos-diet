@@ -14,10 +14,13 @@
   ~ limitations under the License.
   -->
 
-<div *ngFor="let warning of warnings$ | async"
-     class="product_warnings"
-     [class.level_high]="warning.isHigh()"
-     [class.level_medium]="warning.isMedium()">
-  <small>{{warning.text}}</small>&nbsp;<app-biblio-links *ngIf="warning.sources" [references]="warning.sources"></app-biblio-links>
-</div>
+@for (warning of warnings$ | async; track warning) {
+  <div class="product_warnings"
+       [class.level_high]="warning.isHigh()"
+       [class.level_medium]="warning.isMedium()">
+    <small>{{warning.text}}</small>&nbsp;@if (warning.sources) {
+      <app-biblio-links [references]="warning.sources"></app-biblio-links>
+    }
+  </div>
+}
 

@@ -33,7 +33,9 @@
           </mat-card-header>
           <mat-divider></mat-divider>
           <mat-card-content>
-            <app-product-detail *ngFor="let product of productsEnterale" [product]="product"></app-product-detail>
+            @for (product of productsEnterale; track product) {
+              <app-product-detail [product]="product"></app-product-detail>
+            }
           </mat-card-content>
         </mat-card>
       </div>
@@ -45,7 +47,9 @@
           </mat-card-header>
           <mat-divider></mat-divider>
           <mat-card-content>
-            <app-product-detail *ngFor="let product of productsParenterale" [product]="product"></app-product-detail>
+            @for (product of productsParenterale; track product) {
+              <app-product-detail [product]="product"></app-product-detail>
+            }
           </mat-card-content>
         </mat-card>
       </div>

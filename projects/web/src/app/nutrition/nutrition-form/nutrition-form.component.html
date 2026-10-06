@@ -36,7 +36,9 @@
       <mat-form-field>
         <mat-label>Produit</mat-label>
         <mat-select [value]="selectedProduct$ | async" (selectionChange)="selectProduct($event.value)">
-          <mat-option *ngFor="let product of availableProduct$ | async" [value]="product">{{product}}</mat-option>
+          @for (product of availableProduct$ | async; track product) {
+            <mat-option [value]="product">{{product}}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </p>

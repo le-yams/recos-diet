@@ -14,13 +14,19 @@
   ~ limitations under the License.
   -->
 
-<div class="container-fluid mt-3" *ngIf="(survey$ | async) || noSurvey; let survey">
-  <div class="survey" *ngIf="survey.enabled">
-    <iframe [src]="domSanitizer.bypassSecurityTrustResourceUrl(survey.url)">
-      Loading…
-    </iframe>
+@if ((survey$ | async) || noSurvey; as survey) {
+  <div class="container-fluid mt-3">
+    @if (survey.enabled) {
+      <div class="survey">
+        <iframe [src]="domSanitizer.bypassSecurityTrustResourceUrl(survey.url)">
+          Loading…
+        </iframe>
+      </div>
+    }
+    @if (!survey.enabled) {
+      <div class="survey">
+        <p>No survey in progress</p>
+      </div>
+    }
   </div>
-  <div class="survey" *ngIf="!survey.enabled">
-    <p>No survey in progress</p>
-  </div>
-</div>
+}

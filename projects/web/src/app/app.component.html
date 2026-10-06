@@ -18,40 +18,48 @@
 
 <div>
 
-  <div id="flyingMenu" *ngIf="(isHandset$ | async) && !drawer.opened">
-    <button mat-button color="primary" type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()"
-            onclick="this.blur()">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      <span>Menu</span>
-    </button>
-  </div>
+  @if ((isHandset$ | async) && !drawer.opened) {
+    <div id="flyingMenu">
+      <button mat-button color="primary" type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()"
+              onclick="this.blur()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <span>Menu</span>
+      </button>
+    </div>
+  }
 
   <mat-sidenav-container>
     <mat-sidenav #drawer
                  [mode]="(isHandset$ | async) ? 'over' : 'side'"
                  [opened]="(isHandset$ | async) === false">
 
-      <button *ngIf="(isHandset$ | async)" mat-icon-button color="primary" type="button" aria-label="Toggle sidenav"
-              (click)="drawer.toggle()" onclick="this.blur()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
+      @if ((isHandset$ | async)) {
+        <button mat-icon-button color="primary" type="button" aria-label="Toggle sidenav"
+                (click)="drawer.toggle()" onclick="this.blur()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      }
 
       <mat-nav-list>
-        <mat-list-item *ngFor="let menu of menus" [routerLink]="[menu.route]" (click)="closeDrawerIfHandset(drawer)">
-          <a mat-button color="primary" [class.mat-flat-button]="isSelected(menu)">
-            <fa-icon [icon]="menu.icon" aria-hidden="true"></fa-icon>&nbsp;{{menu.label}}
-          </a>
-        </mat-list-item>
+        @for (menu of menus; track menu) {
+          <mat-list-item [routerLink]="[menu.route]" (click)="closeDrawerIfHandset(drawer)">
+            <a mat-button color="primary" [class.mat-flat-button]="isSelected(menu)">
+              <fa-icon [icon]="menu.icon" aria-hidden="true"></fa-icon>&nbsp;{{menu.label}}
+            </a>
+          </mat-list-item>
+        }
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <ng-container *ngIf="(survey$ | async) || noSurvey; let survey">
-        <div *ngIf="survey.enabled && currentRoute !== '/survey'" style="display: flex; justify-content: center">
-          <button mat-flat-button color="accent" class="m-2 blinking text-center" routerLink="/survey">
-            Donnez votre avis ici !
-          </button>
-        </div>
-      </ng-container>
+      @if ((survey$ | async) || noSurvey; as survey) {
+        @if (survey.enabled && currentRoute !== '/survey') {
+          <div style="display: flex; justify-content: center">
+            <button mat-flat-button color="accent" class="m-2 blinking text-center" routerLink="/survey">
+              Donnez votre avis ici !
+            </button>
+          </div>
+        }
+      }
       <div class="main-content">
         <router-outlet></router-outlet>
       </div>

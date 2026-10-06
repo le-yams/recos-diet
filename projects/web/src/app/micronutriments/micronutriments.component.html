@@ -14,17 +14,25 @@
   ~ limitations under the License.
   -->
 
-<div class="column" *ngIf="recommendations$ | async as recommendations">
-  <ng-container *ngFor="let recommendation of recommendations">
-    <p class="reco">
-      {{recommendation.micronutriment}}
-      <span *ngIf="recommendation.administrationTerms">
-      : {{recommendation.administrationTerms.quantity}} {{recommendation.administrationTerms.unit}}
-      </span>
-      <app-biblio-links [references]="recommendation.sources"></app-biblio-links>
-    </p>
-    <ul class="clauses" *ngIf="recommendation.clauses.length > 0">
-      <li *ngFor="let clause of recommendation.clauses" [innerHTML]="renderClause(clause)"></li>
-    </ul>
-  </ng-container>
-</div>
+@if (recommendations$ | async; as recommendations) {
+  <div class="column">
+    @for (recommendation of recommendations; track recommendation) {
+      <p class="reco">
+        {{recommendation.micronutriment}}
+        @if (recommendation.administrationTerms) {
+          <span>
+          : {{recommendation.administrationTerms.quantity}} {{recommendation.administrationTerms.unit}}
+          </span>
+        }
+        <app-biblio-links [references]="recommendation.sources"></app-biblio-links>
+      </p>
+      @if (recommendation.clauses.length > 0) {
+        <ul class="clauses">
+          @for (clause of recommendation.clauses; track clause) {
+            <li [innerHTML]="renderClause(clause)"></li>
+          }
+        </ul>
+      }
+    }
+  </div>
+}

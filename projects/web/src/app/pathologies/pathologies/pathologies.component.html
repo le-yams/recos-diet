@@ -20,24 +20,36 @@
       <fa-icon [icon]="faDisease" aria-hidden="true"></fa-icon>&nbsp;Pathologies
 
     </mat-panel-title>
-    <mat-panel-description *ngIf="selectedPathologies$ | async as selectedPathologies">
-      <span *ngIf="selectedPathologies.length === 1">{{selectedPathologies[0]}}</span>
-      <span *ngIf="selectedPathologies.length > 1">{{selectedPathologies.length}} sélectionnées</span>
-      <span *ngIf="hasWarnings$ | async">&nbsp;<fa-icon [icon]="faExclamationCircle" aria-hidden="true"></fa-icon></span>
-    </mat-panel-description>
+    @if (selectedPathologies$ | async; as selectedPathologies) {
+      <mat-panel-description>
+        @if (selectedPathologies.length === 1) {
+          <span>{{selectedPathologies[0]}}</span>
+        }
+        @if (selectedPathologies.length > 1) {
+          <span>{{selectedPathologies.length}} sélectionnées</span>
+        }
+        @if (hasWarnings$ | async) {
+          <span>&nbsp;<fa-icon [icon]="faExclamationCircle" aria-hidden="true"></fa-icon></span>
+        }
+      </mat-panel-description>
+    }
   </mat-expansion-panel-header>
 
-  <form *ngIf="selectedPathologies$ | async as selectedPathologies">
-    <ul>
-      <li *ngFor="let pathology of allPathologies">
-          <mat-checkbox [disabled]="(isPathologyDisabled(pathology) | async) || false"
-                        [checked]="selectedPathologies.includes(pathology)"
-                        (change)="pathologySelectionChange(pathology, $event.checked)"
-          >{{pathology}}</mat-checkbox>
-      </li>
+  @if (selectedPathologies$ | async; as selectedPathologies) {
+    <form>
+      <ul>
+        @for (pathology of allPathologies; track pathology) {
+          <li>
+              <mat-checkbox [disabled]="(isPathologyDisabled(pathology) | async) || false"
+                            [checked]="selectedPathologies.includes(pathology)"
+                            (change)="pathologySelectionChange(pathology, $event.checked)"
+              >{{pathology}}</mat-checkbox>
+          </li>
+        }
 
-    </ul>
-  </form>
+      </ul>
+    </form>
+  }
 
   <app-warnings></app-warnings>
 </mat-expansion-panel>

@@ -23,8 +23,8 @@
   <span class="p-gradient"><strong>25</strong> kcal</span>
   <span class="p-rehab"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></span>
   <span class="p-rehab">phase de r&eacute;habilitation</span>
-  <ng-container *ngIf="(hasObesity$ | async) === false">
+  @if ((hasObesity$ | async) === false) {
     <span class="p-rehab"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></span>
     <span class="p-rehab"><strong>30</strong> kcal</span>
-  </ng-container>
+  }
 </div>

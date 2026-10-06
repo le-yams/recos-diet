@@ -32,9 +32,11 @@
                required [min]="heightBounds.min" [max]="heightBounds.max"
                [ngModel]="patient.heightCm" (change)="updateHeight($event)"
                (focus)="heightInput.select()" (keyup.enter)="weightInput.focus()">
-        <mat-error *ngIf="heightCtrl.invalid">
-          Taille attendue entre {{heightBounds.min}} et {{heightBounds.max}} cm
-        </mat-error>
+        @if (heightCtrl.invalid) {
+          <mat-error>
+            Taille attendue entre {{heightBounds.min}} et {{heightBounds.max}} cm
+          </mat-error>
+        }
       </mat-form-field>
     </p>
 
@@ -45,23 +47,27 @@
                placeholder="poids du patient" required [min]="weightBounds.min" [max]="weightBounds.max"
                [ngModel]="patient.weightKg" (change)="updateWeight($event)"
                (focus)="weightInput.select()">
-        <mat-error *ngIf="weightCtrl.invalid">
-          Poids attendu entre {{weightBounds.min}} et {{weightBounds.max}} kg
-        </mat-error>
+        @if (weightCtrl.invalid) {
+          <mat-error>
+            Poids attendu entre {{weightBounds.min}} et {{weightBounds.max}} kg
+          </mat-error>
+        }
       </mat-form-field>
     </p>
 
-    <p *ngIf="shouldDisplayAdjustedWeight()">
-      <mat-form-field>
-        <mat-label>Poids ajusté (kg)</mat-label>
-        <input matInput readonly
-               [value]="patient.adjustedWeightKg.toFixed(1)">
-        <mat-hint>
-          références
-          <app-biblio-links [references]="['espen-p52', 'ideal-body-weight-equation']"></app-biblio-links>
-        </mat-hint>
-      </mat-form-field>
-    </p>
+    @if (shouldDisplayAdjustedWeight()) {
+      <p>
+        <mat-form-field>
+          <mat-label>Poids ajusté (kg)</mat-label>
+          <input matInput readonly
+                 [value]="patient.adjustedWeightKg.toFixed(1)">
+          <mat-hint>
+            références
+            <app-biblio-links [references]="['espen-p52', 'ideal-body-weight-equation']"></app-biblio-links>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+    }
 
     <p>
       <mat-form-field>

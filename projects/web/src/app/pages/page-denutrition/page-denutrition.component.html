@@ -43,8 +43,12 @@
             <li>perte de poids &ge; 5 &percnt; en 1 mois ou &ge; 10 &percnt; en 6 mois ou
               &ge; 10 &percnt; par rapport au poids habituel avant le d&eacute;but de la maladie
             </li>
-            <li *ngIf="patientIsOld">IMC &lt; 22</li>
-            <li *ngIf="!patientIsOld">IMC &lt; 18,5</li>
+            @if (patientIsOld) {
+              <li>IMC &lt; 22</li>
+            }
+            @if (!patientIsOld) {
+              <li>IMC &lt; 18,5</li>
+            }
             <li>r&eacute;duction quantifi&eacute;e de la masse musculaire et/ou de la
               fonction musculaire
             </li>
@@ -81,8 +85,12 @@
         <h3>D&eacute;nutrition mod&eacute;r&eacute;e</h3>
         <h5>(1 seul crit&egrave;re suffit)</h5>
         <ul>
-          <li *ngIf="!patientIsOld">17 &lt; IMC &lt; 18,5</li>
-          <li *ngIf="patientIsOld">20 &lt; IMC &lt; 22</li>
+          @if (!patientIsOld) {
+            <li>17 &lt; IMC &lt; 18,5</li>
+          }
+          @if (patientIsOld) {
+            <li>20 &lt; IMC &lt; 22</li>
+          }
           <li>perte de poids &ge; 5 &percnt; en 1 mois ou &ge; 10 &percnt; en 6 mois ou
             &ge; 10 &percnt; par rapport au poids habituel avant le d&eacute;but de la maladie
           </li>
@@ -93,8 +101,12 @@
         <h3>D&eacute;nutrition s&eacute;v&egrave;re</h3>
         <h5>(1 seul crit&egrave;re suffit)</h5>
         <ul>
-          <li *ngIf="!patientIsOld">IMC &le; 17</li>
-          <li *ngIf="patientIsOld">IMC &le; 20</li>
+          @if (!patientIsOld) {
+            <li>IMC &le; 17</li>
+          }
+          @if (patientIsOld) {
+            <li>IMC &le; 20</li>
+          }
           <li>perte de poids &ge; 10 &percnt; en 1 mois ou &ge; 15 &percnt; en 6 mois ou
             &ge; 15 &percnt; par rapport au poids habituel avant le d&eacute;but de la maladie
           </li>
@@ -109,14 +121,16 @@
 
     <span>
       Source:
-      <a *ngIf="!patientIsOld"
-         href="https://www.has-sante.fr/jcms/p_3120231/fr/diagnostic-de-la-denutrition-de-l-enfant-et-de-l-adulte-fiche-outil">
-        Fiche outil pour le diagnostic de la d&eacute;nutrition de l'enfant et de l'adulte
-      </a>
-      <a *ngIf="patientIsOld"
-         href="https://www.has-sante.fr/jcms/p_3165944/fr/diagnostic-de-la-denutrition-chez-la-personne-de-70-ans-et-plus">
-        Diagnostic de la dénutrition chez la personne de 70 ans et plus
-      </a>
+      @if (!patientIsOld) {
+        <a href="https://www.has-sante.fr/jcms/p_3120231/fr/diagnostic-de-la-denutrition-de-l-enfant-et-de-l-adulte-fiche-outil">
+          Fiche outil pour le diagnostic de la d&eacute;nutrition de l'enfant et de l'adulte
+        </a>
+      }
+      @if (patientIsOld) {
+        <a href="https://www.has-sante.fr/jcms/p_3165944/fr/diagnostic-de-la-denutrition-chez-la-personne-de-70-ans-et-plus">
+          Diagnostic de la dénutrition chez la personne de 70 ans et plus
+        </a>
+      }
     </span>
     </div>
 
