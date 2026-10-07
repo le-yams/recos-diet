@@ -12,16 +12,15 @@ values and JSON data are in French.
 
 Angular 22 workspace with two projects declared in `angular.json`:
 
-- `projects/domain` — an **ng-packagr library** named `@recos-diet/domain` (never published). Pure TypeScript
-  domain model with no Angular dependency (its `package.json` declares only `tslib`). All clinical computation
-  lives here.
+- `projects/domain` — the domain, imported as `@recos-diet/domain`. Pure TypeScript domain model with no Angular
+  dependency (only its `src/test.ts` initializes the Angular test environment). All clinical computation lives
+  here. It is a `library` project with `test` and `lint` targets only: no build target, nothing is packaged.
 - `projects/web` — the Angular application (Material + FontAwesome). It imports the domain through the
   `@recos-diet/domain` alias, which `tsconfig.json` maps to the sources (`projects/domain/src/public-api.ts`).
 
 Consequence: the web app compiles the domain sources itself. No domain build is needed before `npm start` or the
-web tests, and `ng serve` reloads on domain edits. The library build (`ng build domain`, ng-packagr →
-`dist/domain`) only runs in CI's `ng-build` job, whose template builds every library project; nothing consumes
-its output.
+web tests, and `ng serve` reloads on domain edits. Since the domain has no build target, CI's `ng-build` job
+overrides the template script to skip its library build step (`run_ng_build_for_libraries`).
 
 ## Commands
 
@@ -85,7 +84,8 @@ other directly; they communicate exclusively via events.
   anorexia / EER+obesity compatibility and re-selects if needed) → `SelectedProductNutritionInfoEvent` →
   `DailyTargetFlows` → `DailyTargetFlowsUpdatedEvent`. `Micronutriments` and `Warnings` also listen to the
   pathology and nutrition-type events.
-- Anything the web app needs must be exported from `public-api.ts`; that file is the library entry point.
+- Anything the web app needs must be exported from `public-api.ts`; that file is what the `@recos-diet/domain`
+  alias resolves to.
 
 ### Domain tests
 

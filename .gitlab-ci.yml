@@ -25,8 +25,6 @@ stages:
 variables:
   # Angular template
   NG_CLI_IMAGE: trion/ng-cli-karma:22.2.1
-  # the template default ("build --no-progress") is also applied to the domain library, whose ng-packagr builder rejects it
-  NG_BUILD_ARGS: "build"
   # ng-audit: production dependencies only, failing on high and critical advisories
   NG_AUDIT_ARGS: "--omit=dev --audit-level=high"
   LFTP_SRC: "dist/web"
@@ -61,11 +59,17 @@ ng-audit:
     - if: '$CI_MERGE_REQUEST_ID && $CI_MERGE_REQUEST_TITLE !~ /^Draft:.*/'
     - allow_failure: true
 
-# the template calls ng directly, so the npm prebuild hook does not run: generate version.json here
+# the template calls ng directly, so the npm prebuild hook does not run: generate version.json here.
+# Template script without run_ng_build_for_libraries: the domain is a library project without build target
+# (the web app compiles its sources), and that function runs `ng build` on every library project
 ng-build:
   before_script:
     - !reference [ .ng-cli-base, before_script ]
     - npm run generate:version
+  script:
+    - run_ng_build_for_applications
+    - run_tests
+    - merge_coverage
 
 # rebuilds the app with the package.json bumped by semantic-release. Extends .ng-cli-base rather than ng-build:
 # tests and coverage already ran in ng-build on the same commit, and replaying them after the release is
@@ -79,7 +83,6 @@ build-for-prod:
     - !reference [ .ng-cli-base, before_script ]
     - npm run generate:version
   script:
-    # the web app compiles the domain from its sources: the library build (dist/domain) is not needed here
     - run_ng_build_for_applications
   artifacts:
     name: "$CI_JOB_NAME artifacts from $CI_PROJECT_NAME on $CI_COMMIT_REF_SLUG"

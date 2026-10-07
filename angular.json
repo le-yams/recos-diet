@@ -5,29 +5,10 @@
   "projects": {
     "domain": {
       "projectType": "library",
-      "schematics": {
-        "@schematics/angular:library": {
-        }
-      },
       "root": "projects/domain",
       "sourceRoot": "projects/domain/src",
       "prefix": "domain",
       "architect": {
-        "build": {
-          "builder": "@angular/build:ng-packagr",
-          "options": {
-            "project": "projects/domain/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/domain/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/domain/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
         "test": {
           "builder": "@angular/build:karma",
           "options": {

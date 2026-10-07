@@ -1,7 +1,0 @@
-{
-  "name": "@recos-diet/domain",
-  "version": "0.0.1",
-  "dependencies": {
-    "tslib": "^2.2.0"
-  }
-}
