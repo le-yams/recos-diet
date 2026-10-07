@@ -15,6 +15,26 @@
  */
 
 
+/* Material positions the side menu absolutely in mat-sidenav-container, whose height only follows the page content:
+   a short page (e.g. the survey page without survey) clipped the menu. The shell fills the viewport so that the
+   container spans at least the space left between the disclaimer and the footer. */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh; /* mobile browsers: excludes their collapsible toolbars */
+}
+
+.shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell > mat-sidenav-container {
+  flex: 1;
+}
+
 #flyingMenu {
   position: -webkit-sticky; /* Safari */
   position: sticky;
