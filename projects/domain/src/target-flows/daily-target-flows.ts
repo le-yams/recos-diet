@@ -30,8 +30,11 @@ interface DailyTarget {
 
 const target10 : DailyTarget = {
   energyPerKg: 10,
-  isRelevant(_: PathologyContext): boolean {
-    return true;
+  isRelevant(context: PathologyContext): boolean {
+    return context.patientHasOnePathologyOf(
+      Pathology.ANOREXIE_MENTALE, 
+      Pathology.DENUTRITION_SRI
+    );
   }
 }
 
@@ -59,8 +62,9 @@ const target25 : DailyTarget = {
 
 const target30 : DailyTarget = {
   energyPerKg: 30,
-  isRelevant(_: PathologyContext): boolean {
-    return false;
+  isRelevant(context: PathologyContext): boolean {
+    return context.patientHasNotPathology(Pathology.ANOREXIE_MENTALE) && 
+    context.patientHasNotPathology(Pathology.OBESITE);
   }
 }
 
