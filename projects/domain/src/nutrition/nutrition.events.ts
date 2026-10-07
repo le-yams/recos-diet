@@ -15,7 +15,7 @@
  */
 
 import {DomainEvent} from '../domain.events';
-import {NutritionType} from "./nutrition";
+import {NutritionType} from './nutrition';
 
 export class SelectedNutritionTypeEvent implements DomainEvent {
 

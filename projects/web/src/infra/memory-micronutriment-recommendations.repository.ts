@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {MicronutrimentRecommendation, MicronutrimentRecommendationsRead, Pathology} from "@recos-diet/domain";
+import {MicronutrimentRecommendation, MicronutrimentRecommendationsRead, Pathology} from '@recos-diet/domain';
 
 export class MemoryMicronutrimentRecommendationsRepository implements MicronutrimentRecommendationsRead {
 

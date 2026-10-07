@@ -23,9 +23,9 @@ import {
 } from './micronutriments';
 import {NutritionType} from '../nutrition/nutrition';
 import {Pathology} from '../pathologies/pathologies.data';
-import {DomainEventBus} from "../domain.events";
-import {SummarizedMicronutrimentRecommendationsUpdatedEvent} from "./micronutriments.events";
-import {SelectedNutritionTypeEvent} from "../nutrition/nutrition.events";
+import {DomainEventBus} from '../domain.events';
+import {SummarizedMicronutrimentRecommendationsUpdatedEvent} from './micronutriments.events';
+import {SelectedNutritionTypeEvent} from '../nutrition/nutrition.events';
 import {EventsCaptor, TestDomainEventBus} from '../shared.spec';
 import {SelectedPathologiesEvent} from '../pathologies/pathologies.event';
 
@@ -94,12 +94,12 @@ describe('Micronutriments', () => {
   it('should give recommendations for ENTERALE nutrition type and given pathology', () => {
     // Given
     const enteraleRecommendationsRead = new TestRecosRead(
-      [reco("a")],
+      [reco('a')],
       new Map([
-        [Pathology.CIRRHOTIQUE, [reco("b"), reco("c")]],
-        [Pathology.CVVHDF, [reco("d")]]
+        [Pathology.CIRRHOTIQUE, [reco('b'), reco('c')]],
+        [Pathology.CVVHDF, [reco('d')]]
       ]));
-    const parenteraleRecommendationsRead = new TestRecosRead([reco("d")], new Map());
+    const parenteraleRecommendationsRead = new TestRecosRead([reco('d')], new Map());
     recommendations = new Micronutriments({
       enteraleRecommendationsRead: enteraleRecommendationsRead,
       parenteraleRecommendationsRead: parenteraleRecommendationsRead,
@@ -125,12 +125,12 @@ describe('Micronutriments', () => {
   it('should merge clauses for multiple recos on same micronutriment', () => {
     // Given
     const enteraleRecommendationsRead = new TestRecosRead(
-      [recoWithClauses("a", ["ca1", "ca2"])],
+      [recoWithClauses('a', ['ca1', 'ca2'])],
       new Map([
-        [Pathology.CIRRHOTIQUE, [recoWithClauses("a", ["ca2", "ca3"]), reco("b")]],
-        [Pathology.CVVHDF, [recoWithClauses("b", ["cb1", "cb2"]), reco("c")]]
+        [Pathology.CIRRHOTIQUE, [recoWithClauses('a', ['ca2', 'ca3']), reco('b')]],
+        [Pathology.CVVHDF, [recoWithClauses('b', ['cb1', 'cb2']), reco('c')]]
       ]));
-    const parenteraleRecommendationsRead = new TestRecosRead([reco("d")], new Map());
+    const parenteraleRecommendationsRead = new TestRecosRead([reco('d')], new Map());
     recommendations = new Micronutriments({
       enteraleRecommendationsRead: enteraleRecommendationsRead,
       parenteraleRecommendationsRead: parenteraleRecommendationsRead,
@@ -147,19 +147,19 @@ describe('Micronutriments', () => {
     const summarizedRecommendations = eventsCaptor.mapSingleEvent(
       evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
     expect(summarizedRecommendations).toEqual([
-      summarizedRecoWithClauses("a", ["ca1", "ca2", "ca3"]),
-      summarizedRecoWithClauses("b", ["cb1", "cb2"]),
-      summarizedReco("c")
+      summarizedRecoWithClauses('a', ['ca1', 'ca2', 'ca3']),
+      summarizedRecoWithClauses('b', ['cb1', 'cb2']),
+      summarizedReco('c')
     ]);
   });
 
   it('should merge exclude specified clauses', () => {
     // Given
     const enteraleRecommendationsRead = new TestRecosRead(
-      [recoWithClauses("a", ["c1", "c2"])], new Map([
-        [Pathology.CIRRHOTIQUE, [reco("b"), recoWithExcludedClauses("a", ["c2"])]]
+      [recoWithClauses('a', ['c1', 'c2'])], new Map([
+        [Pathology.CIRRHOTIQUE, [reco('b'), recoWithExcludedClauses('a', ['c2'])]]
       ]));
-    const parenteraleRecommendationsRead = new TestRecosRead([reco("d")], new Map());
+    const parenteraleRecommendationsRead = new TestRecosRead([reco('d')], new Map());
     recommendations = new Micronutriments({
       enteraleRecommendationsRead: enteraleRecommendationsRead,
       parenteraleRecommendationsRead: parenteraleRecommendationsRead,
@@ -176,17 +176,17 @@ describe('Micronutriments', () => {
     const summarizedRecommendations = eventsCaptor.mapSingleEvent(
       evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
     expect(summarizedRecommendations).toEqual([
-      summarizedRecoWithClauses("a", ["c1"]),
-      summarizedReco("b")
+      summarizedRecoWithClauses('a', ['c1']),
+      summarizedReco('b')
     ]);
   });
 
   it('should merge quantities keeping max value and associated unit', () => {
     // Given
     const enteraleRecommendationsRead = new TestRecosRead(
-      [recoWithAdministrationTerms("a", 7, 'unit1')], new Map([
-        [Pathology.CIRRHOTIQUE, [recoWithAdministrationTerms("a", 42, 'unit2')]],
-        [Pathology.CVVHDF, [recoWithAdministrationTerms("a", 24, 'unit3')]]
+      [recoWithAdministrationTerms('a', 7, 'unit1')], new Map([
+        [Pathology.CIRRHOTIQUE, [recoWithAdministrationTerms('a', 42, 'unit2')]],
+        [Pathology.CVVHDF, [recoWithAdministrationTerms('a', 24, 'unit3')]]
       ]));
     recommendations = new Micronutriments({
       enteraleRecommendationsRead: enteraleRecommendationsRead,
@@ -204,24 +204,24 @@ describe('Micronutriments', () => {
     const summarizedRecommendations = eventsCaptor.mapSingleEvent(
       evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
     expect(summarizedRecommendations).toEqual([
-      summarizedRecoWithAdministrationTerms("a", 42, 'unit2')
+      summarizedRecoWithAdministrationTerms('a', 42, 'unit2')
     ]);
   });
 
   it('should remove excluded micronutriment', () => {
     // Given
     const enteraleRecommendationsRead = new TestRecosRead(
-      [reco("a")],
+      [reco('a')],
       new Map([
-        [Pathology.ANOREXIE_MENTALE, [reco("b")]],
-        [Pathology.CVVHDF, [reco("c"), reco("d")]]
+        [Pathology.ANOREXIE_MENTALE, [reco('b')]],
+        [Pathology.CVVHDF, [reco('c'), reco('d')]]
       ]));
-    const parenteraleRecommendationsRead = new TestRecosRead([reco("d")], new Map());
+    const parenteraleRecommendationsRead = new TestRecosRead([reco('d')], new Map());
     recommendations = new Micronutriments({
       enteraleRecommendationsRead: enteraleRecommendationsRead,
       parenteraleRecommendationsRead: parenteraleRecommendationsRead,
       exclusionsRead: new TestRecoEclusionsRead(new Map([
-        [Pathology.ANOREXIE_MENTALE, ["c"]],
+        [Pathology.ANOREXIE_MENTALE, ['c']],
       ])),
       nutritionType: NutritionType.ENTERALE,
       pathologies: []

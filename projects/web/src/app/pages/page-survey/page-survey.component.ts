@@ -15,8 +15,8 @@
  */
 
 import {Component, OnInit, SecurityContext, inject} from '@angular/core';
-import {NoSurvey, Survey, SurveyService} from "../../survey/survey.service";
-import {DomSanitizer} from "@angular/platform-browser";
+import {NoSurvey, Survey, SurveyService} from '../../survey/survey.service';
+import {DomSanitizer} from '@angular/platform-browser';
 import {AsyncPipe} from '@angular/common';
 
 @Component({

@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import {Products, ProductsRepository, ProductNutritionRepository} from "./nutrition/products";
-import {Nutrition} from "./nutrition/nutrition";
-import {Bibliography, BibliographyRepository} from "./bibliography/bibliography";
-import {DailyTargetFlows} from "./target-flows/daily-target-flows";
-import {Pathologies} from "./pathologies/pathologies";
-import {Patient} from "./patient/patient";
-import {MicronutrimentExclusionsRead, Micronutriments, MicronutrimentRecommendationsRead} from "./micronutriments/micronutriments";
-import {Warnings, WarningsRead} from "./pathologies/warnings";
-import {DomainEventBus} from "./domain.events";
+import {Products, ProductsRepository, ProductNutritionRepository} from './nutrition/products';
+import {Nutrition} from './nutrition/nutrition';
+import {Bibliography, BibliographyRepository} from './bibliography/bibliography';
+import {DailyTargetFlows} from './target-flows/daily-target-flows';
+import {Pathologies} from './pathologies/pathologies';
+import {Patient} from './patient/patient';
+import {MicronutrimentExclusionsRead, Micronutriments, MicronutrimentRecommendationsRead} from './micronutriments/micronutriments';
+import {Warnings, WarningsRead} from './pathologies/warnings';
+import {DomainEventBus} from './domain.events';
 
 
 export class Domain {

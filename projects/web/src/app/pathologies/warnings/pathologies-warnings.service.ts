@@ -15,8 +15,8 @@
  */
 
 import {Injectable, inject} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
-import {DomainService} from "../../domain.service";
+import {BehaviorSubject, Observable} from 'rxjs';
+import {DomainService} from '../../domain.service';
 import {
   NutritionistOpinionRequirementLevelChange,
   Warning,

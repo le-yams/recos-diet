@@ -15,7 +15,7 @@
  */
 
 import {DomainEventBus} from '../domain.events';
-import {PatientInfoUpdatedEvent} from "./patient.events";
+import {PatientInfoUpdatedEvent} from './patient.events';
 
 export interface PatientSize {
 
@@ -70,7 +70,7 @@ export class Patient implements PatientInfo {
     return true;
   }
 
-  private static isValid(value: number | undefined, bounds: { min: number, max: number }): boolean {
+  private static isValid(value: number | undefined, bounds: {min: number, max: number}): boolean {
     return value === undefined || (Number.isFinite(value) && value >= bounds.min && value <= bounds.max);
   }
 

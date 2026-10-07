@@ -15,9 +15,9 @@
  */
 
 import {Injectable, inject} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable} from 'rxjs';
 import {ProductWarningsChange, Warning} from '@recos-diet/domain';
-import {DomainService} from "../../../domain.service";
+import {DomainService} from '../../../domain.service';
 
 @Injectable({
   providedIn: 'root'

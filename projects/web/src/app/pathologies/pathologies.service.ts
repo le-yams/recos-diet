@@ -15,9 +15,9 @@
  */
 
 import {Injectable, inject} from '@angular/core';
-import {Pathology, SelectedPathologiesEvent} from "@recos-diet/domain";
-import {BehaviorSubject} from "rxjs";
-import {DomainService} from "../domain.service";
+import {Pathology, SelectedPathologiesEvent} from '@recos-diet/domain';
+import {BehaviorSubject} from 'rxjs';
+import {DomainService} from '../domain.service';
 
 @Injectable({
   providedIn: 'root'

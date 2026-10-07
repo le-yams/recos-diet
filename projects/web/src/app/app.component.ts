@@ -16,9 +16,9 @@
 
 import {Component, inject} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {firstValueFrom, Observable} from "rxjs";
-import {filter, map} from "rxjs/operators";
-import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
+import {firstValueFrom, Observable} from 'rxjs';
+import {filter, map} from 'rxjs/operators';
+import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {
   faBookMedical,
   faPrescriptionBottle,
@@ -27,9 +27,9 @@ import {
   faVials,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
-import {NavigationEnd, Router, RouterLink, RouterOutlet} from "@angular/router";
+import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {AppService} from './app.service';
-import {NoSurvey, Survey, SurveyService} from "./survey/survey.service";
+import {NoSurvey, Survey, SurveyService} from './survey/survey.service';
 import {DisclaimerComponent} from './disclaimer/disclaimer.component';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';

@@ -15,9 +15,9 @@
  */
 
 import {Injectable, inject} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
-import {DomainService} from "../domain.service";
-import {SummarizedMicronutrimentRecommendation, SummarizedMicronutrimentRecommendationsUpdatedEvent} from "@recos-diet/domain";
+import {BehaviorSubject} from 'rxjs';
+import {DomainService} from '../domain.service';
+import {SummarizedMicronutrimentRecommendation, SummarizedMicronutrimentRecommendationsUpdatedEvent} from '@recos-diet/domain';
 
 @Injectable({
   providedIn: 'root'

@@ -15,11 +15,11 @@
  */
 
 import {Component, inject} from '@angular/core';
-import {ProductWarningsService} from "./product-warnings.service";
-import {Observable} from "rxjs";
+import {ProductWarningsService} from './product-warnings.service';
+import {Observable} from 'rxjs';
 import {Warning, WarningLevel} from '@recos-diet/domain';
-import {map} from "rxjs/operators";
-import {Verbose} from "../../../../infra/utils";
+import {map} from 'rxjs/operators';
+import {Verbose} from '../../../../infra/utils';
 import {BiblioLinksComponent} from '../../../bibliography/biblio-links/biblio-links.component';
 import {AsyncPipe} from '@angular/common';
 

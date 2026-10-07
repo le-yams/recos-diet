@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import {DomainEventBus} from "../domain.events";
-import {PatientInfo} from "../patient/patient";
-import {PatientInfoUpdatedEvent} from "../patient/patient.events";
-import {SelectedPathologiesEvent} from "../pathologies/pathologies.event";
-import {DailyTargetFlowsUpdatedEvent} from "./daily-target-flows.events";
-import {Pathology} from "../pathologies/pathologies.data";
-import {NutritionInfo} from "../nutrition/products";
-import {SelectedProductNutritionInfoEvent} from "../nutrition/products.events";
+import {DomainEventBus} from '../domain.events';
+import {PatientInfo} from '../patient/patient';
+import {PatientInfoUpdatedEvent} from '../patient/patient.events';
+import {SelectedPathologiesEvent} from '../pathologies/pathologies.event';
+import {DailyTargetFlowsUpdatedEvent} from './daily-target-flows.events';
+import {Pathology} from '../pathologies/pathologies.data';
+import {NutritionInfo} from '../nutrition/products';
+import {SelectedProductNutritionInfoEvent} from '../nutrition/products.events';
 
 interface DailyTarget {
   energyPerKg: number;

@@ -16,12 +16,12 @@
 
 import {AfterViewInit, Component, inject} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {DomainService} from "../../domain.service";
+import {DomainService} from '../../domain.service';
 import {faBookMedical} from '@fortawesome/free-solid-svg-icons';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 import {map, tap} from 'rxjs/operators';
 import {BibliographyEntry} from '@recos-diet/domain';
-import {Verbose} from "../../../infra/utils";
+import {Verbose} from '../../../infra/utils';
 import {MatCard, MatCardHeader, MatCardTitle, MatCardContent} from '@angular/material/card';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {MatDivider} from '@angular/material/list';
@@ -54,9 +54,9 @@ export class PageBibliographyComponent implements AfterViewInit {
     const highlightedIndex = this.highlightedIndex();
     if (highlightedIndex) {
       document.getElementById('bibliography-' + highlightedIndex)?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest"
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
       });
     }
   }

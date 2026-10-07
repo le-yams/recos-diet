@@ -16,7 +16,7 @@
 
 import {Component, inject} from '@angular/core';
 import {faBalanceScale} from '@fortawesome/free-solid-svg-icons';
-import {AppService} from "../app.service";
+import {AppService} from '../app.service';
 import {RouterLink} from '@angular/router';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 

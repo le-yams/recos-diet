@@ -15,7 +15,7 @@
  */
 
 import {Injectable, inject} from '@angular/core';
-import {JsonAssetLoaderService} from "./json-asset-loader.service";
+import {JsonAssetLoaderService} from './json-asset-loader.service';
 import {
   BibliographyEntry,
   BibliographyRepository,
@@ -23,19 +23,19 @@ import {
   MicronutrimentExclusionsRead,
   MicronutrimentRecommendationsRead,
   WarningsRead
-} from "@recos-diet/domain";
-import {JsonProducts, MemoryProductsRepository} from "./memory-products.repository";
-import {MemoryBibliographyRepository} from "./memory-bibliography.repository";
+} from '@recos-diet/domain';
+import {JsonProducts, MemoryProductsRepository} from './memory-products.repository';
+import {MemoryBibliographyRepository} from './memory-bibliography.repository';
 import {
   MemoryMicronutrimentRecommendationsRepository,
   NutritionRecommendations
-} from "./memory-micronutriment-recommendations.repository";
+} from './memory-micronutriment-recommendations.repository';
 import {
   MemoryMicronutrimentExclusionsRepository,
   PathologyExclusions
-} from "./memory-micronutriment-exclusions.repository";
-import {MemoryWarningsRepository, ProductOrPathologiesWarnings} from "./memory-warnings.repository";
-import {DomainEvents, InMemoryBus} from "./pubsub";
+} from './memory-micronutriment-exclusions.repository';
+import {MemoryWarningsRepository, ProductOrPathologiesWarnings} from './memory-warnings.repository';
+import {DomainEvents, InMemoryBus} from './pubsub';
 
 
 @Injectable({
@@ -86,33 +86,33 @@ export class DomainLoaderService {
   }
 
   private loadProductsRepository(): Promise<MemoryProductsRepository> {
-    return this.jsonAssets.load<JsonProducts>("products")
+    return this.jsonAssets.load<JsonProducts>('products')
       .then(products => new MemoryProductsRepository(products))
   }
 
   private loadBibliographyRepository(): Promise<BibliographyRepository> {
-    return this.jsonAssets.load<BibliographyEntry[]>("bibliography")
+    return this.jsonAssets.load<BibliographyEntry[]>('bibliography')
       .then(entries => new MemoryBibliographyRepository(entries))
   }
 
 
   private loadEnteraleRecosRead(): Promise<MicronutrimentRecommendationsRead> {
-    return this.jsonAssets.load<NutritionRecommendations>("recos-enterale")
+    return this.jsonAssets.load<NutritionRecommendations>('recos-enterale')
       .then(recos => new MemoryMicronutrimentRecommendationsRepository(recos))
   }
 
   private loadParenteraleRecosRead(): Promise<MicronutrimentRecommendationsRead> {
-    return this.jsonAssets.load<NutritionRecommendations>("recos-parenterale")
+    return this.jsonAssets.load<NutritionRecommendations>('recos-parenterale')
       .then(recos => new MemoryMicronutrimentRecommendationsRepository(recos))
   }
 
   private loadRecoExclusionsRead(): Promise<MicronutrimentExclusionsRead> {
-    return this.jsonAssets.load<PathologyExclusions[]>("recos-exclusions")
+    return this.jsonAssets.load<PathologyExclusions[]>('recos-exclusions')
       .then(exclusions => new MemoryMicronutrimentExclusionsRepository(exclusions))
   }
 
   private loadWarningsRead(): Promise<WarningsRead> {
-    return this.jsonAssets.load<ProductOrPathologiesWarnings[]>("warnings")
+    return this.jsonAssets.load<ProductOrPathologiesWarnings[]>('warnings')
       .then(warnings => new MemoryWarningsRepository(warnings))
   }
 

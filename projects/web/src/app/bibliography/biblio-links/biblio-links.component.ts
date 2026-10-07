@@ -16,7 +16,7 @@
 
 import {Component, Input, OnInit, inject} from '@angular/core';
 import {Bibliography, BibliographyEntries, EMPTY_BIBLIOGRAPHY} from '@recos-diet/domain';
-import {DomainService} from "../../domain.service";
+import {DomainService} from '../../domain.service';
 import {RouterLink} from '@angular/router';
 
 @Component({

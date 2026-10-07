@@ -8,7 +8,7 @@ interface Reco {
 
 interface RecosFile {
   sharedRecommendations: Reco[];
-  pathologiesRecommendations: { pathology: string, recommendations: Reco[] }[];
+  pathologiesRecommendations: {pathology: string, recommendations: Reco[]}[];
 }
 
 describe('recos data', () => {

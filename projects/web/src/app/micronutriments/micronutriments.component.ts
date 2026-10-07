@@ -15,11 +15,11 @@
  */
 
 import {Component, inject} from '@angular/core';
-import {MicronutrimentsService} from "./micronutriments.service";
-import {Observable} from "rxjs";
-import {SummarizedMicronutrimentRecommendation} from "@recos-diet/domain";
-import {map, tap} from "rxjs/operators";
-import {Verbose} from "../../infra/utils";
+import {MicronutrimentsService} from './micronutriments.service';
+import {Observable} from 'rxjs';
+import {SummarizedMicronutrimentRecommendation} from '@recos-diet/domain';
+import {map, tap} from 'rxjs/operators';
+import {Verbose} from '../../infra/utils';
 import {BiblioLinksComponent} from '../bibliography/biblio-links/biblio-links.component';
 import {AsyncPipe} from '@angular/common';
 
@@ -52,13 +52,13 @@ const byNutrimentLabel = function (reco1: SummarizedMicronutrimentRecommendation
 };
 
 const CLAUSE_RENDERING_REPLACEMENTS: [string, string][] = [
-  ["    ", "&nbsp;&nbsp;&nbsp;&nbsp;"],
-  ["->", "&rarr;"],
-  ["=>", "&rArr;"],
-  [">=", "&ge;"],
-  ["<=", "&le;"],
-  ["<", "&lt;"],
-  [">", "&gt;"],
+  ['    ', '&nbsp;&nbsp;&nbsp;&nbsp;'],
+  ['->', '&rarr;'],
+  ['=>', '&rArr;'],
+  ['>=', '&ge;'],
+  ['<=', '&le;'],
+  ['<', '&lt;'],
+  ['>', '&gt;'],
 ]
 
 class ClauseRenderer {

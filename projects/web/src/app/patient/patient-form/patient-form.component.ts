@@ -17,7 +17,7 @@
 import {Component, inject} from '@angular/core';
 import {faUserInjured} from '@fortawesome/free-solid-svg-icons';
 import {Patient} from '@recos-diet/domain';
-import {DomainService} from "../../domain.service";
+import {DomainService} from '../../domain.service';
 import {
   MatExpansionPanel,
   MatExpansionPanelHeader,

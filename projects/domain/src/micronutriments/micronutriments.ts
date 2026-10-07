@@ -17,11 +17,11 @@
 import {NutritionType} from '../nutrition/nutrition';
 import {Pathology} from '../pathologies/pathologies.data';
 import {group, mapValues, notIn} from '../utils';
-import {DomainEventBus, Subscription} from "../domain.events";
-import {SelectedNutritionTypeEvent} from "../nutrition/nutrition.events";
-import {SummarizedMicronutrimentRecommendationsUpdatedEvent} from "./micronutriments.events";
+import {DomainEventBus, Subscription} from '../domain.events';
+import {SelectedNutritionTypeEvent} from '../nutrition/nutrition.events';
+import {SummarizedMicronutrimentRecommendationsUpdatedEvent} from './micronutriments.events';
 import {SelectedPathologiesEvent} from '../pathologies/pathologies.event';
-import {Comparable, maxOf} from "../comparison/comparison";
+import {Comparable, maxOf} from '../comparison/comparison';
 
 
 const groupRecosByMicronutriment = function (sharedRecos: MicronutrimentRecommendation[], pathosRecos: MicronutrimentRecommendation[], micronutrimentExclusions: string[]): Map<string, MicronutrimentRecommendation[]> {

@@ -15,8 +15,8 @@
  */
 
 import {Patient} from './patient';
-import {DomainEventBus} from "../domain.events";
-import {PatientInfoUpdatedEvent} from "./patient.events";
+import {DomainEventBus} from '../domain.events';
+import {PatientInfoUpdatedEvent} from './patient.events';
 import {EventsCaptor, TestDomainEventBus} from '../shared.spec';
 
 describe('Patient', () => {

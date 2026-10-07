@@ -19,7 +19,7 @@
  */
 
 import {Consumer, DomainEvent, DomainEventBus, Subscription} from './domain.events';
-import {Predicate, TRUE_PREDICATE} from "./utils";
+import {Predicate, TRUE_PREDICATE} from './utils';
 
 export class TestDomainEventBus implements DomainEventBus {
 

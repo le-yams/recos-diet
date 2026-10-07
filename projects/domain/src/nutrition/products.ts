@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import {DEFAULT_NUTRITION_TYPE, NutritionType} from "./nutrition";
+import {DEFAULT_NUTRITION_TYPE, NutritionType} from './nutrition';
 import {DomainEventBus} from '../domain.events';
-import {AvailableProductsEvent, SelectedProductNutritionInfoEvent, SelectedProductEvent} from "./products.events";
-import {SelectedNutritionTypeEvent} from "./nutrition.events";
-import {SelectedPathologiesEvent} from "../pathologies/pathologies.event";
+import {AvailableProductsEvent, SelectedProductNutritionInfoEvent, SelectedProductEvent} from './products.events';
+import {SelectedNutritionTypeEvent} from './nutrition.events';
+import {SelectedPathologiesEvent} from '../pathologies/pathologies.event';
 
 
 export interface NutritionInfo {

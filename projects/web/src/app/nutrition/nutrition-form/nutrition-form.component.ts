@@ -16,8 +16,8 @@
 
 import {Component, inject} from '@angular/core';
 import {faUtensils} from '@fortawesome/free-solid-svg-icons';
-import {NutritionType} from "@recos-diet/domain";
-import {NutritionService} from "../nutrition.service";
+import {NutritionType} from '@recos-diet/domain';
+import {NutritionService} from '../nutrition.service';
 import {
   MatExpansionPanel,
   MatExpansionPanelHeader,

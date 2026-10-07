@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {faStickyNote} from '@fortawesome/free-solid-svg-icons';
 import {MatCard, MatCardHeader, MatCardTitle, MatCardContent} from '@angular/material/card';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';

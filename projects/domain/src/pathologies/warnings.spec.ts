@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import {EventsCaptor, TestDomainEventBus} from "../shared.spec";
-import {Warnings, WarningsRead} from "./warnings";
-import {SelectedPathologiesEvent} from "./pathologies.event";
-import {DomainEventBus} from "../domain.events";
-import {Pathology} from "./pathologies.data";
+import {EventsCaptor, TestDomainEventBus} from '../shared.spec';
+import {Warnings, WarningsRead} from './warnings';
+import {SelectedPathologiesEvent} from './pathologies.event';
+import {DomainEventBus} from '../domain.events';
+import {Pathology} from './pathologies.data';
 import {NutritionistOpinionRequirementLevelChange, PathologiesWarningsChange} from './warnings.events';
 import {Warning, WarningLevel} from '../warnings.data';
 

@@ -15,14 +15,14 @@
  */
 
 import {Routes} from '@angular/router';
-import {PageBibliographyComponent} from "./pages/page-bibliography/page-bibliography.component";
-import {PageAboutComponent} from "./pages/page-about/page-about.component";
-import {PageSriComponent} from "./pages/page-sri/page-sri.component";
-import {PageDenutritionComponent} from "./pages/page-denutrition/page-denutrition.component";
+import {PageBibliographyComponent} from './pages/page-bibliography/page-bibliography.component';
+import {PageAboutComponent} from './pages/page-about/page-about.component';
+import {PageSriComponent} from './pages/page-sri/page-sri.component';
+import {PageDenutritionComponent} from './pages/page-denutrition/page-denutrition.component';
 import {PageHomeComponent} from './pages/page-home/page-home.component';
 import {PageProductsComponent} from './pages/page-products/page-products.component';
-import {PagePhosphorusComponent} from "./pages/page-phosphorus/page-phosphorus.component";
-import {PageSurveyComponent} from "./pages/page-survey/page-survey.component";
+import {PagePhosphorusComponent} from './pages/page-phosphorus/page-phosphorus.component';
+import {PageSurveyComponent} from './pages/page-survey/page-survey.component';
 
 export const routes: Routes = [
   {

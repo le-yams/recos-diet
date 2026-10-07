@@ -15,8 +15,8 @@
  */
 
 import {Injectable, inject} from '@angular/core';
-import {DomainLoaderService} from "../infra/domain-loader.service";
-import {DomainEventBus} from "@recos-diet/domain";
+import {DomainLoaderService} from '../infra/domain-loader.service';
+import {DomainEventBus} from '@recos-diet/domain';
 
 @Injectable({
   providedIn: 'root'

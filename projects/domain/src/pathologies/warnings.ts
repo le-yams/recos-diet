@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-import {DomainEventBus, Subscription} from "../domain.events";
-import {Pathology} from "./pathologies.data";
-import {SelectedPathologiesEvent} from "./pathologies.event";
+import {DomainEventBus, Subscription} from '../domain.events';
+import {Pathology} from './pathologies.data';
+import {SelectedPathologiesEvent} from './pathologies.event';
 import {Warning, WarningLevel} from '../warnings.data';
 import {
   NutritionistOpinionRequirementLevelChange,
   PathologiesWarningsChange,
   ProductWarningsChange
 } from './warnings.events';
-import {SelectedProductEvent} from "../nutrition/products.events";
+import {SelectedProductEvent} from '../nutrition/products.events';
 
 export interface WarningsRead {
 

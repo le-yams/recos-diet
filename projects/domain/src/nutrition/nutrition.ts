@@ -15,12 +15,12 @@
  */
 
 import {DomainEventBus} from '../domain.events';
-import {SelectedNutritionTypeEvent} from "./nutrition.events";
+import {SelectedNutritionTypeEvent} from './nutrition.events';
 
 
 export enum NutritionType {
-  ENTERALE = "Entérale",
-  PARENTERALE = "Parentérale"
+  ENTERALE = 'Entérale',
+  PARENTERALE = 'Parentérale'
 }
 
 export const DEFAULT_NUTRITION_TYPE = NutritionType.ENTERALE;

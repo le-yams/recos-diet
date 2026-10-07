@@ -15,7 +15,7 @@
  */
 
 import {Injectable, inject} from '@angular/core';
-import {JsonAssetLoaderService} from "../../infra/json-asset-loader.service";
+import {JsonAssetLoaderService} from '../../infra/json-asset-loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class SurveyService {
   private jsonAssets = inject(JsonAssetLoaderService);
 
   public async get(): Promise<Survey> {
-    return await this.jsonAssets.load<Survey>("survey");
+    return await this.jsonAssets.load<Survey>('survey');
   }
 }
 
@@ -36,5 +36,5 @@ export interface Survey {
 
 export const NoSurvey: Survey = {
   enabled: false,
-  url: ""
+  url: ''
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {BibliographyEntry, BibliographyRepository} from "@recos-diet/domain";
+import {BibliographyEntry, BibliographyRepository} from '@recos-diet/domain';
 
 export class MemoryBibliographyRepository implements BibliographyRepository {
 

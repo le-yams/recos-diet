@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Pathology, Warning, WarningLevel, WarningsRead} from "@recos-diet/domain";
+import {Pathology, Warning, WarningLevel, WarningsRead} from '@recos-diet/domain';
 
 export class MemoryWarningsRepository implements WarningsRead {
 

@@ -15,7 +15,7 @@
  */
 
 import {Component} from '@angular/core';
-import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
+import {faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
 import {MatCard, MatCardHeader, MatCardTitle, MatCardContent} from '@angular/material/card';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {MatDivider} from '@angular/material/list';

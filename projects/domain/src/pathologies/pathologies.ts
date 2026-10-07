@@ -15,10 +15,10 @@
  */
 
 import {DomainEventBus} from '../domain.events';
-import {PatientInfo} from "../patient/patient";
-import {SelectedPathologiesEvent} from "./pathologies.event";
-import {PatientInfoUpdatedEvent} from "../patient/patient.events";
-import {Pathology} from "./pathologies.data";
+import {PatientInfo} from '../patient/patient';
+import {SelectedPathologiesEvent} from './pathologies.event';
+import {PatientInfoUpdatedEvent} from '../patient/patient.events';
+import {Pathology} from './pathologies.data';
 
 export class Pathologies {
 

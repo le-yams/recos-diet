@@ -15,15 +15,15 @@
  */
 
 import {Injectable, inject} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject} from 'rxjs';
 import {
   SelectedNutritionTypeEvent,
   NutritionType,
   AvailableProductsEvent,
   SelectedProductEvent,
   DEFAULT_NUTRITION_TYPE
-} from "@recos-diet/domain";
-import {DomainService} from "../domain.service";
+} from '@recos-diet/domain';
+import {DomainService} from '../domain.service';
 
 @Injectable({
   providedIn: 'root'

@@ -15,7 +15,7 @@
  */
 
 import {DomainEvent} from '../domain.events';
-import {Pathology} from "./pathologies.data";
+import {Pathology} from './pathologies.data';
 
 export class SelectedPathologiesEvent implements DomainEvent {
   readonly name = SelectedPathologiesEvent.name;

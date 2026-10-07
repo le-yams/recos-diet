@@ -29,15 +29,15 @@ export class AppUpdater {
   }
 
   start() {
-    console.group("initializing check for update interval");
+    console.group('initializing check for update interval');
     if (this.checkForUpdateIntervalId) {
-      console.log("clearing previous interval with handle id=" + this.checkForUpdateIntervalId);
+      console.log('clearing previous interval with handle id=' + this.checkForUpdateIntervalId);
       window.clearInterval(this.checkForUpdateIntervalId);
     }
     this.checkForUpdateIntervalId = window.setInterval(() => {
       this.checkAppUpdate()
     }, environment.appUpdateCheckDelay);
-    console.log("new interval set with handle id=" + this.checkForUpdateIntervalId + " and delay=" + environment.appUpdateCheckDelay);
+    console.log('new interval set with handle id=' + this.checkForUpdateIntervalId + ' and delay=' + environment.appUpdateCheckDelay);
     this.checkAppUpdate();
     console.groupEnd()
   }

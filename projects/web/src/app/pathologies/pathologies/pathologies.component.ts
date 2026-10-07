@@ -16,11 +16,11 @@
 
 import {Component, inject} from '@angular/core';
 import {faDisease, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
-import {Pathology} from "@recos-diet/domain";
-import {Observable} from "rxjs";
-import {PathologiesService} from "../pathologies.service";
-import {map} from "rxjs/operators";
-import {PathologiesWarningsService} from "../warnings/pathologies-warnings.service";
+import {Pathology} from '@recos-diet/domain';
+import {Observable} from 'rxjs';
+import {PathologiesService} from '../pathologies.service';
+import {map} from 'rxjs/operators';
+import {PathologiesWarningsService} from '../warnings/pathologies-warnings.service';
 import {
   MatExpansionPanel,
   MatExpansionPanelHeader,

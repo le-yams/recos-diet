@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import {Consumer, DomainEvent, DomainEventBus, Subscription} from "@recos-diet/domain";
-import {Verbose} from "./utils";
+import {Consumer, DomainEvent, DomainEventBus, Subscription} from '@recos-diet/domain';
+import {Verbose} from './utils';
 
 const EMPTY_SUBSCRIPTION: Subscription = {
   unsubscribe: () => undefined,

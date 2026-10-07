@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {NutritionInfo, ProductInfo, ProductNutritionRepository, ProductsRepository} from "@recos-diet/domain";
+import {NutritionInfo, ProductInfo, ProductNutritionRepository, ProductsRepository} from '@recos-diet/domain';
 
 export class MemoryProductsRepository implements ProductsRepository, ProductNutritionRepository {
 

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import {DomainEvent} from "../domain.events";
-import {DailyTargetFlow} from "./daily-target-flows";
+import {DomainEvent} from '../domain.events';
+import {DailyTargetFlow} from './daily-target-flows';
 
 export class DailyTargetFlowsUpdatedEvent implements DomainEvent {
 

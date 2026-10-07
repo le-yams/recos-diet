@@ -18,7 +18,7 @@
 
 import 'zone.js';
 import 'zone.js/testing';
-import { getTestBed } from '@angular/core/testing';
+import {getTestBed} from '@angular/core/testing';
 import {
   BrowserTestingModule,
   platformBrowserTesting
@@ -28,6 +28,6 @@ import {
 getTestBed().initTestEnvironment(
   BrowserTestingModule,
   platformBrowserTesting(), {
-    teardown: { destroyAfterEach: false }
+    teardown: {destroyAfterEach: false}
 }
 );
