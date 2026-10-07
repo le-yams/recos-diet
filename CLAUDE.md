@@ -12,12 +12,16 @@ values and JSON data are in French.
 
 Angular 22 workspace with two projects declared in `angular.json`:
 
-- `projects/domain` — an **ng-packagr library** published as `@recos-diet/domain`. Pure TypeScript domain model
-  with no Angular dependency (its `package.json` declares only `tslib`). All clinical computation lives here.
-- `projects/web` — the Angular application (Material + FontAwesome). It consumes the domain **only through
-  `dist/domain`**: `tsconfig.json` maps `@recos-diet/domain` to `dist/domain`, not to the source.
+- `projects/domain` — an **ng-packagr library** named `@recos-diet/domain` (never published). Pure TypeScript
+  domain model with no Angular dependency (its `package.json` declares only `tslib`). All clinical computation
+  lives here.
+- `projects/web` — the Angular application (Material + FontAwesome). It imports the domain through the
+  `@recos-diet/domain` alias, which `tsconfig.json` maps to the sources (`projects/domain/src/public-api.ts`).
 
-Consequence: **the domain must be built before the web app will compile**, and rebuilt after any domain change.
+Consequence: the web app compiles the domain sources itself. No domain build is needed before `npm start` or the
+web tests, and `ng serve` reloads on domain edits. The library build (`ng build domain`, ng-packagr →
+`dist/domain`) only runs in CI's `ng-build` job, whose template builds every library project; nothing consumes
+its output.
 
 ## Commands
 
@@ -25,10 +29,8 @@ Node 24 (`.nvmrc`, same as the CI image `trion/ng-cli-karma`); `engines` accepts
 (`^22.22.3 || ^24.15.0 || >=26.0.0`) and `.npmrc` sets `engine-strict`, so `npm ci` fails on any other version.
 
 ```bash
-npm run build:domain            # required before `npm start` / web tests; rebuild after domain edits
-npm run watch:domain            # keep dist/domain fresh while editing the library (development config)
-npm start                       # ng serve (web, development config)
-npm run build                   # generate:version (prebuild), then ng build domain && ng build web (production)
+npm start                       # ng serve (web, development config), also watches the domain sources
+npm run build                   # generate:version (prebuild), then ng build web (production)
 npm test                        # ng test domain --no-watch && ng test web --no-watch
 npm run test:domain             # domain tests in watch mode, with coverage
 npm run lint                    # ng lint: every project (domain, then web)
@@ -37,7 +39,7 @@ npm run lint:web
 npm run generate:version        # writes projects/web/src/version.json (gitignored) from package.json version
 ```
 
-`ng build` targets a single project: always name it (`ng build domain`), there is no default project.
+`ng build` targets a single project: always name it (`ng build web`), there is no default project.
 
 Tests use Karma + Jasmine and launch a real `Chrome` (see `karma.conf.js` in each project). Headless:
 `--browsers=ChromeHeadless`. Reports go to `reports/<project>/` (gitignored).
@@ -49,7 +51,7 @@ npx ng test domain --no-watch
 npx ng test domain --no-watch --include='**/patient.spec.ts'
 ```
 
-`fdescribe`/`fit` also work for focusing within a file. Web tests need `dist/domain` to exist.
+`fdescribe`/`fit` also work for focusing within a file.
 
 `eslint.config.js` (flat config, shared by both projects) also enforces the `.ts` code style through `@stylistic`:
 single quotes (`quote_type` of `.editorconfig`) and `{X}` without inner spaces. `npx ng lint <project> --fix`
@@ -57,8 +59,8 @@ restores it, for example after an `ng update` migration that rewrote code as `{ 
 
 The production build enforces an `initial` bundle budget in `angular.json` (warning 1mb, error 1.5mb) and CI runs
 it, so exceeding the error fails the pipeline. Reference measure on 2026-10-07 (Angular 22, `application`
-builder): 951.20 kB initial (main 869.26 kB, styles 47.35 kB, polyfills 34.59 kB). A warning means the bundle
-drifted: find out why before raising the threshold.
+builder, domain compiled from its sources): 951.27 kB initial (main 869.33 kB, styles 47.35 kB, polyfills
+34.59 kB). A warning means the bundle drifted: find out why before raising the threshold.
 
 The web app builds with `@angular/build` (esbuild, Vite dev server); `outputPath.browser` is `""` so the build
 lands directly in `dist/web`, which CI uploads as is (with `.htaccess` and `version.json` at its root).

@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "paths": {
       "@recos-diet/domain": [
-        "./dist/domain"
+        "./projects/domain/src/public-api.ts"
       ]
     },
     "forceConsistentCasingInFileNames": true,

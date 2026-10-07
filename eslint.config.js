@@ -5,11 +5,6 @@ const stylistic = require('@stylistic/eslint-plugin');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 
-const selectorRules = prefix => ({
-  '@angular-eslint/directive-selector': ['error', {type: 'attribute', prefix, style: 'camelCase'}],
-  '@angular-eslint/component-selector': ['error', {type: 'element', prefix, style: 'kebab-case'}],
-});
-
 module.exports = defineConfig([
   {
     files: ['**/*.ts'],
@@ -33,11 +28,10 @@ module.exports = defineConfig([
   },
   {
     files: ['projects/web/**/*.ts'],
-    rules: selectorRules('app'),
-  },
-  {
-    files: ['projects/domain/**/*.ts'],
-    rules: selectorRules('domain'),
+    rules: {
+      '@angular-eslint/directive-selector': ['error', {type: 'attribute', prefix: 'app', style: 'camelCase'}],
+      '@angular-eslint/component-selector': ['error', {type: 'element', prefix: 'app', style: 'kebab-case'}],
+    },
   },
   {
     files: ['**/*.html'],
