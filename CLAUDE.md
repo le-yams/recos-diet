@@ -24,19 +24,20 @@ Consequence: **the domain must be built before the web app will compile**, and r
 Node 24 (`.nvmrc`, same as the CI image `trion/ng-cli-karma`); `engines` accepts what Angular 22 supports
 (`^22.22.3 || ^24.15.0 || >=26.0.0`) and `.npmrc` sets `engine-strict`, so `npm ci` fails on any other version.
 
-npm script names contain spaces, so quote them.
-
 ```bash
-npm run "build domain"          # required before `npm start` / web tests; rebuild after domain edits
-npx ng build domain --watch     # keep dist/domain fresh while editing the library
+npm run build:domain            # required before `npm start` / web tests; rebuild after domain edits
+npm run watch:domain            # keep dist/domain fresh while editing the library (development config)
 npm start                       # ng serve (web, development config)
 npm run build                   # generate:version (prebuild), then ng build domain && ng build web (production)
 npm test                        # ng test domain --no-watch && ng test web --no-watch
-npm run lint                    # ng lint domain && ng lint web
-npm run "lint domain"
-npm run "lint webapp"
+npm run test:domain             # domain tests in watch mode, with coverage
+npm run lint                    # ng lint: every project (domain, then web)
+npm run lint:domain
+npm run lint:web
 npm run generate:version        # writes projects/web/src/version.json (gitignored) from package.json version
 ```
+
+`ng build` targets a single project: always name it (`ng build domain`), there is no default project.
 
 Tests use Karma + Jasmine and launch a real `Chrome` (see `karma.conf.js` in each project). Headless:
 `--browsers=ChromeHeadless`. Reports go to `reports/<project>/` (gitignored).

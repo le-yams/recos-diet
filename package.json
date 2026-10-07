@@ -5,15 +5,15 @@
     "ng": "ng",
     "generate:version": "node generate-version-asset.js",
     "start": "ng serve",
-    "build domain": "ng build domain",
+    "build:domain": "ng build domain",
     "prebuild": "npm run generate:version",
     "build": "ng build domain && ng build web",
-    "watch": "ng build --watch --configuration development",
-    "test domain": "ng test domain --code-coverage",
+    "watch:domain": "ng build domain --watch --configuration development",
+    "test:domain": "ng test domain --code-coverage",
     "test": "ng test domain --no-watch && ng test web --no-watch",
-    "lint": "ng lint domain && ng lint web",
-    "lint domain": "ng lint domain",
-    "lint webapp": "ng lint web"
+    "lint": "ng lint",
+    "lint:domain": "ng lint domain",
+    "lint:web": "ng lint web"
   },
   "private": true,
   "engines": {
