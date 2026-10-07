@@ -50,6 +50,10 @@ npx ng test domain --no-watch --include='**/patient.spec.ts'
 
 `fdescribe`/`fit` also work for focusing within a file. Web tests need `dist/domain` to exist.
 
+`eslint.config.js` (flat config, shared by both projects) also enforces the `.ts` code style through `@stylistic`:
+single quotes (`quote_type` of `.editorconfig`) and `{X}` without inner spaces. `npx ng lint <project> --fix`
+restores it, for example after an `ng update` migration that rewrote code as `{ X }`.
+
 The production build enforces an `initial` bundle budget in `angular.json` (warning 1mb, error 1.5mb) and CI runs
 it, so exceeding the error fails the pipeline. Reference measure on 2026-10-07 (Angular 22, `application`
 builder): 951.20 kB initial (main 869.26 kB, styles 47.35 kB, polyfills 34.59 kB). A warning means the bundle
