@@ -17,7 +17,9 @@
 import {AppService} from './app.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {finalize} from 'rxjs/operators';
 import {environment} from '../environments/environment';
+import {Verbose} from '../infra/utils';
 
 export class AppUpdater {
 
@@ -29,17 +31,15 @@ export class AppUpdater {
   }
 
   start() {
-    console.group('initializing check for update interval');
     if (this.checkForUpdateIntervalId) {
-      console.log('clearing previous interval with handle id=' + this.checkForUpdateIntervalId);
+      Verbose.log('clearing previous check for update interval with handle id=' + this.checkForUpdateIntervalId);
       window.clearInterval(this.checkForUpdateIntervalId);
     }
     this.checkForUpdateIntervalId = window.setInterval(() => {
       this.checkAppUpdate()
     }, environment.appUpdateCheckDelay);
-    console.log('new interval set with handle id=' + this.checkForUpdateIntervalId + ' and delay=' + environment.appUpdateCheckDelay);
+    Verbose.log('new check for update interval set with handle id=' + this.checkForUpdateIntervalId + ' and delay=' + environment.appUpdateCheckDelay);
     this.checkAppUpdate();
-    console.groupEnd()
   }
 
   private checkAppUpdate() {
@@ -48,11 +48,13 @@ export class AppUpdater {
     }
     this.checkingForUpdate = true;
     this.requestLatestOnlineVersion()
-      .subscribe(data => this.refreshAppIfNecessary(data),
-        err => {
-          console.log('error checking for update', err)
-        },
-        () => this.checkingForUpdate = false);
+      // finalize runs on error too: a failed check (network, version.json missing during a deployment)
+      // must not block the next ones
+      .pipe(finalize(() => this.checkingForUpdate = false))
+      .subscribe({
+        next: data => this.refreshAppIfNecessary(data),
+        error: err => Verbose.log('error checking for update', err)
+      });
   }
 
   private userAlreadyNotified() {
@@ -70,7 +72,7 @@ export class AppUpdater {
     const currentVersion = this.app.version;
     const newVersion = data.version;
     if (newVersion !== currentVersion) {
-      console.log(`app new version available: ${newVersion} (current is ${currentVersion})`);
+      Verbose.log(`app new version available: ${newVersion} (current is ${currentVersion})`);
       if (confirm('Une nouvelle version du site a été publiée, il est nécessaire de rafraîchir la page. Voulez-vous rafraîchir maintenant ?')) {
         location.reload();
       } else {
