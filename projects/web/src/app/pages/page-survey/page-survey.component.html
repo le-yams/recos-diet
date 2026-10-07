@@ -18,7 +18,9 @@
   <div class="container-fluid mt-3">
     @if (survey.enabled) {
       <div class="survey">
-        <iframe [src]="domSanitizer.bypassSecurityTrustResourceUrl(survey.url)">
+        <!-- sandbox and referrerpolicy must stay static attributes: Angular rejects their binding on an iframe (NG0910) -->
+        <iframe [src]="survey.url" title="Questionnaire d'avis" referrerpolicy="no-referrer"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox">
           Loading…
         </iframe>
       </div>

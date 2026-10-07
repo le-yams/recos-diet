@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-import {Component, OnInit, SecurityContext, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {NoSurvey, Survey, SurveyService} from '../../survey/survey.service';
-import {DomSanitizer} from '@angular/platform-browser';
 import {AsyncPipe} from '@angular/common';
 
 @Component({
@@ -25,17 +24,9 @@ import {AsyncPipe} from '@angular/common';
   styleUrls: ['./page-survey.component.css'],
   imports: [AsyncPipe]
 })
-export class PageSurveyComponent implements OnInit {
-
-  private survey = inject(SurveyService);
-  domSanitizer = inject(DomSanitizer);
+export class PageSurveyComponent {
 
   noSurvey = NoSurvey;
-  survey$: Promise<Survey> = Promise.resolve(NoSurvey);
-  readonly resourceUrlSecurityContext = SecurityContext.RESOURCE_URL
-
-  ngOnInit(): void {
-    this.survey$ = this.survey.get();
-  }
+  readonly survey$: Promise<Survey> = inject(SurveyService).get();
 
 }
