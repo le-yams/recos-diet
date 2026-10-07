@@ -48,5 +48,9 @@ export const routes: Routes = [
   },
   {
     path: 'survey', component: PageSurveyComponent, pathMatch: 'full'
+  },
+  // must stay last: an unknown url (typo, outdated bookmark) leads to the home page instead of an empty page
+  {
+    path: '**', redirectTo: ''
   }
 ];
