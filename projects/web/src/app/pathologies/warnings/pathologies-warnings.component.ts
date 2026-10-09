@@ -40,10 +40,7 @@ export class PathologiesWarningsComponent {
     this.nutritionistOpinionRequirementLevel$ = warningsService.nutritionistOpinionRequirementLevel$
       .pipe(map(req => new NutritionistOpinionRequirementLevelWrapper(req)));
     this.warnings$ = warningsService.warnings$.pipe(
-      map(warnings => warnings
-        .sort(byLevel)
-        .map(warning => new WarningView(warning))
-      )
+      map(warnings => warnings.map(warning => new WarningView(warning)))
     );
   }
 
@@ -83,8 +80,4 @@ class NutritionistOpinionRequirementLevelWrapper {
   isMedium(): boolean {
     return this.nutritionistOpinionRequirement === WarningLevel.MEDIUM;
   }
-}
-
-const byLevel = function (a: Warning, b: Warning): number {
-  return a.level - b.level;
 }

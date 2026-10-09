@@ -37,10 +37,7 @@ export class ProductWarningsComponent {
     const warningsService = inject(ProductWarningsService);
 
     this.warnings$ = warningsService.warnings$.pipe(
-      map(warnings => warnings
-        .sort(byLevel)
-        .map(warning => new WarningView(warning))
-      )
+      map(warnings => warnings.map(warning => new WarningView(warning)))
     );
   }
 
@@ -66,8 +63,4 @@ class WarningView implements Warning {
   isMedium(): boolean {
     return this.level === WarningLevel.MEDIUM;
   }
-}
-
-const byLevel = function (a: Warning, b: Warning): number {
-  return a.level - b.level;
 }

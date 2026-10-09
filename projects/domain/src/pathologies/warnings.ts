@@ -25,6 +25,10 @@ import {
 } from './warnings.events';
 import {SelectedProductEvent} from '../nutrition/products.events';
 
+const byDecreasingLevel = function (warning1: Warning, warning2: Warning): number {
+  return warning2.level - warning1.level;
+};
+
 export interface WarningsRead {
 
   nutritionistOpinionRequirement(pathology: Pathology): WarningLevel;
@@ -88,7 +92,8 @@ export class Warnings {
       .filter((warn: Warning, index: number, warns: Warning[]) => {
         const foundIndex = warns.findIndex(warn2 => warn.text === warn2.text);
         return index === foundIndex;
-      });
+      })
+      .sort(byDecreasingLevel);
   }
 
   private computeProductWarnings(product: string): Warning[] {
@@ -96,7 +101,8 @@ export class Warnings {
       .filter((warn: Warning, index: number, warns: Warning[]) => {
         const foundIndex = warns.findIndex(warn2 => warn.text === warn2.text);
         return index === foundIndex;
-      });
+      })
+      .sort(byDecreasingLevel);
   }
 
   close() {

@@ -18,7 +18,7 @@ import {Component, inject} from '@angular/core';
 import {MicronutrimentsService} from './micronutriments.service';
 import {Observable} from 'rxjs';
 import {SummarizedMicronutrimentRecommendation} from '@recos-diet/domain';
-import {map, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {Verbose} from '../../infra/utils';
 import {BiblioLinksComponent} from '../bibliography/biblio-links/biblio-links.component';
 import {AsyncPipe} from '@angular/common';
@@ -37,7 +37,6 @@ export class MicronutrimentsComponent {
     const nutrimentsService = inject(MicronutrimentsService);
 
     this.recommendations$ = nutrimentsService.nutrimentRecommendations$.pipe(
-      map(recommendations => recommendations.sort(byNutrimentLabel)),
       tap(recommendations => Verbose.log('recommendations updated', recommendations))
     );
   }
@@ -46,10 +45,6 @@ export class MicronutrimentsComponent {
     return new ClauseRenderer(clause).render();
   }
 }
-
-const byNutrimentLabel = function (reco1: SummarizedMicronutrimentRecommendation, reco2: SummarizedMicronutrimentRecommendation): number {
-  return reco1.micronutriment.localeCompare(reco2.micronutriment);
-};
 
 const CLAUSE_RENDERING_REPLACEMENTS: [string, string][] = [
   ['    ', '&nbsp;&nbsp;&nbsp;&nbsp;'],

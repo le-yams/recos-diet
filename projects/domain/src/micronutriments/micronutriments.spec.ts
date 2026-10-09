@@ -241,6 +241,35 @@ describe('Micronutriments', () => {
     ]);
   });
 
+  it('should sort recommendations by micronutriment', () => {
+    // Given
+    const enteraleRecommendationsRead = new TestRecosRead(
+      [reco('c')],
+      new Map([
+        [Pathology.CIRRHOTIQUE, [reco('b'), reco('a')]]
+      ]));
+    recommendations = new Micronutriments({
+      enteraleRecommendationsRead: enteraleRecommendationsRead,
+      parenteraleRecommendationsRead: emptyRecoRead(),
+      exclusionsRead: new TestRecoEclusionsRead(),
+      nutritionType: NutritionType.ENTERALE,
+      pathologies: []
+    }, events);
+
+    // When
+    events.publish(new SelectedPathologiesEvent([Pathology.CIRRHOTIQUE]));
+
+    // Then
+    eventsCaptor.expectEventsCount(1);
+    const summarizedRecommendations = eventsCaptor.mapSingleEvent(
+      evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
+    expect(summarizedRecommendations).toEqual([
+      summarizedReco('a'),
+      summarizedReco('b'),
+      summarizedReco('c'),
+    ]);
+  });
+
 });
 
 

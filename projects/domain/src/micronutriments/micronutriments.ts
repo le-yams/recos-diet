@@ -100,6 +100,10 @@ class MergeableMicronutrimentRecommendation implements SummarizedMicronutrimentR
   }
 }
 
+const byMicronutriment = function (reco1: SummarizedMicronutrimentRecommendation, reco2: SummarizedMicronutrimentRecommendation): number {
+  return reco1.micronutriment.localeCompare(reco2.micronutriment);
+};
+
 const summarizeMicronutrimentRecommendations = function (micronutrimentRecos: MicronutrimentRecommendation[]) {
   const firstRecommendation = micronutrimentRecos.shift()!;
   return micronutrimentRecos.reduce((mergeableRecommendation: MergeableMicronutrimentRecommendation, nextRecommendation: MicronutrimentRecommendation) => {
@@ -161,7 +165,8 @@ class Context implements MicronutrimentRecommendationsContext {
 
   summarizeRecommendations(): SummarizedMicronutrimentRecommendation[] {
     const recosByMicronutriment = this.recommendationsGroupedByMicronutriment();
-    return mapValues(recosByMicronutriment, summarizeMicronutrimentRecommendations);
+    return mapValues(recosByMicronutriment, summarizeMicronutrimentRecommendations)
+      .sort(byMicronutriment);
   }
 
   withNutritionType(nutritionType: NutritionType) {

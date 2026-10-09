@@ -19,8 +19,13 @@ import {Warnings, WarningsRead} from './warnings';
 import {SelectedPathologiesEvent} from './pathologies.event';
 import {DomainEventBus} from '../domain.events';
 import {Pathology} from './pathologies.data';
-import {NutritionistOpinionRequirementLevelChange, PathologiesWarningsChange} from './warnings.events';
+import {
+  NutritionistOpinionRequirementLevelChange,
+  PathologiesWarningsChange,
+  ProductWarningsChange
+} from './warnings.events';
 import {Warning, WarningLevel} from '../warnings.data';
+import {SelectedProductEvent} from '../nutrition/products.events';
 
 describe('Warnings should', () => {
 
@@ -97,6 +102,11 @@ const WARN3 = {
   level: WarningLevel.MEDIUM,
   sources: []
 };
+const HIGH_WARN = {
+  text: 'high warn',
+  level: WarningLevel.HIGH,
+  sources: []
+};
 describe('Warnings should', () => {
 
   let warnings: Warnings;
@@ -131,13 +141,66 @@ describe('Warnings should', () => {
     expect(ws).toEqual([WARN1, WARN2, WARN3]);
   })
 
+  it('raise an event with selected pathologies warnings sorted by decreasing level', () => {
+    // Given
+    const warns = new Map([
+      [Pathology.CIRRHOTIQUE, [WARN1]],
+      [Pathology.OH, [HIGH_WARN, WARN2]],
+    ]);
+    warnings = new Warnings(new TestWarningsRead(new Map(), warns), events);
+
+    // When
+    const pathologies: Pathology[] = [Pathology.CIRRHOTIQUE, Pathology.OH];
+    events.publish(new SelectedPathologiesEvent(pathologies))
+
+    // Then
+    eventsCaptor.expectEventsCount(1);
+    const ws = eventsCaptor.mapSingleEvent(evt => evt.warnings);
+    expect(ws).toEqual([HIGH_WARN, WARN1, WARN2]);
+  })
+
+});
+
+describe('Warnings should', () => {
+
+  let warnings: Warnings;
+  let events: DomainEventBus;
+  let eventsCaptor: EventsCaptor<ProductWarningsChange>;
+
+  beforeEach(() => {
+    events = new TestDomainEventBus();
+    eventsCaptor = new EventsCaptor(ProductWarningsChange.name, events);
+  });
+
+  afterEach(() => {
+    warnings.close();
+    eventsCaptor.close();
+  });
+
+  it('raise an event with selected product warnings sorted by decreasing level', () => {
+    // Given
+    const productWarns = new Map([
+      ['product', [WARN1, HIGH_WARN, WARN2]],
+    ]);
+    warnings = new Warnings(new TestWarningsRead(new Map(), new Map(), productWarns), events);
+
+    // When
+    events.publish(new SelectedProductEvent('product'))
+
+    // Then
+    eventsCaptor.expectEventsCount(1);
+    const ws = eventsCaptor.mapSingleEvent(evt => evt.warnings);
+    expect(ws).toEqual([HIGH_WARN, WARN1, WARN2]);
+  })
+
 });
 
 class TestWarningsRead implements WarningsRead {
 
   constructor(
     private nutritionistOpinionRequirements: Map<Pathology, WarningLevel> = new Map(),
-    private warnings: Map<Pathology, Warning[]> = new Map()) {
+    private warnings: Map<Pathology, Warning[]> = new Map(),
+    private productsWarnings: Map<string, Warning[]> = new Map()) {
   }
 
   nutritionistOpinionRequirement(pathology: Pathology): WarningLevel {
@@ -148,7 +211,7 @@ class TestWarningsRead implements WarningsRead {
     return this.warnings.get(pathology) ?? [];
   }
 
-  productWarnings(_product: string): Warning[] {
-    return [];
+  productWarnings(product: string): Warning[] {
+    return this.productsWarnings.get(product) ?? [];
   }
 }
