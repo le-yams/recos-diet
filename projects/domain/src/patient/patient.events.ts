@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-import {DomainEvent} from '../domain.events';
 import {PatientInfo} from './patient';
 
-export class PatientInfoUpdatedEvent implements DomainEvent {
-  readonly name = PatientInfoUpdatedEvent.name;
-
+export class PatientInfoUpdatedEvent {
   constructor(public readonly patient: PatientInfo) {
   }
 }

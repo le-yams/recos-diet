@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-import {DomainEvent} from '../domain.events';
 import {NutritionType} from './nutrition';
 
-export class SelectedNutritionTypeEvent implements DomainEvent {
-
-  readonly name = SelectedNutritionTypeEvent.name;
+export class SelectedNutritionTypeEvent {
 
   constructor(public readonly selectedNutritionType: NutritionType) {
   }

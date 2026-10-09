@@ -32,7 +32,7 @@ export class TargetFlowsService {
     const domainService = inject(DomainService);
 
     this.targetFlows.next(domainService.targetFlows.getTargetFlows());
-    domainService.EventBus().subscribe<DailyTargetFlowsUpdatedEvent>(DailyTargetFlowsUpdatedEvent.name,
+    domainService.EventBus().subscribe(DailyTargetFlowsUpdatedEvent,
       evt => this.targetFlows.next(evt.dailyTargetFlows));
   }
 }

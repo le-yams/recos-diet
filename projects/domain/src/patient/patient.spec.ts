@@ -28,7 +28,7 @@ describe('Patient', () => {
   beforeEach(() => {
     events = new TestDomainEventBus();
     patient = new Patient(events);
-    eventsCaptor = new EventsCaptor(PatientInfoUpdatedEvent.name, events);
+    eventsCaptor = new EventsCaptor(PatientInfoUpdatedEvent, events);
   });
 
   afterEach(() => {

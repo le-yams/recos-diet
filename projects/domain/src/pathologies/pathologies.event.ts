@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-import {DomainEvent} from '../domain.events';
 import {Pathology} from './pathologies.data';
 
-export class SelectedPathologiesEvent implements DomainEvent {
-  readonly name = SelectedPathologiesEvent.name;
-
+export class SelectedPathologiesEvent {
   constructor(public readonly pathologies: Pathology[]) {
   }
 

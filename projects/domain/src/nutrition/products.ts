@@ -80,9 +80,9 @@ export class Products {
   private availableProducts: ProductInfo[] = [];
 
   constructor(private repository: ProductsRepository, private productNutritionRepository: ProductNutritionRepository, private events: DomainEventBus) {
-    this.events.subscribe<SelectedNutritionTypeEvent>(SelectedNutritionTypeEvent.name,
+    this.events.subscribe(SelectedNutritionTypeEvent,
       evt => this.nutritionTypeChanged(evt.selectedNutritionType));
-    this.events.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
+    this.events.subscribe(SelectedPathologiesEvent,
       evt => this.updatePatientPathologiesStatus(evt));
   }
 

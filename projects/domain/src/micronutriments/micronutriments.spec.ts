@@ -37,7 +37,7 @@ describe('Micronutriments', () => {
 
   beforeEach(() => {
     events = new TestDomainEventBus();
-    eventsCaptor = new EventsCaptor(SummarizedMicronutrimentRecommendationsUpdatedEvent.name, events);
+    eventsCaptor = new EventsCaptor(SummarizedMicronutrimentRecommendationsUpdatedEvent, events);
   });
 
   afterEach(() => {

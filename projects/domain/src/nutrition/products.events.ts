@@ -14,30 +14,23 @@
  * limitations under the License.
  */
 
-import {DomainEvent} from '../domain.events';
 import {NutritionInfo} from './products';
 
-export class AvailableProductsEvent implements DomainEvent {
-
-  readonly name = AvailableProductsEvent.name;
+export class AvailableProductsEvent {
 
   constructor(public readonly availableProducts: string[]) {
   }
 
 }
 
-export class SelectedProductEvent implements DomainEvent {
-
-  readonly name = SelectedProductEvent.name;
+export class SelectedProductEvent {
 
   constructor(public readonly selectedProduct: string) {
   }
 
 }
 
-export class SelectedProductNutritionInfoEvent implements DomainEvent {
-
-  readonly name = SelectedProductNutritionInfoEvent.name;
+export class SelectedProductNutritionInfoEvent {
 
   constructor(public readonly selectedProductProductNutritionInfo: NutritionInfo) {
   }

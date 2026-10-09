@@ -70,9 +70,11 @@ The domain is **event-driven**. `Domain` (`domain.ts`) is the composition root: 
 with a shared `DomainEventBus` and the repository/read interfaces it needs. Sub-domains never reference each
 other directly; they communicate exclusively via events.
 
-- `DomainEventBus` (`domain.events.ts`) is a minimal `publish` / `subscribe(eventName, consumer)` interface.
-  Events are classes implementing `DomainEvent` whose `name` is the class name (`readonly name = Foo.name`), and
-  subscribers subscribe with `FooEvent.name`. Each sub-domain has a sibling `*.events.ts` file.
+- `DomainEventBus` (`domain.events.ts`) is a minimal `publish` / `subscribe(eventType, consumer)` interface.
+  Events are plain classes, and subscribers subscribe with the class itself (`subscribe(FooEvent, evt => ...)`,
+  the bus filters with `instanceof`). Never identify an event by its class name (`FooEvent.name`): the production
+  build minifies class names and they collide (every event class was named `t`, which left staging blank while
+  `npm start`, not minified, worked). Each sub-domain has a sibling `*.events.ts` file.
 - The standard sub-domain shape: subscribe to input events in the constructor, keep private state, recompute,
   publish an `...UpdatedEvent`. Expose a getter so the UI can read the current value at startup before any event
   fires.

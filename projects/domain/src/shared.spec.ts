@@ -18,15 +18,15 @@
  * Shared utilities for testing
  */
 
-import {Consumer, DomainEvent, DomainEventBus, Subscription} from './domain.events';
+import {Consumer, DomainEvent, DomainEventBus, DomainEventType, Subscription} from './domain.events';
 import {Predicate, TRUE_PREDICATE} from './utils';
 
 export class TestDomainEventBus implements DomainEventBus {
 
   private readonly consumers: Map<EmitterSubscription<DomainEvent>, Consumer<DomainEvent>> = new Map();
 
-  public subscribe<T extends DomainEvent>(eventName: string, consumer: Consumer<T>): Subscription {
-    const filter = forEvent(eventName);
+  public subscribe<T extends DomainEvent>(eventType: DomainEventType<T>, consumer: Consumer<T>): Subscription {
+    const filter = forEvent(eventType);
 
     if (!consumer) {
       return EMPTY_SUBSCRIPTION;
@@ -71,8 +71,8 @@ class EmitterSubscription<T> implements Subscription {
   }
 }
 
-function forEvent(eventName: string): Predicate<DomainEvent> {
-  return evt => evt.name === eventName;
+function forEvent(eventType: DomainEventType<DomainEvent>): Predicate<DomainEvent> {
+  return evt => evt instanceof eventType;
 }
 
 
@@ -82,8 +82,8 @@ export class EventsCaptor<T extends DomainEvent> {
   private subscription: Subscription;
   raisedEvents: T[] = [];
 
-  constructor(eventName: string, events: DomainEventBus) {
-    this.subscription = events.subscribe<T>(eventName, evt => this.raisedEvents.push(evt as T))
+  constructor(eventType: DomainEventType<T>, events: DomainEventBus) {
+    this.subscription = events.subscribe(eventType, evt => this.raisedEvents.push(evt))
   }
 
   expectEventsCount(expected: number) {

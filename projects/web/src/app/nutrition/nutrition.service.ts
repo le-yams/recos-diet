@@ -55,13 +55,13 @@ export class NutritionService {
     this.selectedProduct.next(this.products.getSelectedProduct()?.name);
     this.availableProducts.next(this.products.listAvailableProducts().map(p => p.name));
 
-    domainService.EventBus().subscribe<SelectedNutritionTypeEvent>(SelectedNutritionTypeEvent.name,
+    domainService.EventBus().subscribe(SelectedNutritionTypeEvent,
       evt => this.nutritionType.next(evt.selectedNutritionType));
 
-    domainService.EventBus().subscribe<AvailableProductsEvent>(AvailableProductsEvent.name,
+    domainService.EventBus().subscribe(AvailableProductsEvent,
       evt => this.availableProducts.next(evt.availableProducts));
 
-    domainService.EventBus().subscribe<SelectedProductEvent>(SelectedProductEvent.name,
+    domainService.EventBus().subscribe(SelectedProductEvent,
       evt => this.selectedProduct.next(evt.selectedProduct));
 
   }

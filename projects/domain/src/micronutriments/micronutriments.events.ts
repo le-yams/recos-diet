@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-import {DomainEvent} from '../domain.events';
 import {SummarizedMicronutrimentRecommendation} from './micronutriments';
 
-export class SummarizedMicronutrimentRecommendationsUpdatedEvent implements DomainEvent {
-  readonly name = SummarizedMicronutrimentRecommendationsUpdatedEvent.name;
-
+export class SummarizedMicronutrimentRecommendationsUpdatedEvent {
   constructor(public readonly recommendations: SummarizedMicronutrimentRecommendation[]) {
   }
 }

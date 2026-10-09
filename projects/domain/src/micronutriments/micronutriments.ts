@@ -195,9 +195,9 @@ export class Micronutriments {
     this.context = new Context(contextParams);
     this.summarizedRecommendations = this.context.summarizeRecommendations();
     this.subscriptions = [
-      this.events.subscribe<SelectedNutritionTypeEvent>(SelectedNutritionTypeEvent.name,
+      this.events.subscribe(SelectedNutritionTypeEvent,
         evt => this.updateSelectedNutritionType(evt.selectedNutritionType)),
-      this.events.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
+      this.events.subscribe(SelectedPathologiesEvent,
         evt => this.updateSelectedPathologies(evt.pathologies))
     ];
   }

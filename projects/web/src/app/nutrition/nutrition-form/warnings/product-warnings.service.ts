@@ -34,7 +34,7 @@ export class ProductWarningsService {
     this.warnings = new BehaviorSubject<Warning[]>(domainService.warnings.getProductWarnings());
     this.warnings$ = this.warnings.asObservable();
 
-    domainService.EventBus().subscribe<ProductWarningsChange>(ProductWarningsChange.name,
+    domainService.EventBus().subscribe(ProductWarningsChange,
       evt => this.warnings.next(evt.warnings));
   }
 }

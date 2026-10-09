@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-export interface DomainEvent {
-    name: string
-}
+export type DomainEvent = object;
+
+/**
+ * The class of an event: subscribers receive its instances. Never identify an event by its class name, the
+ * production build minifies class names and several classes can end up with the same one.
+ */
+export type DomainEventType<T extends DomainEvent> = new (...args: never[]) => T;
 
 export interface DomainEventBus {
 
   publish(event: DomainEvent): void;
 
-  subscribe<T extends DomainEvent>(eventName: string, consumer: Consumer<T>): Subscription;
+  subscribe<T extends DomainEvent>(eventType: DomainEventType<T>, consumer: Consumer<T>): Subscription;
 }
 
 export type Consumer<T> = (value: T) => void;

@@ -33,7 +33,7 @@ export class PathologiesService {
 
   constructor() {
     this.pathologies = this.domainService.pathologies;
-    this.domainService.EventBus().subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
+    this.domainService.EventBus().subscribe(SelectedPathologiesEvent,
       evt => this.selectedPathologies.next(evt.pathologies));
   }
 

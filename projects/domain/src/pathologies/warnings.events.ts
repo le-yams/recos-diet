@@ -14,28 +14,21 @@
  * limitations under the License.
  */
 
-import {DomainEvent} from '../domain.events';
 import {Warning, WarningLevel} from '../warnings.data';
 
-export class NutritionistOpinionRequirementLevelChange implements DomainEvent {
-
-  readonly name = NutritionistOpinionRequirementLevelChange.name;
+export class NutritionistOpinionRequirementLevelChange {
 
   constructor(public nutritionistOpinionRequirementLevel: WarningLevel) {
   }
 }
 
-export class PathologiesWarningsChange implements DomainEvent {
-
-  readonly name = PathologiesWarningsChange.name;
+export class PathologiesWarningsChange {
 
   constructor(public warnings: Warning[]) {
   }
 }
 
-export class ProductWarningsChange implements DomainEvent {
-
-  readonly name = ProductWarningsChange.name;
+export class ProductWarningsChange {
 
   constructor(public warnings: Warning[]) {
   }

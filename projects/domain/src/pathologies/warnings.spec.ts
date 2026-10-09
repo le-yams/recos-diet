@@ -30,7 +30,7 @@ describe('Warnings should', () => {
 
   beforeEach(() => {
     events = new TestDomainEventBus();
-    eventsCaptor = new EventsCaptor(NutritionistOpinionRequirementLevelChange.name, events);
+    eventsCaptor = new EventsCaptor(NutritionistOpinionRequirementLevelChange, events);
   });
 
   afterEach(() => {
@@ -105,7 +105,7 @@ describe('Warnings should', () => {
 
   beforeEach(() => {
     events = new TestDomainEventBus();
-    eventsCaptor = new EventsCaptor(PathologiesWarningsChange.name, events);
+    eventsCaptor = new EventsCaptor(PathologiesWarningsChange, events);
   });
 
   afterEach(() => {

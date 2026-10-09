@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Consumer, DomainEvent, DomainEventBus, Subscription} from '@recos-diet/domain';
+import {Consumer, DomainEvent, DomainEventBus, DomainEventType, Subscription} from '@recos-diet/domain';
 import {Verbose} from './utils';
 
 const EMPTY_SUBSCRIPTION: Subscription = {
@@ -96,11 +96,11 @@ export class DomainEvents implements DomainEventBus {
     this.bus.publish(event);
   }
 
-  public subscribe<T extends DomainEvent>(eventName: string, consumer: Consumer<T>): Subscription {
-    return this.bus.subscribe(consumer as Consumer<DomainEvent>, forEvent(eventName));
+  public subscribe<T extends DomainEvent>(eventType: DomainEventType<T>, consumer: Consumer<T>): Subscription {
+    return this.bus.subscribe(consumer as Consumer<DomainEvent>, forEvent(eventType));
   }
 }
 
-function forEvent(eventName: string): Predicate<DomainEvent> {
-  return evt => evt.name === eventName;
+function forEvent(eventType: DomainEventType<DomainEvent>): Predicate<DomainEvent> {
+  return evt => evt instanceof eventType;
 }

@@ -32,7 +32,7 @@ export class MicronutrimentsService {
     const domainService = inject(DomainService);
 
     this.nutrimentRecommendations.next(domainService.micronutriments.getSummarizedRecommendations());
-    domainService.EventBus().subscribe<SummarizedMicronutrimentRecommendationsUpdatedEvent>(SummarizedMicronutrimentRecommendationsUpdatedEvent.name,
+    domainService.EventBus().subscribe(SummarizedMicronutrimentRecommendationsUpdatedEvent,
       evt => this.nutrimentRecommendations.next(evt.recommendations));
   }
 }

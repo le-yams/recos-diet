@@ -25,7 +25,7 @@ export class Pathologies {
   selectedPathologies: Pathology[] = [];
 
   constructor(private events: DomainEventBus) {
-    this.events.subscribe<PatientInfoUpdatedEvent>(PatientInfoUpdatedEvent.name,
+    this.events.subscribe(PatientInfoUpdatedEvent,
       evt => this.updateObesityPathologySelection(evt.patient));
   }
 

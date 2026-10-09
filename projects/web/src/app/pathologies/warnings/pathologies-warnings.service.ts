@@ -45,9 +45,9 @@ export class PathologiesWarningsService {
     this.warnings = new BehaviorSubject<Warning[]>(domainService.warnings.getPathologiesWarnings());
     this.warnings$ = this.warnings.asObservable();
 
-    domainService.EventBus().subscribe<NutritionistOpinionRequirementLevelChange>(NutritionistOpinionRequirementLevelChange.name,
+    domainService.EventBus().subscribe(NutritionistOpinionRequirementLevelChange,
       evt => this.nutritionistOpinionRequirementLevel.next(evt.nutritionistOpinionRequirementLevel));
-    domainService.EventBus().subscribe<PathologiesWarningsChange>(PathologiesWarningsChange.name,
+    domainService.EventBus().subscribe(PathologiesWarningsChange,
       evt => this.warnings.next(evt.warnings));
   }
 }

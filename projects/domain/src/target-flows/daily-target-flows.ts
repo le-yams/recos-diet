@@ -107,9 +107,9 @@ export class DailyTargetFlows {
   private targetFlows: DailyTargetFlow[] = [];
 
   constructor(private events: DomainEventBus) {
-    this.events.subscribe<PatientInfoUpdatedEvent>(PatientInfoUpdatedEvent.name, evt => this.patientInfoUpdated(evt.patient));
-    this.events.subscribe<SelectedProductNutritionInfoEvent>(SelectedProductNutritionInfoEvent.name, evt => this.nutritionInfoUpdated(evt.selectedProductProductNutritionInfo));
-    this.events.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name, evt => this.selectedPathologiesUpdated(evt.pathologies));
+    this.events.subscribe(PatientInfoUpdatedEvent, evt => this.patientInfoUpdated(evt.patient));
+    this.events.subscribe(SelectedProductNutritionInfoEvent, evt => this.nutritionInfoUpdated(evt.selectedProductProductNutritionInfo));
+    this.events.subscribe(SelectedPathologiesEvent, evt => this.selectedPathologiesUpdated(evt.pathologies));
   }
 
   getTargetFlows() {

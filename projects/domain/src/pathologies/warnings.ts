@@ -44,9 +44,9 @@ export class Warnings {
 
   constructor(private repo: WarningsRead, private events: DomainEventBus) {
     this.subscriptions = [
-      this.events.subscribe<SelectedPathologiesEvent>(SelectedPathologiesEvent.name,
+      this.events.subscribe(SelectedPathologiesEvent,
         evt => this.selectedPathologiesChange(evt.pathologies)),
-      this.events.subscribe<SelectedProductEvent>(SelectedProductEvent.name,
+      this.events.subscribe(SelectedProductEvent,
         evt => this.selectedProductChange(evt.selectedProduct))
     ];
   }
