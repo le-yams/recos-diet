@@ -1,0 +1,52 @@
+
+## poids ajusté 
+
+le commit 49a98b7fbe63c39eccc975631ea0262a6d853e37 a modifier la formule de calcul ainsi que la condition de prise en compte du poids ajusté (isOverweigth) avec imc > 30 au lieu de > 25. Il faut revenir en arrière sur la condition isOverweight avec imc > 25 (on garde la nouvelle formule par contre)
+
+## maquette
+variante 1 retenue
+
+* renommer les phases :
+ 1. "Défaillance stabilisée"
+ 2. "Phase aiguë tardive"
+ 3. "Réabilitation"
+
+* phase 1 : la cible énergétique "< 10kcal" devient "= 6kcal" (dans la frise et pour le calcul du débit cible)
+ 
+
+### Nouveau concept : produits d'apport énergétique non nutritionnels
+
+Dans les faits, le patient se voit parfois administrer des produits non nutritionnels qui amène néanmoins de l'énergie.
+Il faudrait donc que l'utilisateur puisse les indiquer et qu'ils soient pris en compte dans les calculs de débits cible (énergie amené par les produits à enlever de la cible énergétique). A noter que la prise en compte de cet apport énergétique ne doit PAS être fait pour la phase 1.
+
+Il y a 3 produits possibles dont 1 ayant lui-même 3 variantes :
+
+ * "Propofol" (apport 1.1 kcal/mL)
+ * "Glucosé" 
+    - "2.5%" (apport 100kcal/L)
+    - "5%" (apport 200kcal/L)
+    - "10% / Polyionique" (apport 400kcal/L)
+ * "CVVH citrate" (apport 200kcal/j)
+
+
+Propofol et glucosés : débit en mL/H qui devra être renseigner par l'utilisateur. Le citrate est considéré comme un apport fixe (pas de débit à renseigner).
+
+Plusieurs produits peuvent être sélectionnées simultannément(mais une seule variante de glucosé à la fois).
+
+Il faudrait donc prévoir un encart au dessus de la frise. Y inclure la somme des apports énergétique non nutritionnels calculés en kcal/kg/j (affichage à 0.1 prêt).
+
+Voici une proposition de UI :
+
+3 lignes (une pour chaque produit) avec une case à coché au début (permet à l'utilisateur d'indiquer si le produit est est administré au patient). Produits non sélectionné par défaut. Pour le glucosé une liste déroulante permet de sélectionner la variante. Pour le propofol et le glucosé, si sélectionné, un champ de saisi pour le débit administré s'affiche (obligatoire, entier ou décimal à 1 chiffre après la virgule). Une dernière ligne affiche (uniquement si au moins un produit est sélectionné) la somme des apports énergétique non nutritionnels calculés.
+
+
+[ ] Propofol  ___
+[ ] Glucosé <variante> ___
+[ ] CVVH citrate
+apports énergétique non nutritionnels : xx kcal/kg/j
+
+
+
+Dans les phases (phase 1 exclue donc), pour chaque débit cible calculé et affiché, si un apport énergétique non nutritionnel est utilisé et intégré au calcul du débit cible, ajouté la mention "corrigé" au libellé "Débit cible" (affiché au dessus du débit cible).
+
+
