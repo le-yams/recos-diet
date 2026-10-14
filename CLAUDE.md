@@ -155,18 +155,20 @@ Actions (`.github/workflows/`):
   `GITHUB_TOKEN`, `fail-on-error: false`), which comments the coverage on the pull request; the `master` builds are
   the base of the comparison. `release.yml` only grants `contents: read` and a called workflow cannot ask for more:
   anything in `verify.yml` that needs `pull-requests: write` or `checks: write` must also be granted by `release.yml`.
-- `release.yml`: on every push to `master`, verify, deploy to staging, then wait for an approval on the `release`
-  environment (required reviewer, no secrets) before semantic-release, a rebuild on the release commit and the
-  production deploy. Production is deployed even when no version is published, so a `chore:` data edit still
-  reaches it. The release job fails if `master` moved on since its run: approve the latest run, or start one with
-  *Run workflow* (`workflow_dispatch`), for instance when the last commit triggered no workflow.
-- Staging version: the `staging-version` job of `release.yml` runs a semantic-release dry-run against the clone itself
-  (`--repository-url .`: semantic-release checks that it may push even in dry-run, and the read-only `GITHUB_TOKEN`
-  may not push to GitHub), with `--plugins` limited to commit-analyzer and `@semantic-release/exec`, which writes the
-  next version. `verify.yml` receives it as its `version` input and sets it with `npm pkg set` (`npm version` drops
-  the `+` build metadata) before building: `2.4.0-rc.12+a1b2c3d` (next release, commits since the last one, commit),
-  or `2.3.1+a1b2c3d` when no release is due. Pull requests and the production build keep the `package.json` version.
-  `--plugins` replaces the plugins of `.releaserc`: a `releaseRules` added there must be repeated in that job.
+- `release.yml`: on every push to `master`, `googleapis/release-please-action` opens or updates the release pull
+  request, then the run verifies and deploys to staging. Merging the release pull request is the approval: its push
+  makes release-please publish the release, and the same run deploys its build to production (backed up first). Only
+  a release reaches production. *Run workflow* (`workflow_dispatch`) starts a run on the current `master` without
+  deploying production; to deploy a release again, re-run the jobs of its run.
+- Build version: the `release-please` job of `release.yml` computes it and `verify.yml` receives it as its `version`
+  input, set with `npm pkg set` (`npm version` drops the `+` build metadata) before building. `2.4.0-rc.12+a1b2c3d`:
+  the version of the open release pull request (label `autorelease: pending`), the commits since the last release tag
+  and the commit. `2.3.1+a1b2c3d` when no release is due, `2.4.0` on the push that publishes it: that build goes to
+  staging, then to production. Pull requests build the `package.json` version.
+- `master` is protected by the `default branch` ruleset: pull request required, `Lint` and `Build and test` required.
+  The release pull request is created with the `GITHUB_TOKEN`, and events of that token start no workflow: its checks
+  never report, so it is merged bypassing the ruleset. Release-please needs the repository setting *Allow GitHub
+  Actions to create and approve pull requests* (Settings → Actions → General).
 - `deploy.yml` (reusable): lftp mirror of the build over SFTP. The `staging` and `production` environments hold the
   `SFTP_HOST`/`SFTP_USERNAME`/`SFTP_PASSWORD` secrets and the `SFTP_DEST` variable; production is backed up as a
   run artifact (30 days) before each deploy. `.htaccess` in the build output provides the SPA rewrite.
@@ -181,12 +183,15 @@ Actions (`.github/workflows/`):
 
 Releases and versions:
 
-- **Conventional commits are required**: `feat:` / `fix:` (optionally scoped, e.g. `fix(products): ...`) drive
-  semantic-release, which bumps `package.json`, rewrites `CHANGELOG.md`, commits `chore(release): x.y.z
-  [skip ci]`, tags `x.y.z` and creates the GitHub release. Data-only edits have historically used `fix:` or
-  `chore:` depending on whether users should see a release.
-- `.releaserc` keeps the `${version}` tag format of the existing tags and disables the GitHub plugin's comments and
-  labels on issues and its failure issue. The plugins are not dependencies: `release.yml` pins their versions.
+- **Conventional commits are required**: `feat:` / `fix:` / `perf:` (optionally scoped, e.g. `fix(products): ...`)
+  call for a release; the other types (`chore:`, `docs:`, `ci:`, `refactor:`...) are hidden from the changelog and
+  release nothing. Data edits are `fix(data):` commits, so they reach production and `AppUpdater` prompts the open
+  tabs to reload (the data is only read at startup).
+- `.release/release-please-config.json` and `.release/release-please-manifest.json` (current version) configure
+  release-please: `node` release type (`package.json`, `package-lock.json`, `CHANGELOG.md`), tags `x.y.z` without
+  `v` like the existing ones, release pull request titled `chore(release): x.y.z`. `bootstrap-sha` (the commit of
+  tag `2.3.1`, the last semantic-release release) only serves while no GitHub release exists. Up to 2.3.1 the
+  changelog was written by semantic-release, which `.releaserc` configured.
 - Version flow: `environment.prod.ts` imports the `package.json` version at build time (only that value ends up
   in the bundle); `version.json` is generated, not tracked, by `generate:version`, which the npm `prebuild` hook
   runs (locally and in CI). In production `AppUpdater` polls `/version.json` and prompts a reload when it differs

@@ -1,3 +1,5 @@
+# Changelog
+
 ## [2.3.1](https://github.com/recos-diet/recos-diet/compare/2.3.0...2.3.1) (2025-12-21)
 
 
