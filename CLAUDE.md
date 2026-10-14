@@ -19,12 +19,11 @@ Angular 22 workspace with two projects declared in `angular.json`:
   `@recos-diet/domain` alias, which `tsconfig.json` maps to the sources (`projects/domain/src/public-api.ts`).
 
 Consequence: the web app compiles the domain sources itself. No domain build is needed before `npm start` or the
-web tests, and `ng serve` reloads on domain edits. Since the domain has no build target, CI's `ng-build` job
-overrides the template script to skip its library build step (`run_ng_build_for_libraries`).
+web tests, and `ng serve` reloads on domain edits. CI builds `web` only.
 
 ## Commands
 
-Node 24 (`.nvmrc`, same as the CI image `trion/ng-cli-karma`); `engines` accepts what Angular 22 supports
+Node 24 (`.nvmrc`, which CI reads through `actions/setup-node`); `engines` accepts what Angular 22 supports
 (`^22.22.3 || ^24.15.0 || >=26.0.0`) and `.npmrc` sets `engine-strict`, so `npm ci` fails on any other version.
 
 ```bash
@@ -62,7 +61,7 @@ builder, domain compiled from its sources): 951.27 kB initial (main 869.33 kB, s
 34.59 kB). A warning means the bundle drifted: find out why before raising the threshold.
 
 The web app builds with `@angular/build` (esbuild, Vite dev server); `outputPath.browser` is `""` so the build
-lands directly in `dist/web`, which CI uploads as is (with `.htaccess` and `version.json` at its root).
+lands directly in `dist/web`, which the deploy uploads as is (with `.htaccess` and `version.json` at its root).
 
 ## Domain architecture (projects/domain/src)
 
@@ -147,15 +146,36 @@ value silently breaks data matching; change both sides together.
 
 ## Versioning, release and deploy
 
-- GitLab CI (`.gitlab-ci.yml`) uses the to-be-continuous Angular and semantic-release templates plus an lftp
-  upload of `dist/web`. `.htaccess` in the build output provides the SPA rewrite.
+The repository is https://github.com/recos-diet/recos-diet (moved from GitLab on 2026-10-14). CI runs on GitHub
+Actions (`.github/workflows/`):
+
+- `verify.yml`: lint, build (initial budget included), domain and web tests in ChromeHeadless, and `npm audit
+  --omit=dev --audit-level=high`, blocking on ready pull requests only. Runs on pull requests; `release.yml` calls it.
+- `release.yml`: on every push to `master`, verify, deploy to staging, then wait for an approval on the `release`
+  environment (required reviewer, no secrets) before semantic-release, a rebuild on the release commit and the
+  production deploy. Production is deployed even when no version is published, so a `chore:` data edit still
+  reaches it. The release job fails if `master` moved on since its run: approve the latest run, or start one with
+  *Run workflow* (`workflow_dispatch`), for instance when the last commit triggered no workflow.
+- `deploy.yml` (reusable): lftp mirror of the build over SFTP. The `staging` and `production` environments hold the
+  `SFTP_HOST`/`SFTP_USERNAME`/`SFTP_PASSWORD` secrets and the `SFTP_DEST` variable; production is backed up as a
+  run artifact (30 days) before each deploy. `.htaccess` in the build output provides the SPA rewrite.
+- A commit message containing a skip marker such as `[skip ci]`, even quoted in its body, cancels the push and pull
+  request workflows of that commit.
+
+Releases and versions:
+
 - **Conventional commits are required**: `feat:` / `fix:` (optionally scoped, e.g. `fix(products): ...`) drive
-  semantic-release, which bumps `package.json`, rewrites `CHANGELOG.md` and commits `chore(release): x.y.z
-  [skip ci]`. Data-only edits have historically used `fix:` or `chore:` depending on whether users should see a
-  release.
+  semantic-release, which bumps `package.json`, rewrites `CHANGELOG.md`, commits `chore(release): x.y.z
+  [skip ci]`, tags `x.y.z` and creates the GitHub release. Data-only edits have historically used `fix:` or
+  `chore:` depending on whether users should see a release.
+- `.releaserc` keeps the `${version}` tag format of the existing tags and disables the GitHub plugin's comments and
+  labels on issues and its failure issue. The plugins are not dependencies: `release.yml` pins their versions.
 - Version flow: `environment.prod.ts` imports the `package.json` version at build time (only that value ends up
-  in the bundle); `version.json` is generated, not tracked, by `generate:version`: the npm `prebuild` hook runs it
-  locally, the `ng-build` job's `before_script` in CI (the template calls `ng` directly). In production
-  `AppUpdater` polls `/version.json` and prompts a reload when it differs from the running build. Dev builds
-  report `SNAPSHOT-<timestamp>`.
+  in the bundle); `version.json` is generated, not tracked, by `generate:version`, which the npm `prebuild` hook
+  runs (locally and in CI). In production `AppUpdater` polls `/version.json` and prompts a reload when it differs
+  from the running build. Dev builds report `SNAPSHOT-<timestamp>`.
 - Default branch is `master`; feature work happens on `feat/*` branches.
+
+Issues: #1 to #86 were imported from GitLab with their numbers, so `#N` references in the history still match.
+Issue types (Bug, Feature, Refactor) and the organization fields `Effort` and `Gain` replace GitLab's scoped labels;
+the `audit-2026-10` label marks the issues of `docs/pistes-amelioration-2026-10-03.md`.
