@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  /* Layout : une colonne de lecture (max 1000px) ; simulation et hypothèses en tête, puis deux
-     variantes de la carte « Débits cibles » (frise avec ou sans bornes des recommandations).
+  /* Layout : une colonne de lecture (max 1000px) ; simulation en tête, puis la carte « Débits cibles »
+     (variante 1 retenue : bornes des recommandations dans la frise), puis les points à valider.
      Thème unique repris de l'application : Material prebuilt « deeppurple-amber », Roboto, et les
      couleurs déjà utilisées par flows-strip / styles.css (rose, jaune, vert, bleu info). */
   :root {
@@ -19,11 +19,12 @@
     --line: rgba(0, 0, 0, .12);
     --accent: #673ab7;          /* primaire deep purple */
     --accent-soft: #ede7f6;
-    --p1: #721c24;  --p1-soft: #f8d7da;   /* état de choc : rose « phase aiguë » */
-    --p2: #856404;  --p2-soft: #fff3cd;   /* stabilisation : jaune « level_medium » */
+    --p1: #721c24;  --p1-soft: #f8d7da;   /* défaillance stabilisée : rose « phase aiguë » */
+    --p2: #856404;  --p2-soft: #fff3cd;   /* phase aiguë tardive : jaune « level_medium » */
     --p3: #155724;  --p3-soft: #d4edda;   /* réhabilitation : vert « phase de réhabilitation » */
     --ok: #155724;  --ok-soft: #d4edda;
     --warn: #856404; --warn-soft: #fff3cd;
+    --error: #b00020;
     --info: #0c5460; --info-soft: #d1ecf1; --info-line: #bee5eb;
     --font-body: Roboto, "Helvetica Neue", sans-serif;
     --shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
@@ -32,15 +33,16 @@
 
   body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; margin: 0; }
   .wrap { max-width: 1000px; margin: 0 auto; padding-block: 24px 48px; padding-inline: 16px; display: grid; gap: 28px; }
+  .wrap > *, .card-body > * { min-width: 0; }
   h1 { font-size: 1.6rem; font-weight: 500; margin: 0 0 4px; text-wrap: balance; }
   h2 { font-size: 1.15rem; font-weight: 500; margin: 0; text-wrap: balance; }
-  h2 small { font-weight: 400; color: var(--muted); font-size: .85rem; margin-left: .5em; }
   p { margin: 0; max-width: 72ch; }
   .lead { color: var(--muted); }
   .eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: var(--muted); font-weight: 500; }
   .num { font-variant-numeric: tabular-nums; }
   .section-head { display: grid; gap: 4px; }
-  button { font: inherit; }
+  button, input, select { font: inherit; }
+  [hidden] { display: none !important; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   /* Simulation (joue le rôle du volet gauche de l'app) */
@@ -48,30 +50,48 @@
   .sim-row { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: end; }
   .field { display: grid; gap: 4px; min-width: 0; }
   .field > label { font-size: .8rem; color: var(--muted); }
-  .field input[type=number], .field select { font: inherit; color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 6px 10px; min-width: 0; }
+  .field input[type=number], .field select { color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 6px 10px; min-width: 0; }
   .field input[type=number] { width: 7em; }
   .field select { max-width: 100%; }
   .check { display: inline-flex; align-items: center; gap: 8px; padding-block: 7px; cursor: pointer; }
-  .check input { width: 18px; height: 18px; accent-color: var(--accent); margin: 0; }
+  .check input { width: 18px; height: 18px; accent-color: var(--accent); margin: 0; flex: none; }
   .sim-note { font-size: .85rem; color: var(--muted); }
   .sim-note strong { color: var(--fg); font-weight: 500; }
 
   .hyp { background: var(--accent-soft); border-radius: 4px; padding: 12px 16px; font-size: .88rem; display: grid; gap: 4px; }
-  .hyp ul, .notes ul { margin: 0; padding-left: 1.2em; }
-  .notes { font-size: .88rem; color: var(--muted); max-width: 80ch; }
+  .hyp ul, .hyp ol { margin: 0; padding-left: 1.4em; display: grid; gap: 2px; }
+  .hyp.todo { background: var(--card); box-shadow: inset 0 0 0 1px var(--accent); }
 
   /* Carte « Débits cibles » telle qu'elle apparaît dans l'app */
   .card { background: var(--card); border-radius: 4px; box-shadow: var(--shadow); }
   .card-title { padding: 16px; font-weight: 500; font-size: 1.25rem; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px; }
   .card-title svg { width: 18px; height: 18px; fill: currentColor; }
-  .card-body { padding: 0 16px 16px; display: grid; gap: 16px; }
+  .card-body { padding: 16px; display: grid; gap: 16px; }
   .p1 { --pc: var(--p1); --pc-soft: var(--p1-soft); }
   .p2 { --pc: var(--p2); --pc-soft: var(--p2-soft); }
   .p3 { --pc: var(--p3); --pc-soft: var(--p3-soft); }
   .rank { width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; font-size: .78rem; font-weight: 500; color: var(--card); background: var(--pc); flex: none; }
 
+  /* Encart des apports énergétiques non nutritionnels, au-dessus de la frise */
+  .nn { border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px 12px; display: grid; gap: 2px; }
+  .nn-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin-bottom: 4px; }
+  .nn-head .hint { font-size: .82rem; color: var(--muted); }
+  .nn-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; min-height: 40px; }
+  .nn-row .check { min-width: 8.5em; }
+  .nn-row select, .nn-row .flow-in input { color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 4px 8px; }
+  .flow-in { display: inline-flex; align-items: center; gap: 6px; }
+  .flow-in input { width: 5.5em; text-align: right; font-variant-numeric: tabular-nums; }
+  .flow-in .u { color: var(--muted); font-size: .9rem; }
+  .flow-in.invalid input { border-color: var(--error); box-shadow: inset 0 0 0 1px var(--error); }
+  .nn-row .err { color: var(--error); font-size: .8rem; }
+  .nn-row .contrib { margin-left: auto; font-weight: 500; white-space: nowrap; }
+  .nn-row .contrib small { font-weight: 400; color: var(--muted); font-size: .82rem; margin-right: .4em; }
+  .nn-total { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; border-top: 1px solid var(--line); margin-top: 6px; padding-top: 8px; }
+  .nn-total b { font-weight: 500; font-size: 1.1rem; color: var(--accent); }
+  .nn-total .alt { color: var(--muted); font-size: .9rem; }
+
   /* Sélecteur de phase : frise cliquable (bandeau à chevrons de flows-strip) */
-  .strip { display: flex; gap: 4px; padding-top: 16px; }
+  .strip { display: flex; gap: 4px; }
   .chev { flex: 1 1 0; min-width: 0; border: 0; cursor: pointer; padding: 10px 22px 10px 26px; background: var(--pc-soft); color: var(--pc); display: flex; align-items: center; justify-content: center; gap: 8px; line-height: 1.25; text-align: left;
           clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%); }
   .chev:first-child { padding-left: 14px; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); border-radius: 4px 0 0 4px; }
@@ -110,6 +130,7 @@
   .step-head .name { font-weight: 500; margin-left: .2em; }
   .step-head .alt { color: var(--muted); font-size: .9rem; }
   .step-grid { display: grid; grid-template-columns: minmax(130px, auto) minmax(0, 1fr); gap: 12px 24px; align-items: center; background: var(--pc-soft); border-radius: 4px; padding: 12px 14px; }
+  .eyebrow .corr { color: var(--pc); }
   .flow { display: flex; align-items: baseline; gap: 6px; }
   .flow .v { font-size: 2rem; font-weight: 500; line-height: 1; color: var(--pc); }
   .flow .u { color: var(--muted); }
@@ -118,15 +139,22 @@
   .vals .lab { color: var(--muted); font-size: .78rem; }
   .vals .val { font-weight: 500; }
   .vals .val .tot { display: inline-block; font-weight: 400; color: var(--muted); margin-left: .35em; }
+  .vals .part { font-size: .78rem; color: var(--muted); }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; }
   .pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 3px 10px; font-size: .82rem; font-weight: 500; background: var(--card); }
   .pill.ok { color: var(--ok); box-shadow: inset 0 0 0 1px var(--ok); }
   .pill.warn { color: var(--warn); box-shadow: inset 0 0 0 1px var(--warn); }
   .pill svg { width: 14px; height: 14px; fill: currentColor; flex: none; }
   @media (max-width: 560px) {
     .step-grid { grid-template-columns: 1fr; }
-    .chev { font-size: .85rem; }
+    .chev { font-size: .85rem; padding-inline: 20px 18px; }
     .chev-bound { font-size: .75rem; }
-    .chev { padding-inline: 20px 18px; }
+    /* Téléphone : trois chevrons avec noms et bornes ne tiennent pas côte à côte. Les phases non
+       choisies se réduisent à leur numéro (nom gardé pour les lecteurs d'écran) ; la phase choisie
+       prend la place restante. */
+    .chev:not([aria-selected="true"]) { flex: none; }
+    .chev:not([aria-selected="true"]) .chev-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .nn { padding-inline: 10px; }
   }
 </style>
 </head>
@@ -135,9 +163,9 @@
 <div class="wrap">
 
   <header class="section-head">
-    <div class="eyebrow">Recos Diet · carte « Débits cibles » · maquette de travail, version 6</div>
+    <div class="eyebrow">Recos Diet · carte « Débits cibles » · maquette de travail, version 7</div>
     <h1>Débits cibles par phase</h1>
-    <p class="lead">Le médecin choisit la phase courante du patient ; seuls les paliers et la cible protéique de cette phase s'affichent. Les valeurs sont recalculées à partir du poids et du produit ci-dessous, avec un débit arrondi à l'entier le plus proche et des apports réels dérivés de ce débit arrondi.</p>
+    <p class="lead">Le médecin choisit la phase courante du patient ; seuls les paliers et la cible protéique de cette phase s'affichent. Les apports énergétiques non nutritionnels (propofol, glucosé, citrate) saisis dans l'encart sont déduits de la cible énergétique des phases 2 et 3. Les valeurs sont recalculées à partir du poids et du produit ci-dessous, avec un débit arrondi à l'entier le plus proche et des apports réels dérivés de ce débit arrondi.</p>
   </header>
 
   <section class="sim" aria-label="Simulation">
@@ -159,43 +187,75 @@
   </section>
 
   <section class="hyp">
-    <div class="eyebrow">Hypothèses et règles validées</div>
+    <div class="eyebrow">Nouveautés de la version 7 (retours du 13 octobre)</div>
     <ul>
-      <li>Le palier 30 kcal/kg/j (futur « patient chronique ») n'est pas représenté.</li>
-      <li>Règles validées : phase 1 à l'ouverture, phase conservée quand le poids ou le produit changent, poids ajusté (égal au poids réel si IMC ≤ 30), débit sur 24 h/24.</li>
-      <li>Protéines « dans la cible » si ≤ 0,4 (phase 1), ≤ 0,9 (phase 2), entre 1,2 et 1,5 g/kg/j (phase 3) : pas de borne basse en phases 1 et 2, pas de marge de tolérance (validé).</li>
-      <li>Anorexie mentale : seule la phase 1 est proposée, avec les mêmes chiffres que pour les autres patients (validé) ; la liste des produits est filtrée comme dans l'application.</li>
+      <li>Variante 1 retenue : la frise porte les bornes des recommandations (énergie et protéines par kg) ; l'en-tête de la phase donne la cible protéique en g/j.</li>
+      <li>Phases renommées : 1 « Défaillance stabilisée », 2 « Phase aiguë tardive », 3 « Réhabilitation ».</li>
+      <li>Phase 1 : cible énergétique de 6 kcal/kg/j (au lieu de ≤ 10), dans la frise et pour le calcul du débit.</li>
+      <li>Nouvel encart au-dessus de la frise : apports énergétiques non nutritionnels. Leur énergie est retirée de la cible énergétique de chaque palier, sauf en phase 1. Le débit ainsi calculé est libellé « Débit cible corrigé ».</li>
     </ul>
   </section>
 
-  <section class="section-head">
-    <h2>Sélection de la phase par la frise</h2>
-    <p class="lead">Le bandeau à chevrons actuel, déjà connu des utilisateurs, devient le sélecteur : il montre l'ordre des phases et la progression de l'une à l'autre ; la phase choisie est pleine, les autres restent pâles. Cliquez sur une phase pour l'afficher (ou flèches gauche/droite au clavier). Deux variantes à comparer :</p>
-  </section>
-
-  <section class="section-head">
-    <h2>Variante 1 <small>bornes des recommandations dans la frise</small></h2>
-    <p class="lead">Chaque chevron porte les bornes énergétiques et protéiques par kg (repère des médecins). L'en-tête de la phase donne la cible protéique en g/j (repère des diététiciens).</p>
-  </section>
-  <div class="card" id="variant-bounds">
+  <div class="card" id="target-flows">
     <div class="card-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-14a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Débits cibles</div>
     <div class="card-body">
+      <section class="nn" aria-labelledby="nn-title">
+        <div class="nn-head">
+          <span class="eyebrow" id="nn-title">Apports énergétiques non nutritionnels</span>
+          <span class="hint">déduits de la cible énergétique, sauf en phase 1</span>
+        </div>
+        <div class="nn-row">
+          <label class="check"><input type="checkbox" data-nn="propofol"> Propofol</label>
+          <span class="flow-in" data-flow-for="propofol" hidden><input type="text" inputmode="decimal" autocomplete="off" aria-label="Débit de propofol (mL/h)" required><span class="u">mL/h</span></span>
+          <span class="err" data-err-for="propofol" hidden></span>
+          <span class="contrib num" data-contrib-for="propofol"></span>
+        </div>
+        <div class="nn-row">
+          <label class="check"><input type="checkbox" data-nn="glucose"> Glucosé</label>
+          <select id="glucose-variant" aria-label="Variante de glucosé">
+            <option value="2.5" selected>2,5 %</option>
+            <option value="5">5 %</option>
+            <option value="10">10 % / Polyionique</option>
+          </select>
+          <span class="flow-in" data-flow-for="glucose" hidden><input type="text" inputmode="decimal" autocomplete="off" aria-label="Débit de glucosé (mL/h)" required><span class="u">mL/h</span></span>
+          <span class="err" data-err-for="glucose" hidden></span>
+          <span class="contrib num" data-contrib-for="glucose"></span>
+        </div>
+        <div class="nn-row">
+          <label class="check"><input type="checkbox" data-nn="citrate"> CVVH citrate</label>
+          <span class="contrib num" data-contrib-for="citrate"></span>
+        </div>
+        <div class="nn-total" id="nn-total" hidden></div>
+      </section>
       <div class="strip" role="tablist" aria-label="Phase du patient"></div>
       <div class="panel" role="tabpanel"></div>
     </div>
   </div>
 
-  <section class="section-head">
-    <h2>Variante 2 <small>frise sans bornes</small></h2>
-    <p class="lead">La frise ne porte que les noms des phases. L'en-tête de la phase donne la cible protéique en g/kg/j et en g/j.</p>
+  <section class="hyp todo">
+    <div class="eyebrow">Hypothèses de la maquette sur les apports non nutritionnels, à valider</div>
+    <ol>
+      <li><strong>Calcul</strong> : débit cible corrigé = arrondi((poids × cible du palier − apports non nutritionnels en kcal/j) ÷ densité du produit × 1000 ÷ 24). Propofol : débit × 24 × 1,1 ; glucosé : débit × 24 ÷ 1000 × 100, 200 ou 400 ; citrate : 200 kcal/j.</li>
+      <li><strong>Énergie réelle</strong> : produit + apports non nutritionnels, puisque c'est ce total qui est comparé à la cible. La ligne « dont x kcal/kg/j non nutritionnels » rappelle la part déduite. Les protéines ne viennent que du produit.</li>
+      <li><strong>Apports supérieurs à la cible</strong> : si les apports non nutritionnels atteignent ou dépassent la cible d'un palier, le débit affiché est 0 mL/h avec la mention « Cible énergétique déjà couverte ». Faut-il un autre comportement ?</li>
+      <li><strong>Phase 1</strong> : quand au moins un produit est coché, un rappel indique que ses apports ne sont pas déduits en phase 1.</li>
+      <li><strong>Saisie</strong> : choisir une variante de glucosé coche le produit. Tant que le débit manque ou est mal formé, le produit n'est pas compté et le champ est signalé en rouge.</li>
+      <li><strong>Affichage par ligne</strong> : chaque produit coché affiche son apport en kcal/j, le total en kcal/kg/j (à 0,1 près) et en kcal/j.</li>
+      <li><strong>Anorexie mentale</strong> : seule la phase 1 est proposée, donc les apports ne sont jamais déduits. L'encart reste affiché ; faut-il le masquer ?</li>
+      <li><strong>Conservation</strong> : les saisies restent en place quand on change de phase, de poids ou de produit.</li>
+    </ol>
   </section>
-  <div class="card" id="variant-plain">
-    <div class="card-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-14a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Débits cibles</div>
-    <div class="card-body">
-      <div class="strip" role="tablist" aria-label="Phase du patient"></div>
-      <div class="panel" role="tabpanel"></div>
-    </div>
-  </div>
+
+  <section class="hyp">
+    <div class="eyebrow">Règles validées</div>
+    <ul>
+      <li>Le palier 30 kcal/kg/j (futur « patient chronique ») n'est pas représenté.</li>
+      <li>Phase 1 à l'ouverture, phase conservée quand le poids ou le produit changent, poids ajusté (égal au poids réel si IMC ≤ 25), débit sur 24 h/24.</li>
+      <li>Protéines « dans la cible » si ≤ 0,4 (phase 1), ≤ 0,9 (phase 2), entre 1,2 et 1,5 g/kg/j (phase 3) : pas de borne basse en phases 1 et 2, pas de marge de tolérance.</li>
+      <li>Anorexie mentale : seule la phase 1 est proposée, avec les mêmes chiffres que pour les autres patients ; la liste des produits est filtrée comme dans l'application.</li>
+      <li>Apports non nutritionnels : produits non cochés par défaut, plusieurs produits à la fois mais une seule variante de glucosé (2,5 % par défaut), débit obligatoire pour le propofol et le glucosé (entier ou une décimale), pas de déduction en phase 1. Les apports propres à chaque produit (kcal/mL, kcal/L, apport fixe du citrate) ne sont pas affichés : ils ne servent qu'au calcul.</li>
+    </ul>
+  </section>
 
 </div>
 
@@ -221,12 +281,19 @@
     ["SMOFKABIVEN PROTEINE N10 (Réa)", "Parentérale", 889, 65.5, false]
   ];
 
-  // Phases transmises par l'équipe diététique. energyMin / proteinMin null = pas de borne basse.
+  // Phases transmises par l'équipe diététique. energyMin / proteinMin null = pas de borne basse ;
+  // energyMin = energyMax = cible unique. deductsNonNutritional : apports non nutritionnels retirés de la cible.
   var PHASES = [
-    { rank: 1, cls: "p1", name: "État de choc / Défaillance multiviscérale", energyMin: null, energyMax: 10, steps: [10], proteinMin: null, proteinMax: 0.4 },
-    { rank: 2, cls: "p2", name: "Stabilisation", energyMin: 10, energyMax: 20, steps: [10, 15, 20], proteinMin: null, proteinMax: 0.9 },
-    { rank: 3, cls: "p3", name: "Réhabilitation", energyMin: 20, energyMax: 25, steps: [20, 25], proteinMin: 1.2, proteinMax: 1.5 }
+    { rank: 1, cls: "p1", name: "Défaillance stabilisée", energyMin: 6, energyMax: 6, steps: [6], proteinMin: null, proteinMax: 0.4, deductsNonNutritional: false },
+    { rank: 2, cls: "p2", name: "Phase aiguë tardive", energyMin: 10, energyMax: 20, steps: [10, 15, 20], proteinMin: null, proteinMax: 0.9, deductsNonNutritional: true },
+    { rank: 3, cls: "p3", name: "Réhabilitation", energyMin: 20, energyMax: 25, steps: [20, 25], proteinMin: 1.2, proteinMax: 1.5, deductsNonNutritional: true }
   ];
+
+  // Variantes de glucosé (kcal/L), indexées par la valeur de la liste déroulante.
+  var GLUCOSE_KCAL_PER_L = { "2.5": 100, "5": 200, "10": 400 };
+  var PROPOFOL_KCAL_PER_ML = 1.1;
+  var CITRATE_KCAL_PER_DAY = 200;
+  var FLOW_PATTERN = /^\d+([.,]\d)?$/; // entier ou une décimale, virgule ou point
 
   var fmt0 = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
   var fmt1 = new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -235,20 +302,32 @@
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
 
   function range(min, max, f, unit) {
-    return (min == null ? "≤ " + trim(f(max)) : trim(f(min)) + " à " + trim(f(max))) + " " + unit;
+    var text;
+    if (min == null) text = "≤ " + trim(f(max));
+    else if (min === max) text = trim(f(max));
+    else text = trim(f(min)) + " à " + trim(f(max));
+    return text + " " + unit;
   }
 
-  function computeStep(phase, energyPerKg, weight, product) {
+  // nonNutritionalKcal : apports non nutritionnels déduits de la cible (0 en phase 1).
+  function computeStep(phase, energyPerKg, weight, product, nonNutritionalKcal) {
     var kcalPerL = product[2], gPerL = product[3];
-    var theo = weight * energyPerKg / kcalPerL * 1000 / 24;
+    var targetKcal = energyPerKg * weight;
+    var productKcalTarget = Math.max(targetKcal - nonNutritionalKcal, 0);
+    var theo = productKcalTarget / kcalPerL * 1000 / 24;
     var flow = Math.round(theo); // débit entier : seul débit applicable sur une pompe
     var liters = flow * 24 / 1000;
-    var energy = liters * kcalPerL, proteins = liters * gPerL;
+    var energy = liters * kcalPerL + nonNutritionalKcal, proteins = liters * gPerL;
     var status;
     if (phase.proteinMin != null && proteins < phase.proteinMin * weight) status = { ok: false, text: "Protéines sous la cible", delta: proteins - phase.proteinMin * weight };
     else if (proteins > phase.proteinMax * weight) status = { ok: false, text: "Protéines au-dessus de la cible", delta: proteins - phase.proteinMax * weight };
     else status = { ok: true, text: "Protéines dans la cible", delta: 0 };
-    return { target: energyPerKg, targetKcal: energyPerKg * weight, theo: theo, flow: flow, energy: energy, energyPerKg: energy / weight, proteins: proteins, proteinsPerKg: proteins / weight, status: status };
+    return {
+      target: energyPerKg, targetKcal: targetKcal, theo: theo, flow: flow,
+      corrected: nonNutritionalKcal > 0, covered: nonNutritionalKcal > 0 && nonNutritionalKcal >= targetKcal,
+      nonNutritionalPerKg: nonNutritionalKcal / weight,
+      energy: energy, energyPerKg: energy / weight, proteins: proteins, proteinsPerKg: proteins / weight, status: status
+    };
   }
 
   var ICON_OK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>';
@@ -259,19 +338,19 @@
     return '<span class="pill ' + (st.ok ? "ok" : "warn") + '">' + (st.ok ? ICON_OK : ICON_WARN) + st.text + d + "</span>";
   }
 
-  function renderPhase(phase, weight, product, boundsInStrip) {
-    var steps = phase.steps.map(function (e) { return computeStep(phase, e, weight, product); });
+  function renderPhase(phase, weight, product, nonNutritional) {
+    var deducted = phase.deductsNonNutritional ? nonNutritional.kcal : 0;
+    var steps = phase.steps.map(function (e) { return computeStep(phase, e, weight, product, deducted); });
     var proteinPerDay = range(phase.proteinMin == null ? null : phase.proteinMin * weight, phase.proteinMax * weight, fmt0.format, "g/j");
     var html = '<div class="phase-head ' + phase.cls + '">' +
       '<div class="phase-title"><span class="rank">' + phase.rank + "</span>" + esc(phase.name) + "</div>" +
       (steps.length > 1 ? '<div class="progress-hint">Réalimentation progressive</div>' : "") +
-      '<div class="prot"><span class="lab">Cible protéique de la phase</span>' +
-      (boundsInStrip
-        // g/kg/j déjà dans la frise : seul l'équivalent en g/j est repris ici
-        ? '<b class="num">' + proteinPerDay + "</b>"
-        : '<b class="num">' + range(phase.proteinMin, phase.proteinMax, fmt1.format, "g/kg/j") + '</b><span class="sep">soit</span><span class="num">' + proteinPerDay + "</span>") +
-      "</div>" +
+      // g/kg/j déjà dans la frise : seul l'équivalent en g/j est repris ici
+      '<div class="prot"><span class="lab">Cible protéique de la phase</span><b class="num">' + proteinPerDay + "</b></div>" +
       "</div>";
+    if (!phase.deductsNonNutritional && nonNutritional.selected) {
+      html += '<div class="info">Phase 1 : les apports énergétiques non nutritionnels ne sont pas déduits de la cible énergétique.</div>';
+    }
     html += '<div class="steps ' + phase.cls + '">';
     steps.forEach(function (s) {
       html += '<div class="step">' +
@@ -279,21 +358,88 @@
         '<div class="step-body">' +
         '<div class="step-head"><span>Cible énergétique <span class="name num">' + s.target + ' kcal/kg/j</span></span><span class="alt num">soit ' + fmt0.format(s.targetKcal) + " kcal/j</span></div>" +
         '<div class="step-grid">' +
-        '<div><div class="eyebrow">Débit cible</div><div class="flow"><span class="v num">' + s.flow + '</span><span class="u">mL/h</span></div><div class="theo">théorique ' + fmt2.format(s.theo) + " mL/h</div></div>" +
+        '<div><div class="eyebrow">Débit cible' + (s.corrected ? ' <span class="corr">corrigé</span>' : "") + '</div>' +
+        '<div class="flow"><span class="v num">' + s.flow + '</span><span class="u">mL/h</span></div><div class="theo">théorique ' + fmt2.format(s.theo) + " mL/h</div></div>" +
         '<div class="vals">' +
-        '<div><div class="lab">Énergie réelle</div><div class="val"><span class="num">' + fmt1.format(s.energyPerKg) + '</span> kcal/kg/j<span class="tot num">' + fmt0.format(s.energy) + " kcal/j</span></div></div>" +
+        '<div><div class="lab">Énergie réelle</div><div class="val"><span class="num">' + fmt1.format(s.energyPerKg) + '</span> kcal/kg/j<span class="tot num">' + fmt0.format(s.energy) + " kcal/j</span></div>" +
+        (s.corrected ? '<div class="part num">dont ' + fmt1.format(s.nonNutritionalPerKg) + " kcal/kg/j non nutritionnels</div>" : "") +
+        "</div>" +
         '<div><div class="lab">Protéines réelles</div><div class="val"><span class="num">' + fmt2.format(s.proteinsPerKg) + '</span> g/kg/j<span class="tot num">' + fmt1.format(s.proteins) + " g/j</span></div></div>" +
-        "<div>" + pill(s.status) + "</div>" +
+        '<div class="pills">' + (s.covered ? '<span class="pill warn">' + ICON_WARN + "Cible énergétique déjà couverte</span>" : "") + pill(s.status) + "</div>" +
         "</div></div></div></div>";
     });
     return html + "</div>";
   }
 
-  // Sélecteur de phase (frise) et phase sélectionnée.
-  var variants = [
-    { root: document.getElementById("variant-bounds"), list: ".strip", btnClass: "chev", bounds: true, selected: 1 },  // phase 1 par défaut
-    { root: document.getElementById("variant-plain"), list: ".strip", btnClass: "chev", bounds: false, selected: 1 }
-  ];
+  // --- Apports énergétiques non nutritionnels ---
+  var nnRoot = document.querySelector(".nn");
+  var glucoseVariantEl = document.getElementById("glucose-variant");
+  var touched = { propofol: false, glucose: false };
+
+  function checkbox(key) { return nnRoot.querySelector('[data-nn="' + key + '"]'); }
+  function flowBox(key) { return nnRoot.querySelector('[data-flow-for="' + key + '"]'); }
+  function flowInput(key) { return flowBox(key).querySelector("input"); }
+
+  // Débit saisi : { value } si valide, { error } sinon (vide ou mal formé).
+  function readFlow(key) {
+    var raw = flowInput(key).value.trim();
+    if (raw === "") return { error: "Débit obligatoire" };
+    if (!FLOW_PATTERN.test(raw)) return { error: "Entier ou une décimale (ex. 12,5)" };
+    return { value: parseFloat(raw.replace(",", ".")) };
+  }
+
+  // Lit l'encart : apport de chaque produit coché et complet, et somme en kcal/j.
+  function readNonNutritional() {
+    var result = { selected: false, kcal: 0, lines: {} };
+    if (checkbox("propofol").checked) {
+      result.selected = true;
+      var propofolFlow = readFlow("propofol");
+      result.lines.propofol = propofolFlow.error ? { error: propofolFlow.error } : { kcal: propofolFlow.value * 24 * PROPOFOL_KCAL_PER_ML };
+    }
+    if (checkbox("glucose").checked) {
+      result.selected = true;
+      var glucoseFlow = readFlow("glucose");
+      result.lines.glucose = glucoseFlow.error ? { error: glucoseFlow.error } : { kcal: glucoseFlow.value * 24 / 1000 * GLUCOSE_KCAL_PER_L[glucoseVariantEl.value] };
+    }
+    if (checkbox("citrate").checked) {
+      result.selected = true;
+      result.lines.citrate = { kcal: CITRATE_KCAL_PER_DAY };
+    }
+    Object.keys(result.lines).forEach(function (key) {
+      var line = result.lines[key];
+      if (line.kcal != null) result.kcal += line.kcal;
+    });
+    return result;
+  }
+
+  function renderNonNutritional(nonNutritional, weight) {
+    ["propofol", "glucose"].forEach(function (key) {
+      var selected = checkbox(key).checked;
+      var line = nonNutritional.lines[key];
+      var box = flowBox(key), errEl = nnRoot.querySelector('[data-err-for="' + key + '"]');
+      box.hidden = !selected;
+      var flowError = line && line.error;
+      var hasText = flowInput(key).value.trim() !== "";
+      var showFlowError = selected && flowError && (touched[key] || hasText);
+      box.classList.toggle("invalid", !!showFlowError);
+      flowInput(key).setAttribute("aria-invalid", showFlowError ? "true" : "false");
+      errEl.textContent = showFlowError ? flowError : "";
+      errEl.hidden = !showFlowError;
+    });
+
+    ["propofol", "glucose", "citrate"].forEach(function (key) {
+      var line = nonNutritional.lines[key];
+      var contribEl = nnRoot.querySelector('[data-contrib-for="' + key + '"]');
+      contribEl.innerHTML = line && line.kcal != null ? fmt0.format(line.kcal) + " kcal/j" : "";
+    });
+
+    var totalEl = document.getElementById("nn-total");
+    totalEl.hidden = !nonNutritional.selected;
+    totalEl.innerHTML = '<span>Total des apports non nutritionnels</span><b class="num">' + fmt1.format(nonNutritional.kcal / weight) + ' kcal/kg/j</b><span class="alt num">soit ' + fmt0.format(nonNutritional.kcal) + " kcal/j</span>";
+  }
+
+  // --- Frise et phase sélectionnée ---
+  var card = { root: document.getElementById("target-flows"), selected: 1 }; // phase 1 par défaut
 
   var weightEl = document.getElementById("weight"), productEl = document.getElementById("product"), anorexiaEl = document.getElementById("anorexia");
 
@@ -314,54 +460,78 @@
     return anorexiaEl.checked ? PHASES.filter(function (p) { return p.rank === 1; }) : PHASES;
   }
 
-  function renderVariant(v, weight, product) {
+  function renderCard(weight, product, nonNutritional) {
     var phases = availablePhases();
-    if (!phases.some(function (p) { return p.rank === v.selected; })) v.selected = phases[0].rank;
-    var list = v.root.querySelector(v.list), panel = v.root.querySelector(".panel");
+    if (!phases.some(function (p) { return p.rank === card.selected; })) card.selected = phases[0].rank;
+    var list = card.root.querySelector(".strip"), panel = card.root.querySelector(".panel");
     list.innerHTML = phases.map(function (p) {
-      var sel = p.rank === v.selected;
-      return '<button type="button" role="tab" class="' + v.btnClass + " " + p.cls + '" data-rank="' + p.rank + '" aria-selected="' + sel + '" tabindex="' + (sel ? 0 : -1) + '">' +
+      var sel = p.rank === card.selected;
+      return '<button type="button" role="tab" class="chev ' + p.cls + '" data-rank="' + p.rank + '" aria-selected="' + sel + '" tabindex="' + (sel ? 0 : -1) + '">' +
         '<span class="rank">' + p.rank + '</span><span class="chev-text"><span class="chev-name">' + esc(p.name) + "</span>" +
-        (v.bounds ?
-          '<span class="chev-bound">Énergie <span class="nw">' + range(p.energyMin, p.energyMax, fmt0.format, "kcal/kg/j") + "</span></span>" +
-          '<span class="chev-bound">Protéines <span class="nw">' + range(p.proteinMin, p.proteinMax, fmt1.format, "g/kg/j") + "</span></span>" : "") +
+        '<span class="chev-bound">Énergie <span class="nw">' + range(p.energyMin, p.energyMax, fmt0.format, "kcal/kg/j") + "</span></span>" +
+        '<span class="chev-bound">Protéines <span class="nw">' + range(p.proteinMin, p.proteinMax, fmt1.format, "g/kg/j") + "</span></span>" +
         "</span></button>";
     }).join("");
     var info = anorexiaEl.checked ? '<div class="info">Anorexie mentale : seule la phase 1 est proposée.</div>' : "";
-    var phase = PHASES.filter(function (p) { return p.rank === v.selected; })[0];
-    panel.innerHTML = info + renderPhase(phase, weight, product, v.bounds);
+    var phase = PHASES.filter(function (p) { return p.rank === card.selected; })[0];
+    panel.innerHTML = info + renderPhase(phase, weight, product, nonNutritional);
   }
 
   function currentInputs() {
     var weight = parseFloat(weightEl.value);
     if (!isFinite(weight) || weight <= 0) weight = 70;
-    return { weight: weight, product: PRODUCTS[parseInt(productEl.value, 10)] };
+    return { weight: weight, product: PRODUCTS[parseInt(productEl.value, 10)], nonNutritional: readNonNutritional() };
   }
 
   function update() {
     var c = currentInputs();
     document.getElementById("product-note").innerHTML = "<strong>" + esc(c.product[0]) + "</strong> : " + fmt0.format(c.product[2]) + " kcal/L, " + trim(fmt1.format(c.product[3])) + " g de protéines/L · poids ajusté " + fmt0.format(c.weight) + " kg · 24 h/24.";
-    variants.forEach(function (v) { renderVariant(v, c.weight, c.product); });
+    renderNonNutritional(c.nonNutritional, c.weight);
+    renderCard(c.weight, c.product, c.nonNutritional);
   }
 
-  variants.forEach(function (v) {
-    var list = v.root.querySelector(v.list);
-    list.addEventListener("click", function (e) {
-      var b = e.target.closest("[data-rank]");
-      if (!b) return;
-      v.selected = parseInt(b.dataset.rank, 10);
-      var c = currentInputs(); renderVariant(v, c.weight, c.product);
-      list.querySelector('[data-rank="' + v.selected + '"]').focus();
-    });
-    list.addEventListener("keydown", function (e) {
-      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-      var ranks = availablePhases().map(function (p) { return p.rank; });
-      var i = ranks.indexOf(v.selected) + (e.key === "ArrowRight" ? 1 : -1);
-      if (i < 0 || i >= ranks.length) return;
-      e.preventDefault();
-      v.selected = ranks[i];
-      var c = currentInputs(); renderVariant(v, c.weight, c.product);
-      list.querySelector('[data-rank="' + v.selected + '"]').focus();
+  function selectPhase(rank) {
+    card.selected = rank;
+    var c = currentInputs(); renderCard(c.weight, c.product, c.nonNutritional);
+    card.root.querySelector('.strip [data-rank="' + rank + '"]').focus();
+  }
+
+  var strip = card.root.querySelector(".strip");
+  strip.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-rank]");
+    if (b) selectPhase(parseInt(b.dataset.rank, 10));
+  });
+  strip.addEventListener("keydown", function (e) {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    var ranks = availablePhases().map(function (p) { return p.rank; });
+    var i = ranks.indexOf(card.selected) + (e.key === "ArrowRight" ? 1 : -1);
+    if (i < 0 || i >= ranks.length) return;
+    e.preventDefault();
+    selectPhase(ranks[i]);
+  });
+
+  nnRoot.addEventListener("change", function (e) {
+    var key = e.target.dataset.nn;
+    var justChecked = !!key && e.target.checked;
+    if (e.target === glucoseVariantEl) {
+      key = "glucose";
+      if (!checkbox("glucose").checked) {
+        checkbox("glucose").checked = true; // choisir une variante coche le glucosé
+        justChecked = true;
+      }
+    }
+    update();
+    // le débit est la saisie attendue juste après avoir coché ou changé de variante
+    var hasFlowField = key === "propofol" || key === "glucose";
+    if (hasFlowField && checkbox(key).checked && (justChecked || flowInput(key).value.trim() === "")) flowInput(key).focus();
+  });
+  nnRoot.addEventListener("input", function (e) { if (e.target.matches(".flow-in input")) update(); });
+  // Au blur, seul l'encart change (affichage de l'erreur) : re-rendre la frise ferait perdre le clic
+  // qui a provoqué le blur.
+  ["propofol", "glucose"].forEach(function (key) {
+    flowInput(key).addEventListener("blur", function () {
+      touched[key] = true;
+      var c = currentInputs(); renderNonNutritional(c.nonNutritional, c.weight);
     });
   });
 
