@@ -169,7 +169,7 @@ describe('Warnings should', () => {
 
   beforeEach(() => {
     events = new TestDomainEventBus();
-    eventsCaptor = new EventsCaptor(ProductWarningsChange.name, events);
+    eventsCaptor = new EventsCaptor(ProductWarningsChange, events);
   });
 
   afterEach(() => {
