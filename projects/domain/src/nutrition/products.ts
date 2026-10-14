@@ -110,17 +110,21 @@ export class Products {
     this.events.publish(new AvailableProductsEvent(products.map(product => product.name)));
   }
 
+  /**
+   * Keeps the selected product when no available product is compatible.
+   */
   private updateSelectedProductIfNecessary() {
     const nutritionType = this.selectedNutritionType;
+    let compatibleProduct: ProductInfo | undefined;
     if (this.selectedProductIsNotCompatibleWith(nutritionType)) {
       const lastSelectedProduct = this.lastSelectedProducts.get(nutritionType) ?? this.defaultProductFor(nutritionType);
-      const compatibleProduct = this.availableProducts.find(p => p.name === lastSelectedProduct) ?? this.availableProducts[0];
-      this.selectProduct(compatibleProduct.name);
+      compatibleProduct = this.availableProducts.find(p => p.name === lastSelectedProduct) ?? this.availableProducts[0];
     } else if (this.patientHasAnorexia && !this.selectedProduct?.compatibleWithAnorexia) {
-      const compatibleProduct = this.availableProducts.find(p => p.compatibleWithAnorexia)!;
-      this.updateSelectedProduct(compatibleProduct);
+      compatibleProduct = this.availableProducts.find(p => p.compatibleWithAnorexia);
     } else if (this.patientHasEerObesity && !this.selectedProduct?.compatibleWithEerObesity) {
-      const compatibleProduct = this.availableProducts.find(p => p.compatibleWithEerObesity)!;
+      compatibleProduct = this.availableProducts.find(p => p.compatibleWithEerObesity);
+    }
+    if (compatibleProduct) {
       this.updateSelectedProduct(compatibleProduct);
     }
   }

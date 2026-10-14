@@ -26,9 +26,11 @@ export class MemoryProductsRepository implements ProductsRepository, ProductNutr
   }
 
   private productEntity(name: string): ProductInfoEntity {
-    return this.productEntities()
-      .filter(product => product.name === name)
-      .pop()!;
+    const product = this.productEntities().find(entity => entity.name === name);
+    if (!product) {
+      throw new Error(`Unknown product: ${name}`);
+    }
+    return product;
   }
 
   read(): ProductInfo[] {
