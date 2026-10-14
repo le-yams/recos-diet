@@ -32,10 +32,28 @@ export class FooterComponent {
 
   appVersion;
 
+  appVersionUrl;
+
   constructor() {
     const appService = inject(AppService);
 
     this.appVersion = appService.getAppInfo().version;
+    this.appVersionUrl = versionPageUrl(this.appVersion);
   }
 
+}
+
+const REPOSITORY_URL = 'https://github.com/recos-diet/recos-diet';
+
+// GitHub page of a version: the release of 2.4.0, the commit of a staging build (2.4.0-rc.12+a1b2c3d or
+// 2.3.1+a1b2c3d, which have no release), the list of releases otherwise (SNAPSHOT-<timestamp> in development)
+export function versionPageUrl(version: string): string {
+  const [release, commit] = version.split('+');
+  if (commit) {
+    return `${REPOSITORY_URL}/commit/${commit}`;
+  }
+  if (/^\d+\.\d+\.\d+$/.test(release)) {
+    return `${REPOSITORY_URL}/releases/tag/${release}`;
+  }
+  return `${REPOSITORY_URL}/releases`;
 }
