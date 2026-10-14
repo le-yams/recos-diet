@@ -16,7 +16,7 @@
 
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {MATERIAL_ANIMATIONS} from '@angular/material/core';
-import {Patient} from '@recos-diet/domain';
+import {Bibliography, Patient} from '@recos-diet/domain';
 import {DomainService} from '../../domain.service';
 import {PatientFormComponent} from './patient-form.component';
 
@@ -29,7 +29,8 @@ describe('PatientFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PatientFormComponent],
       providers: [
-        {provide: DomainService, useValue: {patient}},
+        // bibliography: an overweight patient shows the adjusted weight and its references (app-biblio-links)
+        {provide: DomainService, useValue: {patient, bibliography: new Bibliography({read: () => []})}},
         {provide: MATERIAL_ANIMATIONS, useValue: {animationsDisabled: true}},
       ]
     }).compileComponents();
