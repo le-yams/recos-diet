@@ -1,0 +1,121 @@
+name: Release
+
+# Delivery of master: every push is verified and deployed to staging, then waits for an approval on the release
+# environment (required reviewer, no secret) to publish a release and deploy production.
+# A release is published when the commits call for one (feat, fix...); production is deployed in any case, so that a
+# chore: data edit reaches it without a new version.
+# semantic-release (.releaserc) bumps package.json, writes CHANGELOG.md, commits `chore(release): x.y.z [skip ci]`,
+# tags x.y.z and creates the GitHub release. Pushed with GITHUB_TOKEN, that commit triggers no workflow.
+# Run workflow (workflow_dispatch) starts a run on the current master: when its last commit is a [skip ci] one, which
+# has no run to approve, or to deploy production again.
+# No workflow-level concurrency: a run waiting for its approval would hold back the following pushes and their staging
+# deployment. Each deploy job locks its environment, and the release job checks that it releases master's head.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify
+    # dispatched from another branch: skipped. The release and production environments also only accept master
+    if: github.ref == 'refs/heads/master'
+    uses: ./.github/workflows/verify.yml
+
+  deploy-staging:
+    name: Staging
+    needs: verify
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: staging
+      artifact: web
+    secrets: inherit
+
+  release:
+    name: Release
+    needs: deploy-staging
+    runs-on: ubuntu-24.04
+    # approval gate, after staging so that it can be checked first. The reviewer is required by the release
+    # environment rather than production: the deploy job uses production, and each job referencing an environment
+    # with reviewers asks for its own approval
+    environment: release
+    permissions:
+      # release commit, tag and GitHub release; issues and pull requests are only touched if .releaserc turns the
+      # release comments back on
+      contents: write
+      issues: write
+      pull-requests: write
+    outputs:
+      sha: ${{ steps.released.outputs.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # semantic-release reads the whole history and the tags
+          fetch-depth: 0
+      # an approved older run would deploy an outdated commit: semantic-release refuses to release a branch behind its
+      # remote, but production is deployed even without a release
+      - name: Check that master is still at this commit
+        run: |
+          head=$(git ls-remote origin refs/heads/master | cut -f1)
+          if [ "$head" != "$GITHUB_SHA" ]; then
+            echo "::error::master moved on since this run ($GITHUB_SHA -> $head): approve the run of its last commit, or start one with Run workflow"
+            exit 1
+          fi
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      # commit-analyzer, release-notes-generator, npm and github come with semantic-release
+      - name: Publish the release, if any
+        run: >-
+          npx --yes
+          --package=semantic-release@25.0.9
+          --package=@semantic-release/changelog@7.0.0
+          --package=@semantic-release/git@11.0.1
+          semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # the release commit when one was published, the verified commit otherwise
+      - name: Get the commit to deploy
+        id: released
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: Build for production
+    needs: release
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.release.outputs.sha }}
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      # rebuilt rather than reusing the verified build: version.json and the bundle carry the released version.
+      # Tests already ran in the verify job on the same sources: replaying them after the release is published would
+      # only add failure points that leave it undeployed
+      - name: Build
+        run: npm run build
+      - name: Keep the build
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: web-production
+          path: dist/web
+          # .htaccess (SPA rewrite) is a hidden file
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy-production:
+    name: Production
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: production
+      artifact: web-production
+      backup: true
+    secrets: inherit

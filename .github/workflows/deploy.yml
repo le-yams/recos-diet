@@ -1,0 +1,92 @@
+name: Deploy
+
+# Uploads a build artifact to an environment over SFTP, with an lftp mirror.
+# Settings of each GitHub environment (staging, production):
+#   secrets   SFTP_HOST, SFTP_USERNAME, SFTP_PASSWORD
+#   variable  SFTP_DEST (remote directory)
+#   variable  SFTP_KNOWN_HOSTS, optional, may be set on the repository: `ssh-keyscan <host>` output, which pins the
+#             server key. Without it, the key is trusted on first use at every run.
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+      artifact:
+        description: Name of the build artifact to deploy
+        type: string
+        required: true
+      backup:
+        description: Download what the server serves before replacing it, kept 30 days as an artifact (rollback)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy ${{ inputs.environment }}
+    runs-on: ubuntu-24.04
+    environment: ${{ inputs.environment }}
+    concurrency:
+      group: deploy-${{ inputs.environment }}
+      cancel-in-progress: false
+    env:
+      SFTP_HOST: ${{ secrets.SFTP_HOST }}
+      SFTP_USERNAME: ${{ secrets.SFTP_USERNAME }}
+      # read by `open --env-password`: the password never appears on the lftp command line
+      LFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+      SFTP_DEST: ${{ vars.SFTP_DEST }}
+      SFTP_KNOWN_HOSTS: ${{ vars.SFTP_KNOWN_HOSTS }}
+      LFTP_SETTINGS: 'set net:timeout 5; set net:max-retries 2; set net:reconnect-interval-base 5;'
+    steps:
+      - name: Check the environment settings
+        run: |
+          missing=0
+          for name in SFTP_HOST SFTP_USERNAME LFTP_PASSWORD SFTP_DEST; do
+            if [ -z "${!name}" ]; then
+              echo "::error::${name/LFTP_PASSWORD/SFTP_PASSWORD} is not set on the ${{ inputs.environment }} environment"
+              missing=1
+            fi
+          done
+          exit $missing
+
+      - name: Download the build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: ${{ inputs.artifact }}
+          path: dist/web
+
+      - name: Install lftp
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+
+      - name: Trust the server key
+        run: |
+          mkdir -p ~/.ssh
+          if [ -n "$SFTP_KNOWN_HOSTS" ]; then
+            printf '%s\n' "$SFTP_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+          else
+            ssh-keyscan -H "$SFTP_HOST" >> ~/.ssh/known_hosts
+          fi
+
+      - name: Back up the deployed site
+        if: inputs.backup
+        run: lftp -c "$LFTP_SETTINGS open --env-password -u \"$SFTP_USERNAME\" \"sftp://$SFTP_HOST\"; mirror -vp \"$SFTP_DEST\" backup; bye"
+
+      - name: Keep the backup
+        if: inputs.backup
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ${{ inputs.environment }}-backup-${{ github.run_id }}
+          path: backup
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+
+      # -R upload, -e delete what the build no longer has, -n newer files only, -v verbose, -p keep the server
+      # permissions
+      - name: Deploy
+        run: lftp -c "$LFTP_SETTINGS open --env-password -u \"$SFTP_USERNAME\" \"sftp://$SFTP_HOST\"; mirror -Renvp dist/web/ \"$SFTP_DEST\"; bye"
