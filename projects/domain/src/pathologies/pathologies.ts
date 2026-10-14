@@ -22,6 +22,8 @@ import {Pathology} from './pathologies.data';
 
 export class Pathologies {
 
+  static readonly OBESITY_BMI = 30
+
   selectedPathologies: Pathology[] = [];
 
   constructor(private events: DomainEventBus) {
@@ -34,17 +36,32 @@ export class Pathologies {
     this.events.publish(new SelectedPathologiesEvent(pathologies));
   }
 
+  /**
+   * Publishes a single event: an intermediate selection holding both anorexia and obesity matches no product.
+   */
   private updateObesityPathologySelection(patient: PatientInfo) {
-    if (Pathologies.hasObesity(patient)) {
-      this.addPathologyToSelection(Pathology.OBESITE);
-      this.removePathologyFromSelection(Pathology.ANOREXIE_MENTALE);
-    } else {
-      this.removePathologyFromSelection(Pathology.OBESITE);
+    const pathologies = Pathologies.hasObesity(patient) ?
+      this.selectionWithObesity() :
+      this.selectedPathologies.filter(pathology => pathology !== Pathology.OBESITE);
+    if (Pathologies.differ(pathologies, this.selectedPathologies)) {
+      this.selectPathologies(pathologies);
     }
   }
 
+  private selectionWithObesity(): Pathology[] {
+    const pathologiesWithoutAnorexia = this.selectedPathologies.filter(pathology => pathology !== Pathology.ANOREXIE_MENTALE);
+    return this.isPathologySelected(Pathology.OBESITE) ?
+      pathologiesWithoutAnorexia :
+      [...pathologiesWithoutAnorexia, Pathology.OBESITE];
+  }
+
   private static hasObesity(patient: PatientInfo):boolean {
-    return patient.bmi >= 30;
+    return patient.bmi >= Pathologies.OBESITY_BMI;
+  }
+
+  private static differ(pathologies: Pathology[], otherPathologies: Pathology[]): boolean {
+    return pathologies.length !== otherPathologies.length ||
+      pathologies.some((pathology, index) => pathology !== otherPathologies[index]);
   }
 
   addPathologyToSelection(pathology: Pathology) {
