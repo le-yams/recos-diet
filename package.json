@@ -1,6 +1,10 @@
 {
   "name": "recos-diet",
   "version": "2.3.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/recos-diet/recos-diet.git"
+  },
   "scripts": {
     "ng": "ng",
     "generate:version": "node generate-version-asset.js",
