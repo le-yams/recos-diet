@@ -52,7 +52,7 @@ describe('PatientFormComponent', () => {
   }
 
   const errors = () => Array.from<HTMLElement>(fixture.nativeElement.querySelectorAll('mat-error'))
-    .map(e => e.textContent!.trim());
+    .map(e => (e.textContent ?? '').trim());
 
   it('should update patient size with valid values', async () => {
     await type('height', '180');
