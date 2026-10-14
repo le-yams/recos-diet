@@ -1,5 +1,39 @@
 # Changelog
 
+## [2.4.0](https://github.com/recos-diet/recos-diet/compare/2.3.1...2.4.0) (2026-10-14)
+
+
+### Features
+
+* **theme:** décorations saisonnières (Noël, Halloween, poisson d'avril) pilotées par assets/theme.json ([20be1be](https://github.com/recos-diet/recos-diet/commit/20be1be7c9d2149bb44b1128c18e25011fbe298b))
+
+
+### Bug Fixes
+
+* **about:** rétablir le bouton de don PayPal ([3ed593f](https://github.com/recos-diet/recos-diet/commit/3ed593fd4caeb46cc4ea0aaf61365eecaa0e20ff))
+* adjusted weight formula ([49a98b7](https://github.com/recos-diet/recos-diet/commit/49a98b7fbe63c39eccc975631ea0262a6d853e37))
+* christmas theme season ([5331106](https://github.com/recos-diet/recos-diet/commit/5331106973f69654e39e770baef06420e42cf2fb))
+* **disclaimer:** supprimer le débordement horizontal du bandeau ([81723a1](https://github.com/recos-diet/recos-diet/commit/81723a16d3028c7c96ab4c06cbe44c2c4513aace))
+* domain imports ([1444b7d](https://github.com/recos-diet/recos-diet/commit/1444b7d0a2a76b461c8b7d34ea0225c3336de83a))
+* **domain:** s'abonner aux événements par classe et non par nom de classe ([cda1267](https://github.com/recos-diet/recos-diet/commit/cda1267e97028ae9a7118be8fcf233297d4c08bb)), closes [#57](https://github.com/recos-diet/recos-diet/issues/57)
+* **footer:** pointer la version et le copyright vers le dépôt GitHub ([2b1296a](https://github.com/recos-diet/recos-diet/commit/2b1296a0f0c6b3039a14f1512ec6b4e692e7517d))
+* **layout:** afficher le menu en entier quand la page est courte ([0297f66](https://github.com/recos-diet/recos-diet/commit/0297f66d900111ea537963abc2d874e065de0a74))
+* min height and min weight ([6fbffbc](https://github.com/recos-diet/recos-diet/commit/6fbffbcc91b9bfb1f2037ae81421124a30cafb0b))
+* **patient:** appliquer le poids ajusté dès un IMC &gt; 25 ([5db304f](https://github.com/recos-diet/recos-diet/commit/5db304f1377a57f9c770f1fceae5f36c9786ee40))
+* **patient:** valider taille et poids avant propagation ([f70fce8](https://github.com/recos-diet/recos-diet/commit/f70fce821eca4cbd7ef2868f08e070141a16236e))
+* **products:** ne plus planter quand l'IMC atteint 30 avec Anorexie et EER ([4edda41](https://github.com/recos-diet/recos-diet/commit/4edda41760d181a7b65cd66aca7218703fc4e218)), closes [#45](https://github.com/recos-diet/recos-diet/issues/45)
+* **recos:** clé excludedClauses et exclusion B9/Zinc anorexie ([0ed1492](https://github.com/recos-diet/recos-diet/commit/0ed149217f3b80ba22c66c2cde14103ca0a3c065))
+* **routes:** rediriger une URL inconnue vers l'accueil ([46745be](https://github.com/recos-diet/recos-diet/commit/46745bee58c591d6f25d50ce7918cd6b5bb830f6)), closes [#70](https://github.com/recos-diet/recos-diet/issues/70)
+* **survey:** ne plus recharger l'iframe du sondage et charger survey.json une seule fois ([4a56c9e](https://github.com/recos-diet/recos-diet/commit/4a56c9ede4e8fdd8e8aef034608c77780178d93a)), closes [#60](https://github.com/recos-diet/recos-diet/issues/60)
+* **themes:** afficher le coin des panneaux dépliés au survol et au focus ([2b6c54d](https://github.com/recos-diet/recos-diet/commit/2b6c54d5ce888e4e5bc122296f4de97a03e3bee7))
+* **updater:** ne plus désactiver la détection de mise à jour après une erreur HTTP ([6325763](https://github.com/recos-diet/recos-diet/commit/6325763bf44b6a5a80ef24b523251bafc91fa053)), closes [#61](https://github.com/recos-diet/recos-diet/issues/61)
+* **warnings:** afficher les avertissements les plus graves en premier ([f00d5e0](https://github.com/recos-diet/recos-diet/commit/f00d5e0f640387fc2fb1544db8a035d656c23533)), closes [#51](https://github.com/recos-diet/recos-diet/issues/51)
+
+
+### Reverts
+
+* rollback daily target phases relevancy change ([c49aa9d](https://github.com/recos-diet/recos-diet/commit/c49aa9d0ad6f47033464418b86e389fd2b57cf95))
+
 ## [2.3.1](https://github.com/recos-diet/recos-diet/compare/2.3.0...2.3.1) (2025-12-21)
 
 
