@@ -40,11 +40,18 @@ $outer-components: ':is(mat-card, mat-expansion-panel):not(:is(mat-card, mat-exp
 }
 
 // In the top right corner of the components, within the padding of their header: the chevron of an expansion panel
-// starts 24px below the top edge and 24px away from the right edge, its description ends 48px away from it
+// starts 24px below the top edge and 24px away from the right edge, its description ends 48px away from it.
+// The header of an expansion panel is positioned (mat-focus-indicator) and gets the opaque background of the panel
+// when it is expanded and hovered or focused: the decoration goes above it, the component isolating that z-index.
 @mixin component-corner($image, $width, $height) {
+  #{$outer-components} {
+    isolation: isolate;
+  }
+
   #{$outer-components}::before {
     content: '';
     position: absolute;
+    z-index: 1;
     top: 0;
     right: 0;
     width: $width;
