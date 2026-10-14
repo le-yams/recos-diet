@@ -208,6 +208,66 @@ describe('Micronutriments', () => {
     ]);
   });
 
+  // the recommendations are built in each test: the helpers at the bottom of the file are not defined yet here
+  [
+    {case: 'shared one', sharedHasTerms: true},
+    {case: 'pathology one', sharedHasTerms: false},
+  ].forEach(param => {
+    it(`should keep the quantity of the ${param.case} when the other recommendation gives none`, () => {
+      // Given
+      const withTerms = recoWithAdministrationTerms('a', 7, 'unit1');
+      const withoutTerms = reco('a');
+      const enteraleRecommendationsRead = new TestRecosRead(
+        [param.sharedHasTerms ? withTerms : withoutTerms],
+        new Map([[Pathology.CIRRHOTIQUE, [param.sharedHasTerms ? withoutTerms : withTerms]]]));
+      recommendations = new Micronutriments({
+        enteraleRecommendationsRead: enteraleRecommendationsRead,
+        parenteraleRecommendationsRead: emptyRecoRead(),
+        exclusionsRead: new TestRecoEclusionsRead(),
+        nutritionType: NutritionType.ENTERALE,
+        pathologies: []
+      }, events);
+
+      // When
+      events.publish(new SelectedPathologiesEvent([Pathology.CIRRHOTIQUE]));
+
+      // Then
+      eventsCaptor.expectEventsCount(1);
+      const summarizedRecommendations = eventsCaptor.mapSingleEvent(
+        evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
+      expect(summarizedRecommendations).toEqual([
+        summarizedRecoWithAdministrationTerms('a', 7, 'unit1')
+      ]);
+    });
+  });
+
+  it('should keep the max quantity when a recommendation without quantity is merged in between', () => {
+    // Given
+    const enteraleRecommendationsRead = new TestRecosRead(
+      [recoWithAdministrationTerms('a', 7, 'unit1')], new Map([
+        [Pathology.CIRRHOTIQUE, [reco('a')]],
+        [Pathology.CVVHDF, [recoWithAdministrationTerms('a', 42, 'unit2')]]
+      ]));
+    recommendations = new Micronutriments({
+      enteraleRecommendationsRead: enteraleRecommendationsRead,
+      parenteraleRecommendationsRead: emptyRecoRead(),
+      exclusionsRead: new TestRecoEclusionsRead(),
+      nutritionType: NutritionType.ENTERALE,
+      pathologies: []
+    }, events);
+
+    // When
+    events.publish(new SelectedPathologiesEvent([Pathology.CIRRHOTIQUE, Pathology.CVVHDF]));
+
+    // Then
+    eventsCaptor.expectEventsCount(1);
+    const summarizedRecommendations = eventsCaptor.mapSingleEvent(
+      evt => evt.recommendations.map(reco => cloneSummarizedReco(reco))); // getting rid of returned reco internal methods preventing equal comparison
+    expect(summarizedRecommendations).toEqual([
+      summarizedRecoWithAdministrationTerms('a', 42, 'unit2')
+    ]);
+  });
+
   it('should remove excluded micronutriment', () => {
     // Given
     const enteraleRecommendationsRead = new TestRecosRead(
@@ -281,7 +341,7 @@ class TestRecosRead implements MicronutrimentRecommendationsRead {
   }
 
   pathologyRecommendations(pathology: Pathology): MicronutrimentRecommendation[] {
-    return this.pathosRecos.get(pathology)!;
+    return this.pathosRecos.get(pathology) ?? [];
   }
 
   sharedRecommendations(): MicronutrimentRecommendation[] {

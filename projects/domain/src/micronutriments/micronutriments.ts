@@ -41,7 +41,11 @@ export class AdministrationTerms implements Comparable<AdministrationTerms>{
     return this.quantity - other.quantity;
   }
 
-  merge(other: AdministrationTerms): AdministrationTerms {
+  // the highest quantity with its unit; these terms when the other recommendation gives none
+  merge(other?: AdministrationTerms): AdministrationTerms {
+    if (!other) {
+      return this;
+    }
     const max = maxOf(this, other);
     return new AdministrationTerms(max.quantity, max.unit);
   }
@@ -92,7 +96,8 @@ class MergeableMicronutrimentRecommendation implements SummarizedMicronutrimentR
       .filter(notIn(excludedClauses));
     return new MergeableMicronutrimentRecommendation({
       micronutriment: this.micronutriment,
-      administrationTerms: this.administrationTerms?.merge(other.administrationTerms!),
+      // the highest quantity of the recommendations that give one
+      administrationTerms: this.administrationTerms?.merge(other.administrationTerms) ?? other.administrationTerms,
       clauses: clauses,
       excludedClauses: excludedClauses,
       sources: [...new Set(this.sources.concat(other.sources))]
@@ -104,9 +109,10 @@ const byMicronutriment = function (reco1: SummarizedMicronutrimentRecommendation
   return reco1.micronutriment.localeCompare(reco2.micronutriment);
 };
 
+// a group of group().by(), so never empty
 const summarizeMicronutrimentRecommendations = function (micronutrimentRecos: MicronutrimentRecommendation[]) {
-  const firstRecommendation = micronutrimentRecos.shift()!;
-  return micronutrimentRecos.reduce((mergeableRecommendation: MergeableMicronutrimentRecommendation, nextRecommendation: MicronutrimentRecommendation) => {
+  const [firstRecommendation, ...otherRecommendations] = micronutrimentRecos;
+  return otherRecommendations.reduce((mergeableRecommendation: MergeableMicronutrimentRecommendation, nextRecommendation: MicronutrimentRecommendation) => {
     return mergeableRecommendation.merge(nextRecommendation);
   }, new MergeableMicronutrimentRecommendation(firstRecommendation));
 }
@@ -139,7 +145,8 @@ class Context implements MicronutrimentRecommendationsContext {
   readonly nutritionType: NutritionType;
   readonly pathologies: Pathology[];
 
-  private readonly repos: Map<NutritionType, MicronutrimentRecommendationsRead>;
+  // a Record rather than a Map: the compiler checks that every nutrition type has its repository
+  private readonly repos: Record<NutritionType, MicronutrimentRecommendationsRead>;
 
   constructor(context: MicronutrimentRecommendationsContext) {
     this.nutritionType = context.nutritionType;
@@ -147,14 +154,14 @@ class Context implements MicronutrimentRecommendationsContext {
     this.enteraleRecommendationsRead = context.enteraleRecommendationsRead;
     this.parenteraleRecommendationsRead = context.parenteraleRecommendationsRead;
     this.exclusionsRead = context.exclusionsRead;
-    this.repos = new Map<NutritionType, MicronutrimentRecommendationsRead>([
-      [NutritionType.ENTERALE, context.enteraleRecommendationsRead],
-      [NutritionType.PARENTERALE, context.parenteraleRecommendationsRead]
-    ]);
+    this.repos = {
+      [NutritionType.ENTERALE]: context.enteraleRecommendationsRead,
+      [NutritionType.PARENTERALE]: context.parenteraleRecommendationsRead
+    };
   }
 
   recommendationsGroupedByMicronutriment(): Map<string, MicronutrimentRecommendation[]> {
-    const repository = this.repos.get(this.nutritionType)!;
+    const repository = this.repos[this.nutritionType];
     const sharedRecos = repository.sharedRecommendations();
     const pathosRecos = this.pathologies.flatMap(
       pathology => repository.pathologyRecommendations(pathology));
