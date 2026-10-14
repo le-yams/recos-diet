@@ -151,6 +151,7 @@ Actions (`.github/workflows/`):
 
 - `verify.yml`: lint, build (initial budget included), domain and web tests in ChromeHeadless, and `npm audit
   --omit=dev --audit-level=high`, blocking on ready pull requests only. Runs on pull requests; `release.yml` calls it.
+  The Lint job lints each project in its own step: GitHub shows at most 10 warning annotations per step.
   It sends both Cobertura reports to Coveralls in one build (`coverallsapp/github-action`, authenticated by the
   `GITHUB_TOKEN`, `fail-on-error: false`), which comments the coverage on the pull request; the `master` builds are
   the base of the comparison. `release.yml` only grants `contents: read` and a called workflow cannot ask for more:

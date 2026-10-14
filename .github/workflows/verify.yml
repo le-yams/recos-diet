@@ -33,7 +33,12 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - run: npx ng lint
+      # one step per project: GitHub shows at most 10 warning annotations per step and drops the others silently
+      - name: Lint domain
+        run: npx ng lint domain
+      - name: Lint web
+        if: ${{ !cancelled() }}
+        run: npx ng lint web
 
   build-test:
     name: Build and test
