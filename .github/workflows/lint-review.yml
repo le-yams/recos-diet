@@ -1,0 +1,35 @@
+name: Lint review
+
+# ESLint findings on the lines a pull request adds or changes, posted as review comments. Not in verify.yml: commenting
+# needs pull-requests: write, and release.yml, which calls verify.yml, would have to grant it to every master run.
+# Never blocking: the Lint job of verify.yml stays the gate, and its annotations still list every finding
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: lint-review-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    name: Review lint
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      # eslint run directly (not ng lint) on the lintFilePatterns of angular.json, with the shared eslint.config.js.
+      # Default filter_mode (added): the findings of untouched lines stay out of the review
+      - uses: reviewdog/action-eslint@3ee2a450da17e060b9dfa4bffd53976906c6b2b0 # v1.36.1
+        with:
+          eslint_flags: projects/domain/src projects/web/src

@@ -170,6 +170,12 @@ Actions (`.github/workflows/`):
 - `deploy.yml` (reusable): lftp mirror of the build over SFTP. The `staging` and `production` environments hold the
   `SFTP_HOST`/`SFTP_USERNAME`/`SFTP_PASSWORD` secrets and the `SFTP_DEST` variable; production is backed up as a
   run artifact (30 days) before each deploy. `.htaccess` in the build output provides the SPA rewrite.
+- `lint-review.yml`: on pull requests only, `reviewdog/action-eslint` runs `eslint` (not `ng lint`) on
+  `projects/*/src` and posts its findings on the lines the pull request adds or changes as review comments. Never
+  blocking, the Lint job of `verify.yml` stays the gate. It is a separate workflow because it needs
+  `pull-requests: write`, and `release.yml` calls `verify.yml` with `contents: read` only: a called workflow cannot
+  ask for more than its caller grants. Every finding, untouched lines included, stays in the annotations of the Lint
+  job (problem matchers of `actions/setup-node`).
 - A commit message containing a skip marker such as `[skip ci]`, even quoted in its body, cancels the push and pull
   request workflows of that commit.
 
