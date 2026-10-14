@@ -1,14 +1,15 @@
 name: Verify
 
 # Lint, build (initial budget included), tests and audit of every pull request. On master, the release workflow
-# calls it first, with the staging version, and deploys its build to staging.
+# calls it with the version to build and deploys its build to staging, then to production when the push publishes a
+# release.
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
   workflow_call:
     inputs:
       version:
-        description: Version to build, in place of the package.json one (2.4.0-rc.12+a1b2c3d)
+        description: Version to build, in place of the package.json one (2.4.0-rc.12+a1b2c3d, or 2.4.0 for a release)
         type: string
         default: ''
 
@@ -44,10 +45,10 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      # staging build of the release workflow; pull requests build the package.json version. Only package.json of the
-      # runner changes: environment.prod.ts and version.json read it at build time. Not `npm version`, which drops the
-      # +<commit> build metadata
-      - name: Set the staging version
+      # build of the release workflow (the staging version, or the released one); pull requests build the package.json
+      # version. Only package.json of the runner changes: environment.prod.ts and version.json read it at build time.
+      # Not `npm version`, which drops the +<commit> build metadata
+      - name: Set the version to build
         if: inputs.version
         run: npm pkg set version="$VERSION"
         env:
