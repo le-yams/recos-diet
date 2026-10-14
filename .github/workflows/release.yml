@@ -5,8 +5,9 @@ name: Release
 # while commits call for a release (feat, fix, perf). Merging that pull request publishes the release (tag x.y.z,
 # GitHub release) and deploys production: it is the approval. Only a release reaches production, so a data edit is a
 # fix(data): commit.
-# The release pull request is created with the GITHUB_TOKEN: no workflow runs on it and its required checks never
-# report, so it is merged bypassing the ruleset. Its code is master's, verified by the run of its last commit.
+# The release pull request is created with the GITHUB_TOKEN: its workflows wait for an approval (Approve workflows to
+# run), again after each update. Approve the runs of its last commit, then merge it once its checks pass; bypassing the
+# ruleset is the fallback. Its code is master's, already verified by the run of master's last commit.
 # The build carries the version to come on staging, 2.4.0-rc.12+a1b2c3d (2.3.1+a1b2c3d when no release is due), and the
 # released version, without suffix, on the push that publishes it: that same build then goes to production.
 # Run workflow (workflow_dispatch) starts a run on the current master, without deploying production: to deploy a
