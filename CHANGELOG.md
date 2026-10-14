@@ -1,83 +1,83 @@
-## [2.3.1](https://gitlab.com/ydisanto/recos-diet/compare/2.3.0...2.3.1) (2025-12-21)
+## [2.3.1](https://github.com/recos-diet/recos-diet/compare/2.3.0...2.3.1) (2025-12-21)
 
 
 ### Bug Fixes
 
-* vit C ([3c80ba0](https://gitlab.com/ydisanto/recos-diet/commit/3c80ba04b18cfc5e674b5413401b014287f82aec))
+* vit C ([3c80ba0](https://github.com/recos-diet/recos-diet/commit/3c80ba04b18cfc5e674b5413401b014287f82aec))
 
-# [2.3.0](https://gitlab.com/ydisanto/recos-diet/compare/2.2.1...2.3.0) (2025-05-04)
+# [2.3.0](https://github.com/recos-diet/recos-diet/compare/2.2.1...2.3.0) (2025-05-04)
 
 
 ### Bug Fixes
 
-* anorexia specific Vit K recos ([52892f5](https://gitlab.com/ydisanto/recos-diet/commit/52892f54620798a73a4fd0312cb1e93ce10399ad))
-* default enterale product ([442003a](https://gitlab.com/ydisanto/recos-diet/commit/442003a43172845429622aa0b86f057d784c1689))
-* phosphorus title ([b00fb40](https://gitlab.com/ydisanto/recos-diet/commit/b00fb405872a5fa7a2440ebae374a53385bdba2f))
-* product selection on nutrition type change ([5ffca53](https://gitlab.com/ydisanto/recos-diet/commit/5ffca533b24ee3a596df078370c8bb48cbcb5be1))
-* products indication ([a768c75](https://gitlab.com/ydisanto/recos-diet/commit/a768c756f164f4c55e7dac20ac7101c7b49ffc5d))
-* **products:** sondalis hp energy fibres indications ([eb403e1](https://gitlab.com/ydisanto/recos-diet/commit/eb403e16e462eb7cd6adadff288eb8a4c86a4b0a))
-* remove enterale B1 IV clause ([340848c](https://gitlab.com/ydisanto/recos-diet/commit/340848c0c090f431883a2a339559312af3f7daec))
+* anorexia specific Vit K recos ([52892f5](https://github.com/recos-diet/recos-diet/commit/52892f54620798a73a4fd0312cb1e93ce10399ad))
+* default enterale product ([442003a](https://github.com/recos-diet/recos-diet/commit/442003a43172845429622aa0b86f057d784c1689))
+* phosphorus title ([b00fb40](https://github.com/recos-diet/recos-diet/commit/b00fb405872a5fa7a2440ebae374a53385bdba2f))
+* product selection on nutrition type change ([5ffca53](https://github.com/recos-diet/recos-diet/commit/5ffca533b24ee3a596df078370c8bb48cbcb5be1))
+* products indication ([a768c75](https://github.com/recos-diet/recos-diet/commit/a768c756f164f4c55e7dac20ac7101c7b49ffc5d))
+* **products:** sondalis hp energy fibres indications ([eb403e1](https://github.com/recos-diet/recos-diet/commit/eb403e16e462eb7cd6adadff288eb8a4c86a4b0a))
+* remove enterale B1 IV clause ([340848c](https://github.com/recos-diet/recos-diet/commit/340848c0c090f431883a2a339559312af3f7daec))
 
 
 ### Features
 
-* filter products for eer with obesity ([5013296](https://gitlab.com/ydisanto/recos-diet/commit/5013296179cd92b8817419abccef16936b593fee))
-* product warnings ([24282e4](https://gitlab.com/ydisanto/recos-diet/commit/24282e4ff3214a3d23032a84515a55b26579f691))
-* **products:** nutrison energy multifibres ([5534fd9](https://gitlab.com/ydisanto/recos-diet/commit/5534fd9601e887adfa742c3216703c623d07b3b0))
+* filter products for eer with obesity ([5013296](https://github.com/recos-diet/recos-diet/commit/5013296179cd92b8817419abccef16936b593fee))
+* product warnings ([24282e4](https://github.com/recos-diet/recos-diet/commit/24282e4ff3214a3d23032a84515a55b26579f691))
+* **products:** nutrison energy multifibres ([5534fd9](https://github.com/recos-diet/recos-diet/commit/5534fd9601e887adfa742c3216703c623d07b3b0))
 
-## [2.2.1](https://gitlab.com/ydisanto/recos-diet/compare/2.2.0...2.2.1) (2023-04-14)
+## [2.2.1](https://github.com/recos-diet/recos-diet/compare/2.2.0...2.2.1) (2023-04-14)
 
 
 ### Bug Fixes
 
-* adjusted weight ([46d5412](https://gitlab.com/ydisanto/recos-diet/commit/46d5412045bdab86225f15f526a8950da5fa4a8c))
+* adjusted weight ([46d5412](https://github.com/recos-diet/recos-diet/commit/46d5412045bdab86225f15f526a8950da5fa4a8c))
 
-# [2.2.0](https://gitlab.com/ydisanto/recos-diet/compare/2.1.1...2.2.0) (2023-02-21)
+# [2.2.0](https://github.com/recos-diet/recos-diet/compare/2.1.1...2.2.0) (2023-02-21)
 
 
 ### Features
 
-* add periolimel product ([f4c6aaa](https://gitlab.com/ydisanto/recos-diet/commit/f4c6aaa79ccf483cf9a0f8453f75eb7c22b3d8ad))
+* add periolimel product ([f4c6aaa](https://github.com/recos-diet/recos-diet/commit/f4c6aaa79ccf483cf9a0f8453f75eb7c22b3d8ad))
 
-## [2.1.1](https://gitlab.com/ydisanto/recos-diet/compare/2.1.0...2.1.1) (2022-11-02)
-
-
-### Bug Fixes
-
-* update dependency ([071bcc9](https://gitlab.com/ydisanto/recos-diet/commit/071bcc90b0b4af46a38f3b65b3704e92d6ce8734))
-
-# [2.1.0](https://gitlab.com/ydisanto/recos-diet/compare/2.0.2...2.1.0) (2022-10-07)
+## [2.1.1](https://github.com/recos-diet/recos-diet/compare/2.1.0...2.1.1) (2022-11-02)
 
 
 ### Bug Fixes
 
-* survey link ([a09cb9e](https://gitlab.com/ydisanto/recos-diet/commit/a09cb9eca41d9373c3120126f7ddf6bdd6fa6885))
+* update dependency ([071bcc9](https://github.com/recos-diet/recos-diet/commit/071bcc90b0b4af46a38f3b65b3704e92d6ce8734))
+
+# [2.1.0](https://github.com/recos-diet/recos-diet/compare/2.0.2...2.1.0) (2022-10-07)
+
+
+### Bug Fixes
+
+* survey link ([a09cb9e](https://github.com/recos-diet/recos-diet/commit/a09cb9eca41d9373c3120126f7ddf6bdd6fa6885))
 
 
 ### Features
 
-* survey ([41c8203](https://gitlab.com/ydisanto/recos-diet/commit/41c8203b1061b5eeab63aa223a97ee7229c4ac96))
+* survey ([41c8203](https://github.com/recos-diet/recos-diet/commit/41c8203b1061b5eeab63aa223a97ee7229c4ac96))
 
-## [2.0.2](https://gitlab.com/ydisanto/recos-diet/compare/2.0.1...2.0.2) (2022-06-23)
-
-
-### Bug Fixes
-
-* weight input with 1 fraction digit ([5b23f4f](https://gitlab.com/ydisanto/recos-diet/commit/5b23f4f2aac44bb11bdd45deb3c6fae1f365a235))
-
-## [2.0.1](https://gitlab.com/ydisanto/recos-diet/compare/2.0.0...2.0.1) (2022-05-23)
+## [2.0.2](https://github.com/recos-diet/recos-diet/compare/2.0.1...2.0.2) (2022-06-23)
 
 
 ### Bug Fixes
 
-* **patient-form:** enter key event regression ([0ffe528](https://gitlab.com/ydisanto/recos-diet/commit/0ffe528fe3bdeab5b437b6d6118e3a2e19f9b6d2))
+* weight input with 1 fraction digit ([5b23f4f](https://github.com/recos-diet/recos-diet/commit/5b23f4f2aac44bb11bdd45deb3c6fae1f365a235))
 
-# [2.0.0](https://gitlab.com/ydisanto/recos-diet/compare/1.35.2...2.0.0) (2022-05-18)
+## [2.0.1](https://github.com/recos-diet/recos-diet/compare/2.0.0...2.0.1) (2022-05-23)
+
+
+### Bug Fixes
+
+* **patient-form:** enter key event regression ([0ffe528](https://github.com/recos-diet/recos-diet/commit/0ffe528fe3bdeab5b437b6d6118e3a2e19f9b6d2))
+
+# [2.0.0](https://github.com/recos-diet/recos-diet/compare/1.35.2...2.0.0) (2022-05-18)
 
 
 ### Features
 
-* recos-diet v2 ([1ba0adb](https://gitlab.com/ydisanto/recos-diet/commit/1ba0adbc77c457b823bba3e7955734f3d0bd28ab))
+* recos-diet v2 ([1ba0adb](https://github.com/recos-diet/recos-diet/commit/1ba0adbc77c457b823bba3e7955734f3d0bd28ab))
 
 
 ### BREAKING CHANGES
