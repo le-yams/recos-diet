@@ -190,8 +190,8 @@ Releases and versions:
   release nothing. Data edits are `fix(data):` commits, so they reach production and `AppUpdater` prompts the open
   tabs to reload (the data is only read at startup).
 - `.release/release-please-config.json` and `.release/release-please-manifest.json` (current version) configure
-  release-please: `node` release type (`package.json`, `package-lock.json`, `CHANGELOG.md`), tags `x.y.z` without
-  `v` like the existing ones, release pull request titled `chore(release): x.y.z`. `bootstrap-sha` (the commit of
+  release-please: `node` release type (`package.json`, `package-lock.json`, `CHANGELOG.md`), tags and GitHub
+  release names `x.y.z` without `v` like the existing tags, release pull request titled `chore(release): x.y.z`. `bootstrap-sha` (the commit of
   tag `2.3.1`, the last semantic-release release) only serves while no GitHub release exists. Up to 2.3.1 the
   changelog was written by semantic-release, which `.releaserc` configured.
 - Version flow: `environment.prod.ts` imports the `package.json` version at build time (only that value ends up
