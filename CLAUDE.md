@@ -151,6 +151,10 @@ Actions (`.github/workflows/`):
 
 - `verify.yml`: lint, build (initial budget included), domain and web tests in ChromeHeadless, and `npm audit
   --omit=dev --audit-level=high`, blocking on ready pull requests only. Runs on pull requests; `release.yml` calls it.
+  It sends both Cobertura reports to Coveralls in one build (`coverallsapp/github-action`, authenticated by the
+  `GITHUB_TOKEN`, `fail-on-error: false`), which comments the coverage on the pull request; the `master` builds are
+  the base of the comparison. `release.yml` only grants `contents: read` and a called workflow cannot ask for more:
+  anything in `verify.yml` that needs `pull-requests: write` or `checks: write` must also be granted by `release.yml`.
 - `release.yml`: on every push to `master`, verify, deploy to staging, then wait for an approval on the `release`
   environment (required reviewer, no secrets) before semantic-release, a rebuild on the release commit and the
   production deploy. Production is deployed even when no version is published, so a `chore:` data edit still

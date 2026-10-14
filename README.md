@@ -19,7 +19,9 @@ npm test    # tests unitaires (Karma, Chrome)
 
 La CI tourne sur GitHub Actions :
 
-- chaque pull request est vérifiée (lint, build, tests, audit des dépendances) par `verify.yml` ;
+- chaque pull request est vérifiée (lint, build, tests, audit des dépendances) par `verify.yml`, qui envoie la
+  couverture des tests à [Coveralls](https://coveralls.io/github/recos-diet/recos-diet) : elle est commentée dans la
+  pull request, avec l'écart par rapport à `master` ;
 - chaque push sur `master` est vérifié puis déployé sur l'environnement de staging par `release.yml`, qui attend
   ensuite une approbation (environnement `release`) pour publier la version (semantic-release, GitHub Release) et
   déployer la production.
