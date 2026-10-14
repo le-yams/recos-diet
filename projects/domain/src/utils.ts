@@ -41,6 +41,9 @@ export type Predicate<T> = (item: T) => boolean
 
 export const TRUE_PREDICATE: Predicate<unknown> = () => true;
 
+// TEST lint-review.yml: deliberate no-explicit-any warning, this branch is thrown away
+export const LINT_REVIEW_PROBE: any = null;
+
 export const notIn = function <T>(exclusion: T[]): Predicate<T> {
   return item => !exclusion.includes(item);
 }
