@@ -58,7 +58,22 @@
             ],
             "styles": [
               "projects/web/src/theme.scss",
-              "projects/web/src/styles.css"
+              "projects/web/src/styles.css",
+              {
+                "input": "projects/web/src/themes/halloween/halloween.scss",
+                "bundleName": "theme-halloween",
+                "inject": false
+              },
+              {
+                "input": "projects/web/src/themes/christmas/christmas.scss",
+                "bundleName": "theme-christmas",
+                "inject": false
+              },
+              {
+                "input": "projects/web/src/themes/april-fools/april-fools.scss",
+                "bundleName": "theme-april-fools",
+                "inject": false
+              }
             ],
             "scripts": [],
             "browser": "projects/web/src/main.ts"

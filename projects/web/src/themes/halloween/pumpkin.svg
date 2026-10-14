@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="100" viewBox="0 0 120 100">
+  <g fill="#424242">
+    <path transform="translate(94 20) scale(1.1)"
+          d="M0 -3 L2 -6 L3 -2 C7 -5 12 -6 16 -3 Q13 -1 12 2 Q9 0 7 3 Q5 1 2 4 L0 6 L-2 4 Q-5 1 -7 3 Q-9 0 -12 2 Q-13 -1 -16 -3 C-12 -6 -7 -5 -3 -2 L-2 -6 Z"/>
+    <path transform="translate(22 32) rotate(-12) scale(0.75)"
+          d="M0 -3 L2 -6 L3 -2 C7 -5 12 -6 16 -3 Q13 -1 12 2 Q9 0 7 3 Q5 1 2 4 L0 6 L-2 4 Q-5 1 -7 3 Q-9 0 -12 2 Q-13 -1 -16 -3 C-12 -6 -7 -5 -3 -2 L-2 -6 Z"/>
+  </g>
+  <path d="M57 46 Q56 37 63 32 L66 35 Q61 39 62 46 Z" fill="#6d4c41"/>
+  <path d="M63 40 Q72 34 78 40" fill="none" stroke="#558b2f" stroke-width="2" stroke-linecap="round"/>
+  <ellipse cx="60" cy="71" rx="34" ry="25" fill="#ef6c00"/>
+  <ellipse cx="45" cy="71" rx="19" ry="25" fill="#f57c00"/>
+  <ellipse cx="75" cy="71" rx="19" ry="25" fill="#f57c00"/>
+  <ellipse cx="60" cy="71" rx="15" ry="26" fill="#fb8c00"/>
+  <g fill="#ffd54f">
+    <polygon points="44,66 54,66 49,57"/>
+    <polygon points="66,66 76,66 71,57"/>
+    <polygon points="57.5,73 62.5,73 60,68"/>
+    <path d="M42 76 Q60 92 78 76 Q60 84 42 76 Z"/>
+  </g>
+</svg>

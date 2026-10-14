@@ -122,6 +122,17 @@ matrices. Classes that hold subscriptions (`Warnings`, `Micronutriments`) expose
 - **Material theme**: `src/theme.scss` (M2 API, deep-purple/amber like the former `deeppurple-amber` prebuilt
   theme) only includes the `*-theme` mixins of the components in use. Using a new Material component means adding
   its mixin there, otherwise it renders without theme colors.
+- **Seasonal themes** (Christmas, Halloween, April Fools) only add decorations, they do not touch the Material theme.
+  `assets/theme.json` picks one: `"auto"` (the season of the day, `MM-DD` bounds included, a season may span the new
+  year), `"none"`, or a theme name to force. `ThemeService.start()`, run by an app initializer, appends
+  `<link href="theme-<name>.css?v=<version>">`, then reads `theme.json` again every `themeCheckDelay` (`environment`)
+  and when the tab becomes visible again: the site stays open for days on the ward computers, so it swaps or removes
+  the `<link>` without any reload, and keeps the current theme when `theme.json` cannot be read. In dev, `ng serve`
+  reloads the page on any asset edit: test with `--live-reload=false`. Each theme is a style bundle with `"inject": false` in `angular.json`:
+  built from `src/themes/<name>/<name>.scss` as an unhashed `theme-<name>.css`, outside the initial budget. It places
+  its SVGs through the mixins of `src/themes/_decorations.scss`, only in empty areas (under the side menu, under the
+  disclaimer, the header padding of the outermost cards and expansion panels). Adding a theme: its folder, its
+  `angular.json` entry and its name in `themes` (`theme.service.ts`).
 
 ## Clinical data is JSON, not code
 

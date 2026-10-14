@@ -20,6 +20,7 @@ import {provideHttpClient, withXhr} from '@angular/common/http';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {routes} from './app.routes';
 import {DomainLoaderService} from '../infra/domain-loader.service';
+import {ThemeService} from './theme/theme.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,6 +28,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withXhr()),
     provideAppInitializer(() => inject(DomainLoaderService).load()),
+    provideAppInitializer(() => inject(ThemeService).start()),
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
   ]
 };

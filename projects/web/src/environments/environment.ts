@@ -20,5 +20,6 @@ export const environment = {
   production: false,
   appVersion: 'SNAPSHOT-' + new Date().toISOString(),
   appUpdateCheckDelay: 30 * secondInMillis,
-  updateWarningSleep: 2 * minuteInMillis
+  updateWarningSleep: 2 * minuteInMillis,
+  themeCheckDelay: 30 * secondInMillis
 };

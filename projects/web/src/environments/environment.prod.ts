@@ -22,5 +22,6 @@ export const environment = {
   production: true,
   appVersion: version,
   appUpdateCheckDelay: 20 * minuteInMillis,
-  updateWarningSleep: 2 * hourInMillis
+  updateWarningSleep: 2 * hourInMillis,
+  themeCheckDelay: hourInMillis
 };

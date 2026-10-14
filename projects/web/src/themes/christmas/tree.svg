@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="112" viewBox="0 0 100 112">
+  <g stroke="#90caf9" stroke-width="1.2" stroke-linecap="round">
+    <g transform="translate(14 26)">
+      <line x1="-4" y1="0" x2="4" y2="0"/>
+      <line x1="-2" y1="-3.5" x2="2" y2="3.5"/>
+      <line x1="-2" y1="3.5" x2="2" y2="-3.5"/>
+    </g>
+    <g transform="translate(86 20) scale(0.8)">
+      <line x1="-4" y1="0" x2="4" y2="0"/>
+      <line x1="-2" y1="-3.5" x2="2" y2="3.5"/>
+      <line x1="-2" y1="3.5" x2="2" y2="-3.5"/>
+    </g>
+    <g transform="translate(90 60)">
+      <line x1="-4" y1="0" x2="4" y2="0"/>
+      <line x1="-2" y1="-3.5" x2="2" y2="3.5"/>
+      <line x1="-2" y1="3.5" x2="2" y2="-3.5"/>
+    </g>
+    <g transform="translate(8 66) scale(0.7)">
+      <line x1="-4" y1="0" x2="4" y2="0"/>
+      <line x1="-2" y1="-3.5" x2="2" y2="3.5"/>
+      <line x1="-2" y1="3.5" x2="2" y2="-3.5"/>
+    </g>
+  </g>
+  <rect x="44" y="94" width="12" height="14" rx="1" fill="#6d4c41"/>
+  <g stroke-linejoin="round" stroke-width="4">
+    <polygon points="50,54 14,94 86,94" fill="#2e7d32" stroke="#2e7d32"/>
+    <polygon points="50,32 22,70 78,70" fill="#388e3c" stroke="#388e3c"/>
+    <polygon points="50,16 30,46 70,46" fill="#43a047" stroke="#43a047"/>
+  </g>
+  <circle cx="41" cy="40" r="3" fill="#e53935"/>
+  <circle cx="58" cy="58" r="3" fill="#fbc02d"/>
+  <circle cx="37" cy="63" r="3" fill="#1e88e5"/>
+  <circle cx="64" cy="84" r="3" fill="#e53935"/>
+  <circle cx="45" cy="80" r="3" fill="#fbc02d"/>
+  <circle cx="27" cy="88" r="3" fill="#1e88e5"/>
+  <polygon points="50,4 52,9.25 57.61,9.53 53.23,13.05 54.7,18.47 50,15.4 45.3,18.47 46.77,13.05 42.39,9.53 48,9.25"
+           fill="#fbc02d" stroke="#f9a825" stroke-width="0.8" stroke-linejoin="round"/>
+</svg>

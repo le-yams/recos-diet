@@ -1,0 +1,73 @@
+/*
+ * Copyright (c) 2026. Yann D'Isanto
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// Where a theme places its decorations: only in empty areas, so that they never hide nor push any content (the
+// disclaimer and the warnings stay untouched). A theme bundle is a global stylesheet, it reaches the elements of the
+// components through their tag names despite the emulated encapsulation.
+
+// The cards and expansion panels that are not inside another one: decorating the nested ones too would overload the
+// pages that nest many of them (products). Their decoration goes in ::before, Material uses the ::after of mat-card
+// (outline in high contrast mode).
+$outer-components: ':is(mat-card, mat-expansion-panel):not(:is(mat-card, mat-expansion-panel) *)';
+
+// Under the items of the side menu, in the space left by a short page: the illustration shrinks with that space so
+// that it never makes the menu scroll (.mat-drawer-inner-container is the scrolling content of mat-sidenav)
+@mixin menu-illustration($image, $height) {
+  mat-sidenav .mat-drawer-inner-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  mat-sidenav .mat-drawer-inner-container::after {
+    content: '';
+    flex: 0 1 calc($height + 1.5rem);
+    min-height: 0;
+    background: $image center bottom / auto min(100%, $height) no-repeat;
+  }
+}
+
+// In the top right corner of the components, within the padding of their header: the chevron of an expansion panel
+// starts 24px below the top edge and 24px away from the right edge, its description ends 48px away from it
+@mixin component-corner($image, $width, $height) {
+  #{$outer-components}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: $width;
+    height: $height;
+    background: $image right top / contain no-repeat;
+    pointer-events: none;
+  }
+}
+
+// Repeated under the disclaimer, in the 1rem gap (its bottom margin) above the shell of the app
+@mixin top-frieze($image) {
+  app-root .shell {
+    position: relative;
+  }
+
+  app-root .shell::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    height: 1rem;
+    background: $image left top / auto 100% repeat-x;
+    pointer-events: none;
+  }
+}
