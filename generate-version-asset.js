@@ -23,8 +23,6 @@ const outputfilePath = path.join(__dirname + '/projects/web/src/version.json');
 console.log('Generating application version asset...');
 
 try {
-  // semgrep detect-non-literal-fs-filename: false positive, the path is built from __dirname and a constant
-  // nosemgrep
   fs.writeFileSync(outputfilePath, JSON.stringify({version: appVersion}));
   console.log(`asset successfully generated with version ${appVersion} at ${outputfilePath}`);
 } catch (err) {
