@@ -166,9 +166,11 @@ Actions (`.github/workflows/`):
   and the commit. `2.3.1+a1b2c3d` when no release is due, `2.4.0` on the push that publishes it: that build goes to
   staging, then to production. Pull requests build the `package.json` version.
 - `master` is protected by the `default branch` ruleset: pull request required, `Lint` and `Build and test` required.
-  The release pull request is created with the `GITHUB_TOKEN`, and events of that token start no workflow: its checks
-  never report, so it is merged bypassing the ruleset. Release-please needs the repository setting *Allow GitHub
-  Actions to create and approve pull requests* (Settings → Actions → General).
+  The release pull request is created with the `GITHUB_TOKEN`: GitHub creates its `pull_request` runs (Verify, Lint
+  review) awaiting approval (`action_required`), again after each update by release-please. Approve the runs of its
+  last commit (*Approve workflows to run*), then merge once the checks pass; bypassing the ruleset is the fallback.
+  The release-please README says no workflow runs on such pull requests: no longer true. Release-please needs the
+  repository setting *Allow GitHub Actions to create and approve pull requests* (Settings → Actions → General).
 - `deploy.yml` (reusable): lftp mirror of the build over SFTP. The `staging` and `production` environments hold the
   `SFTP_HOST`/`SFTP_USERNAME`/`SFTP_PASSWORD` secrets and the `SFTP_DEST` variable; production is backed up as a
   run artifact (30 days) before each deploy. `.htaccess` in the build output provides the SPA rewrite.
