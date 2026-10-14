@@ -132,19 +132,19 @@ export class DailyTargetFlows {
   }
 
   private updateTargets() {
-    if (this.patient && this.selectedProductNutritionInfo) {
+    const patient = this.patient;
+    const nutrition = this.selectedProductNutritionInfo;
+    if (patient && nutrition) {
       const context = new PathologyContext(this.selectedPathologies);
       const targetFlows = this.targets
         .filter(target => target.isRelevant(context))
-        .map(target => this.computeTargetFlow(target.energyPerKg));
+        .map(target => this.computeTargetFlow(target.energyPerKg, patient, nutrition));
       this.targetFlows = targetFlows;
       this.events.publish(new DailyTargetFlowsUpdatedEvent(targetFlows))
     }
   }
 
-  private computeTargetFlow(target: number): DailyTargetFlow {
-    const patient = this.patient!;
-    const nutrition = this.selectedProductNutritionInfo!;
+  private computeTargetFlow(target: number, patient: PatientInfo, nutrition: NutritionInfo): DailyTargetFlow {
     const dayFlowLiter = patient.adjustedWeightKg * target / nutrition.kcalPerLiter;
     const hourFlowML = dayFlowLiter * 1000 / 24;
     const dayEnergy = nutrition.kcalPerLiter * dayFlowLiter;

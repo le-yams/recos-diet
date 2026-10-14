@@ -27,12 +27,12 @@ export class Verbose {
 
   private static enabled: boolean = isDevOrStagingEnv();
 
-  static log(...data: any[]) {
+  static log(...data: unknown[]) {
     Verbose.ifEnabled(
       () => console.log(...data));
   }
 
-  static debug(...data: any[]) {
+  static debug(...data: unknown[]) {
     Verbose.ifEnabled(
       () => console.debug(...data));
   }
