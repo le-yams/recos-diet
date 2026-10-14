@@ -3,6 +3,6 @@
   "seasons": [
     {"theme": "april-fools", "from": "04-01", "to": "04-01"},
     {"theme": "halloween", "from": "10-20", "to": "11-01"},
-    {"theme": "christmas", "from": "12-01", "to": "01-06"}
+    {"theme": "christmas", "from": "12-01", "to": "12-31"}
   ]
 }
