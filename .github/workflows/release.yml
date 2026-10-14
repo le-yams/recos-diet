@@ -4,6 +4,8 @@ name: Release
 # environment (required reviewer, no secret) to publish a release and deploy production.
 # A release is published when the commits call for one (feat, fix...); production is deployed in any case, so that a
 # chore: data edit reaches it without a new version.
+# The staging build carries the version to come, from a dry-run of the release: 2.4.0-rc.12+a1b2c3d, or 2.3.1+a1b2c3d
+# when no release is due. The production build carries the released version, without suffix.
 # semantic-release (.releaserc) bumps package.json, writes CHANGELOG.md, commits `chore(release): x.y.z [skip ci]`,
 # tags x.y.z and creates the GitHub release. Pushed with GITHUB_TOKEN, that commit triggers no workflow.
 # Run workflow (workflow_dispatch) starts a run on the current master: when its last commit is a [skip ci] one, which
@@ -19,11 +21,59 @@ permissions:
   contents: read
 
 jobs:
+  staging-version:
+    name: Staging version
+    # dispatched from another branch: skipped, and every job after it. The release and production environments also
+    # only accept master
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # semantic-release reads the whole history and the tags. It would complete a shallow clone from the
+          # repository URL, here the clone itself
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      # dry-run of the release job on this commit. Even in dry-run, semantic-release checks that it may push: with the
+      # clone itself as repository (.), that check needs no write permission.
+      # --plugins replaces the plugins of .releaserc: commit-analyzer keeps its default rules, so releaseRules added to
+      # .releaserc must be repeated here
+      - name: Compute the next release
+        id: next
+        run: >-
+          npx --yes
+          --package=semantic-release@25.0.9
+          --package=@semantic-release/exec@7.1.0
+          semantic-release
+          --dry-run
+          --repository-url .
+          --plugins @semantic-release/commit-analyzer,@semantic-release/exec
+          --verify-release-cmd "$VERIFY_RELEASE_CMD"
+        env:
+          # template of @semantic-release/exec, run only when the commits call for a release
+          VERIFY_RELEASE_CMD: 'echo "prerelease=${nextRelease.version}-rc.${commits.length}" >> "$GITHUB_OUTPUT"'
+      # 2.4.0-rc.12+a1b2c3d: the next release, the number of commits since the last one and this commit. When no
+      # release is due (chore, docs...): 2.3.1+a1b2c3d, the current version and this commit
+      - name: Get the staging version
+        id: version
+        env:
+          PRERELEASE: ${{ steps.next.outputs.prerelease }}
+        run: |
+          version="${PRERELEASE:-$(node -p "require('./package.json').version")}+${GITHUB_SHA::7}"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Staging version: $version" >> "$GITHUB_STEP_SUMMARY"
+
   verify:
     name: Verify
-    # dispatched from another branch: skipped. The release and production environments also only accept master
-    if: github.ref == 'refs/heads/master'
+    needs: staging-version
     uses: ./.github/workflows/verify.yml
+    with:
+      version: ${{ needs.staging-version.outputs.version }}
 
   deploy-staging:
     name: Staging

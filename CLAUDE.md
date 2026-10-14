@@ -156,6 +156,13 @@ Actions (`.github/workflows/`):
   production deploy. Production is deployed even when no version is published, so a `chore:` data edit still
   reaches it. The release job fails if `master` moved on since its run: approve the latest run, or start one with
   *Run workflow* (`workflow_dispatch`), for instance when the last commit triggered no workflow.
+- Staging version: the `staging-version` job of `release.yml` runs a semantic-release dry-run against the clone itself
+  (`--repository-url .`: semantic-release checks that it may push even in dry-run, and the read-only `GITHUB_TOKEN`
+  may not push to GitHub), with `--plugins` limited to commit-analyzer and `@semantic-release/exec`, which writes the
+  next version. `verify.yml` receives it as its `version` input and sets it with `npm pkg set` (`npm version` drops
+  the `+` build metadata) before building: `2.4.0-rc.12+a1b2c3d` (next release, commits since the last one, commit),
+  or `2.3.1+a1b2c3d` when no release is due. Pull requests and the production build keep the `package.json` version.
+  `--plugins` replaces the plugins of `.releaserc`: a `releaseRules` added there must be repeated in that job.
 - `deploy.yml` (reusable): lftp mirror of the build over SFTP. The `staging` and `production` environments hold the
   `SFTP_HOST`/`SFTP_USERNAME`/`SFTP_PASSWORD` secrets and the `SFTP_DEST` variable; production is backed up as a
   run artifact (30 days) before each deploy. `.htaccess` in the build output provides the SPA rewrite.
@@ -173,7 +180,8 @@ Releases and versions:
 - Version flow: `environment.prod.ts` imports the `package.json` version at build time (only that value ends up
   in the bundle); `version.json` is generated, not tracked, by `generate:version`, which the npm `prebuild` hook
   runs (locally and in CI). In production `AppUpdater` polls `/version.json` and prompts a reload when it differs
-  from the running build. Dev builds report `SNAPSHOT-<timestamp>`.
+  from the running build; the staging version changes with every commit, so every staging deploy prompts too, and
+  renews the theme stylesheets (`?v=<version>`). Dev builds report `SNAPSHOT-<timestamp>`.
 - Default branch is `master`; feature work happens on `feat/*` branches.
 
 Issues: #1 to #86 were imported from GitLab with their numbers, so `#N` references in the history still match.
