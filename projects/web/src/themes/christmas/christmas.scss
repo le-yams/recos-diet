@@ -17,5 +17,5 @@
 @use '../decorations';
 
 @include decorations.menu-illustration(url('./tree.svg'), 112px);
-@include decorations.top-frieze(url('./garland.svg'));
+@include decorations.top-frieze(url('./tinsel.svg'));
 @include decorations.component-corner(url('./baubles.svg'), 48px, 24px);
