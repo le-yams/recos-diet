@@ -132,8 +132,8 @@ de la cible énergétique de chaque palier pour calculer le débit, **sauf en ph
 |---|---|---|
 | Propofol | 1,1 kcal/mL | débit en mL/h |
 | Glucosé 2,5 % | 100 kcal/L | variante et débit en mL/h |
-| Glucosé 5 % | 200 kcal/L | variante et débit en mL/h |
-| Glucosé 10 % / Polyionique | 400 kcal/L | variante et débit en mL/h |
+| Glucosé 5 % / Polyionique | 200 kcal/L | variante et débit en mL/h |
+| Glucosé 10 % | 400 kcal/L | variante et débit en mL/h |
 | CVVH citrate | 200 kcal/j, apport fixe | aucune |
 
 `A` (kcal/j) = débit propofol × 24 × 1,1 + débit glucosé × 24 / 1000 × apport de la variante
