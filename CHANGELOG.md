@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.4.1](https://github.com/recos-diet/recos-diet/compare/2.4.0...2.4.1) (2026-10-15)
+
+
+### Bug Fixes
+
+* **disclaimer:** mettre réanimation en gras ([9080a5d](https://github.com/recos-diet/recos-diet/commit/9080a5dd1111af7042b49c1c81a4667cae714880))
+* **footer:** lier le numéro de version à sa GitHub Release ([2baeef4](https://github.com/recos-diet/recos-diet/commit/2baeef46c7b9681cf983c96a605bcede7320d029))
+* **micronutriments:** fusionner les posologies quand une recommandation n'en donne pas ([1523908](https://github.com/recos-diet/recos-diet/commit/15239081b35b6cd094fb736e124dc0509a5a2a7e)), closes [#48](https://github.com/recos-diet/recos-diet/issues/48)
+
 ## [2.4.0](https://github.com/recos-diet/recos-diet/compare/2.3.1...2.4.0) (2026-10-14)
 
 
