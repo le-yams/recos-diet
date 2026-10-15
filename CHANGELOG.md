@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.2](https://github.com/recos-diet/recos-diet/compare/2.4.1...2.4.2) (2026-10-15)
+
+
+### Bug Fixes
+
+* **themes:** guirlande poilue à Noël, chauves-souris et fantômes à Halloween ([d1dfa39](https://github.com/recos-diet/recos-diet/commit/d1dfa39da89234ca9407b1ac1e1858069d1f751d))
+
 ## [2.4.1](https://github.com/recos-diet/recos-diet/compare/2.4.0...2.4.1) (2026-10-15)
 
 
