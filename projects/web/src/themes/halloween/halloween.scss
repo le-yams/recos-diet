@@ -17,5 +17,5 @@
 @use '../decorations';
 
 @include decorations.menu-illustration(url('./pumpkin.svg'), 100px);
-@include decorations.top-frieze(url('./bunting.svg'));
+@include decorations.top-frieze(url('./bats-ghosts.svg'));
 @include decorations.component-corner(url('./cobweb.svg'), 28px, 28px);
