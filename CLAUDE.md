@@ -26,6 +26,13 @@ web tests, and `ng serve` reloads on domain edits. CI builds `web` only.
 Node 24 (`.nvmrc`, which CI reads through `actions/setup-node`); `engines` accepts what Angular 22 supports
 (`^22.22.3 || ^24.15.0 || >=26.0.0`) and `.npmrc` sets `engine-strict`, so `npm ci` fails on any other version.
 
+Dependency install scripts: `package.json#allowScripts` names the only dependencies allowed to run one (`esbuild`,
+`lmdb`, `msgpackr-extract`, `@parcel/watcher`, by name, so any version), and `.npmrc` sets `strict-allow-scripts`.
+With npm 11 (Node 24, CI included), an install fails with `ESTRICTALLOWSCRIPTS`, before any script runs, as soon as
+another dependency brings an install script. Review that script, then `npm install-scripts approve
+--no-allow-scripts-pin <pkg>` (or `deny`); `npm install-scripts ls` lists the pending ones. npm 10 knows neither
+setting.
+
 ```bash
 npm start                       # ng serve (web, development config), also watches the domain sources
 npm run build                   # generate:version (prebuild), then ng build web (production)
