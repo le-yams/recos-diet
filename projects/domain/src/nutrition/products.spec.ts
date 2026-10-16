@@ -23,7 +23,8 @@ import {Pathology} from '../pathologies/pathologies.data';
 import {SelectedPathologiesEvent} from '../pathologies/pathologies.event';
 import {PatientInfoUpdatedEvent} from '../patient/patient.events';
 import {DomainEventBus} from '../domain.events';
-import {EventsCaptor, TestDomainEventBus} from '../shared.spec';
+import {EventsCaptor} from '../shared.spec';
+import {InMemoryDomainEventBus} from '../in-memory-domain-event-bus';
 
 // Extract of products.json: no product is compatible with both anorexia and EER with obesity.
 const PRODUCTS: ProductInfo[] = [
@@ -73,7 +74,7 @@ describe('Products', () => {
   let products: Products;
 
   beforeEach(() => {
-    events = new TestDomainEventBus();
+    events = new InMemoryDomainEventBus();
     const repository = new TestProductsRepository();
     products = new Products(repository, repository, events);
     events.publish(new SelectedNutritionTypeEvent(NutritionType.ENTERALE));

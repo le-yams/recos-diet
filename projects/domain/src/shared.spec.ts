@@ -18,63 +18,7 @@
  * Shared utilities for testing
  */
 
-import {Consumer, DomainEvent, DomainEventBus, DomainEventType, Subscription} from './domain.events';
-import {Predicate, TRUE_PREDICATE} from './utils';
-
-export class TestDomainEventBus implements DomainEventBus {
-
-  private readonly consumers: Map<EmitterSubscription<DomainEvent>, Consumer<DomainEvent>> = new Map();
-
-  public subscribe<T extends DomainEvent>(eventType: DomainEventType<T>, consumer: Consumer<T>): Subscription {
-    const filter = forEvent(eventType);
-
-    if (!consumer) {
-      return EMPTY_SUBSCRIPTION;
-    }
-    const subscription = new EmitterSubscription<DomainEvent>(this.consumers, filter);
-    this.consumers.set(subscription, consumer as Consumer<DomainEvent>);
-    return subscription;
-  }
-
-  publish(event: DomainEvent): void {
-    if (this.consumers.size === 0) {
-      return;
-    }
-    this.consumers.forEach((consumer, subscription) => {
-      const filter = subscription.filter ?? TRUE_PREDICATE;
-      if (filter(event)) {
-        consumer(event);
-      }
-    });
-  }
-}
-
-const EMPTY_SUBSCRIPTION: Subscription = {
-  unsubscribe: () => undefined,
-};
-
-class EmitterSubscription<T> implements Subscription {
-  private consumers: Map<EmitterSubscription<T>, Consumer<T>> | undefined;
-  filter: Predicate<T> | undefined;
-
-  constructor(consumers: Map<EmitterSubscription<T>, Consumer<T>>, filter?: Predicate<T>) {
-    this.consumers = consumers;
-    this.filter = filter;
-  }
-
-  unsubscribe(): void {
-    if (this.consumers) {
-      this.consumers.delete(this);
-    }
-    this.consumers = undefined;
-    this.filter = undefined;
-  }
-}
-
-function forEvent(eventType: DomainEventType<DomainEvent>): Predicate<DomainEvent> {
-  return evt => evt instanceof eventType;
-}
-
+import {DomainEvent, DomainEventBus, DomainEventType, Subscription} from './domain.events';
 
 export class EventsCaptor<T extends DomainEvent> {
 

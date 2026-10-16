@@ -26,7 +26,8 @@ import {Pathology} from '../pathologies/pathologies.data';
 import {DomainEventBus} from '../domain.events';
 import {SummarizedMicronutrimentRecommendationsUpdatedEvent} from './micronutriments.events';
 import {SelectedNutritionTypeEvent} from '../nutrition/nutrition.events';
-import {EventsCaptor, TestDomainEventBus} from '../shared.spec';
+import {EventsCaptor} from '../shared.spec';
+import {InMemoryDomainEventBus} from '../in-memory-domain-event-bus';
 import {SelectedPathologiesEvent} from '../pathologies/pathologies.event';
 
 describe('Micronutriments', () => {
@@ -36,7 +37,7 @@ describe('Micronutriments', () => {
   let eventsCaptor: EventsCaptor<SummarizedMicronutrimentRecommendationsUpdatedEvent>;
 
   beforeEach(() => {
-    events = new TestDomainEventBus();
+    events = new InMemoryDomainEventBus();
     eventsCaptor = new EventsCaptor(SummarizedMicronutrimentRecommendationsUpdatedEvent, events);
   });
 
