@@ -206,8 +206,12 @@ Releases and versions:
 - Default branch is `master`; feature work happens on `feat/*` branches.
 
 Issues: #1 to #86 were imported from GitLab with their numbers, so `#N` references in the history still match.
-Every issue has a type (Bug, Feature, Refactor, Task) and three organization fields. `Effort` and `Gain`
-(Low/Medium/High) replace GitLab's scoped labels. `Category` is the area of the product the issue changes:
+Every issue has a type, chosen by asking whether a user (clinician, dietitian) will see a difference: `Feature`
+(new or improved behavior they see), `Bug` (wrong behavior of the app, a test, a script or a workflow), `Refactor`
+(the app code restructured, same behavior) or `Chore` (no change for users: dependencies, build, lint, CI/CD,
+hosting, tests, docs, hardening). The type is the nature of the work, not the commit prefix: an `.htaccess` change is
+a `Chore` committed as `fix:` so that a release ships it. Every issue also has three organization fields. `Effort`
+and `Gain` (Low/Medium/High) replace GitLab's scoped labels. `Category` is the area of the product the issue changes:
 `Clinical data` (content the dietitians validate: the JSON assets, the clinical texts of the pages), `Domain`
 (`projects/domain`), `UI`, `Tests`, `Tooling`, `CI/CD` (what runs in GitHub Actions, `deploy.yml` included), `Infra`
 (what the server does: `.htaccess`, HTTPS, domains) and `Docs`. A new page is `UI` even when its content is clinical,
