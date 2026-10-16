@@ -23,15 +23,19 @@ web tests, and `ng serve` reloads on domain edits. CI builds `web` only.
 
 ## Commands
 
-Node 24 (`.nvmrc`, which CI reads through `actions/setup-node`); `engines` accepts what Angular 22 supports
-(`^22.22.3 || ^24.15.0 || >=26.0.0`) and `.npmrc` sets `engine-strict`, so `npm ci` fails on any other version.
+Node 24 (`.nvmrc`, which CI reads through `actions/setup-node`); `engines.node` accepts what Angular 22 supports
+(`^22.22.3 || ^24.15.0 || >=26.0.0`), `engines.npm` asks for npm 11.18.0 or later, and `.npmrc` sets `engine-strict`,
+so `npm ci` fails with `EBADENGINE` on any other version. npm 11.18.0 is the first that both reads the lock and
+applies `allowScripts`: npm 11 (Dependabot's included) leaves out of the lock the optional peer dependencies nothing
+asks for, which npm before 11.5.0 reports as `Missing: chokidar@5.0.0 from lock file`; npm before 11.16.0 ignores
+`strict-allow-scripts`, and 11.16 and 11.17 reject `fsevents` (optional, macOS only) even where it is not installed.
+Node 22 ships npm 10, Node 24 before 24.20 and Node 26 before 26.6 an older npm 11: `npm install -g npm@11` first.
 
 Dependency install scripts: `package.json#allowScripts` names the only dependencies allowed to run one (`esbuild`,
 `lmdb`, `msgpackr-extract`, `@parcel/watcher`, by name, so any version), and `.npmrc` sets `strict-allow-scripts`.
-With npm 11 (Node 24, CI included), an install fails with `ESTRICTALLOWSCRIPTS`, before any script runs, as soon as
-another dependency brings an install script. Review that script, then `npm install-scripts approve
---no-allow-scripts-pin <pkg>` (or `deny`); `npm install-scripts ls` lists the pending ones. npm 10 knows neither
-setting.
+An install fails with `ESTRICTALLOWSCRIPTS`, before any script runs, as soon as another dependency brings an install
+script. Review that script, then `npm install-scripts approve --no-allow-scripts-pin <pkg>` (or `deny`);
+`npm install-scripts ls` lists the pending ones.
 
 ```bash
 npm start                       # ng serve (web, development config), also watches the domain sources
