@@ -20,6 +20,7 @@
 
 export * from './domain';
 export * from './domain.events';
+export * from './in-memory-domain-event-bus';
 export * from './bibliography/bibliography';
 export * from './patient/patient';
 export * from './patient/patient.events';

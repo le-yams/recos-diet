@@ -74,6 +74,9 @@ other directly; they communicate exclusively via events.
   the bus filters with `instanceof`). Never identify an event by its class name (`FooEvent.name`): the production
   build minifies class names and they collide (every event class was named `t`, which left staging blank while
   `npm start`, not minified, worked). Each sub-domain has a sibling `*.events.ts` file.
+  `InMemoryDomainEventBus` (`in-memory-domain-event-bus.ts`) is its only implementation, used by the app and by the
+  specs: synchronous delivery in subscription order, and a subscription removed during a `publish` no longer
+  receives that event.
 - The standard sub-domain shape: subscribe to input events in the constructor, keep private state, recompute,
   publish an `...UpdatedEvent`. Expose a getter so the UI can read the current value at startup before any event
   fires.
@@ -90,12 +93,11 @@ other directly; they communicate exclusively via events.
 
 ### Domain tests
 
-Domain specs are plain unit tests, no `TestBed`. `shared.spec.ts` provides `TestDomainEventBus` (an in-memory
-bus) and `EventsCaptor` (records events of one type; `expectEventsCount`, `mapSingleEvent`, `close()`). Typical
-spec: build the class with a test bus, publish input events or call methods, assert on the captured output
-events. `warnings.spec.ts` shows the table-driven `params.forEach(param => it(...))` style used for rule
-matrices. Classes that hold subscriptions (`Warnings`, `Micronutriments`) expose `close()`; call it in
-`afterEach`.
+Domain specs are plain unit tests, no `TestBed`. `shared.spec.ts` provides `EventsCaptor` (records events of one
+type; `expectEventsCount`, `mapSingleEvent`, `close()`). Typical spec: build the class with a new
+`InMemoryDomainEventBus`, publish input events or call methods, assert on the captured output events.
+`warnings.spec.ts` shows the table-driven `params.forEach(param => it(...))` style used for rule matrices. Classes
+that hold subscriptions (`Warnings`, `Micronutriments`) expose `close()`; call it in `afterEach`.
 
 ## Web architecture (projects/web/src)
 
@@ -103,8 +105,8 @@ matrices. Classes that hold subscriptions (`Warnings`, `Micronutriments`) expose
   `app/app.config.ts` holds the root providers (zone change detection, `provideRouter` with `app/app.routes.ts`,
   HttpClient) and runs `DomainLoaderService.load()` through `provideAppInitializer`. It fetches every JSON asset
   through `JsonAssetLoaderService` (cache-busted `GET /assets/<name>.json`), wraps each in a `Memory*Repository`
-  from `infra/`, creates the bus (`InMemoryBus` wrapped by `DomainEvents` in `infra/pubsub.ts`) and builds the
-  `Domain`. Nothing renders until this resolves.
+  from `infra/`, creates the bus (`InMemoryDomainEventBus` of the domain) and builds the `Domain`. Nothing renders
+  until this resolves.
 - **Components** are standalone and list what their template uses in `imports`; dependencies come from `inject()`,
   not constructor parameters (both enforced by lint). They use the default `OnPush` change detection: anything the
   template shows must come from an `async` pipe, a signal, an input or one of the template's own events. A value

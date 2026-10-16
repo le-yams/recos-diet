@@ -19,7 +19,8 @@ import {Pathology} from './pathologies.data';
 import {SelectedPathologiesEvent} from './pathologies.event';
 import {PatientInfoUpdatedEvent} from '../patient/patient.events';
 import {DomainEventBus} from '../domain.events';
-import {EventsCaptor, TestDomainEventBus} from '../shared.spec';
+import {EventsCaptor} from '../shared.spec';
+import {InMemoryDomainEventBus} from '../in-memory-domain-event-bus';
 
 function patientInfoUpdatedEvent(bmi: number): PatientInfoUpdatedEvent {
   return new PatientInfoUpdatedEvent({heightCm: 170, weightKg: 70, bmi: bmi, adjustedWeightKg: 70});
@@ -32,7 +33,7 @@ describe('Pathologies', () => {
   let pathologies: Pathologies;
 
   beforeEach(() => {
-    events = new TestDomainEventBus();
+    events = new InMemoryDomainEventBus();
     pathologies = new Pathologies(events);
   });
 

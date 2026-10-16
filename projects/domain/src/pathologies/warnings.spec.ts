@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import {EventsCaptor, TestDomainEventBus} from '../shared.spec';
+import {EventsCaptor} from '../shared.spec';
+import {InMemoryDomainEventBus} from '../in-memory-domain-event-bus';
 import {Warnings, WarningsRead} from './warnings';
 import {SelectedPathologiesEvent} from './pathologies.event';
 import {DomainEventBus} from '../domain.events';
@@ -34,7 +35,7 @@ describe('Warnings should', () => {
   let eventsCaptor: EventsCaptor<NutritionistOpinionRequirementLevelChange>;
 
   beforeEach(() => {
-    events = new TestDomainEventBus();
+    events = new InMemoryDomainEventBus();
     eventsCaptor = new EventsCaptor(NutritionistOpinionRequirementLevelChange, events);
   });
 
@@ -114,7 +115,7 @@ describe('Warnings should', () => {
   let eventsCaptor: EventsCaptor<PathologiesWarningsChange>;
 
   beforeEach(() => {
-    events = new TestDomainEventBus();
+    events = new InMemoryDomainEventBus();
     eventsCaptor = new EventsCaptor(PathologiesWarningsChange, events);
   });
 
@@ -168,7 +169,7 @@ describe('Warnings should', () => {
   let eventsCaptor: EventsCaptor<ProductWarningsChange>;
 
   beforeEach(() => {
-    events = new TestDomainEventBus();
+    events = new InMemoryDomainEventBus();
     eventsCaptor = new EventsCaptor(ProductWarningsChange, events);
   });
 

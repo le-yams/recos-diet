@@ -17,7 +17,8 @@
 import {Patient} from './patient';
 import {DomainEventBus} from '../domain.events';
 import {PatientInfoUpdatedEvent} from './patient.events';
-import {EventsCaptor, TestDomainEventBus} from '../shared.spec';
+import {EventsCaptor} from '../shared.spec';
+import {InMemoryDomainEventBus} from '../in-memory-domain-event-bus';
 
 describe('Patient', () => {
 
@@ -26,7 +27,7 @@ describe('Patient', () => {
   let patient: Patient;
 
   beforeEach(() => {
-    events = new TestDomainEventBus();
+    events = new InMemoryDomainEventBus();
     patient = new Patient(events);
     eventsCaptor = new EventsCaptor(PatientInfoUpdatedEvent, events);
   });

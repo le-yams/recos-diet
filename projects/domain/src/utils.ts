@@ -39,8 +39,6 @@ export const group = function <T>(array: T[]): GroupableArray<T> {
 
 export type Predicate<T> = (item: T) => boolean
 
-export const TRUE_PREDICATE: Predicate<unknown> = () => true;
-
 export const notIn = function <T>(exclusion: T[]): Predicate<T> {
   return item => !exclusion.includes(item);
 }
