@@ -175,8 +175,9 @@ Actions (`.github/workflows/`):
   The release-please README says no workflow runs on such pull requests: no longer true. Release-please needs the
   repository setting *Allow GitHub Actions to create and approve pull requests* (Settings → Actions → General).
 - `deploy.yml` (reusable): lftp mirror of the build over SFTP. The `staging` and `production` environments hold the
-  `SFTP_HOST`/`SFTP_USERNAME`/`SFTP_PASSWORD` secrets and the `SFTP_DEST` variable; production is backed up as a
-  run artifact (30 days) before each deploy. `.htaccess` in the build output provides the SPA rewrite.
+  `SFTP_HOST`/`SFTP_USERNAME`/`SFTP_PASSWORD` secrets and the `SFTP_DEST` variable, and only accept deployments from
+  `master`; production is backed up as a run artifact (30 days) before each deploy. `.htaccess` in the build output
+  provides the SPA rewrite.
 - `lint-review.yml`: on pull requests only, `reviewdog/action-eslint` runs `eslint` (not `ng lint`) on
   `projects/*/src` and posts its findings on the lines the pull request adds or changes as review comments. Never
   blocking, the Lint job of `verify.yml` stays the gate. It is a separate workflow because it needs
@@ -205,5 +206,14 @@ Releases and versions:
 - Default branch is `master`; feature work happens on `feat/*` branches.
 
 Issues: #1 to #86 were imported from GitLab with their numbers, so `#N` references in the history still match.
-Issue types (Bug, Feature, Refactor) and the organization fields `Effort` and `Gain` replace GitLab's scoped labels;
-the `audit-2026-10` label marks the issues of `docs/pistes-amelioration-2026-10-03.md`.
+Every issue has a type (Bug, Feature, Refactor, Task) and three organization fields. `Effort` and `Gain`
+(Low/Medium/High) replace GitLab's scoped labels. `Category` is the area of the product the issue changes:
+`Clinical data` (content the dietitians validate: the JSON assets, the clinical texts of the pages), `Domain`
+(`projects/domain`), `UI`, `Tests`, `Tooling`, `CI/CD` (what runs in GitHub Actions, `deploy.yml` included), `Infra`
+(what the server does: `.htaccess`, HTTPS, domains) and `Docs`. A new page is `UI` even when its content is clinical,
+editing the clinical text of an existing page is `Clinical data`, and an issue that adds a domain mechanism for a
+clinical rule is `Domain`. Cross-cutting concerns are labels, not categories: `security` and `accessibility`. The
+repository is public: vulnerabilities go through GitHub's private vulnerability reporting, never a public issue.
+The `audit-2026-10` label marks the issues of `docs/pistes-amelioration-2026-10-03.md`. Their titles have no prefix:
+the piste ID (`SEC-4`...) is in the first column of the table that opens their body, and they cite each other as
+`SEC-3 (#65)`.
