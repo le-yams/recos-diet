@@ -17,17 +17,20 @@ updates:
       include: scope
     # The @angular/* packages move together, production and development ones alike (@angular/compiler-cli requires
     # the exact version of @angular/compiler): split by dependency type, their pull requests failed npm ci (ERESOLVE).
-    # A dependency joins the first group it matches, so this one comes first; then one pull request per dependency
-    # type, each with a single prefix
+    # The order of the groups does not settle it: Dependabot puts a dependency in the group it deems the most specific,
+    # and a dependency-type group beat the angular one. Hence the exclusion from the other groups, then one pull request
+    # per dependency type, each with a single prefix
     groups:
       angular:
         patterns: ['@angular/*']
         update-types: [minor, patch]
       production:
         dependency-type: production
+        exclude-patterns: ['@angular/*']
         update-types: [minor, patch]
       development:
         dependency-type: development
+        exclude-patterns: ['@angular/*']
         update-types: [minor, patch]
     # the Angular majors go through ng update and its migrations, and Angular 22 pins its peers
     # (typescript >=6.0 <6.1, zone.js ~0.15 || ~0.16). @types/node follows Node 24 (.nvmrc)
