@@ -1,5 +1,11 @@
 RewriteEngine on
 
+# HTTP is redirected to HTTPS. The host sits behind a proxy (X-WS-* headers): REQUEST_SCHEME is the scheme Apache
+# builds its own redirects with (mod_dir answers https:// over HTTPS, http:// over HTTP), while %{HTTPS} only tells
+# whether the connection reaching Apache is encrypted, which a proxy terminating TLS leaves off: a redirect loop
+RewriteCond %{REQUEST_SCHEME} !=https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -29,4 +35,7 @@ RewriteRule ^ /index.html [L]
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # HTTPS responses only, tested like the redirect above. A short max-age while the redirect proves itself: a browser
+  # refuses HTTP for the whole duration, there is no going back before it expires
+  Header always set Strict-Transport-Security "max-age=86400" "expr=%{REQUEST_SCHEME} == 'https'"
 </IfModule>
