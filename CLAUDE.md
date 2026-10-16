@@ -205,12 +205,14 @@ Actions (`.github/workflows/`):
   the other production dependencies and one for the other development ones. The order of the groups does not decide
   where a dependency goes: Dependabot picks the group it deems the most specific, and the `dependency-type` groups beat
   the `angular` one, so both exclude `@angular/*` (`exclude-patterns`). The majors come one by one. Security updates
-  come one per alert, without cooldown. Commit prefixes: `fix(deps):` for a production dependency, so that a
-  release ships it, `chore(deps-dev):` for a development one, `ci(deps):` for the actions. Merge them in squash: the
-  pull request title becomes the commit. The majors of `@angular/*` and `angular-eslint`, and the minors of
-  `typescript` and `zone.js` (pinned by Angular's peer dependencies), are ignored: they go through `ng update`. The
-  majors of `@types/node` follow `.nvmrc`. Its pull requests carry the default `dependencies` and `javascript` labels:
-  `labels: []` did not remove them.
+  come one per alert, without cooldown. Commit prefixes: `chore(deps):` for a production dependency,
+  `chore(deps-dev):` for a development one, `ci(deps):` for the actions; none of them releases anything, a version
+  bump is not a fix. Merge them in squash: the pull request title becomes the commit. When an update fixes a bug or a
+  vulnerability of a production dependency (security updates included), rename its pull request to `fix(deps): …`
+  before merging, so that a release ships it to production; otherwise it waits for the next release. The majors of
+  `@angular/*` and `angular-eslint`, and the minors of `typescript` and `zone.js` (pinned by Angular's peer
+  dependencies), are ignored: they go through `ng update`. The majors of `@types/node` follow `.nvmrc`. Its pull
+  requests carry the default `dependencies` and `javascript` labels: `labels: []` did not remove them.
 - A commit message containing a skip marker such as `[skip ci]`, even quoted in its body, cancels the push and pull
   request workflows of that commit.
 

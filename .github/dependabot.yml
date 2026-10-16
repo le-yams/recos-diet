@@ -10,10 +10,10 @@ updates:
     # a compromised release is usually unpublished within hours: wait a week before proposing it
     cooldown:
       default-days: 7
-    # fix(deps): a production dependency reaches production through a release; chore(deps-dev): releases nothing
+    # chore(deps) and chore(deps-dev): a version bump releases nothing. When it fixes a bug or a vulnerability of a
+    # production dependency, rename the pull request to fix(deps): before merging, so that a release ships it
     commit-message:
-      prefix: fix
-      prefix-development: chore
+      prefix: chore
       include: scope
     # The @angular/* packages move together, production and development ones alike (@angular/compiler-cli requires
     # the exact version of @angular/compiler): split by dependency type, their pull requests failed npm ci (ERESOLVE).
