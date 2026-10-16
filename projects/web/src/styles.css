@@ -16,6 +16,13 @@
 
 /* You can add global styles to this file, and also import other style files */
 
+/* Roboto, self-hosted instead of fonts.googleapis.com: each weight declares every subset with its unicode-range, so
+   the browser only downloads the subsets of the characters a page shows (math for "≥", combining accents of the
+   bibliography). Same weights as the M2 typography of theme.scss. */
+@import '@fontsource/roboto/300.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
