@@ -58,5 +58,11 @@
     "karma-junit-reporter": "^2.0.1",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.71.1"
+  },
+  "allowScripts": {
+    "esbuild": true,
+    "lmdb": true,
+    "msgpackr-extract": true,
+    "@parcel/watcher": true
   }
 }
