@@ -22,8 +22,7 @@
     <div id="flyingMenu">
       <button mat-button color="primary" type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()"
               onclick="this.blur()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-        <span>Menu</span>
+        <fa-icon [icon]="faBars" aria-hidden="true"></fa-icon>&nbsp;<span>Menu</span>
       </button>
     </div>
   }
@@ -36,7 +35,7 @@
       @if ((isHandset$ | async)) {
         <button mat-icon-button color="primary" type="button" aria-label="Toggle sidenav"
                 (click)="drawer.toggle()" onclick="this.blur()">
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          <fa-icon [icon]="faBars" aria-hidden="true"></fa-icon>
         </button>
       }
 

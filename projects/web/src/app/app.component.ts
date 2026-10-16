@@ -20,6 +20,7 @@ import {firstValueFrom, Observable} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {
+  faBars,
   faBookMedical,
   faPrescriptionBottle,
   faQuestionCircle,
@@ -32,7 +33,6 @@ import {AppService} from './app.service';
 import {NoSurvey, Survey, SurveyService} from './survey/survey.service';
 import {DisclaimerComponent} from './disclaimer/disclaimer.component';
 import {MatButton, MatIconButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
 import {MatNavList, MatListItem} from '@angular/material/list';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {FooterComponent} from './footer/footer.component';
@@ -45,7 +45,6 @@ import {AsyncPipe} from '@angular/common';
   imports: [
     DisclaimerComponent,
     MatButton,
-    MatIcon,
     MatSidenavContainer,
     MatSidenav,
     MatIconButton,
@@ -64,6 +63,8 @@ import {AsyncPipe} from '@angular/common';
 export class AppComponent {
 
   private router = inject(Router);
+
+  faBars = faBars;
 
   survey$: Promise<Survey>;
   noSurvey = NoSurvey;
