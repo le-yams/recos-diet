@@ -6,4 +6,27 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [L]
 
+# only the routes, which have no extension, fall back to index.html: a missing file (a bundle of a previous build,
+# deleted by the deploy) answers 404 instead of index.html, which the browser rejects with a MIME type error
+RewriteCond %{REQUEST_URI} !\.(js|css|svg|json|png|ico)$
 RewriteRule ^ /index.html [L]
+
+# without mod_headers the directives are skipped instead of failing every request with a 500
+<IfModule mod_headers.c>
+  # FilesMatch tests the file served: it also covers the routes rewritten to index.html.
+  # A stale index.html would reference the bundles of a previous build, deleted by the deploy: revalidate it on every
+  # load, like the JSON data (version.json, assets/*.json)
+  <FilesMatch "^(index\.html|.+\.json)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  # the bundles and the theme SVGs are named <name>-<hash of 8 characters>: a new content gets a new url.
+  # theme-<name>.css are not hashed and stay out: ThemeService renews their url with ?v=<version>
+  <FilesMatch "-[A-Z0-9]{8}\.(js|css|svg)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
