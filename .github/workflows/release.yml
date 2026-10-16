@@ -63,8 +63,11 @@ jobs:
             version=$RELEASED_VERSION
           else
             current=$(manifest_version "$GITHUB_SHA")
-            release_branch=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --label 'autorelease: pending' \
-              --json headRefName --jq '.[0].headRefName // empty')
+            # the REST list of the pull requests, not gh pr list --label: a label filter makes gh query the search
+            # index, which lags a few seconds behind and missed the release pull request opened by the step above
+            # (2.4.2+c00a80a built instead of 2.4.3-rc.1+c00a80a)
+            release_branch=$(gh api "repos/$GITHUB_REPOSITORY/pulls?state=open&per_page=100" \
+              --jq 'map(select(any(.labels[]; .name == "autorelease: pending")))[0].head.ref // empty')
             if [ -n "$release_branch" ]; then
               commits=$(gh api "repos/$GITHUB_REPOSITORY/compare/$current...$GITHUB_SHA" --jq .ahead_by)
               version="$(manifest_version "$release_branch")-rc.$commits+${GITHUB_SHA::7}"
