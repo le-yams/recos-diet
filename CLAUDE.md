@@ -202,9 +202,10 @@ Actions (`.github/workflows/`):
   and their `# vX.Y.Z` comment), after a 7-day cooldown. The npm minor and patch updates come grouped: first one pull
   request for all the `@angular/*` packages, production and development alike (`@angular/compiler-cli` requires the
   exact version of `@angular/compiler`: split by dependency type, they failed `npm ci` with `ERESOLVE`), then one for
-  the other production dependencies and one for the other development ones. A dependency joins the first group it
-  matches, so the `angular` group stays first. The majors come one by one. Security updates come one per alert,
-  without cooldown. Commit prefixes: `fix(deps):` for a production dependency, so that a
+  the other production dependencies and one for the other development ones. The order of the groups does not decide
+  where a dependency goes: Dependabot picks the group it deems the most specific, and the `dependency-type` groups beat
+  the `angular` one, so both exclude `@angular/*` (`exclude-patterns`). The majors come one by one. Security updates
+  come one per alert, without cooldown. Commit prefixes: `fix(deps):` for a production dependency, so that a
   release ships it, `chore(deps-dev):` for a development one, `ci(deps):` for the actions. Merge them in squash: the
   pull request title becomes the commit. The majors of `@angular/*` and `angular-eslint`, and the minors of
   `typescript` and `zone.js` (pinned by Angular's peer dependencies), are ignored: they go through `ng update`. The
