@@ -185,7 +185,16 @@ Actions (`.github/workflows/`):
   blocking, the Lint job of `verify.yml` stays the gate. It is a separate workflow because it needs
   `pull-requests: write`, and `release.yml` calls `verify.yml` with `contents: read` only: a called workflow cannot
   ask for more than its caller grants. Every finding, untouched lines included, stays in the annotations of the Lint
-  job (problem matchers of `actions/setup-node`).
+  job (problem matchers of `actions/setup-node`). Skipped on the pull requests of Dependabot.
+- Dependabot: alerts, malware alerts and security updates are on (Settings → Advanced Security), and
+  `.github/dependabot.yml` adds monthly version updates for npm and for the GitHub Actions (it updates the SHA pins
+  and their `# vX.Y.Z` comment), after a 7-day cooldown. The npm minor and patch updates come grouped, one pull
+  request for the production dependencies and one for the development ones; the majors come one by one. Security
+  updates come one per alert, without cooldown. Commit prefixes: `fix(deps):` for a production dependency, so that a
+  release ships it, `chore(deps-dev):` for a development one, `ci(deps):` for the actions. Merge them in squash: the
+  pull request title becomes the commit. The majors of `@angular/*` and `angular-eslint`, and the minors of
+  `typescript` and `zone.js` (pinned by Angular's peer dependencies), are ignored: they go through `ng update`. The
+  majors of `@types/node` follow `.nvmrc`. No labels (`labels: []`).
 - A commit message containing a skip marker such as `[skip ci]`, even quoted in its body, cancels the push and pull
   request workflows of that commit.
 
