@@ -1,0 +1,55 @@
+# Version updates once a month, grouped, and the commit conventions of release-please. The commit-message settings also
+# apply to the security updates, which stay one pull request per alert and skip the cooldown. Merge in squash: the
+# pull request title becomes the commit.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    # a compromised release is usually unpublished within hours: wait a week before proposing it
+    cooldown:
+      default-days: 7
+    # fix(deps): a production dependency reaches production through a release; chore(deps-dev): releases nothing
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope
+    # one pull request per dependency type, each with a single prefix
+    groups:
+      production:
+        dependency-type: production
+        update-types: [minor, patch]
+      development:
+        dependency-type: development
+        update-types: [minor, patch]
+    # the Angular majors go through ng update and its migrations, and Angular 22 pins its peers
+    # (typescript >=6.0 <6.1, zone.js ~0.15 || ~0.16). @types/node follows Node 24 (.nvmrc)
+    ignore:
+      - dependency-name: '@angular/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: angular-eslint
+        update-types: ['version-update:semver-major']
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+      - dependency-name: zone.js
+        update-types: ['version-update:semver-major', 'version-update:semver-minor']
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
+    # no default labels: the issues and pull requests are sorted by type and Category, not by labels
+    labels: []
+
+  # the actions are pinned by SHA: Dependabot updates the SHA and its # vX.Y.Z comment
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: ci
+      include: scope
+    groups:
+      actions:
+        patterns: ['*']
+    labels: []

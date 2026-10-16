@@ -18,6 +18,10 @@ permissions:
 jobs:
   review:
     name: Review lint
+    # Dependabot only touches package.json, package-lock.json and the workflows: nothing for eslint to review, and its
+    # runs get a read-only GITHUB_TOKEN anyway. Tested on the author of the pull request, not on github.actor, so that
+    # an update of its branch by someone else skips it too
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
