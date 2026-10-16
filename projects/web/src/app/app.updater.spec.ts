@@ -19,13 +19,15 @@ import {HttpClient, HttpRequest, provideHttpClient} from '@angular/common/http';
 import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
 import {environment} from '../environments/environment';
 import {AppService} from './app.service';
-import {AppUpdater} from './app.updater';
+import {AppUpdater, dismissalCheckDelay} from './app.updater';
 
 describe('AppUpdater', () => {
   const runningVersion = '2.3.1';
   let httpTesting: HttpTestingController;
   let confirmSpy: jasmine.Spy;
   let updater: AppUpdater;
+  // the real visibility of the Karma tab depends on the window that hosts it (Chrome reports an occluded window hidden)
+  let tabVisibility: DocumentVisibilityState;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -34,14 +36,22 @@ describe('AppUpdater', () => {
     httpTesting = TestBed.inject(HttpTestingController);
     // declining the refresh keeps the test page from reloading
     confirmSpy = spyOn(window, 'confirm').and.returnValue(false);
+    tabVisibility = 'visible';
+    spyOnProperty(document, 'visibilityState').and.callFake(() => tabVisibility);
     updater = new AppUpdater({version: runningVersion} as AppService, TestBed.inject(HttpClient));
     jasmine.clock().install();
   });
 
   afterEach(() => {
+    updater.stop();
     jasmine.clock().uninstall();
     httpTesting.verify();
   });
+
+  const changeTabVisibility = (visibility: DocumentVisibilityState) => {
+    tabVisibility = visibility;
+    document.dispatchEvent(new Event('visibilitychange'));
+  };
 
   const isVersionRequest = (request: HttpRequest<unknown>) => request.url.startsWith(location.origin + '/version.json');
   const expectVersionRequest = () => httpTesting.expectOne(isVersionRequest);
@@ -68,6 +78,67 @@ describe('AppUpdater', () => {
     updater.start();
     expectVersionRequest().flush({version: '2.4.0'});
 
+    expect(confirmSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not check for updates while the tab is hidden', () => {
+    tabVisibility = 'hidden';
+    updater.start();
+    jasmine.clock().tick(environment.appUpdateCheckDelay);
+
+    expect(httpTesting.match(isVersionRequest).length).toBe(0);
+  });
+
+  it('should check for updates when the tab comes back to the foreground', () => {
+    updater.start();
+    expectVersionRequest().flush({version: runningVersion});
+
+    changeTabVisibility('hidden');
+    changeTabVisibility('visible');
+    expectVersionRequest().flush({version: '2.4.0'});
+
+    expect(confirmSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should ask to refresh once back to the foreground when the tab was hidden during the check', () => {
+    updater.start();
+    const check = expectVersionRequest();
+    tabVisibility = 'hidden';
+    check.flush({version: '2.4.0'});
+    expect(confirmSpy).not.toHaveBeenCalled();
+
+    changeTabVisibility('visible');
+    expectVersionRequest().flush({version: '2.4.0'});
+
+    expect(confirmSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should ask again when the tab comes back after its dialog was closed by switching tabs', () => {
+    // the page only learns it is hidden after confirm() has returned
+    confirmSpy.and.callFake(() => {
+      window.setTimeout(() => changeTabVisibility('hidden'));
+      return false;
+    });
+    updater.start();
+    expectVersionRequest().flush({version: '2.4.0'});
+    jasmine.clock().tick(dismissalCheckDelay);
+
+    changeTabVisibility('visible');
+    expectVersionRequest().flush({version: '2.4.0'});
+
+    expect(confirmSpy).toHaveBeenCalledTimes(2);
+  });
+
+  it('should not ask again for a while after a refusal', () => {
+    updater.start();
+    expectVersionRequest().flush({version: '2.4.0'});
+    jasmine.clock().tick(dismissalCheckDelay);
+
+    changeTabVisibility('hidden');
+    changeTabVisibility('visible');
+    jasmine.clock().tick(environment.appUpdateCheckDelay);
+
+    expect(httpTesting.match(isVersionRequest).length).toBe(0);
     expect(confirmSpy).toHaveBeenCalledTimes(1);
   });
 });
