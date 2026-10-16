@@ -15,8 +15,14 @@ updates:
       prefix: fix
       prefix-development: chore
       include: scope
-    # one pull request per dependency type, each with a single prefix
+    # The @angular/* packages move together, production and development ones alike (@angular/compiler-cli requires
+    # the exact version of @angular/compiler): split by dependency type, their pull requests failed npm ci (ERESOLVE).
+    # A dependency joins the first group it matches, so this one comes first; then one pull request per dependency
+    # type, each with a single prefix
     groups:
+      angular:
+        patterns: ['@angular/*']
+        update-types: [minor, patch]
       production:
         dependency-type: production
         update-types: [minor, patch]
@@ -36,8 +42,6 @@ updates:
         update-types: ['version-update:semver-major', 'version-update:semver-minor']
       - dependency-name: '@types/node'
         update-types: ['version-update:semver-major']
-    # no default labels: the issues and pull requests are sorted by type and Category, not by labels
-    labels: []
 
   # the actions are pinned by SHA: Dependabot updates the SHA and its # vX.Y.Z comment
   - package-ecosystem: github-actions
@@ -52,4 +56,3 @@ updates:
     groups:
       actions:
         patterns: ['*']
-    labels: []

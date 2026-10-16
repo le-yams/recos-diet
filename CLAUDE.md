@@ -195,13 +195,17 @@ Actions (`.github/workflows/`):
   job (problem matchers of `actions/setup-node`). Skipped on the pull requests of Dependabot.
 - Dependabot: alerts, malware alerts and security updates are on (Settings → Advanced Security), and
   `.github/dependabot.yml` adds monthly version updates for npm and for the GitHub Actions (it updates the SHA pins
-  and their `# vX.Y.Z` comment), after a 7-day cooldown. The npm minor and patch updates come grouped, one pull
-  request for the production dependencies and one for the development ones; the majors come one by one. Security
-  updates come one per alert, without cooldown. Commit prefixes: `fix(deps):` for a production dependency, so that a
+  and their `# vX.Y.Z` comment), after a 7-day cooldown. The npm minor and patch updates come grouped: first one pull
+  request for all the `@angular/*` packages, production and development alike (`@angular/compiler-cli` requires the
+  exact version of `@angular/compiler`: split by dependency type, they failed `npm ci` with `ERESOLVE`), then one for
+  the other production dependencies and one for the other development ones. A dependency joins the first group it
+  matches, so the `angular` group stays first. The majors come one by one. Security updates come one per alert,
+  without cooldown. Commit prefixes: `fix(deps):` for a production dependency, so that a
   release ships it, `chore(deps-dev):` for a development one, `ci(deps):` for the actions. Merge them in squash: the
   pull request title becomes the commit. The majors of `@angular/*` and `angular-eslint`, and the minors of
   `typescript` and `zone.js` (pinned by Angular's peer dependencies), are ignored: they go through `ng update`. The
-  majors of `@types/node` follow `.nvmrc`. No labels (`labels: []`).
+  majors of `@types/node` follow `.nvmrc`. Its pull requests carry the default `dependencies` and `javascript` labels:
+  `labels: []` did not remove them.
 - A commit message containing a skip marker such as `[skip ci]`, even quoted in its body, cancels the push and pull
   request workflows of that commit.
 
