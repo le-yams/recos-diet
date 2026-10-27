@@ -32,16 +32,14 @@ updates:
         dependency-type: development
         exclude-patterns: ['@angular/*']
         update-types: [minor, patch]
-    # the Angular majors go through ng update and its migrations, and Angular 22 pins its peers
-    # (typescript >=6.0 <6.1, zone.js ~0.15 || ~0.16). @types/node follows Node 24 (.nvmrc)
+    # the Angular majors go through ng update and its migrations, and Angular 22 pins its typescript peer
+    # (>=6.0 <6.1). @types/node follows Node 24 (.nvmrc)
     ignore:
       - dependency-name: '@angular/*'
         update-types: ['version-update:semver-major']
       - dependency-name: angular-eslint
         update-types: ['version-update:semver-major']
       - dependency-name: typescript
-        update-types: ['version-update:semver-major', 'version-update:semver-minor']
-      - dependency-name: zone.js
         update-types: ['version-update:semver-major', 'version-update:semver-minor']
       - dependency-name: '@types/node'
         update-types: ['version-update:semver-major']

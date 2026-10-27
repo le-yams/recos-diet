@@ -28,7 +28,7 @@ import {
 import {Warning, WarningLevel} from '../warnings.data';
 import {SelectedProductEvent} from '../nutrition/products.events';
 
-describe('Warnings should', () => {
+describe('Warnings, for the nutritionist opinion requirement, should', () => {
 
   let warnings: Warnings;
   let events: DomainEventBus;
@@ -108,7 +108,7 @@ const HIGH_WARN = {
   level: WarningLevel.HIGH,
   sources: []
 };
-describe('Warnings should', () => {
+describe('Warnings, for the pathologies, should', () => {
 
   let warnings: Warnings;
   let events: DomainEventBus;
@@ -162,7 +162,7 @@ describe('Warnings should', () => {
 
 });
 
-describe('Warnings should', () => {
+describe('Warnings, for the selected product, should', () => {
 
   let warnings: Warnings;
   let events: DomainEventBus;

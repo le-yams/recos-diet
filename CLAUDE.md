@@ -51,7 +51,13 @@ npm run generate:version        # writes projects/web/src/version.json (gitignor
 `ng build` targets a single project: always name it (`ng build web`), there is no default project.
 
 Tests use Karma + Jasmine and launch a real `Chrome` (see `karma.conf.js` in each project). Headless:
-`--browsers=ChromeHeadless`. Reports go to `reports/<project>/` (gitignored).
+`--browsers=ChromeHeadless`. Reports go to `reports/<project>/` (gitignored). Karma runs the jasmine-core 4.6 that
+`karma-jasmine` bundles; the root `jasmine-core` only serves the `kjhtml` reporter, absent in CI
+(`--reporters=progress,junit`), which from version 7 on loads it instead. So only a local run with the default
+reporters uses jasmine 7: it rejects two suites or two specs of the same name under the same parent
+(`forbidDuplicateNames`), and warns that `jasmine-core isn't an ES module`, because the Angular Karma builder serves
+every file as a module (harmless). There is no zone.js, hence no `fakeAsync` / `waitForAsync`: timers go through
+`jasmine.clock()`, requests through `HttpTestingController`, and a component spec waits with `fixture.whenStable()`.
 
 Run one project, or one spec file:
 
@@ -67,9 +73,9 @@ single quotes (`quote_type` of `.editorconfig`) and `{X}` without inner spaces. 
 restores it, for example after an `ng update` migration that rewrote code as `{ X }`.
 
 The production build enforces an `initial` bundle budget in `angular.json` (warning 1mb, error 1.5mb) and CI runs
-it, so exceeding the error fails the pipeline. Reference measure on 2026-10-07 (Angular 22, `application`
-builder, domain compiled from its sources): 951.27 kB initial (main 869.33 kB, styles 47.35 kB, polyfills
-34.59 kB). A warning means the bundle drifted: find out why before raising the threshold.
+it, so exceeding the error fails the pipeline. Reference measure on 2026-10-27 (Angular 22.2, `application`
+builder, domain compiled from its sources, zoneless so no `polyfills` chunk): 918.86 kB initial (main 856.54 kB,
+styles 62.33 kB). A warning means the bundle drifted: find out why before raising the threshold.
 
 The web app builds with `@angular/build` (esbuild, Vite dev server); `outputPath.browser` is `""` so the build
 lands directly in `dist/web`, which the deploy uploads as is (with `.htaccess` and `version.json` at its root).
@@ -113,16 +119,17 @@ that hold subscriptions (`Warnings`, `Micronutriments`) expose `close()`; call i
 ## Web architecture (projects/web/src)
 
 - **Bootstrap**: standalone app, no NgModule. `main.ts` calls `bootstrapApplication(AppComponent, appConfig)`;
-  `app/app.config.ts` holds the root providers (zone change detection, `provideRouter` with `app/app.routes.ts`,
-  HttpClient) and runs `DomainLoaderService.load()` through `provideAppInitializer`. It fetches every JSON asset
-  through `JsonAssetLoaderService` (cache-busted `GET /assets/<name>.json`), wraps each in a `Memory*Repository`
-  from `infra/`, creates the bus (`InMemoryDomainEventBus` of the domain) and builds the `Domain`. Nothing renders
-  until this resolves.
+  `app/app.config.ts` holds the root providers (`provideZonelessChangeDetection()`, `provideRouter` with
+  `app/app.routes.ts`, HttpClient) and runs `DomainLoaderService.load()` through `provideAppInitializer`. It
+  fetches every JSON asset through `JsonAssetLoaderService` (cache-busted `GET /assets/<name>.json`), wraps each in
+  a `Memory*Repository` from `infra/`, creates the bus (`InMemoryDomainEventBus` of the domain) and builds the
+  `Domain`. Nothing renders until this resolves.
 - **Components** are standalone and list what their template uses in `imports`; dependencies come from `inject()`,
-  not constructor parameters (both enforced by lint). They use the default `OnPush` change detection: anything the
-  template shows must come from an `async` pipe, a signal, an input or one of the template's own events. A value
-  assigned in a `subscribe()` callback only shows up when something else refreshes the view (see `toSignal` in
-  `AppComponent.currentRoute`).
+  not constructor parameters (both enforced by lint). They use the default `OnPush` change detection, and the app is
+  zoneless (no zone.js, no `polyfills`): anything the template shows must come from an `async` pipe, a signal, an
+  input or one of the template's own events. A value assigned in a `subscribe()`, `setTimeout` or DOM listener
+  callback only shows up when something else refreshes the view (see `toSignal` in `AppComponent.currentRoute`).
+  `AppUpdater` and `ThemeService` refresh no view: they only call `confirm()` and swap the theme `<link>`.
 - **`DomainService`** (`app/domain.service.ts`) exposes the built `Domain` and its sub-domains to Angular.
 - **Feature services** (`app/<feature>/<feature>.service.ts`) are the domain→RxJS bridge: seed a
   `BehaviorSubject` from the domain getter, then subscribe to the matching `...UpdatedEvent` on
@@ -210,8 +217,8 @@ Actions (`.github/workflows/`):
   bump is not a fix. Merge them in squash: the pull request title becomes the commit. When an update fixes a bug or a
   vulnerability of a production dependency (security updates included), rename its pull request to `fix(deps): …`
   before merging, so that a release ships it to production; otherwise it waits for the next release. The majors of
-  `@angular/*` and `angular-eslint`, and the minors of `typescript` and `zone.js` (pinned by Angular's peer
-  dependencies), are ignored: they go through `ng update`. The majors of `@types/node` follow `.nvmrc`. Its pull
+  `@angular/*` and `angular-eslint`, and the minors of `typescript` (pinned by Angular's peer dependency), are
+  ignored: they go through `ng update`. The majors of `@types/node` follow `.nvmrc`. Its pull
   requests carry the default `dependencies` and `javascript` labels: `labels: []` did not remove them.
 - A commit message containing a skip marker such as `[skip ci]`, even quoted in its body, cancels the push and pull
   request workflows of that commit.

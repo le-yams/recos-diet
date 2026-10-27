@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetection} from '@angular/core';
+import {ApplicationConfig, inject, provideAppInitializer, provideZonelessChangeDetection} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {provideHttpClient, withXhr} from '@angular/common/http';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
@@ -24,7 +24,7 @@ import {ThemeService} from './theme/theme.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection(),
+    provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(withXhr()),
     provideAppInitializer(() => inject(DomainLoaderService).load()),
