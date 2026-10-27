@@ -258,7 +258,8 @@ and `Gain` (Low/Medium/High) replace GitLab's scoped labels. `Category` is the a
 (what the server does: `.htaccess`, HTTPS, domains) and `Docs`. A new page is `UI` even when its content is clinical,
 editing the clinical text of an existing page is `Clinical data`, and an issue that adds a domain mechanism for a
 clinical rule is `Domain`. Cross-cutting concerns are labels, not categories: `security` and `accessibility`. The
-repository is public: vulnerabilities go through GitHub's private vulnerability reporting, never a public issue.
+repository is public: vulnerabilities go through GitHub's private vulnerability reporting, never a public issue;
+`SECURITY.md` tells reporters how, and what counts as one (a wrong clinical recommendation is a public issue).
 The `audit-2026-10` label marks the issues of `docs/pistes-amelioration-2026-10-03.md`. Their titles have no prefix:
 the piste ID (`SEC-4`...) is in the first column of the table that opens their body, and they cite each other as
 `SEC-3 (#65)`.
