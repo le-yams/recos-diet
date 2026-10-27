@@ -51,13 +51,14 @@ npm run generate:version        # writes projects/web/src/version.json (gitignor
 `ng build` targets a single project: always name it (`ng build web`), there is no default project.
 
 Tests use Karma + Jasmine and launch a real `Chrome` (see `karma.conf.js` in each project). Headless:
-`--browsers=ChromeHeadless`. Reports go to `reports/<project>/` (gitignored). Karma runs the jasmine-core 4.6 that
-`karma-jasmine` bundles; the root `jasmine-core` only serves the `kjhtml` reporter, absent in CI
-(`--reporters=progress,junit`), which from version 7 on loads it instead. So only a local run with the default
-reporters uses jasmine 7: it rejects two suites or two specs of the same name under the same parent
-(`forbidDuplicateNames`), and warns that `jasmine-core isn't an ES module`, because the Angular Karma builder serves
-every file as a module (harmless). There is no zone.js, hence no `fakeAsync` / `waitForAsync`: timers go through
-`jasmine.clock()`, requests through `HttpTestingController`, and a component spec waits with `fixture.whenStable()`.
+`--browsers=ChromeHeadless`. Reports go to `reports/<project>/` (gitignored). `karma-jasmine` bundles its own
+jasmine-core (4.6): the root `jasmine-core` (7) only runs because the `kjhtml` reporter (`karma-jasmine-html-reporter`
+2.3 or later) loads it instead. Keep `kjhtml` in the reporters, CI included (`--reporters=progress,kjhtml,junit`):
+without it, both `test.ts` throw (`jasmine 4.6.1 runs instead of jasmine-core ~7.0.2`). Jasmine 7 rejects two suites
+or two specs of the same name under the same parent (`forbidDuplicateNames`), and warns that `jasmine-core isn't an
+ES module`, because the Angular Karma builder serves every file as a module (harmless). There is no zone.js, hence no
+`fakeAsync` / `waitForAsync`: timers go through `jasmine.clock()`, requests through `HttpTestingController`, and a
+component spec waits with `fixture.whenStable()`.
 
 Run one project, or one spec file:
 
