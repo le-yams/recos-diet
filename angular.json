@@ -48,9 +48,6 @@
               "browser": ""
             },
             "index": "projects/web/src/index.html",
-            "polyfills": [
-              "projects/web/src/polyfills.ts"
-            ],
             "tsConfig": "projects/web/tsconfig.app.json",
             "assets": [
               "projects/web/src/assets",
@@ -132,9 +129,6 @@
           "builder": "@angular/build:karma",
           "options": {
             "main": "projects/web/src/test.ts",
-            "polyfills": [
-              "projects/web/src/polyfills.ts"
-            ],
             "tsConfig": "projects/web/tsconfig.spec.json",
             "karmaConfig": "projects/web/karma.conf.js",
             "assets": [
