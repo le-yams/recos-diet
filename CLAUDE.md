@@ -143,7 +143,9 @@ that hold subscriptions (`Warnings`, `Micronutriments`) expose `close()`; call i
 - `infra/utils.ts` `Verbose` logging is on when the hostname contains `localhost` or `staging`.
 - **Material theme**: `src/theme.scss` (M2 API, deep-purple/amber like the former `deeppurple-amber` prebuilt
   theme) only includes the `*-theme` mixins of the components in use. Using a new Material component means adding
-  its mixin there, otherwise it renders without theme colors.
+  its mixin there, otherwise it renders without theme colors. It also styles the side menu (`.mat-mdc-nav-list`):
+  token overrides through `mat.list-overrides`, which fail the build if Material renames a token, rather than
+  hand-written `--mat-*` variables or legacy classes that stop applying silently.
 - **Seasonal themes** (Christmas, Halloween, April Fools) only add decorations, they do not touch the Material theme.
   `assets/theme.json` picks one: `"auto"` (the season of the day, `MM-DD` bounds included, a season may span the new
   year), `"none"`, or a theme name to force. `ThemeService.start()`, run by an app initializer, appends

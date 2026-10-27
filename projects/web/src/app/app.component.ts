@@ -28,7 +28,7 @@ import {
   faVials,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
-import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
+import {IsActiveMatchOptions, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {AppService} from './app.service';
 import {NoSurvey, Survey, SurveyService} from './survey/survey.service';
 import {DisclaimerComponent} from './disclaimer/disclaimer.component';
@@ -51,6 +51,7 @@ import {AsyncPipe} from '@angular/common';
     MatNavList,
     MatListItem,
     RouterLink,
+    RouterLinkActive,
     FaIconComponent,
     MatSidenavContent,
     RouterOutlet,
@@ -75,6 +76,14 @@ export class AppComponent {
     filter(e => e instanceof NavigationEnd),
     map(() => this.router.url.split('?')[0])
   ));
+
+  // exact paths: '/' prefixes every route. Query params ignored: the bibliography links open /bibliography?index=N
+  readonly activeMenuOptions: IsActiveMatchOptions = {
+    paths: 'exact',
+    queryParams: 'ignored',
+    matrixParams: 'ignored',
+    fragment: 'ignored'
+  };
 
   menus: Menu[] = [
     {
@@ -128,10 +137,6 @@ export class AppComponent {
     if (isHandset) {
       await drawer.close();
     }
-  }
-
-  public isSelected(menu: Menu) {
-    return this.currentRoute() === menu.route;
   }
 
 }

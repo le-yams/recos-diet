@@ -48,4 +48,9 @@ describe('routes', () => {
     await harness.navigateByUrl('/products');
     expect(router.url).toBe('/products');
   });
+
+  it('should give each page a title', () => {
+    const untitledPages = routes.filter(route => route.component && !route.title).map(route => route.path);
+    expect(untitledPages).toEqual([]);
+  });
 });

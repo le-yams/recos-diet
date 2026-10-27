@@ -15,10 +15,11 @@
  */
 
 import {ApplicationConfig, inject, provideAppInitializer, provideZonelessChangeDetection} from '@angular/core';
-import {provideRouter} from '@angular/router';
+import {provideRouter, TitleStrategy} from '@angular/router';
 import {provideHttpClient, withXhr} from '@angular/common/http';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {routes} from './app.routes';
+import {AppTitleStrategy} from './app.title-strategy';
 import {DomainLoaderService} from '../infra/domain-loader.service';
 import {ThemeService} from './theme/theme.service';
 
@@ -26,6 +27,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZonelessChangeDetection(),
     provideRouter(routes),
+    {provide: TitleStrategy, useClass: AppTitleStrategy},
     provideHttpClient(withXhr()),
     provideAppInitializer(() => inject(DomainLoaderService).load()),
     provideAppInitializer(() => inject(ThemeService).start()),
