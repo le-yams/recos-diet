@@ -31,7 +31,7 @@ export class EventsCaptor<T extends DomainEvent> {
   }
 
   expectEventsCount(expected: number) {
-    expect(this.raisedEvents).toHaveSize(expected);
+    expect(this.raisedEvents).toHaveLength(expected);
   }
 
   mapSingleEvent<U>(mapper: (evt: T) => U): U {

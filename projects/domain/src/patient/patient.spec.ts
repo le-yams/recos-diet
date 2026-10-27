@@ -57,7 +57,7 @@ describe('Patient', () => {
       heightCm: 182,
       weightKg: 86
     });
-    expect(patient.isOverweight()).toBeTrue();
+    expect(patient.isOverweight()).toBe(true);
     expect(patient.adjustedWeightKg).toBeCloseTo(83.61, 2);
   });
 
@@ -74,7 +74,7 @@ describe('Patient', () => {
       heightCm: 175,
       weightKg: 76.3
     });
-    expect(patient.isOverweight()).toBeFalse();
+    expect(patient.isOverweight()).toBe(false);
   });
 
   it('should emit an event on patient info update', () => {
@@ -108,7 +108,7 @@ describe('Patient', () => {
       it(`should ignore ${param.name}`, () => {
         const before = {height: patient.heightCm, weight: patient.weightKg, bmi: patient.bmi};
         eventsCaptor.expectEventsCount(0);
-        expect(patient.updateSize(param.size)).toBeFalse();
+        expect(patient.updateSize(param.size)).toBe(false);
         expect(patient.heightCm).toBe(before.height);
         expect(patient.weightKg).toBe(before.weight);
         expect(patient.bmi).toBe(before.bmi);
@@ -120,12 +120,12 @@ describe('Patient', () => {
       expect(patient.updateSize({
         heightCm: Patient.HEIGHT_CM.min,
         weightKg: Patient.WEIGHT_KG.max
-      })).toBeTrue();
+      })).toBe(true);
       eventsCaptor.expectEventsCount(1);
     });
 
     it('should update a single field', () => {
-      expect(patient.updateSize({weightKg: 80})).toBeTrue();
+      expect(patient.updateSize({weightKg: 80})).toBe(true);
       expect(patient.weightKg).toBe(80);
       expect(patient.heightCm).toBe(170);
     });

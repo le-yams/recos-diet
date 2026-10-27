@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import type {MockInstance} from 'vitest';
 import {TestBed} from '@angular/core/testing';
 import {HttpClient, HttpRequest, provideHttpClient} from '@angular/common/http';
 import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
@@ -24,9 +25,9 @@ import {AppUpdater, dismissalCheckDelay} from './app.updater';
 describe('AppUpdater', () => {
   const runningVersion = '2.3.1';
   let httpTesting: HttpTestingController;
-  let confirmSpy: jasmine.Spy;
+  let confirmSpy: MockInstance<typeof window.confirm>;
   let updater: AppUpdater;
-  // the real visibility of the Karma tab depends on the window that hosts it (Chrome reports an occluded window hidden)
+  // the real visibility of the test page depends on where it runs (jsdom, a browser tab hidden behind another window)
   let tabVisibility: DocumentVisibilityState;
 
   beforeEach(() => {
@@ -35,16 +36,16 @@ describe('AppUpdater', () => {
     });
     httpTesting = TestBed.inject(HttpTestingController);
     // declining the refresh keeps the test page from reloading
-    confirmSpy = spyOn(window, 'confirm').and.returnValue(false);
+    confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(false);
     tabVisibility = 'visible';
-    spyOnProperty(document, 'visibilityState').and.callFake(() => tabVisibility);
+    vi.spyOn(document, 'visibilityState', 'get').mockImplementation(() => tabVisibility);
     updater = new AppUpdater({version: runningVersion} as AppService, TestBed.inject(HttpClient));
-    jasmine.clock().install();
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
     updater.stop();
-    jasmine.clock().uninstall();
+    vi.useRealTimers();
     httpTesting.verify();
   });
 
@@ -60,7 +61,7 @@ describe('AppUpdater', () => {
     updater.start();
     expectVersionRequest().error(new ProgressEvent('error'));
 
-    jasmine.clock().tick(environment.appUpdateCheckDelay);
+    vi.advanceTimersByTime(environment.appUpdateCheckDelay);
 
     const nextChecks = httpTesting.match(isVersionRequest);
     expect(nextChecks.length).toBe(1);
@@ -84,7 +85,7 @@ describe('AppUpdater', () => {
   it('should not check for updates while the tab is hidden', () => {
     tabVisibility = 'hidden';
     updater.start();
-    jasmine.clock().tick(environment.appUpdateCheckDelay);
+    vi.advanceTimersByTime(environment.appUpdateCheckDelay);
 
     expect(httpTesting.match(isVersionRequest).length).toBe(0);
   });
@@ -115,13 +116,13 @@ describe('AppUpdater', () => {
 
   it('should ask again when the tab comes back after its dialog was closed by switching tabs', () => {
     // the page only learns it is hidden after confirm() has returned
-    confirmSpy.and.callFake(() => {
+    confirmSpy.mockImplementation(() => {
       window.setTimeout(() => changeTabVisibility('hidden'));
       return false;
     });
     updater.start();
     expectVersionRequest().flush({version: '2.4.0'});
-    jasmine.clock().tick(dismissalCheckDelay);
+    vi.advanceTimersByTime(dismissalCheckDelay);
 
     changeTabVisibility('visible');
     expectVersionRequest().flush({version: '2.4.0'});
@@ -132,11 +133,11 @@ describe('AppUpdater', () => {
   it('should not ask again for a while after a refusal', () => {
     updater.start();
     expectVersionRequest().flush({version: '2.4.0'});
-    jasmine.clock().tick(dismissalCheckDelay);
+    vi.advanceTimersByTime(dismissalCheckDelay);
 
     changeTabVisibility('hidden');
     changeTabVisibility('visible');
-    jasmine.clock().tick(environment.appUpdateCheckDelay);
+    vi.advanceTimersByTime(environment.appUpdateCheckDelay);
 
     expect(httpTesting.match(isVersionRequest).length).toBe(0);
     expect(confirmSpy).toHaveBeenCalledTimes(1);

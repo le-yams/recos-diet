@@ -5,13 +5,10 @@
     "outDir": "../../out-tsc/spec",
     "resolveJsonModule": true,
     "types": [
-      "jasmine",
+      "vitest/globals",
       "node"
     ]
   },
-  "files": [
-    "src/test.ts"
-  ],
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.d.ts"

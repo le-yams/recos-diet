@@ -137,7 +137,7 @@ describe('Products', () => {
   it('should not filter products on EER without obesity', () => {
     events.publish(new SelectedPathologiesEvent([Pathology.CVVHDF]));
 
-    expect(availableProducts()).toHaveSize(4);
+    expect(availableProducts()).toHaveLength(4);
     expect(selectedProduct()).toBe('Nutrison Protein Plus Energy');
   });
 
