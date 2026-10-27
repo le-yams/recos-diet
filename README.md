@@ -12,7 +12,7 @@ Prérequis : Node 24 (voir `.nvmrc`).
 ```bash
 npm ci
 npm start   # serveur de développement sur http://localhost:4200
-npm test    # tests unitaires (Karma, Chrome)
+npm test    # tests unitaires (Vitest, jsdom)
 ```
 
 ## Livraison

@@ -10,11 +10,13 @@
       "prefix": "domain",
       "architect": {
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/domain/src/test.ts",
-            "tsConfig": "projects/domain/tsconfig.spec.json",
-            "karmaConfig": "projects/domain/karma.conf.js"
+            "buildTarget": "web:build:development",
+            "runnerConfig": "projects/domain/vitest-base.config.mts",
+            "exclude": [
+              "shared.spec.ts"
+            ]
           }
         },
         "lint": {
@@ -126,20 +128,12 @@
           }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/web/src/test.ts",
-            "tsConfig": "projects/web/tsconfig.spec.json",
-            "karmaConfig": "projects/web/karma.conf.js",
-            "assets": [
-              "projects/web/src/assets",
-              "projects/web/src/version.json"
-            ],
-            "styles": [
-              "projects/web/src/theme.scss",
-              "projects/web/src/styles.css"
-            ],
-            "scripts": []
+            "runnerConfig": "projects/web/vitest-base.config.mts",
+            "coverageExclude": [
+              "**/*.html"
+            ]
           }
         },
         "lint": {

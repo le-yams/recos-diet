@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
+import type {Mock} from 'vitest';
 import {TestBed} from '@angular/core/testing';
 import {JsonAssetLoaderService} from '../../infra/json-asset-loader.service';
 import {NoSurvey, SurveyService} from './survey.service';
 
 describe('SurveyService', () => {
   const googleFormUrl = 'https://docs.google.com/forms/d/e/form-id/viewform?embedded=true';
-  let load: jasmine.Spy;
+  let load: Mock;
   let service: SurveyService;
 
   function givenSurveyJson(json: {enabled: boolean, url: string}) {
-    load = jasmine.createSpy('load').and.resolveTo(json);
+    load = vi.fn().mockResolvedValue(json);
     TestBed.configureTestingModule({
       providers: [{provide: JsonAssetLoaderService, useValue: {load}}]
     });
@@ -36,7 +37,7 @@ describe('SurveyService', () => {
 
     await Promise.all([service.get(), service.get()]);
 
-    expect(load).toHaveBeenCalledOnceWith('survey');
+    expect(load).toHaveBeenCalledExactlyOnceWith('survey');
   });
 
   it('should enable a Google Forms survey', async () => {
@@ -44,7 +45,7 @@ describe('SurveyService', () => {
 
     const survey = await service.get();
 
-    expect(survey.enabled).toBeTrue();
+    expect(survey.enabled).toBe(true);
     expect(survey.url).toBeTruthy();
   });
 

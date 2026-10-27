@@ -1,3 +1,6 @@
+import recosEnterale from '../assets/recos-enterale.json';
+import recosParenterale from '../assets/recos-parenterale.json';
+
 const ALLOWED_KEYS = ['micronutriment', 'administrationTerms', 'clauses', 'excludedClauses', 'sources'];
 
 interface Reco {
@@ -11,18 +14,18 @@ interface RecosFile {
   pathologiesRecommendations: {pathology: string, recommendations: Reco[]}[];
 }
 
-describe('recos data', () => {
-  ['recos-enterale', 'recos-parenterale'].forEach(name => {
-    describe(name, () => {
-      let allRecos: Reco[];
+const recosFiles: Record<string, RecosFile> = {
+  'recos-enterale': recosEnterale,
+  'recos-parenterale': recosParenterale
+};
 
-      beforeAll(async () => {
-        const file: RecosFile = await (await fetch(`/assets/${name}.json`)).json();
-        allRecos = [
-          ...file.sharedRecommendations,
-          ...file.pathologiesRecommendations.flatMap(p => p.recommendations)
-        ];
-      });
+describe('recos data', () => {
+  Object.entries(recosFiles).forEach(([name, file]) => {
+    describe(name, () => {
+      const allRecos: Reco[] = [
+        ...file.sharedRecommendations,
+        ...file.pathologiesRecommendations.flatMap(p => p.recommendations)
+      ];
 
       it('should only use known recommendation keys', () => {
         const unknownKeys = allRecos.flatMap(reco => Object.keys(reco).filter(key => !ALLOWED_KEYS.includes(key)));

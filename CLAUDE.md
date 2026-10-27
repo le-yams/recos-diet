@@ -13,8 +13,9 @@ values and JSON data are in French.
 Angular 22 workspace with two projects declared in `angular.json`:
 
 - `projects/domain` — the domain, imported as `@recos-diet/domain`. Pure TypeScript domain model with no Angular
-  dependency (only its `src/test.ts` initializes the Angular test environment). All clinical computation lives
-  here. It is a `library` project with `test` and `lint` targets only: no build target, nothing is packaged.
+  dependency. All clinical computation lives here. It is a `library` project with `test` and `lint` targets only:
+  no build target, nothing is packaged. Its `test` target compiles the specs with the options of
+  `web:build:development` (`buildTarget`), since the `unit-test` builder requires a build target.
 - `projects/web` — the Angular application (Material + FontAwesome). It imports the domain through the
   `@recos-diet/domain` alias, which `tsconfig.json` maps to the sources (`projects/domain/src/public-api.ts`).
 
@@ -50,15 +51,15 @@ npm run generate:version        # writes projects/web/src/version.json (gitignor
 
 `ng build` targets a single project: always name it (`ng build web`), there is no default project.
 
-Tests use Karma + Jasmine and launch a real `Chrome` (see `karma.conf.js` in each project). Headless:
-`--browsers=ChromeHeadless`. Reports go to `reports/<project>/` (gitignored). `karma-jasmine` bundles its own
-jasmine-core (4.6): the root `jasmine-core` (7) only runs because the `kjhtml` reporter (`karma-jasmine-html-reporter`
-2.3 or later) loads it instead. Keep `kjhtml` in the reporters, CI included (`--reporters=progress,kjhtml,junit`):
-without it, both `test.ts` throw (`jasmine 4.6.1 runs instead of jasmine-core ~7.0.2`). Jasmine 7 rejects two suites
-or two specs of the same name under the same parent (`forbidDuplicateNames`), and warns that `jasmine-core isn't an
-ES module`, because the Angular Karma builder serves every file as a module (harmless). There is no zone.js, hence no
-`fakeAsync` / `waitForAsync`: timers go through `jasmine.clock()`, requests through `HttpTestingController`, and a
-component spec waits with `fixture.whenStable()`.
+Tests run on Vitest through the `@angular/build:unit-test` builder, in jsdom (no browser). `angular.json` sets the
+builder, and the `vitest-base.config.mts` of each project the rest: spies restored after each test as with Jasmine
+(`restoreMocks`), and the report paths. The builder initializes TestBed itself, there is no `test.ts`. Specs use the
+Vitest globals (`describe`, `it`, `expect`, `vi`, typed by `vitest/globals`). Reports go to `reports/<project>/`
+(gitignored): JUnit with `--reporters=junit`, Cobertura with `--coverage` (templates excluded, as with Karma). A spec
+reads a JSON asset through an import (`import themeAsset from '../../assets/theme.json'`), not a `fetch`: nothing
+serves the assets. There is no zone.js, hence no `fakeAsync` / `waitForAsync`: timers go through
+`vi.useFakeTimers()`, requests through `HttpTestingController`, and a component spec waits with
+`fixture.whenStable()`. The builder refuses `vi.mock` of a relative import: replace a dependency through TestBed.
 
 Run one project, or one spec file:
 
@@ -67,7 +68,7 @@ npx ng test domain --no-watch
 npx ng test domain --no-watch --include='**/patient.spec.ts'
 ```
 
-`fdescribe`/`fit` also work for focusing within a file.
+`describe.only` / `it.only` focus within a file, and `--filter=<regex>` runs the tests whose name matches.
 
 `eslint.config.js` (flat config, shared by both projects) also enforces the `.ts` code style through `@stylistic`:
 single quotes (`quote_type` of `.editorconfig`) and `{X}` without inner spaces. `npx ng lint <project> --fix`
@@ -112,7 +113,8 @@ other directly; they communicate exclusively via events.
 ### Domain tests
 
 Domain specs are plain unit tests, no `TestBed`. `shared.spec.ts` provides `EventsCaptor` (records events of one
-type; `expectEventsCount`, `mapSingleEvent`, `close()`). Typical spec: build the class with a new
+type; `expectEventsCount`, `mapSingleEvent`, `close()`); it holds no test, so `exclude` (`angular.json`) keeps Vitest
+from rejecting it, and the specs that import it still compile it. Typical spec: build the class with a new
 `InMemoryDomainEventBus`, publish input events or call methods, assert on the captured output events.
 `warnings.spec.ts` shows the table-driven `params.forEach(param => it(...))` style used for rule matrices. Classes
 that hold subscriptions (`Warnings`, `Micronutriments`) expose `close()`; call it in `afterEach`.
@@ -170,7 +172,7 @@ value silently breaks data matching; change both sides together.
 The repository is https://github.com/recos-diet/recos-diet (moved from GitLab on 2026-10-14). CI runs on GitHub
 Actions (`.github/workflows/`):
 
-- `verify.yml`: lint, build (initial budget included), domain and web tests in ChromeHeadless, and `npm audit
+- `verify.yml`: lint, build (initial budget included), domain and web tests (Vitest, jsdom), and `npm audit
   --omit=dev --audit-level=high`, blocking on ready pull requests only. Runs on pull requests; `release.yml` calls it.
   The Lint job lints each project in its own step: GitHub shows at most 10 warning annotations per step.
   `maxWarnings: 0` (`angular.json`, both projects) makes a warning fail `ng lint` like an error, so `npm run lint`

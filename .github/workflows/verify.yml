@@ -61,11 +61,12 @@ jobs:
       # prebuild writes version.json; fails when the initial bundle exceeds its budget (angular.json)
       - name: Build
         run: npm run build
-      # kjhtml loads the root jasmine-core instead of the 4.6 that karma-jasmine bundles: without it, test.ts fails
+      # Vitest in jsdom. The JUnit and Cobertura reports land in reports/<project> (vitest-base.config.mts of each
+      # project); github-actions annotates the failed tests
       - name: Test domain
-        run: npx ng test domain --no-watch --no-progress --code-coverage --browsers=ChromeHeadless --reporters=progress,kjhtml,junit
+        run: npx ng test domain --no-watch --no-progress --coverage --reporters=default --reporters=junit --reporters=github-actions
       - name: Test web
-        run: npx ng test web --no-watch --no-progress --code-coverage --browsers=ChromeHeadless --reporters=progress,kjhtml,junit
+        run: npx ng test web --no-watch --no-progress --coverage --reporters=default --reporters=junit --reporters=github-actions
       # one Coveralls build for both projects: comment and status on pull requests, master builds serve as the base of
       # the comparison. Authenticated by the GITHUB_TOKEN, no secret. Never blocking: a Coveralls outage must not hold
       # back a release, such as a clinical data fix

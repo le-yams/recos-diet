@@ -29,7 +29,7 @@ describe('InMemoryDomainEventBus', () => {
   });
 
   it('should not forward an event to the subscribers of another class with the same name', () => {
-    const consumer = jasmine.createSpy('consumer');
+    const consumer = vi.fn();
     events.subscribe(FirstEvent, consumer);
 
     events.publish(new SecondEvent());
@@ -38,13 +38,13 @@ describe('InMemoryDomainEventBus', () => {
   });
 
   it('should forward an event to the subscribers of its class', () => {
-    const consumer = jasmine.createSpy('consumer');
+    const consumer = vi.fn();
     events.subscribe(FirstEvent, consumer);
     const event = new FirstEvent();
 
     events.publish(event);
 
-    expect(consumer).toHaveBeenCalledOnceWith(event);
+    expect(consumer).toHaveBeenCalledExactlyOnceWith(event);
   });
 
   it('should forward an event to its subscribers in subscription order', () => {
@@ -58,7 +58,7 @@ describe('InMemoryDomainEventBus', () => {
   });
 
   it('should not forward an event to a consumer that unsubscribed', () => {
-    const consumer = jasmine.createSpy('consumer');
+    const consumer = vi.fn();
     const subscription = events.subscribe(FirstEvent, consumer);
 
     subscription.unsubscribe();
@@ -68,8 +68,8 @@ describe('InMemoryDomainEventBus', () => {
   });
 
   it('should keep the other subscriptions when a subscription is unsubscribed twice', () => {
-    const otherConsumer = jasmine.createSpy('otherConsumer');
-    const subscription = events.subscribe(FirstEvent, jasmine.createSpy('consumer'));
+    const otherConsumer = vi.fn();
+    const subscription = events.subscribe(FirstEvent, vi.fn());
     events.subscribe(FirstEvent, otherConsumer);
 
     subscription.unsubscribe();
@@ -80,11 +80,11 @@ describe('InMemoryDomainEventBus', () => {
   });
 
   it('should not forward an event to a consumer unsubscribed while that event is being published', () => {
-    const unsubscribingConsumer = jasmine.createSpy('unsubscribingConsumer');
-    const laterConsumer = jasmine.createSpy('laterConsumer');
+    const unsubscribingConsumer = vi.fn();
+    const laterConsumer = vi.fn();
     events.subscribe(FirstEvent, unsubscribingConsumer);
     const laterSubscription = events.subscribe(FirstEvent, laterConsumer);
-    unsubscribingConsumer.and.callFake(() => laterSubscription.unsubscribe());
+    unsubscribingConsumer.mockImplementation(() => laterSubscription.unsubscribe());
 
     events.publish(new FirstEvent());
 

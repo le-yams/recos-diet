@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
+import type {Mock} from 'vitest';
 import {DOCUMENT} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
 import {JsonAssetLoaderService} from '../../infra/json-asset-loader.service';
 import {environment} from '../../environments/environment';
 import {currentTheme, JsonTheme, ThemeService} from './theme.service';
+import themeAsset from '../../assets/theme.json';
 
 const seasons = [
   {theme: 'halloween', from: '10-20', to: '11-01'},
@@ -27,12 +29,12 @@ const seasons = [
 
 describe('ThemeService', () => {
   const themeJson = (theme: string): JsonTheme => ({theme, seasons});
-  let load: jasmine.Spy;
+  let load: Mock;
   let service: ThemeService;
   // detached from the test runner page: its stylesheets are not fetched
   let page: Document;
 
-  function givenAssetLoad(assetLoad: jasmine.Spy) {
+  function givenAssetLoad(assetLoad: Mock) {
     load = assetLoad;
     page = document.implementation.createHTMLDocument();
     TestBed.configureTestingModule({
@@ -46,7 +48,7 @@ describe('ThemeService', () => {
 
   // theme.json as read by each check, in turn
   function givenThemeJson(...jsons: JsonTheme[]) {
-    givenAssetLoad(jasmine.createSpy('load').and.returnValues(...jsons.map(json => Promise.resolve(json))));
+    givenAssetLoad(jsons.reduce<Mock>((assetLoad, json) => assetLoad.mockResolvedValueOnce(json), vi.fn()));
   }
 
   function themeStylesheets() {
@@ -59,7 +61,7 @@ describe('ThemeService', () => {
 
     await service.apply();
 
-    expect(themeStylesheets()).toEqual([jasmine.stringMatching(/^theme-christmas\.css\?v=/)]);
+    expect(themeStylesheets()).toEqual([expect.stringMatching(/^theme-christmas\.css\?v=/)]);
   });
 
   it('should load no stylesheet without theme', async () => {
@@ -71,9 +73,9 @@ describe('ThemeService', () => {
   });
 
   it('should leave the page without theme when theme.json cannot be loaded', async () => {
-    givenAssetLoad(jasmine.createSpy('load').and.rejectWith(new Error('404')));
+    givenAssetLoad(vi.fn().mockRejectedValue(new Error('404')));
 
-    await expectAsync(service.apply()).toBeResolved();
+    await expect(service.apply()).resolves.toBeUndefined();
     expect(themeStylesheets()).toEqual([]);
   });
 
@@ -94,7 +96,7 @@ describe('ThemeService', () => {
 
     await service.apply();
 
-    expect(themeStylesheets()).toEqual([jasmine.stringMatching(/^theme-halloween\.css\?v=/)]);
+    expect(themeStylesheets()).toEqual([expect.stringMatching(/^theme-halloween\.css\?v=/)]);
   });
 
   it('should remove the stylesheet when the season ends', async () => {
@@ -107,19 +109,20 @@ describe('ThemeService', () => {
   });
 
   it('should keep the theme on display when theme.json cannot be loaded anymore', async () => {
-    givenAssetLoad(jasmine.createSpy('load').and.returnValues(
-      Promise.resolve(themeJson('christmas')), Promise.reject(new Error('network down'))));
+    givenAssetLoad(vi.fn()
+      .mockResolvedValueOnce(themeJson('christmas'))
+      .mockRejectedValueOnce(new Error('network down')));
     await service.apply();
 
     await service.apply();
 
-    expect(themeStylesheets()).toEqual([jasmine.stringMatching(/^theme-christmas\.css\?v=/)]);
+    expect(themeStylesheets()).toEqual([expect.stringMatching(/^theme-christmas\.css\?v=/)]);
   });
 
   describe('once started', () => {
-    beforeEach(() => jasmine.clock().install());
+    beforeEach(() => vi.useFakeTimers());
 
-    afterEach(() => jasmine.clock().uninstall());
+    afterEach(() => vi.useRealTimers());
 
     function givenPageVisibility(visibility: DocumentVisibilityState) {
       Object.defineProperty(page, 'visibilityState', {value: visibility, configurable: true});
@@ -129,7 +132,7 @@ describe('ThemeService', () => {
       givenThemeJson(themeJson('christmas'), themeJson('christmas'));
       await service.start();
 
-      jasmine.clock().tick(environment.themeCheckDelay);
+      vi.advanceTimersByTime(environment.themeCheckDelay);
 
       expect(load).toHaveBeenCalledTimes(2);
     });
@@ -205,8 +208,8 @@ describe('currentTheme', () => {
 
 describe('theme.json', () => {
   // edited by hand: a misspelled theme or date would silently leave its season without decorations
-  it('should apply the theme of each season on its first and last days', async () => {
-    const json: JsonTheme = await (await fetch('/assets/theme.json')).json();
+  it('should apply the theme of each season on its first and last days', () => {
+    const json: JsonTheme = themeAsset;
 
     const appliedThemes = json.seasons.flatMap(season => [season.from, season.to]
       .map(monthDay => currentTheme({theme: 'auto', seasons: [season]}, day(`2026-${monthDay}`))));
