@@ -20,8 +20,7 @@
 
   @if ((isHandset$ | async) && !drawer.opened) {
     <div id="flyingMenu">
-      <button mat-button color="primary" type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()"
-              onclick="this.blur()">
+      <button mat-button color="primary" type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()">
         <fa-icon [icon]="faBars" aria-hidden="true"></fa-icon>&nbsp;<span>Menu</span>
       </button>
     </div>
@@ -34,18 +33,18 @@
 
       @if ((isHandset$ | async)) {
         <button mat-icon-button color="primary" type="button" aria-label="Toggle sidenav"
-                (click)="drawer.toggle()" onclick="this.blur()">
+                (click)="drawer.toggle()">
           <fa-icon [icon]="faBars" aria-hidden="true"></fa-icon>
         </button>
       }
 
       <mat-nav-list>
         @for (menu of menus; track menu) {
-          <mat-list-item [routerLink]="[menu.route]" (click)="closeDrawerIfHandset(drawer)">
-            <a mat-button color="primary" [class.mat-flat-button]="isSelected(menu)">
-              <fa-icon [icon]="menu.icon" aria-hidden="true"></fa-icon>&nbsp;{{menu.label}}
-            </a>
-          </mat-list-item>
+          <a mat-list-item [routerLink]="menu.route" routerLinkActive #rla="routerLinkActive"
+             [routerLinkActiveOptions]="activeMenuOptions" [activated]="rla.isActive"
+             (click)="closeDrawerIfHandset(drawer)">
+            <fa-icon [icon]="menu.icon" aria-hidden="true"></fa-icon>&nbsp;{{menu.label}}
+          </a>
         }
       </mat-nav-list>
     </mat-sidenav>

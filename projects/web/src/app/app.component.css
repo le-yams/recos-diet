@@ -52,12 +52,15 @@
   margin-left: 0.5em;
 }
 
-.blinking {
-  animation: blinking 2s linear infinite;
+/* Draws the eye for 10 seconds, without ever hiding the button, and not at all when the system asks for less motion */
+@media (prefers-reduced-motion: no-preference) {
+  .blinking {
+    animation: blinking 2s linear 5;
+  }
 }
 
 @keyframes blinking {
   50% {
-    opacity: 0;
+    opacity: 0.5;
   }
 }

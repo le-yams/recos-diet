@@ -24,30 +24,31 @@ import {PageProductsComponent} from './pages/page-products/page-products.compone
 import {PagePhosphorusComponent} from './pages/page-phosphorus/page-phosphorus.component';
 import {PageSurveyComponent} from './pages/page-survey/page-survey.component';
 
+// each title names its page in the tab of the browser, after AppTitleStrategy (app.title-strategy.ts)
 export const routes: Routes = [
   {
-    path: '', component: PageHomeComponent, pathMatch: 'full'
+    path: '', component: PageHomeComponent, pathMatch: 'full', title: 'Débits cibles et Micronutriments'
   },
   {
-    path: 'phosphorus', component: PagePhosphorusComponent, pathMatch: 'full'
+    path: 'phosphorus', component: PagePhosphorusComponent, pathMatch: 'full', title: 'Supplémentation en phosphore'
   },
   {
-    path: 'sri', component: PageSriComponent, pathMatch: 'full'
+    path: 'sri', component: PageSriComponent, pathMatch: 'full', title: 'SRI'
   },
   {
-    path: 'denutrition', component: PageDenutritionComponent, pathMatch: 'full'
+    path: 'denutrition', component: PageDenutritionComponent, pathMatch: 'full', title: 'Dénutrition'
   },
   {
-    path: 'bibliography', component: PageBibliographyComponent, pathMatch: 'full'
+    path: 'bibliography', component: PageBibliographyComponent, pathMatch: 'full', title: 'Bibliographie'
   },
   {
-    path: 'products', component: PageProductsComponent, pathMatch: 'full'
+    path: 'products', component: PageProductsComponent, pathMatch: 'full', title: 'Produits'
   },
   {
-    path: 'about', component: PageAboutComponent, pathMatch: 'full'
+    path: 'about', component: PageAboutComponent, pathMatch: 'full', title: 'À propos'
   },
   {
-    path: 'survey', component: PageSurveyComponent, pathMatch: 'full'
+    path: 'survey', component: PageSurveyComponent, pathMatch: 'full', title: 'Donnez votre avis'
   },
   // must stay last: an unknown url (typo, outdated bookmark) leads to the home page instead of an empty page
   {

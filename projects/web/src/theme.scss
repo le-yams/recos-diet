@@ -16,10 +16,12 @@
 
 @use '@angular/material' as mat;
 
+$primary-palette: mat.m2-define-palette(mat.$m2-deep-purple-palette);
+
 // Same palettes, typography and density as the deeppurple-amber prebuilt theme (warn defaults to red)
 $theme: mat.m2-define-light-theme((
   color: (
-    primary: mat.m2-define-palette(mat.$m2-deep-purple-palette),
+    primary: $primary-palette,
     accent: mat.m2-define-palette(mat.$m2-amber-palette, A200, A100, A400),
   ),
   typography: mat.m2-define-typography-config(),
@@ -40,3 +42,50 @@ $theme: mat.m2-define-light-theme((
 @include mat.list-theme($theme);
 @include mat.select-theme($theme);
 @include mat.sidenav-theme($theme);
+
+// The side menu (app.component.html): its entries in the primary color, the open page as a solid block of it. Hover
+// tints an entry with 12 % of the primary color, keyboard focus adds an outline. The M2 list theme leaves the active
+// indicator transparent, and colors the label of the active entry with a selector stronger than the tokens.
+$menu-color: mat.m2-get-color-from-palette($primary-palette);
+$menu-hover-color: mat.m2-get-color-from-palette($primary-palette, 700);
+$menu-on-color: mat.m2-get-color-from-palette($primary-palette, default-contrast);
+
+.mat-mdc-nav-list {
+  @include mat.list-overrides((
+    active-indicator-color: $menu-color,
+    list-item-label-text-color: $menu-color,
+    list-item-hover-label-text-color: $menu-color,
+    list-item-focus-label-text-color: $menu-color,
+    list-item-hover-state-layer-color: $menu-color,
+    list-item-hover-state-layer-opacity: 0.12,
+    list-item-focus-state-layer-color: $menu-color,
+    list-item-focus-state-layer-opacity: 0.12,
+  ));
+
+  .mat-mdc-list-item:focus-visible {
+    outline: 2px solid $menu-color;
+    outline-offset: -2px;
+  }
+
+  // the open page: no state layer on the solid block, hover darkens it and keyboard focus draws a white outline inside
+  .mat-mdc-list-item.mdc-list-item--activated {
+    @include mat.list-overrides((
+      list-item-hover-state-layer-opacity: 0,
+      list-item-focus-state-layer-opacity: 0,
+    ));
+
+    &:hover {
+      @include mat.list-overrides((active-indicator-color: $menu-hover-color));
+    }
+
+    &:focus-visible {
+      outline-color: $menu-on-color;
+      outline-offset: -4px;
+    }
+
+    // as specific as the rule of list-theme above, wins by coming after it
+    .mdc-list-item__primary-text {
+      color: $menu-on-color;
+    }
+  }
+}
