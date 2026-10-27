@@ -41,7 +41,7 @@ describe('Patient', () => {
       heightCm: 155,
       weightKg: 96
     });
-    expect(patient.bmi).toBeCloseTo(39.95, 0.01);
+    expect(patient.bmi).toBeCloseTo(39.96, 2);
   });
 
   it('should compute adjusted weight', () => {
@@ -49,7 +49,7 @@ describe('Patient', () => {
       heightCm: 155,
       weightKg: 96
     });
-    expect(patient.adjustedWeightKg).toBeCloseTo(68.91, 0.01);
+    expect(patient.adjustedWeightKg).toBeCloseTo(69.05, 2);
   });
 
   it('should compute adjusted weight when 25 < bmi < 30', () => {
@@ -66,7 +66,7 @@ describe('Patient', () => {
       heightCm: 175,
       weightKg: 76.3
     });
-    expect(patient.adjustedWeightKg).toBeCloseTo(76.3, 0.01);
+    expect(patient.adjustedWeightKg).toBeCloseTo(76.3, 2);
   });
 
   it('should not be overweight bmi < 25', () => {
@@ -75,6 +75,48 @@ describe('Patient', () => {
       weightKg: 76.3
     });
     expect(patient.isOverweight()).toBe(false);
+  });
+
+  it('should not be overweight when bmi = 25', () => {
+    patient.updateSize({
+      heightCm: 200,
+      weightKg: 100
+    });
+    expect(patient.bmi).toBe(Patient.IDEAL_BMI);
+    expect(patient.isOverweight()).toBe(false);
+    expect(patient.adjustedWeightKg).toBe(100);
+  });
+
+  it('should compute adjusted weight as soon as bmi > 25', () => {
+    patient.updateSize({
+      heightCm: 200,
+      weightKg: 100.4
+    });
+    expect(patient.isOverweight()).toBe(true);
+    expect(patient.adjustedWeightKg).toBeCloseTo(100.1, 2);
+  });
+
+  it('should compute adjusted weight when bmi = 30', () => {
+    patient.updateSize({
+      heightCm: 200,
+      weightKg: 120
+    });
+    expect(patient.bmi).toBe(30);
+    expect(patient.isOverweight()).toBe(true);
+    expect(patient.adjustedWeightKg).toBeCloseTo(105, 2);
+  });
+
+  [
+    {heightCm: 160, weightKg: 100, adjustedWeightKg: 73},
+    {heightCm: 180, weightKg: 120, adjustedWeightKg: 90.75},
+  ].forEach(param => {
+    it(`should compute adjusted weight for ${param.heightCm} cm and ${param.weightKg} kg`, () => {
+      patient.updateSize({
+        heightCm: param.heightCm,
+        weightKg: param.weightKg
+      });
+      expect(patient.adjustedWeightKg).toBeCloseTo(param.adjustedWeightKg, 2);
+    });
   });
 
   it('should emit an event on patient info update', () => {
@@ -86,8 +128,8 @@ describe('Patient', () => {
     const patientInfo = eventsCaptor.mapSingleEvent(evt => evt.patient);
     expect(patientInfo.heightCm).toBe(155);
     expect(patientInfo.weightKg).toBe(96);
-    expect(patientInfo.bmi).toBeCloseTo(39.95, 0.1);
-    expect(patientInfo.adjustedWeightKg).toBeCloseTo(68.91, 0.1);
+    expect(patientInfo.bmi).toBeCloseTo(39.96, 2);
+    expect(patientInfo.adjustedWeightKg).toBeCloseTo(69.05, 2);
   });
 
   describe('invalid size', () => {
