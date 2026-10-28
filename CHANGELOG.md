@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.5.0](https://github.com/recos-diet/recos-diet/compare/2.4.2...2.5.0) (2026-10-28)
+
+
+### Features
+
+* **menu:** menu latéral activable au clavier, page ouverte signalée et titre d'onglet par page ([#146](https://github.com/recos-diet/recos-diet/issues/146)) ([9200862](https://github.com/recos-diet/recos-diet/commit/92008622c536cf994bd6e5a88246b1b3bcb8b74b))
+
+
+### Bug Fixes
+
+* **about:** retirer le crédit Flaticon de l'ancien favicon ([#116](https://github.com/recos-diet/recos-diet/issues/116)) ([a77b5c0](https://github.com/recos-diet/recos-diet/commit/a77b5c005e78af547a1af166351877ceb9133a49))
+* **fonts:** ne plus charger Roboto ni Material Icons depuis Google Fonts ([#117](https://github.com/recos-diet/recos-diet/issues/117)) ([dfeb816](https://github.com/recos-diet/recos-diet/commit/dfeb816155467fc2d66784c7a1f35a2ab2b58ace))
+* **htaccess:** rediriger HTTP vers HTTPS et poser HSTS ([25a5063](https://github.com/recos-diet/recos-diet/commit/25a506308d497fe92dc7ddc28f9508d27b08aa9b)), closes [#64](https://github.com/recos-diet/recos-diet/issues/64)
+* **htaccess:** revalider index.html à chaque chargement et poser les en-têtes de sécurité de base ([#103](https://github.com/recos-diet/recos-diet/issues/103)) ([c00a80a](https://github.com/recos-diet/recos-diet/commit/c00a80ae6455c3a5effbfb2e943ad7019356c235))
+* **updater:** ne proposer la mise à jour que sur un onglet visible, et revérifier au retour sur l'onglet ([#115](https://github.com/recos-diet/recos-diet/issues/115)) ([eecfc50](https://github.com/recos-diet/recos-diet/commit/eecfc506c067c30dc151c13cefc2cc16b939c749))
+
 ## [2.4.2](https://github.com/recos-diet/recos-diet/compare/2.4.1...2.4.2) (2026-10-15)
 
 
